@@ -10,16 +10,16 @@
     </div>
   </div>
 
-  <div class="container filter mt-3">
+  <div class="container mt-3">
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 align-items-center g-2">
       <div class="col">
         <div class="row g-1 align-items-center">
           <div class="col-auto">
-            <label for="selectcourseCategory" class="col-form-label">音樂技能：</label>
+            <label for="selectCourseCategory" class="col-form-label">音樂技能：</label>
           </div>
           <div class="col-auto">
-            <input type="text" id="selectcourseCategory" class="form-control w-75" aria-labelledby="selectcourseCategory"
-            v-model="selectcourseCategory">
+            <input type="text" id="selectCourseCategory" class="form-control w-75" aria-labelledby="selectCourseCategory"
+            v-model="selectCourseCategory">
           </div>
         </div>      
       </div>
@@ -60,25 +60,29 @@
       <div class="col">
         <div class="row g-1 align-items-center">
           <div class="col-auto">
-            <label for="inputPassword6" class="col-form-label">課程名稱：</label>
+            <label for="selectCourseName" class="col-form-label">課程名稱：</label>
           </div>
           <div class="col-auto">
-            <input type="password" id="inputPassword6" class="form-control w-75" aria-labelledby="passwordHelpInline"
-            placeholder="請輸入課程名稱">
+            <input type="search" id="selectCourseName" class="form-control w-75" aria-labelledby="searchHelpInline"
+            placeholder="請輸入課程名稱"
+            v-model="selectCourseName">
           </div>
         </div>
       </div>
     </div>
   </div>
-
-  <div class="container courses mt-3">
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-2">
+  <div class="container mt-3">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-2">
       <div class="col"
       v-for="item in filterData" :key="item.id">
         <div class="card rounded-3 scale"
         @click="goCoursePage(item.id)">
           <div class="card-img overflow-hidden position-relative">
             <img src="https://fakeimg.pl/200x150/" alt="" class="card-img-top">
+            <i class="bookmark"
+            :class="bookmarkState(item.id)"
+            @click.stop="toggleBookmark(item.id)"
+            ></i>
           </div>
           <div class="card-body">
             <div class="mb-1">
@@ -114,14 +118,16 @@ import goStore from '@/stores/goStore'
 
 export default {
   computed: {
-    ...mapState(dataStore, ['coursesData']),
+    ...mapState(dataStore, ['coursesData', 'bookmarkState']),
     ...mapState(filterStore, ['filterData']),
-    ...mapWritableState(filterStore, ['selectCityName', 'selectcourseCategory'])
+    ...mapWritableState(filterStore, ['selectCityName', 'selectCourseCategory', 'selectCourseName'])
   },
   methods: {
-    ...mapActions(dataStore, ['']),
+    ...mapActions(dataStore, ['getBookmarkCoursesData','toggleBookmark']),
     ...mapActions(goStore, ['goCoursePage'])
-    
+  },
+  created () {
+    this.getBookmarkCoursesData()
   }
 }
 </script>
@@ -143,5 +149,12 @@ export default {
       transform: scale(1.15);
     }
   }
+}
+.bookmark {
+  font-size: 40px;
+  position: absolute;
+  right: 5px;
+  top: -15px;
+  z-index: 10;
 }
 </style>
