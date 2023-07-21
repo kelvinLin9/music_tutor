@@ -88,7 +88,7 @@ export default {
   },
   created () {
     this.getCourseData(this.$route.params.coursePageId)
-    console.log(this.courseData[0] )
+    // console.log(this.courseData[0])
   }
 }
 </script>

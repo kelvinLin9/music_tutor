@@ -160,14 +160,73 @@ export default defineStore('dataStore', {
         price: 2000,
       },
     ],
-    courseData:{}
+    courseData:{},
+    teacherCoursesData:[],
+    studentCoursesData:[],
+    myCoursesState: 'student',
+    bookmarksCoursesData:[],
+    bookmarkIds: [],
+    bookmarkNum: 0,
+
   }),
   actions: {
-    getCourseData(id) {
+    // 單一課程頁面用
+    getCourseData(id) { 
       this.courseData = this.coursesData.filter((item) => {
         return item.id == id
       })
-    }
+    },
+    // 我的課程頁面用(老師端隨便選些測試)
+    getTeacherCoursesData () {
+      this.teacherCoursesData = this.coursesData.filter((item) => {
+        return item.id > 6
+      })
+    },
+    // 我的課程頁面用(學生端隨便選些測試)
+    getStudentCoursesData () {
+      this.studentCoursesData = this.coursesData.filter((item) => {
+        return item.id > 8
+      })
+    },
+    // 我的課程頁面用(收藏)
+    getBookmarkIds () {
+      this.bookmarkIds = JSON.parse(localStorage.getItem('bookmarkIds')) || []
+    },
+    getBookmarkCoursesData () {
+      this.getBookmarkIds ()
+      this.bookmarksCoursesData = []
+      this.coursesData.forEach((item) => {
+        if (this.bookmarkIds.indexOf(item.id) > -1) {
+          this.bookmarksCoursesData.push(item)
+        }
+      })
+      this.bookmarkNum = this.bookmarksCoursesData.length
+      // console.log(this.bookmarkIds)
+      // console.log(this.bookmarksCoursesData)
+      console.log(this.bookmarkNum)
+    },
+    toggleBookmark (item) {
+      const clickId = item
+      const inBookmarks = this.bookmarkIds.some((item) => item === clickId)
+      if (!inBookmarks) {
+        this.bookmarkIds.push(item)
+        localStorage.setItem('bookmarkIds', JSON.stringify(this.bookmarkIds))
+      } else {
+        const delItem = this.bookmarkIds.find((item) => {
+          return item === clickId
+        })
+        this.bookmarkIds.splice(this.bookmarkIds.indexOf(delItem), 1)
+        localStorage.setItem('bookmarkIds', JSON.stringify(this.bookmarkIds))
+      }
+      this.getBookmarkCoursesData()
+    },
 
+  },
+  getters: {
+    bookmarkState () {
+      return (id) => {
+        return this.bookmarkIds.indexOf(id) > -1 ? 'bi bi-bookmark-plus-fill text-success' : 'bi bi-bookmark-plus text-success'
+      }
+    }
   }
 })
