@@ -32,5 +32,6 @@ export default {
   right: 20px;
   bottom: 10px;
   z-index: 99;
+  font-size: 40px;
 }
 </style>

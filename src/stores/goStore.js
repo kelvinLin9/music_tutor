@@ -28,6 +28,18 @@ export default defineStore('goStore', {
       logIn.signUpForm.user.email = ''
       logIn.signUpForm.user.password = ''
       logIn.signUpForm.user.confirmation = ''
+    },
+    goBeATeacherStep1 () {
+      router.push('/CreateCourses/BeATeacherStep1')
+    },
+    goBeATeacherStep2 () {
+      router.push('/CreateCourses/BeATeacherStep2')
+    },
+    goBeATeacherStep3 () {
+      router.push('/CreateCourses/BeATeacherStep3')
+    },
+    goBeATeacherStep4 () {
+      router.push('/CreateCourses/BeATeacherStep4')
     }
   }
 })

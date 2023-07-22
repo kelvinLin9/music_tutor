@@ -31,6 +31,7 @@
           <div class="col-auto">
             <select class="form-select" aria-label="Default select example"
             v-model="selectCityName">
+              <option value="" selected>請選擇</option>
               <option value="台北市">台北市</option>
               <option value="基隆市">基隆市</option>
               <option value="新北市">新北市</option>
@@ -71,6 +72,7 @@
       </div>
     </div>
   </div>
+
   <div class="container mt-3">
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-2">
       <div class="col"
@@ -107,9 +109,12 @@
       </div>
     </div>
   </div>
+
+  <PaginationCom />
 </template>
   
 <script>
+import PaginationCom from '../components/PaginationCom.vue'
 import { mapState, mapActions, mapWritableState } from 
 'pinia'  
 import dataStore from '@/stores/dataStore'
@@ -117,6 +122,7 @@ import filterStore from '@/stores/filterStore'
 import goStore from '@/stores/goStore'
 
 export default {
+  components: { PaginationCom },
   computed: {
     ...mapState(dataStore, ['coursesData', 'bookmarkState']),
     ...mapState(filterStore, ['filterData']),

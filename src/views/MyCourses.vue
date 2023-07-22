@@ -11,15 +11,15 @@
         <div class="row align-items-center">
           <div class="col text-center">
             <h5 class="test">參加課程</h5>
-            <p class="fs-1 test">1</p>
+            <p class="fs-1 test">{{ studentCoursesData.length }}</p>
           </div>
           <div class="col text-center">
             <h5>已開課程</h5>
-            <p class="fs-1">1</p>
+            <p class="fs-1">{{ teacherCoursesData.length }}</p>
           </div>
           <div class="col text-center">
             <h5>目前收藏</h5>
-            <p class="fs-1">1</p>
+            <p class="fs-1">{{ bookmarksCoursesData.length }}</p>
           </div>
         </div>
       </div>
@@ -153,7 +153,6 @@
               NT$ {{ item.price }}
             </div>
           </div>
-
         </div>
       </div>
     </div>
@@ -164,7 +163,6 @@
 import { mapState, mapActions, mapWritableState } from 
 'pinia'  
 import dataStore from '@/stores/dataStore'
-// import filterStore from '@/stores/filterStore'
 import goStore from '@/stores/goStore'
 
 export default {
@@ -181,7 +179,6 @@ export default {
     this.getTeacherCoursesData()
     this.getStudentCoursesData()
     this.getBookmarkCoursesData()
-    console.log(this.bookmarksCoursesData)
   }
 }
 </script>

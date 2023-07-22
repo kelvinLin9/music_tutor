@@ -17,7 +17,29 @@ const router = createRouter({
         {
           path: 'CreateCourses',
           name: 'CreateCourses',
-          component: () => import('../views/CreateCourses.vue')
+          component: () => import('../views/CreateCourses.vue'),
+          children: [
+            {
+              path: 'BeATeacherStep1',
+              name: 'BeATeacherStep1',
+              component: () => import('../views/BeATeacherStep1.vue')
+            },
+            {
+              path: 'BeATeacherStep2',
+              name: 'BeATeacherStep2',
+              component: () => import('../views/BeATeacherStep2.vue')
+            },
+            {
+              path: 'BeATeacherStep3',
+              name: 'BeATeacherStep3',
+              component: () => import('../views/BeATeacherStep3.vue')
+            },
+            {
+              path: 'BeATeacherStep4',
+              name: 'BeATeacherStep4',
+              component: () => import('../views/BeATeacherStep4.vue')
+            },
+          ]
         },
         {
           path: 'AllCourses',
