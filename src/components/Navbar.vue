@@ -11,9 +11,9 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <RouterLink to="/CreateCourses" class="nav-link"
-            :class="{ 'text-warning':  $route.name === 'CreateCourses'}">
-            建立課程
+          <RouterLink to="/CreateCourses/BeATeacherStep1" class="nav-link"
+            :class="{ 'text-warning':  $route.matched[1].path === '/CreateCourses'}">
+            成為老師
           </RouterLink>
         </li>
         <li class="nav-item">
