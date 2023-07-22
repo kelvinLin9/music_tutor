@@ -1,37 +1,42 @@
 <template>
+  <div class="container">
+    <div class="row">
+      <div class="col text-center">
+        <h1 class="border-top border-bottom border-5 py-2 w-75 mx-auto">
+          預覽頁面
+        </h1>
+      </div>
+    </div>
+  </div>
+
   <div class="container mt-5">
     <div class="row">
-      <div class="col-8">
-        <img src="https://fakeimg.pl/200x120/" alt="">
+      <div class="col-8 test">
+        <img :src="beATeacherData.courseImg" alt="課程照片">
       </div>
       <div class="col-4 d-flex flex-column">
-        <h1>{{ courseData[0].courseName }}</h1>
-        <p class="">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque repudiandae quae qui sed ipsa. Voluptatibus totam incidunt laboriosam aliquam illum doloribus facilis consectetur adipisci nulla obcaecati? Vitae perspiciatis facere vero.</p>
-        <div class="border border-success px-2 py-1 text-success mt-auto ms-auto cursor-pointer"
-            @click="toggleBookmark(courseData[0].id)">
-          <i class=""
-            :class="bookmarkState(courseData[0].id)">
-          </i>
-          收藏
-        </div>
+        <h1>{{ beATeacherData.courseName }}</h1>
+        <p class="">
+          {{ beATeacherData.courseIntro }}
+        </p>
       </div>
     </div>
   </div>
 
   <div class="container mt-3">
     <div class="row align-items-center">
-      <div class="col-8">
+      <div class="col-8 test">
         <div class="row align-items-center">
           <div class="col-2">
-            <img src="https://fakeimg.pl/20x20/" alt="">
+            <img :src="beATeacherData.teacherImg" alt="老師照片">
           </div>
           <div class="col-10">
-            {{ courseData[0].teacherName }}
+            {{ beATeacherData.teacherName }}
           </div>
         </div>
         <div class="row">
           <div class="col-10 ms-auto">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur officiis delectus accusantium repellat soluta odio, corrupti nesciunt similique velit dolorem ea neque iste rerum voluptatum reprehenderit, ad illum in molestias.
+            {{ beATeacherData.teacherIntro }}
           </div>
         </div>
         <div class="row mt-3">
@@ -39,33 +44,34 @@
           <div class="col-3">
             <div class="d-flex align-items-center">
               <i class="bi bi-clock me-2"></i>
-              課程時長<br>{{ courseData[0].time }}分鐘
+              課程時長<br>{{ beATeacherData.time }}分鐘
             </div>
           </div>
-          <div class="col-4">
+          <div class="col-3">
             <div class="d-flex align-items-center">
-              <i class="bi bi-tools me-2"></i>
+              <i class="bi bi-tools me-2"></i>              
               <div>
                 上課方式<br>
                 <span class="bg-info rounded-2 px-2 me-2"
-                      v-if="courseData[0].courseMethod[0]">
-                  {{ courseData[0].courseMethod[0] }}
+                      v-if="beATeacherData.courseMethod[0]">
+                  {{ beATeacherData.courseMethod[0] }}
                 </span>
                 <span class="bg-info rounded-2 px-2 me-2"
-                v-if="courseData[0].courseMethod[1]">
-                  {{ courseData[0].courseMethod[1] }}
+                v-if="beATeacherData.courseMethod[1]">
+                  {{ beATeacherData.courseMethod[1] }}
                 </span>
                 <span class="bg-info rounded-2 px-2 me-2"
-                v-if="courseData[0].courseMethod[2]">
-                  {{ courseData[0].courseMethod[2] }}
+                v-if="beATeacherData.courseMethod[2]">
+                  {{ beATeacherData.courseMethod[2] }}
                 </span>
               </div>
+                
             </div>
           </div>
           <div class="col-3">
             <div class="d-flex align-items-center">
               <i class="bi bi-geo-alt-fill me-2"></i>
-              上課地點<br> {{ courseData[0].cityName }}
+              上課地點<br> {{ beATeacherData.cityName }}
             </div>
           </div>
         </div>
@@ -74,7 +80,7 @@
         <h4 class="border-bottom pb-2">購買單堂課程</h4>
         <div class="mb-3">
           <span class="fs-5">售價</span>
-          <span class="fs-1">NT${{ courseData[0].price }}</span> 
+          <span class="fs-1">NT${{ beATeacherData.price }}</span> 
         </div>
         <div class="d-flex justify-content-between">
           <button type="button" class="btn btn-outline-danger w-75">
@@ -86,9 +92,23 @@
         </div>
       </div>
     </div>
+    <div class="row justify-content-center mt-5">
+        <div class="col-12 d-flex justify-content-between">
+          <button type="button" class="btn btn-outline-primary"
+                   @click="goBeATeacherStep2()">
+            &emsp;&emsp;上一步&emsp;&emsp;
+          </button>
+          <button type="button" class="btn btn-primary"
+                  @click="goBeATeacherStep4()">
+            &emsp;&emsp;下一步&emsp;&emsp;
+          </button>
+        </div>
+      </div>
   </div>
+
+
 </template>
-  
+
 <script>
 import { mapState, mapActions } from 
 'pinia'  
@@ -97,16 +117,13 @@ import goStore from '@/stores/goStore'
 
 export default {
   computed: {
-    ...mapState(dataStore, ['courseData', 'bookmarkState']),
+    ...mapState(dataStore, ['beATeacherData']),
   },
   methods: {
-    ...mapActions(dataStore, ['getCourseData', 'getBookmarkCoursesData','toggleBookmark']),
-    ...mapActions(goStore, ['goCoursePage'])
+    ...mapActions(goStore, ['goBeATeacherStep2', 'goBeATeacherStep4']),
     
   },
   created () {
-    this.getCourseData(this.$route.params.coursePageId)
-    this.getBookmarkCoursesData()
   }
 }
 </script>
@@ -114,8 +131,5 @@ export default {
 <style lang="scss" scoped>
 img {
   width: 100%;
-}
-.cursor-pointer {
-  cursor:pointer;
 }
 </style>
