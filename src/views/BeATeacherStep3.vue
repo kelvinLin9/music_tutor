@@ -11,10 +11,10 @@
 
   <div class="container mt-5">
     <div class="row">
-      <div class="col-8 test">
+      <div class="col-12 col-lg-8 test">
         <img :src="beATeacherData.courseImg" alt="課程照片">
       </div>
-      <div class="col-4 d-flex flex-column">
+      <div class="col-12 col-lg-4 d-flex flex-column">
         <h1>{{ beATeacherData.courseName }}</h1>
         <p class="">
           {{ beATeacherData.courseIntro }}
@@ -25,7 +25,7 @@
 
   <div class="container mt-3">
     <div class="row align-items-center">
-      <div class="col-8 test">
+      <div class="col-12 col-lg-8 test">
         <div class="row align-items-center">
           <div class="col-2">
             <img :src="beATeacherData.teacherImg" alt="老師照片">
@@ -39,7 +39,7 @@
             {{ beATeacherData.teacherIntro }}
           </div>
         </div>
-        <div class="row mt-3">
+        <div class="row my-3">
           <p>關於課程</p>
           <div class="col-3">
             <div class="d-flex align-items-center">
@@ -76,7 +76,7 @@
           </div>
         </div>
        </div>
-      <div class="col-4 p-4 border">
+      <div class="col-12 col-lg-4 p-4 border">
         <h4 class="border-bottom pb-2">購買單堂課程</h4>
         <div class="mb-3">
           <span class="fs-5">售價</span>
