@@ -47,7 +47,7 @@
               課程時長<br>{{ beATeacherData.time }}分鐘
             </div>
           </div>
-          <div class="col-3">
+          <div class="col-4">
             <div class="d-flex align-items-center">
               <i class="bi bi-tools me-2"></i>              
               <div>
@@ -93,17 +93,17 @@
       </div>
     </div>
     <div class="row justify-content-center mt-5">
-        <div class="col-12 d-flex justify-content-between">
-          <button type="button" class="btn btn-outline-primary"
+      <div class="col-12 d-flex justify-content-between">
+        <button type="button" class="btn btn-outline-primary"
                    @click="goBeATeacherStep2()">
             &emsp;&emsp;上一步&emsp;&emsp;
-          </button>
-          <button type="button" class="btn btn-primary"
+        </button>
+        <button type="button" class="btn btn-primary"
                   @click="goBeATeacherStep4()">
             &emsp;&emsp;下一步&emsp;&emsp;
-          </button>
-        </div>
+        </button>
       </div>
+    </div>
   </div>
 
 

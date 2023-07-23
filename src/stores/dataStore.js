@@ -355,7 +355,7 @@ export default defineStore('dataStore', {
       teacherImg: '',
       teacherName: '',
       teacherIntro: '',
-      courseName: '',
+      courseName: '李老師',
       courseIntro: '',
       courseCategory: '',
       courseMethod: [],      
