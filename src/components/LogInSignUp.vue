@@ -1,10 +1,10 @@
 <template>
   <div class="container">
     <div class="row align-items-center">
-      <div class="col-3 test">
+      <div class="col-3">
         <img src="https://fakeimg.pl/180x720/" alt="">
       </div>
-      <div class="col-6 mx-auto test">
+      <div class="col-6 mx-auto">
         <div v-if="logInPage">
           <h1 class="mx-auto border-bottom my-3 pb-2 w-50 text-center">會員登入</h1>
           <VForm class="mx-auto w-75"
