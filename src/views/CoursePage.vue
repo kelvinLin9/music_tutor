@@ -1,10 +1,10 @@
 <template>
   <div class="container mt-5">
     <div class="row">
-      <div class="col-8">
+      <div class="col-12 col-lg-8">
         <img src="https://fakeimg.pl/200x120/" alt="">
       </div>
-      <div class="col-4 d-flex flex-column">
+      <div class="col-12 col-lg-4 d-flex flex-column">
         <h1>{{ courseData[0].courseName }}</h1>
         <p class="">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque repudiandae quae qui sed ipsa. Voluptatibus totam incidunt laboriosam aliquam illum doloribus facilis consectetur adipisci nulla obcaecati? Vitae perspiciatis facere vero.</p>
         <div class="border border-success px-2 py-1 text-success mt-auto ms-auto cursor-pointer"
@@ -21,7 +21,7 @@
 
   <div class="container mt-3">
     <div class="row align-items-center">
-      <div class="col-8">
+      <div class="col-12 col-lg-8">
         <div class="row align-items-center">
           <div class="col-2">
             <img src="https://fakeimg.pl/20x20/" alt="">
@@ -35,7 +35,7 @@
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur officiis delectus accusantium repellat soluta odio, corrupti nesciunt similique velit dolorem ea neque iste rerum voluptatum reprehenderit, ad illum in molestias.
           </div>
         </div>
-        <div class="row mt-3">
+        <div class="row my-3">
           <p>關於課程</p>
           <div class="col-3">
             <div class="d-flex align-items-center">
@@ -71,7 +71,7 @@
           </div>
         </div>
        </div>
-      <div class="col-4 p-4 border">
+      <div class="col-12 col-lg-4 p-4 border">
         <h4 class="border-bottom pb-2">購買單堂課程</h4>
         <div class="mb-3">
           <span class="fs-5">售價</span>

@@ -26,6 +26,9 @@ configure({
 });
 setLocale('zh_TW');
 
+import { register } from 'swiper/element/bundle';
+
+
 
 // Import all of Bootstrap's JS
 import * as bootstrap from 'bootstrap'
@@ -43,4 +46,5 @@ app.use(VueAxios, axios)
 app.component('VField', Field);
 app.component('VForm', Form);
 app.component('ErrorMessage', ErrorMessage);
+app.use(register);
 app.mount('#app')
