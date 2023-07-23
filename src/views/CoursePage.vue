@@ -8,10 +8,11 @@
         <h1>{{ courseData[0].courseName }}</h1>
         <p class="">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque repudiandae quae qui sed ipsa. Voluptatibus totam incidunt laboriosam aliquam illum doloribus facilis consectetur adipisci nulla obcaecati? Vitae perspiciatis facere vero.</p>
         <div class="border border-success px-2 py-1 text-success mt-auto ms-auto cursor-pointer"
-            @click="toggleBookmark(courseData[0].id)">
-          <i class=""
-            :class="bookmarkState(courseData[0].id)">
-          </i>
+            @click="toggleBookmark(courseData[0].id)"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            title="加入 / 移除收藏">
+          <i :class="bookmarkState(courseData[0].id)"></i>
           收藏
         </div>
       </div>
@@ -80,7 +81,10 @@
           <button type="button" class="btn btn-outline-danger w-75">
             立即購買
           </button>
-          <button type="button" class="btn btn-danger">
+          <button type="button" class="btn btn-danger"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  title="加入購物車">
             <i class="bi bi-cart-fill"></i>
           </button>
         </div>
