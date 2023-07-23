@@ -74,6 +74,12 @@
   </div>
 
   <div class="container mt-3">
+    <div class="row"
+     v-if="filterData.length == 0">
+      <div class="col text-center">
+        很抱歉，沒有符合條件課程
+      </div>
+    </div>
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-2">
       <div class="col"
       v-for="item in filterData" :key="item.id">
@@ -107,7 +113,6 @@
               NT$ {{ item.price }}
             </div>
           </div>
-
         </div>
       </div>
     </div>

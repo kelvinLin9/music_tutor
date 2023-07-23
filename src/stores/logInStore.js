@@ -3,6 +3,7 @@ import { defineStore } from 'pinia'
 export default defineStore('logInStore', {
   state: () => ({
     logInPage: true,
+    isMember: false,
     logInForm: {
       user: {
         email: '',
@@ -19,6 +20,8 @@ export default defineStore('logInStore', {
     }
   }),
   actions: {
-   
+   logOut() {
+    this.isMember = false
+   }
   }
 })
