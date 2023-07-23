@@ -1,17 +1,17 @@
 <template>
   <div class="container mt-5">
     <div class="row align-items-center mb-3">
-      <div class="col-4 test">
+      <div class="col-4">
         <div class="d-flex align-items-center">
-          <img src="https://fakeimg.pl/80x80/" alt="">
-          <h1 class="ms-auto">陳先生</h1>
+          <img src="https://fakeimg.pl/80x80/" alt="" class="t">
+          <h1 class="ms-5">陳先生</h1>
         </div>
       </div>
       <div class="col-6 ms-auto">
         <div class="row align-items-center">
           <div class="col text-center">
-            <h5 class="test">參加課程</h5>
-            <p class="fs-1 test">{{ studentCoursesData.length }}</p>
+            <h5 class="">參加課程</h5>
+            <p class="fs-1">{{ studentCoursesData.length }}</p>
           </div>
           <div class="col text-center">
             <h5>已開課程</h5>

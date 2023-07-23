@@ -8,11 +8,11 @@
     <div class="row justify-content-center mt-5">
       <div class="col-6 d-flex justify-content-between">
         <button type="button" class="btn btn-outline-primary"
-                   @click="goBeATeacherStep2()">
+                   @click="goHomePage()">
             &emsp;&emsp;回到首頁&emsp;&emsp;
         </button>
         <button type="button" class="btn btn-primary"
-                  @click="goBeATeacherStep4()">
+                  @click="goBeATeacherStep1()">
             &emsp;&emsp;繼續開課&emsp;&emsp;
         </button>
       </div>
@@ -21,7 +21,20 @@
 </template>
 
 <script>
+import { mapState, mapActions, mapWritableState } from 
+'pinia' 
+import goStore from '@/stores/goStore'
 
+export default {
+  computed: {
+  },
+  methods: {
+    ...mapActions(goStore, ['goHomePage', 'goBeATeacherStep1'])
+  },
+  created () {
+
+  }
+}
 </script>
 
 <style lang="scss" scoped>

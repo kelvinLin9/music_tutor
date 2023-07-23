@@ -17,10 +17,10 @@
             </div>
           </div>
           <div class="pills">
-            <span class="badge rounded-pill text-bg-primary">Primary</span>
-            <span class="badge rounded-pill text-bg-primary">Primary</span>
-            <span class="badge rounded-pill text-bg-primary">Primary</span>
-            <span class="badge rounded-pill text-bg-primary">Primary</span>
+            <span class="badge rounded-pill text-bg-primary me-1">鋼琴</span>
+            <span class="badge rounded-pill text-bg-primary me-1">吉他</span>
+            <span class="badge rounded-pill text-bg-primary me-1">唱歌</span>
+            <span class="badge rounded-pill text-bg-primary me-1">大鼓</span>
           </div>
         </div>
       </div>
@@ -51,7 +51,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@media (min-width: 1024px) {
   .header {
     background: #FFFCEB;
     min-height: 100vh;
@@ -61,5 +60,4 @@ export default {
   .bg-test {
     background: #FFFCEB;
   }
-}
 </style>

@@ -38,6 +38,7 @@ import router from './router'
 
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import "./assets/scss/all.scss";
+
 const app = createApp(App)
 
 app.use(createPinia())
