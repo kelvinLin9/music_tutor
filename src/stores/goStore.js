@@ -9,10 +9,6 @@ const data = dataStore()
 
 export default defineStore('goStore', {
   actions: {
-    // goCart () {
-    //   router.push('/cart')
-    //   cart.cartBoxState = false
-    // },
     goCoursePage (id) {
       router.push(`/coursePage/${id}`)
     },

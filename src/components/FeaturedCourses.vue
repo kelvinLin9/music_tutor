@@ -2,7 +2,7 @@
   <div class="container">
     <swiper
       :loop="true"
-      :slidesPerView="3"
+      :slidesPerView="1"
       :spaceBetween="20"
       :freeMode="true"
       :pagination="{clickable: true}"
@@ -51,7 +51,6 @@
               NT$ {{ item.price }}
             </div>
           </div>
-
         </div>
       </SwiperSlide>
     </swiper>
