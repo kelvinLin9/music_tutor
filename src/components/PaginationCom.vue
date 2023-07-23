@@ -1,13 +1,15 @@
 <template>
-  {{ page.hasPrevPage }}
+  <!-- {{ page.hasPrevPage }}
   {{ page.currentPage }}
   {{ page.pageNumBox }}
   {{ page.totalPage }}
-  {{ page.hasNextPage }}
+  {{ page.hasNextPage }} -->
   <div class="container d-flex justify-content-center mt-4">
     <nav aria-label="Page navigation example">
-      <ul class="pagination" id="pageid">
-        <li class="page-item" :class="{'disabled':!page.hasPrevPage}">
+      <ul class="pagination">
+        <li class="page-item" 
+            :class="{'disabled':!page.hasPrevPage}"
+            v-if="page.totalPage > 0">
           <a class="page-link" href="#" 
             :data-page="page.currentPage - 1" 
             @click.prevent="changePage">
@@ -34,7 +36,8 @@
         </li>
 
         <li class="page-item" 
-            :class="{'disabled':!page.hasNextPage}">
+            :class="{'disabled':!page.hasNextPage}"
+            v-if="page.totalPage > 0">
           <a class="page-link" href="#" 
             :data-page="page.currentPage + 1" 
             @click.prevent="changePage">

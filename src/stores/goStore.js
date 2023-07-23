@@ -1,8 +1,11 @@
 import router from '../router'
 import { defineStore } from 'pinia'
 import logInStore from './logInStore'
+import dataStore from './dataStore'
+
 
 const logIn = logInStore()
+const data = dataStore()
 
 export default defineStore('goStore', {
   actions: {
@@ -10,15 +13,12 @@ export default defineStore('goStore', {
     //   router.push('/cart')
     //   cart.cartBoxState = false
     // },
-    // goProducts () {
-    //   router.push('/products')
-    //   cart.cartBoxState = false
-    // },
     goCoursePage (id) {
       router.push(`/coursePage/${id}`)
     },
-    goHomePage () {
+    goHomePage (isMember = false) {
       router.push('/')
+      logIn.isMember = isMember
       logIn.logInForm.user.email = ''
       logIn.logInForm.user.password = ''
     },
@@ -40,6 +40,17 @@ export default defineStore('goStore', {
     },
     goBeATeacherStep4 () {
       router.push('/CreateCourses/BeATeacherStep4')
+      data.beATeacherData.courseImg = ''
+      data.beATeacherData.teacherImg = ''
+      data.beATeacherData.teacherName = ''
+      data.beATeacherData.teacherIntro = ''
+      data.beATeacherData.courseName = '李老師'
+      data.beATeacherData.courseIntro = ''
+      data.beATeacherData.courseCategory = ''
+      data.beATeacherData.courseMethod = []
+      data.beATeacherData.cityName = ''
+      data.beATeacherData.time = 0
+      data.beATeacherData.price = 0
     }
   }
 })

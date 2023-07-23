@@ -344,11 +344,11 @@ export default defineStore('dataStore', {
     courseData:{},
     teacherCoursesData:[],
     studentCoursesData:[],
-    myCoursesState: 'student',
+    myCoursesState: 'student', // 我的課程換頁用
     bookmarksCoursesData:[],
     bookmarkIds: [],
     bookmarkNum: 0,
-    // 成為老師表單數據
+    // 成為老師表單數據，老師名稱來自會員(先預設)
     beATeacherData:{
       id: 0,
       courseImg: '',

@@ -13,7 +13,7 @@
         <li class="nav-item">
           <RouterLink to="/CreateCourses/BeATeacherStep1" class="nav-link"
             :class="{ 'text-warning':  $route.matched[1].path === '/CreateCourses'}">
-            成為老師
+            我要開課
           </RouterLink>
         </li>
         <li class="nav-item">
@@ -22,17 +22,35 @@
             所有課程
           </RouterLink>
         </li>
-        <li class="nav-item">
-          <RouterLink to="/MyCourses" class="nav-link"
-            :class="{ 'text-warning':  $route.name === 'MyCourses'}">
-            我的課程
-          </RouterLink>
-        </li>
         <li class="nav-item dropdown">
           <RouterLink to="/UserLogin" class="nav-link"
-            :class="{ 'text-warning':  $route.name === 'UserLogin'}">
+            :class="{ 'text-warning':  $route.name === 'UserLogin'}"
+            v-if="isMember === false">
             登入
           </RouterLink>
+          <button class="btn dropdown-toggle text-success"
+                  type="button" id="dropdownLogin" 
+                  data-bs-toggle="dropdown" aria-expanded="false"
+                  :class="{ 'text-warning':  $route.name === 'UserLogin'}"
+                  v-if="isMember === true">
+            <i class="bi bi-person-circle me-2"></i>陳老師
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end text-center" aria-labelledby="dropdownLogin"
+                  v-if="isMember === true">
+            <li><a class="dropdown-item" href="#">個人主頁</a></li>
+            <li>
+              <RouterLink to="/MyCourses" class="dropdown-item">
+                我的課程
+              </RouterLink>
+            </li>
+            <li><a class="dropdown-item" href="#">課表時間</a></li>
+            <li><a class="dropdown-item" href="#">帳戶設定</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#"
+              @click="logOut()">
+              登出
+            </a></li>
+          </ul>
         </li>
       </ul>
     </div>
@@ -41,8 +59,24 @@
 </template>
 
 
-<script >
+<script>
+import { mapState, mapActions, mapWritableState } from 
+'pinia'  
+import logInStore from '@/stores/logInStore'
+import goStore from '@/stores/goStore'
 
+export default {
+  computed: {
+    ...mapState(logInStore, ['isMember']),
+  },
+  methods: {
+    ...mapActions(logInStore, ['logOut'])
+    
+  },
+  created () {
+
+  }
+}
 </script>
 
 

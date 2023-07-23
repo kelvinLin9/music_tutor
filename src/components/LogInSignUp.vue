@@ -46,6 +46,10 @@
               <button type="submit" class="btn btn-sm btn-primary">
                 登入
               </button>
+              <button type="button" class="btn btn-sm btn-outline-primary ms-5"
+                @click="goHomePage(true)">
+                假裝登入
+              </button>
             </div>
             <div class="d-flex justify-content-between">
               <a href="#">忘記密碼</a>
@@ -56,6 +60,7 @@
             </div>
           </VForm>
         </div>
+
         <div v-else>
           <h1 class="mx-auto border-bottom my-3 pb-2 w-50 text-center">會員註冊</h1>
           <VForm class="mx-auto w-75"
@@ -153,7 +158,7 @@ import goStore from '../stores/goStore';
 
 export default {
   computed: {
-    ...mapWritableState(logInStore, ['logInForm', 'signUpForm', 'logInPage'])
+    ...mapWritableState(logInStore, ['logInForm', 'signUpForm', 'logInPage', 'isMember'])
   },
   methods: {  
     ...mapActions(goStore, ['goHomePage', 'goLoginPage'])
