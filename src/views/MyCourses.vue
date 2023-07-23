@@ -58,7 +58,10 @@
             <img src="https://fakeimg.pl/200x150/" alt="" class="card-img-top">
             <i class="bookmark"
             :class="bookmarkState(item.id)"
-            @click.stop="toggleBookmark(item.id)"
+            @click.stop="toggleBookmark(item.id)"        
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            title="加入 / 移除收藏"
             ></i>
           </div>
           <div class="card-body">
@@ -96,6 +99,9 @@
             <i class="bookmark"
             :class="bookmarkState(item.id)"
             @click.stop="toggleBookmark(item.id)"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            title="加入 / 移除收藏"
             ></i>
           </div>
           <div class="card-body">
@@ -133,6 +139,9 @@
             <i class="bookmark"
             :class="bookmarkState(item.id)"
             @click.stop="toggleBookmark(item.id)"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            title="加入 / 移除收藏"
             ></i>
           </div>
           <div class="card-body">
