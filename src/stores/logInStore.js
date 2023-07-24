@@ -3,6 +3,8 @@ import router from '../router'
 import { getAuth, 
          createUserWithEmailAndPassword, 
          signInWithEmailAndPassword,
+         GoogleAuthProvider,
+         signInWithPopup
       } from 'firebase/auth'
 
 
@@ -43,7 +45,6 @@ export default defineStore('logInStore', {
 
     })
     .catch((err) => {
-      console.log(err)
       alert(err)
     })
    },
@@ -60,7 +61,18 @@ export default defineStore('logInStore', {
 
     })
     .catch((err) => {
-      console.log(err)
+      alert(err)
+    })
+   },
+   signInWithGoogle () {
+    const provider = new GoogleAuthProvider()
+    signInWithPopup(getAuth(), provider)
+    .then((res) => {
+      router.push('/')
+      this.isMember = true
+      alert('恭喜登入成功')
+    })
+    .catch((err) => {
       alert(err)
     })
    }
