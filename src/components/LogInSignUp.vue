@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row align-items-center">
       <div class="col-3">
-        <img src="https://fakeimg.pl/180x720/" alt="">
+        <img src="https://fakeimg.pl/180x520/" alt="">
       </div>
       <div class="col-6 mx-auto">
         <div v-if="logInPage">
@@ -42,9 +42,13 @@
               />
               <ErrorMessage class="invalid-feedback" name="password"/>
             </div>
-            <div class="mb-3">
+            <div class="mb-3 d-flex justify-content-between">
               <button type="submit" class="btn btn-sm btn-primary">
                 登入
+              </button>
+              <button type="button" class="btn btn-sm btn-outline-primary"
+                      @click="signInWithGoogle()">
+                Google登入
               </button>
             </div>
             <div class="d-flex justify-content-between">
@@ -159,7 +163,7 @@ export default {
   },
   methods: {  
     ...mapActions(goStore, ['goHomePage', 'goLoginPage']),
-    ...mapActions(logInStore, ['signUp', 'logIn']),
+    ...mapActions(logInStore, ['signUp', 'logIn', 'signInWithGoogle']),
   },
   created() {
     
