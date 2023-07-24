@@ -14,6 +14,7 @@ export default defineStore('logInStore', {
   state: () => ({
     logInPage: true,
     isMember: false,
+    googleUserName:'',
     logInForm: {
       user: {
         email: '',
@@ -32,6 +33,7 @@ export default defineStore('logInStore', {
   actions: {
    logOut() {
     this.isMember = false
+    this.googleUserName = ''
    },
    logIn() {
     signInWithEmailAndPassword(getAuth(), this.logInForm.user.email, this.logInForm.user.password)
@@ -68,9 +70,10 @@ export default defineStore('logInStore', {
     const provider = new GoogleAuthProvider()
     signInWithPopup(getAuth(), provider)
     .then((res) => {
+      console.log(res.user)
+      this.googleUserName = res.user.displayName
       router.push('/')
       this.isMember = true
-      alert('恭喜登入成功')
     })
     .catch((err) => {
       alert(err)

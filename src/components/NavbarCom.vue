@@ -40,7 +40,8 @@
                   data-bs-toggle="dropdown" aria-expanded="false"
                   :class="{ 'text-primary':  $route.name === 'UserLogin'}"
                   v-if="isMember === true">
-            <i class="bi bi-person-circle me-2"></i>陳老師
+            <i class="bi bi-person-circle me-2"></i>
+            {{ googleUserName }}
           </button>
           <ul class="dropdown-menu dropdown-menu-end text-primary" aria-labelledby="dropdownLogin"
                   v-if="isMember === true">
@@ -85,7 +86,7 @@ import goStore from '@/stores/goStore'
 
 export default {
   computed: {
-    ...mapState(logInStore, ['isMember']),
+    ...mapState(logInStore, ['isMember', 'googleUserName']),
   },
   methods: {
     ...mapActions(logInStore, ['logOut'])
