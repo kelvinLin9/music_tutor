@@ -3,7 +3,7 @@
 
 // Include any default variable overrides here (though functions won't be available)
 
-@import "bootstrap/scss/bootstrap";
+
 
 // Then add additional custom code here
 
@@ -27,7 +27,7 @@
 @import "bootstrap/scss/root";
 
 // 6. Optionally include any other parts as needed
-@import "utilities";
+// @import "utilities";
 // @import "bootstrap/scss/reboot";
 // @import "bootstrap/scss/type";
 // @import "bootstrap/scss/images";
@@ -39,6 +39,6 @@
 // @import "bootstrap/scss/utilities/api";
 
 // 8. Add additional custom code here
-
+@import "bootstrap/scss/bootstrap";
 @import "font";
 

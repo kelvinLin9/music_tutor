@@ -12,39 +12,58 @@
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
           <RouterLink to="/CreateCourses/BeATeacherStep1" class="nav-link"
-            :class="{ 'text-warning':  $route.matched[1].path === '/CreateCourses'}">
+            :class="{ 'text-primary':  $route.matched[1].path === '/CreateCourses'}">
             我要開課
           </RouterLink>
         </li>
         <li class="nav-item">
           <RouterLink to="/AllCourses" class="nav-link"
-            :class="{ 'text-warning':  $route.name === 'AllCourses'}">
+            :class="{ 'text-primary':  $route.name === 'AllCourses'}">
             所有課程
+          </RouterLink>
+        </li>
+        <li class="nav-item" 
+            v-if="isMember === true">
+          <RouterLink to="/CoursesCart" class="nav-link"
+            :class="{ 'text-primary':  $route.name === 'CoursesCart'}">
+            <i class="bi bi-cart-fill me-lg-2"></i>
           </RouterLink>
         </li>
         <li class="nav-item dropdown">
           <RouterLink to="/UserLogin" class="nav-link"
-            :class="{ 'text-warning':  $route.name === 'UserLogin'}"
+            :class="{ 'text-primary':  $route.name === 'UserLogin'}"
             v-if="isMember === false">
             登入
-          </RouterLink>
-          <button class="btn dropdown-toggle text-success"
+          </RouterLink>          
+          <button class="btn dropdown-toggle text-primary"
                   type="button" id="dropdownLogin" 
                   data-bs-toggle="dropdown" aria-expanded="false"
-                  :class="{ 'text-warning':  $route.name === 'UserLogin'}"
+                  :class="{ 'text-primary':  $route.name === 'UserLogin'}"
                   v-if="isMember === true">
             <i class="bi bi-person-circle me-2"></i>陳老師
           </button>
-          <ul class="dropdown-menu dropdown-menu-end text-center" aria-labelledby="dropdownLogin"
+          <ul class="dropdown-menu dropdown-menu-end text-primary" aria-labelledby="dropdownLogin"
                   v-if="isMember === true">
-            <li><a class="dropdown-item" href="#">個人主頁</a></li>
+            <li>
+              <RouterLink to="/MemberPage" class="dropdown-item">
+                個人主頁
+              </RouterLink>
+            </li>
             <li>
               <RouterLink to="/MyCourses" class="dropdown-item">
                 我的課程
               </RouterLink>
             </li>
-            <li><a class="dropdown-item" href="#">課表時間</a></li>
-            <li><a class="dropdown-item" href="#">帳戶設定</a></li>
+            <li>
+              <RouterLink to="/CoursesTime" class="dropdown-item">
+                課表時間
+              </RouterLink>
+            </li>
+            <li>
+              <RouterLink to="/AccountSetting" class="dropdown-item">
+                帳戶設定
+              </RouterLink>
+            </li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#"
               @click="logOut()">
@@ -57,7 +76,6 @@
   </div>
 </nav>
 </template>
-
 
 <script>
 import { mapState, mapActions, mapWritableState } from 
