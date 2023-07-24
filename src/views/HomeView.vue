@@ -1,18 +1,18 @@
 <template>
-  <Navbar />
+  <NavbarCom />
   <RouterView />
   <GoTop/>
 </template>
 
 
 <script>
-import Navbar from '@/components/Navbar.vue'
+import NavbarCom from '@/components/NavbarCom.vue'
 import GoTop from '@/components/GoTop.vue'
 import { mapActions, mapState } from 'pinia'
 
 export default {
   components: {
-    Navbar,
+    NavbarCom,
     GoTop
   },
   computed: {

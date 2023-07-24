@@ -9,7 +9,7 @@
           <h1 class="mx-auto border-bottom my-3 pb-2 w-50 text-center">會員登入</h1>
           <VForm class="mx-auto w-75"
           v-slot="{ errors }"
-          @submit="goHomePage()">
+          @submit="logIn()">
             <div class="mb-3">
               <label for="email" class="form-label ">
                 Email：
@@ -46,10 +46,6 @@
               <button type="submit" class="btn btn-sm btn-primary">
                 登入
               </button>
-              <button type="button" class="btn btn-sm btn-outline-primary ms-5"
-                @click="goHomePage(true)">
-                假裝登入
-              </button>
             </div>
             <div class="d-flex justify-content-between">
               <a href="#">忘記密碼</a>
@@ -65,7 +61,7 @@
           <h1 class="mx-auto border-bottom my-3 pb-2 w-50 text-center">會員註冊</h1>
           <VForm class="mx-auto w-75"
           v-slot="{ errors }"
-          @submit="goLoginPage()">
+          @submit="signUp()">
             <div class="mb-3">
               <label for="name" class="form-label ">
                 Name：
@@ -156,12 +152,17 @@ import { mapState, mapActions, mapWritableState } from
 import logInStore from '../stores/logInStore';
 import goStore from '../stores/goStore';
 
+
 export default {
   computed: {
-    ...mapWritableState(logInStore, ['logInForm', 'signUpForm', 'logInPage', 'isMember'])
+    ...mapWritableState(logInStore, ['logInForm', 'signUpForm', 'logInPage'])
   },
   methods: {  
-    ...mapActions(goStore, ['goHomePage', 'goLoginPage'])
+    ...mapActions(goStore, ['goHomePage', 'goLoginPage']),
+    ...mapActions(logInStore, ['signUp', 'logIn']),
+  },
+  created() {
+    
   }
 }
 </script>

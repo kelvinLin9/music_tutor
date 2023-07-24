@@ -37,7 +37,7 @@
                 class="form-control" 
                 id="courseIntro" 
                 rows="5"
-                placeholder="限定20字元內"
+                placeholder="限定200字元內"
                 v-model="beATeacherData.courseIntro"
                 >
           </textarea>
@@ -61,7 +61,7 @@
                   class="form-control"
                   @change="uploadPhoto('teacher', $event)"
                 />
-                <img class="img-fluid" 
+                <img class="img-fluid mt-3" 
                     :src="beATeacherData.teacherImg" 
                     alt="個人形象照"
                     v-if="beATeacherData.teacherImg"/>
@@ -84,7 +84,7 @@
                   class="form-control"
                   @change="uploadPhoto('course',$event)"
                 />
-                <img class="img-fluid" 
+                <img class="img-fluid mt-3" 
                     :src="beATeacherData.courseImg" 
                     alt="課程封面照"
                     v-if="beATeacherData.courseImg"/>

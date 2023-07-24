@@ -12,11 +12,8 @@ export default defineStore('goStore', {
     goCoursePage (id) {
       router.push(`/coursePage/${id}`)
     },
-    goHomePage (isMember = false) {
+    goHomePage () {
       router.push('/')
-      logIn.isMember = isMember
-      logIn.logInForm.user.email = ''
-      logIn.logInForm.user.password = ''
     },
     goLoginPage () {
       logIn.logInPage = true
