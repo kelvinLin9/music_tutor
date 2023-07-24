@@ -1,5 +1,5 @@
 <template>
-  個人主頁
+  課表時間
 </template>
   
 <script>
