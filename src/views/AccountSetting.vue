@@ -1,5 +1,5 @@
 <template>
-  個人主頁
+  帳戶設定
 </template>
   
 <script>

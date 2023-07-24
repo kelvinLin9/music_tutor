@@ -29,7 +29,6 @@ setLocale('zh_TW');
 import { register } from 'swiper/element/bundle';
 
 
-
 // Import all of Bootstrap's JS
 import * as bootstrap from 'bootstrap'
 
@@ -38,6 +37,31 @@ import router from './router'
 
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import "./assets/scss/all.scss";
+
+
+
+//firebase
+
+import { initializeApp } from 'firebase/app';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBurMB5RDdvNOV8jMh0M6zi4gNx8r5xNyU",
+  authDomain: "music-tutor-909ea.firebaseapp.com",
+  projectId: "music-tutor-909ea",
+  storageBucket: "music-tutor-909ea.appspot.com",
+  messagingSenderId: "653538731223",
+  appId: "1:653538731223:web:7d9fdd8b43e991ab6bfc92",
+  measurementId: "G-D8YY5SWYN2"
+};
+
+initializeApp(firebaseConfig)
+
+
+
+
+
+
+
 
 const app = createApp(App)
 

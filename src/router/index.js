@@ -62,6 +62,21 @@ const router = createRouter({
           component: () => import('../views/MemberPage.vue')
         },
         {
+          path: 'CoursesCart',
+          name: 'CoursesCart',
+          component: () => import('../views/CoursesCart.vue')
+        },
+        {
+          path: 'CoursesTime',
+          name: 'CoursesTime',
+          component: () => import('../views/CoursesTime.vue')
+        },
+        {
+          path: 'AccountSetting',
+          name: 'AccountSetting',
+          component: () => import('../views/AccountSetting.vue')
+        },
+        {
           path: 'UserLogin',
           name: 'UserLogin',
           component: () => import('../views/UserLogin.vue')
