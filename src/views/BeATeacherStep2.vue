@@ -14,7 +14,8 @@
     <VForm  v-slot="{ errors }"
            @submit="goBeATeacherStep3()">
       <div class="row justify-content-center mb-3">
-        <div class="col-12 col-lg-8">
+        <div class="col-12 col-lg-8"
+              v-if="!teacherData.teacherIntro">
           <label for="teacherIntro" class="form-label">
             自我介紹(限定80字元內)：
           </label>
@@ -23,7 +24,7 @@
                 id="teacherIntro" 
                 rows="5"
                 placeholder="限定80字元內"
-                v-model="beATeacherData.teacherIntro"
+                v-model="teacherData.teacherIntro"
                 >
           </textarea>
         </div>
@@ -45,7 +46,7 @@
       </div>
 
       <div class="row justify-content-center mb-3">
-        <div class="col-12 col-lg-8 mb-3">
+        <!-- <div class="col-12 col-lg-8 mb-3">
           <div class="row">
             <div class="col-4">
               <label for="teacherPhoto" 
@@ -67,7 +68,7 @@
                     v-if="beATeacherData.teacherImg"/>
             </div>
           </div>
-        </div>
+        </div> -->
         <div class="col-12 col-lg-8 mb-3">
           <div class="row">
             <div class="col-4">
@@ -115,7 +116,7 @@ import dataStore from '@/stores/dataStore'
 
 export default {
   computed: {
-    ...mapWritableState(dataStore, ['beATeacherData']),
+    ...mapWritableState(dataStore, ['beATeacherData','teacherData']),
 
   },
   methods: {

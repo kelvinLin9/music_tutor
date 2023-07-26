@@ -83,11 +83,12 @@
 import { mapState, mapActions, mapWritableState } from 
 'pinia'  
 import logInStore from '@/stores/logInStore'
+import dataStore from '../stores/dataStore';
 import goStore from '@/stores/goStore'
 
 export default {
   computed: {
-    ...mapState(logInStore, ['user', 'googleUserName','isMember']),
+    ...mapState(dataStore, ['user', 'isMember'])
   },
   methods: {
     ...mapActions(logInStore, ['signOut'])
