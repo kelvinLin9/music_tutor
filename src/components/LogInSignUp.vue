@@ -31,16 +31,16 @@
                 password：
               </label>
               <VField
-                name="password"
+                name="密碼"
                 id="password"
                 type="password"
                 rules="required|min:8"
                 class="form-control"
-                :class="{ 'is-invalid': errors['password'] }"
+                :class="{ 'is-invalid': errors['密碼'] }"
                 placeholder="請輸入密碼"
                 v-model="logInForm.user.password"
               />
-              <ErrorMessage class="invalid-feedback" name="password"/>
+              <ErrorMessage class="invalid-feedback" name="密碼"/>
             </div>
             <div class="mb-3 d-flex justify-content-between">
               <button type="submit" class="btn btn-sm btn-primary">
@@ -66,6 +66,22 @@
           <VForm class="mx-auto w-75"
           v-slot="{ errors }"
           @submit="signUp()">
+            <div class="mb-3">
+              <label for="displayName" class="form-label ">
+                姓名：
+              </label>
+              <VField
+                name="姓名"
+                id="displayName"
+                type="text"
+                rules="required"
+                class="form-control"
+                :class="{ 'is-invalid': errors['姓名'] }"
+                placeholder="請輸入姓名"
+                v-model="signUpForm.user.displayName"
+              />
+              <ErrorMessage class="invalid-feedback" name="姓名"/>
+            </div>
             <div class="mb-3">
               <label for="email" class="form-label ">
                 Email：
@@ -146,8 +162,8 @@
     tryDelete
   </button>
   <button type="button" class="btn btn-primary me-5"
-  @click="testGetData()">
-    tryGet
+  @click="updateProfile()">
+  updateProfile
   </button>
 </template>
   
@@ -165,11 +181,11 @@ export default {
   },
   methods: {  
     ...mapActions(goStore, ['goHomePage', 'goLoginPage']),
-    ...mapActions(logInStore, ['signUp', 'logIn', 'signInWithGoogle']),
+    ...mapActions(logInStore, ['signUp', 'logIn', 'signInWithGoogle','updateProfile', 'signOut']),
     ...mapActions(dataStore, ['testSetData','testUpdateData','testDeleteData', 'testGetData'])
   },
   created() {
-    
+
   }
 }
 </script>
