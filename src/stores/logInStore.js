@@ -17,7 +17,6 @@ export default defineStore('logInStore', {
   state: () => ({
     logInPage: true,
     isMember: false,
-    googleUserName:'',
     logInForm: {
       user: {
         email: '',
@@ -38,7 +37,6 @@ export default defineStore('logInStore', {
    signOut() {
     this.googleUserName = ''
     signOut(auth)
-    // alert('登出成功')
     router.push('/UserLogin')
     
    },
@@ -60,7 +58,6 @@ export default defineStore('logInStore', {
       console.log(user)
       if (user) {
         this.user = user;
-        console.log(user.uid)
         this.isMember = true
       } else {
         this.isMember = false
@@ -72,9 +69,6 @@ export default defineStore('logInStore', {
     await createUserWithEmailAndPassword(auth, this.signUpForm.user.email, this.signUpForm.user.password)
     .then((res) => {
       console.log(res)
-      this.signUpForm.user.email = ''
-      this.signUpForm.user.password = ''
-      this.signUpForm.user.confirmation = ''
       this.logInPage = true
       alert('恭喜註冊成功')
 
@@ -82,12 +76,13 @@ export default defineStore('logInStore', {
     .catch((err) => {
       alert(err)
     })  
-    console.log(this.signUpForm.user.displayName)
     updateProfile(auth.currentUser, {
       displayName: this.signUpForm.user.displayName
-    }).then(() => {
-      console.log(this.signUpForm.user.displayName)
+    }).then(() => { 
       this.signUpForm.user.displayName = ''
+      this.signUpForm.user.email = ''
+      this.signUpForm.user.password = ''
+      this.signUpForm.user.confirmation = ''
     }).catch(() => {
       console.log('失敗')
     });
@@ -100,7 +95,6 @@ export default defineStore('logInStore', {
     signInWithPopup(auth, provider)
     .then((res) => {
       console.log(res.user)
-      this.googleUserName = res.user.displayName
       router.push('/')
       this.isMember = true
     })
