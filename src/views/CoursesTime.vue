@@ -1,5 +1,5 @@
 <template>
-  課表時間
+  課表時間...
 </template>
   
 <script>

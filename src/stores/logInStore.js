@@ -9,14 +9,15 @@ import { getAuth,
          updateProfile,
          signOut
         } from 'firebase/auth'
+import dataStore from './dataStore';
+
 
 const auth = getAuth();
-
+const data = dataStore()
 
 export default defineStore('logInStore', {
   state: () => ({
     logInPage: true,
-    isMember: false,
     logInForm: {
       user: {
         email: '',
@@ -31,7 +32,6 @@ export default defineStore('logInStore', {
         confirmation: ''
       },
     },
-    user:{},
   }),
   actions: {
    signOut() {
@@ -42,8 +42,8 @@ export default defineStore('logInStore', {
    },
    logIn() {
     signInWithEmailAndPassword(auth, this.logInForm.user.email, this.logInForm.user.password)
-    .then((res) => {
-      this.user = res.user
+    .then(() => {
+      data.isMember = true
       this.logInForm.user.email = ''
       this.logInForm.user.password = ''
       router.push('/')
@@ -52,18 +52,6 @@ export default defineStore('logInStore', {
     .catch((err) => {
       alert(err.message)
     })
-   },
-   onAuthStateChanged() {
-    onAuthStateChanged(auth, (user) => {
-      console.log(user)
-      if (user) {
-        this.user = user;
-        this.isMember = true
-      } else {
-        this.isMember = false
-        console.log('已登出')
-      }
-    });
    },
    async signUp () {
     await createUserWithEmailAndPassword(auth, this.signUpForm.user.email, this.signUpForm.user.password)
@@ -88,15 +76,13 @@ export default defineStore('logInStore', {
     });
      
    },
-
-  
    signInWithGoogle () {
     const provider = new GoogleAuthProvider()
     signInWithPopup(auth, provider)
     .then((res) => {
       console.log(res.user)
       router.push('/')
-      this.isMember = true
+      data.isMember = true
     })
     .catch((err) => {
       alert(err)

@@ -25,18 +25,18 @@
 
   <div class="container mt-3">
     <div class="row align-items-center">
-      <div class="col-12 col-lg-8 test">
+      <div class="col-12 col-lg-8">
         <div class="row align-items-center">
           <div class="col-2">
-            <img :src="beATeacherData.teacherImg" alt="老師照片">
+            <img :src="user.photoURL" alt="老師照片" class="user-photo">
           </div>
           <div class="col-10">
-            {{ beATeacherData.teacherName }}
+            {{ user.displayName }}
           </div>
         </div>
-        <div class="row">
-          <div class="col-10 ms-auto">
-            {{ beATeacherData.teacherIntro }}
+        <div class="row my-3">
+          <div class="col-10">
+            {{ teacherData.teacherIntro }}
           </div>
         </div>
         <div class="row my-3">
@@ -99,7 +99,7 @@
             &emsp;&emsp;上一步&emsp;&emsp;
         </button>
         <button type="button" class="btn btn-primary"
-                  @click="goBeATeacherStep4()">
+                  @click="goBeATeacherStep4(), SetFirebaseCourseData()">
             &emsp;&emsp;下一步&emsp;&emsp;
         </button>
       </div>
@@ -117,10 +117,11 @@ import goStore from '@/stores/goStore'
 
 export default {
   computed: {
-    ...mapState(dataStore, ['beATeacherData']),
+    ...mapState(dataStore, ['beATeacherData','teacherData','user']),
   },
   methods: {
     ...mapActions(goStore, ['goBeATeacherStep2', 'goBeATeacherStep4']),
+    ...mapActions(dataStore, ['SetFirebaseCourseData'])
     
   },
   created () {
@@ -131,5 +132,12 @@ export default {
 <style lang="scss" scoped>
 img {
   width: 100%;
+  object-fit: cover;
+}
+.user-photo {
+  width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    object-fit: cover;
 }
 </style>
