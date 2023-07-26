@@ -378,7 +378,16 @@ export default defineStore('dataStore', {
       time: 0,
       price: 0,
     },
-    membersData:[]
+    musicTutorData:[],
+    userData:{
+      email: '',
+      accessToken: '',
+      metadata:{},
+      uid: '',
+
+
+
+    }
 
   }),
   actions: {

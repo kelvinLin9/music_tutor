@@ -22,29 +22,30 @@
             所有課程
           </RouterLink>
         </li>
+        <RouterLink to="/UserLogin" class="nav-link"
+            :class="{ 'text-primary':  $route.name === 'UserLogin'}"
+            v-if="this.isMember === false">
+            登入
+          </RouterLink> 
+          <!-- 登入後出現 -->
         <li class="nav-item" 
-            v-if="isMember === true">
+            v-if="this.isMember === true">
           <RouterLink to="/CoursesCart" class="nav-link"
             :class="{ 'text-primary':  $route.name === 'CoursesCart'}">
             <i class="bi bi-cart-fill me-lg-2"></i>
           </RouterLink>
         </li>
-        <li class="nav-item dropdown">
-          <RouterLink to="/UserLogin" class="nav-link"
-            :class="{ 'text-primary':  $route.name === 'UserLogin'}"
-            v-if="isMember === false">
-            登入
-          </RouterLink>          
+        <li class="nav-item dropdown">  
           <button class="btn dropdown-toggle text-primary"
                   type="button" id="dropdownLogin" 
                   data-bs-toggle="dropdown" aria-expanded="false"
                   :class="{ 'text-primary':  $route.name === 'UserLogin'}"
-                  v-if="isMember === true">
+                  v-if="this.isMember === true">
             <i class="bi bi-person-circle me-2"></i>
-            {{ googleUserName }}
+            {{ user.displayName }}
           </button>
           <ul class="dropdown-menu dropdown-menu-end text-primary" aria-labelledby="dropdownLogin"
-                  v-if="isMember === true">
+                  v-if="this.isMember === true">
             <li>
               <RouterLink to="/MemberPage" class="dropdown-item">
                 個人主頁
@@ -67,7 +68,7 @@
             </li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#"
-              @click="logOut()">
+              @click="signOut()">
               登出
             </a></li>
           </ul>
@@ -86,14 +87,14 @@ import goStore from '@/stores/goStore'
 
 export default {
   computed: {
-    ...mapState(logInStore, ['isMember', 'googleUserName']),
+    ...mapState(logInStore, ['user', 'googleUserName','isMember']),
   },
   methods: {
-    ...mapActions(logInStore, ['logOut'])
+    ...mapActions(logInStore, ['signOut','onAuthStateChanged'])
     
   },
   created () {
-
+    this.onAuthStateChanged()
   }
 }
 </script>
