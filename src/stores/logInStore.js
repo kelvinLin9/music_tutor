@@ -23,7 +23,6 @@ export default defineStore('logInStore', {
     },
     signUpForm: {
       user: {
-        name: '',
         email: '',
         password: '',
         confirmation: ''
@@ -54,7 +53,6 @@ export default defineStore('logInStore', {
     createUserWithEmailAndPassword(getAuth(), this.signUpForm.user.email, this.signUpForm.user.password)
     .then((res) => {
       console.log(res)
-      this.signUpForm.user.name = ''
       this.signUpForm.user.email = ''
       this.signUpForm.user.password = ''
       this.signUpForm.user.confirmation = ''

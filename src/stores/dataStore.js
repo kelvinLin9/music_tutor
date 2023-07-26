@@ -1,7 +1,20 @@
-import { getFirestore, collection, getDocs, addDoc } from 'firebase/firestore/lite'
+import {getFirestore, 
+        collection, 
+        doc, 
+        setDoc, 
+        getDoc,
+        getDocs, 
+        addDoc, 
+        Timestamp,
+        updateDoc, 
+        serverTimestamp,
+        writeBatch,
+        deleteDoc,
+        deleteField,
+       } from 'firebase/firestore/lite'
 import { defineStore } from 'pinia'
 
-
+const db = getFirestore()
 export default defineStore('dataStore', {
   state: () => ({
     // 自己創的測試用數據
@@ -364,24 +377,93 @@ export default defineStore('dataStore', {
       cityName: '',
       time: 0,
       price: 0,
-    }
+    },
+    membersData:[]
 
   }),
   actions: {
+    async testSetData() {   
+      const member = "Kelvin"
+      const identity = "teacher"
+      await setDoc(doc(db, member , identity), 
+      { id: 7788995,
+        coursesData: this.coursesData
+      });
+      console.log('ok')
+    },
+    async testUpdateData() {
+      const docRef = doc(db, 'Kelvin', 'teacher');
+      await updateDoc(docRef, {
+        id: 778899555,
+        timestamp: serverTimestamp()
+      });
+    },
+    async testDeleteData() {
+      // 刪集合
+      // await deleteDoc(doc(db, "Kelvin", "teacher"));
+
+      const cityRef = doc(db, 'Kelvin', 'teacher');
+      await updateDoc(cityRef, {
+        id: deleteField()
+      });
+    console.log('ok')
+    },
     async testGetData() {
-      console.log(getFirestore())
+      // const citiesRef = collection(db, "cities");
+      // await setDoc(doc(citiesRef, "SF"), {
+      //     name: "San Francisco", 
+      //     state: "CA", 
+      //     country: "USA",
+      //     capital: false, population: 860000,
+      //     regions: ["west_coast", "norcal"] });
+      // await setDoc(doc(citiesRef, "LA"), {
+      //     name: "Los Angeles", 
+      //     state: "CA", 
+      //     country: "USA",
+      //     capital: false, population: 3900000,
+      //     regions: ["west_coast", "socal"] });
+      // await setDoc(doc(citiesRef, "DC"), {
+      //     name: "Washington, D.C.", 
+      //     state: null, 
+      //     country: "USA",
+      //     capital: true, population: 680000,
+      //     regions: ["east_coast"] });
+      // await setDoc(doc(citiesRef, "TOK"), {
+      //     name: "Tokyo", 
+      //     state: null, 
+      //     country: "Japan",
+      //     capital: true, population: 9000000,
+      //     regions: ["kanto", "honshu"] });
+      // await setDoc(doc(citiesRef, "BJ"), {
+      //     name: "Beijing", 
+      //     state: null, 
+      //     country: "China",
+      //     capital: true, population: 21500000,
+      //     regions: ["jingjinji", "hebei"] });
+      //     console.log('ok')
 
-      const querySnapshot = await getDocs(collection(getFirestore(), "musicTutorData"));
-      // console.log(querySnapshot.id)
-      console.log(querySnapshot._docs[0]._document)
-    },
-    async testAddData() {
-      console.log(getFirestore())
 
-      const querySnapshot = await getDocs(collection(getFirestore(), "musicTutorData"));
-      // console.log(querySnapshot.id)
-      console.log(querySnapshot._docs[0]._document)
+      const docRef = doc(db, "cities", "SF");
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        console.log("Document data:", docSnap.data());
+      } else {
+        // docSnap.data() will be undefined in this case
+        console.log("No such document!");
+      }
+
+
     },
+
+
+
+
+
+
+
+
+
     // 單一課程頁面用
     getCourseData(id) { 
       this.courseData = this.coursesData.filter((item) => {
