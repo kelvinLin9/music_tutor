@@ -8,8 +8,8 @@
         <div v-if="logInPage">
           <h1 class="mx-auto border-bottom my-3 pb-2 w-50 text-center">會員登入</h1>
           <VForm class="mx-auto w-75"
-          v-slot="{ errors }"
-          @submit="logIn()">
+                v-slot="{ errors }"
+                @submit="logIn()">
             <div class="mb-3">
               <label for="email" class="form-label ">
                 Email：
