@@ -149,7 +149,7 @@
   </div>
 
 
-  <button type="button" class="btn btn-primary me-5"
+  <!-- <button type="button" class="btn btn-primary me-5"
   @click="testSetData()">
     trySet
   </button>
@@ -164,7 +164,7 @@
   <button type="button" class="btn btn-primary me-5"
   @click="updateProfile()">
   updateProfile
-  </button>
+  </button> -->
 </template>
   
 <script>

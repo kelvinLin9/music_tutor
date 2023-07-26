@@ -90,11 +90,10 @@ export default {
     ...mapState(logInStore, ['user', 'googleUserName','isMember']),
   },
   methods: {
-    ...mapActions(logInStore, ['signOut','onAuthStateChanged'])
+    ...mapActions(logInStore, ['signOut'])
     
   },
   created () {
-    this.onAuthStateChanged()
   }
 }
 </script>
