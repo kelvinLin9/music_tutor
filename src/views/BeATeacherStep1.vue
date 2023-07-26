@@ -289,14 +289,14 @@ import dataStore from '@/stores/dataStore'
 
 export default {
   computed: {
-    ...mapWritableState(dataStore, ['beATeacherData']),
+    ...mapWritableState(dataStore, ['beATeacherData','teacherData']),
 
   },
   methods: {
     ...mapActions(goStore, ['goBeATeacherStep1', 'goBeATeacherStep2']),
   },
   created () {
-    
+
   }
 }
 </script>

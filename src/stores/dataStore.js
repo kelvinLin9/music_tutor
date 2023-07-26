@@ -12,9 +12,12 @@ import {getFirestore,
         deleteDoc,
         deleteField,
        } from 'firebase/firestore/lite'
+import { getAuth, onAuthStateChanged,} from 'firebase/auth'
 import { defineStore } from 'pinia'
 
+const auth = getAuth();
 const db = getFirestore()
+
 export default defineStore('dataStore', {
   state: () => ({
     // 自己創的測試用數據
@@ -365,7 +368,7 @@ export default defineStore('dataStore', {
     bookmarkNum: 0,
     // 成為老師表單數據，老師名稱來自會員(先預設)
     beATeacherData:{
-      id: 0,
+      uid: '',
       courseImg: '',
       teacherImg: '',
       teacherName: '',
@@ -384,30 +387,44 @@ export default defineStore('dataStore', {
       accessToken: '',
       metadata:{},
       uid: '',
-
-
-
-    }
+    },
+    teacherData: {
+      phoneNumber: '',
+      gender: '',
+      address: '',
+      teacherIntro: '',
+      instagram: '',
+      FaceBook: '',
+      Discord: '',
+    },
+    student: {},
+    user:{},
+    isMember: false,
 
   }),
   actions: {
-    async testSetData() {   
-      const member = "Kelvin"
+    async SetFirebaseData() {   
+      const member = this.user.uid
       const identity = "teacher"
       await setDoc(doc(db, member , identity), 
-      { id: 7788995,
-        coursesData: this.coursesData
-      });
+      this.teacherData);
       console.log('ok')
     },
-    async testUpdateData() {
+    async SetFirebaseCourseData() {   
+      this.beATeacherData.uid = this.user.uid
+      const member = "MusicTutorCourses"
+      // const identity = "teacher"
+      await addDoc(collection(db, member), this.beATeacherData);
+      alert('新增課程成功')
+    },
+    async UpdateFirebaseData() {
       const docRef = doc(db, 'Kelvin', 'teacher');
       await updateDoc(docRef, {
         id: 778899555,
         timestamp: serverTimestamp()
       });
     },
-    async testDeleteData() {
+    async DeleteFirebaseData() {
       // 刪集合
       // await deleteDoc(doc(db, "Kelvin", "teacher"));
 
@@ -417,53 +434,42 @@ export default defineStore('dataStore', {
       });
     console.log('ok')
     },
-    async testGetData() {
-      // const citiesRef = collection(db, "cities");
-      // await setDoc(doc(citiesRef, "SF"), {
-      //     name: "San Francisco", 
-      //     state: "CA", 
-      //     country: "USA",
-      //     capital: false, population: 860000,
-      //     regions: ["west_coast", "norcal"] });
-      // await setDoc(doc(citiesRef, "LA"), {
-      //     name: "Los Angeles", 
-      //     state: "CA", 
-      //     country: "USA",
-      //     capital: false, population: 3900000,
-      //     regions: ["west_coast", "socal"] });
-      // await setDoc(doc(citiesRef, "DC"), {
-      //     name: "Washington, D.C.", 
-      //     state: null, 
-      //     country: "USA",
-      //     capital: true, population: 680000,
-      //     regions: ["east_coast"] });
-      // await setDoc(doc(citiesRef, "TOK"), {
-      //     name: "Tokyo", 
-      //     state: null, 
-      //     country: "Japan",
-      //     capital: true, population: 9000000,
-      //     regions: ["kanto", "honshu"] });
-      // await setDoc(doc(citiesRef, "BJ"), {
-      //     name: "Beijing", 
-      //     state: null, 
-      //     country: "China",
-      //     capital: true, population: 21500000,
-      //     regions: ["jingjinji", "hebei"] });
-      //     console.log('ok')
-
-
-      const docRef = doc(db, "cities", "SF");
+    async GetTeacherFirebaseData() {
+      const docRef = doc(db, this.user.uid, 'teacher');
       const docSnap = await getDoc(docRef);
-
       if (docSnap.exists()) {
         console.log("Document data:", docSnap.data());
+        this.teacherData = docSnap.data()
       } else {
         // docSnap.data() will be undefined in this case
         console.log("No such document!");
       }
-
-
     },
+    async GetStudentFirebaseData() {
+      const docRef = doc(db, this.user.uid, 'student');
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        console.log("Document data:", docSnap.data());
+        this.studentData = docSnap.data()
+      } else {
+        // docSnap.data() will be undefined in this case
+        console.log("No such document!");
+      }
+    },
+    // 判斷完是否登入後，讀取用戶老師端學生端資料
+    onAuthStateChanged() {
+      onAuthStateChanged(auth, (user) => {
+        console.log(user)
+        if (user) {
+          this.user = user;
+          this.isMember = true
+          this.GetTeacherFirebaseData()
+        } else {
+          this.isMember = false
+          console.log('已登出')
+        }
+      });
+     },
 
 
 
