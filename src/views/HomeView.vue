@@ -9,6 +9,7 @@
 import NavbarCom from '@/components/NavbarCom.vue'
 import GoTop from '@/components/GoTop.vue'
 import { mapActions, mapState } from 'pinia'
+import logInStore from '../stores/logInStore';
 
 export default {
   components: {
@@ -19,10 +20,11 @@ export default {
 
   },
   methods: {
-
+    ...mapActions(logInStore, ['onAuthStateChanged']),
   },
   created () {
     console.log(this.$route.name)
+    this.onAuthStateChanged()
   }
 }
 </script>
