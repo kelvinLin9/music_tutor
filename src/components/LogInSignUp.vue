@@ -67,22 +67,6 @@
           v-slot="{ errors }"
           @submit="signUp()">
             <div class="mb-3">
-              <label for="name" class="form-label ">
-                Name：
-              </label>
-              <VField
-                name="name"
-                id="name"
-                type="text"
-                rules="required"
-                class="form-control"
-                :class="{ 'is-invalid': errors['name'] }"
-                placeholder="請輸入姓名"
-                v-model="signUpForm.user.name"
-              />
-              <ErrorMessage class="invalid-feedback" name="name"/>
-            </div>
-            <div class="mb-3">
               <label for="email" class="form-label ">
                 Email：
               </label>
@@ -143,16 +127,27 @@
               </button>
             </div>
           </VForm>
-
         </div>
       </div>
     </div>
   </div>
 
 
-  <button type="button" class="btn btn-primary"
+  <button type="button" class="btn btn-primary me-5"
+  @click="testSetData()">
+    trySet
+  </button>
+  <button type="button" class="btn btn-primary me-5"
+  @click="testUpdateData()">
+    tryUpdate
+  </button>
+  <button type="button" class="btn btn-primary me-5"
+  @click="testDeleteData()">
+    tryDelete
+  </button>
+  <button type="button" class="btn btn-primary me-5"
   @click="testGetData()">
-    try
+    tryGet
   </button>
 </template>
   
@@ -171,7 +166,7 @@ export default {
   methods: {  
     ...mapActions(goStore, ['goHomePage', 'goLoginPage']),
     ...mapActions(logInStore, ['signUp', 'logIn', 'signInWithGoogle']),
-    ...mapActions(dataStore, ['testGetData'])
+    ...mapActions(dataStore, ['testSetData','testUpdateData','testDeleteData', 'testGetData'])
   },
   created() {
     
