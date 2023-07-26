@@ -148,6 +148,12 @@
       </div>
     </div>
   </div>
+
+
+  <button type="button" class="btn btn-primary"
+  @click="testGetData()">
+    try
+  </button>
 </template>
   
 <script>
@@ -155,6 +161,7 @@ import { mapState, mapActions, mapWritableState } from
 'pinia' 
 import logInStore from '../stores/logInStore';
 import goStore from '../stores/goStore';
+import dataStore from '../stores/dataStore';
 
 
 export default {
@@ -164,6 +171,7 @@ export default {
   methods: {  
     ...mapActions(goStore, ['goHomePage', 'goLoginPage']),
     ...mapActions(logInStore, ['signUp', 'logIn', 'signInWithGoogle']),
+    ...mapActions(dataStore, ['testGetData'])
   },
   created() {
     

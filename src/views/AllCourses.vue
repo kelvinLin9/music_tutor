@@ -115,15 +115,29 @@
         <div class="row g-1 align-items-center">
           <div class="col-auto">
             <label for="selectCityName" class="col-form-label">
-              上課地點：
+              上課方式：
             </label>
           </div>
-
           <div class="col-auto">
+            <select class="form-select" 
+                    aria-label="Default select example"
+                    id="selectCityName"
+                    v-model="selectCourseMethod"
+                    @change="selectCityNameCancel()">
+              <option value="" selected>請選擇</option>
+              <option v-for="item in courseMethod" 
+                      :key="item" :value="item">
+                {{ item }}
+              </option>
+            </select>
+          </div>
+
+          <div class="col-auto"
+              v-if="selectCourseMethod === '在老師家'">
             <select class="form-select" aria-label="Default select example"
                     id="selectCityName"
                     v-model="selectCityName">
-              <option value="" selected>請選擇</option>
+              <option value="" selected>請選擇地點</option>
               <option value="台北市">台北市</option>
               <option value="基隆市">基隆市</option>
               <option value="新北市">新北市</option>
@@ -148,6 +162,7 @@
               <option value="連江縣">連江縣</option>
             </select>
           </div>
+
         </div>
       </div>
 
@@ -199,8 +214,22 @@
             <div class="mb-1">
               <i class="bi bi-clock-fill"></i>
               {{ item.time }}
-              <i class="bi bi-geo-alt-fill"></i>
+              <i class="bi bi-geo-alt-fill ms-2"></i>
               {{ item.cityName }}
+            </div>
+            <div class="mb-1">
+              <span class="bg-info rounded-2 px-2 me-2"
+                    v-if="item.courseMethod[0]">
+                {{ item.courseMethod[0] }}
+              </span>
+              <span class="bg-info rounded-2 px-2 me-2"
+                    v-if="item.courseMethod[1]">
+                {{ item.courseMethod[1] }}
+              </span>
+              <span class="bg-info rounded-2 px-2 me-2"
+                    v-if="item.courseMethod[2]">
+                {{ item.courseMethod[2] }}
+              </span>
             </div>
             <div class="mb-1">
               NT$ {{ item.price }}
@@ -226,12 +255,13 @@ export default {
   components: { PaginationCom },
   computed: {
     ...mapState(dataStore, ['coursesData', 'bookmarkState']),
-    ...mapState(filterStore, ['filterData']),
-    ...mapWritableState(filterStore, ['selectCityName', 'selectCourseCategory', 'selectCourseName'])
+    ...mapState(filterStore, ['filterData','courseMethod']),
+    ...mapWritableState(filterStore, ['selectCityName', 'selectCourseCategory', 'selectCourseName','selectCourseMethod'])
   },
   methods: {
     ...mapActions(dataStore, ['getBookmarkCoursesData','toggleBookmark']),
-    ...mapActions(goStore, ['goCoursePage'])
+    ...mapActions(goStore, ['goCoursePage']),
+    ...mapActions(filterStore, ['selectCityNameCancel'])
   },
   created () {
     this.getBookmarkCoursesData()

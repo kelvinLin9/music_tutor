@@ -1,5 +1,5 @@
 <template>
-  個人主頁
+
 </template>
   
 <script>
