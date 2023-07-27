@@ -4,7 +4,6 @@
       <div class="col-9 timeline">
       </div>
     </div>
-
     <div class="row">
       <div class="col-3">
         <div class="timeline-pointer text-center step-1"

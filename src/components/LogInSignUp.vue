@@ -182,7 +182,7 @@ export default {
   methods: {  
     ...mapActions(goStore, ['goHomePage', 'goLoginPage']),
     ...mapActions(logInStore, ['signUp', 'logIn', 'signInWithGoogle','updateProfile', 'signOut']),
-    ...mapActions(dataStore, ['testSetData','testUpdateData','testDeleteData', 'testGetData'])
+    ...mapActions(dataStore, [])
   },
   created() {
 
