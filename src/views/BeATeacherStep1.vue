@@ -210,7 +210,7 @@
                   type="checkbox" 
                   id="studentHome" 
                   value="在學生家" 
-                  name="courseMethod" 
+                  name="courseMethod1" 
                   v-model="beATeacherData.courseMethod"> 
             <label for="studentHome">在學生家</label>
           </div>
@@ -219,7 +219,7 @@
                   type="checkbox" 
                   id="teacherHome" 
                   value="在老師家" 
-                  name="courseMethod" 
+                  name="courseMethod2" 
                   v-model="beATeacherData.courseMethod">
             <label for="teacherHome">在老師家</label>
           </div>
@@ -228,7 +228,7 @@
                   type="checkbox" 
                   id="online" 
                   value="線上" 
-                  name="courseMethod" 
+                  name="courseMethod3" 
                   v-model="beATeacherData.courseMethod">
             <label for="online">線上</label>
           </div>
@@ -290,13 +290,15 @@ import dataStore from '@/stores/dataStore'
 export default {
   computed: {
     ...mapWritableState(dataStore, ['beATeacherData','teacherData']),
+    ...mapState(dataStore, ['isMember','','teacherData','user']),
 
   },
   methods: {
     ...mapActions(goStore, ['goBeATeacherStep1', 'goBeATeacherStep2']),
+    ...mapActions(dataStore, ['onAuthStateChangedForCreateCourse']),
   },
   created () {
-
+    this.onAuthStateChangedForCreateCourse()
   }
 }
 </script>

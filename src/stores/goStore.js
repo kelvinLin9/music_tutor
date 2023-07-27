@@ -33,17 +33,6 @@ export default defineStore('goStore', {
     },
     goBeATeacherStep4 () {
       router.push('/CreateCourses/BeATeacherStep4')
-      data.beATeacherData.courseImg = ''
-      data.beATeacherData.teacherImg = ''
-      data.beATeacherData.teacherName = ''
-      data.beATeacherData.teacherIntro = ''
-      data.beATeacherData.courseName = '李老師'
-      data.beATeacherData.courseIntro = ''
-      data.beATeacherData.courseCategory = ''
-      data.beATeacherData.courseMethod = []
-      data.beATeacherData.cityName = ''
-      data.beATeacherData.time = 0
-      data.beATeacherData.price = 0
     }
   }
 })

@@ -28,7 +28,6 @@
   </div>
 
   <FeaturedCourses class="my-5"/>
-
 </template>
 
 <script>
