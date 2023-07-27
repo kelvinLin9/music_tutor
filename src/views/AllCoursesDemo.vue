@@ -190,9 +190,9 @@
     </div>
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-2">
       <div class="col"
-      v-for="item in AllCoursesFirebaseData" :key="item.id">
+      v-for="item in filterData" :key="item.id">
         <div class="card rounded-3 scale"
-        @click="GetOneCoursesFirebaseData(item.id)">
+        @click="goCoursePage(item.id)">
           <div class="card-img overflow-hidden position-relative">
             <img src="https://fakeimg.pl/200x150/" alt="" class="card-img-top">
             <i class="bookmark"
@@ -209,7 +209,7 @@
               <span class="">&ensp;{{ item.courseName }}</span>   
             </div>
             <div class="mb-1 text-primary">
-              by {{ item.displayName }}
+              by {{ item.teacherName }}
             </div>
             <div class="mb-1">
               <i class="bi bi-clock-fill"></i>
@@ -219,16 +219,16 @@
             </div>
             <div class="mb-1">
               <span class="bg-info rounded-2 px-2 me-2"
-                    v-if="item.courseMethod.values[0]">
-                {{ item.courseMethod.values[0].stringValue }}
+                    v-if="item.courseMethod[0]">
+                {{ item.courseMethod[0] }}
               </span>
               <span class="bg-info rounded-2 px-2 me-2"
-                    v-if="item.courseMethod.values[1]">
-                {{ item.courseMethod.values[0].stringValue }}
+                    v-if="item.courseMethod[1]">
+                {{ item.courseMethod[1] }}
               </span>
               <span class="bg-info rounded-2 px-2 me-2"
-                    v-if="item.courseMethod.values[2]">
-                {{ item.courseMethod.values[2].stringValue }}
+                    v-if="item.courseMethod[2]">
+                {{ item.courseMethod[2] }}
               </span>
             </div>
             <div class="mb-1">
@@ -254,12 +254,12 @@ import goStore from '@/stores/goStore'
 export default {
   components: { PaginationCom },
   computed: {
-    ...mapState(dataStore, ['coursesData', 'bookmarkState', 'AllCoursesFirebaseData']),
+    ...mapState(dataStore, ['coursesData', 'bookmarkState']),
     ...mapState(filterStore, ['filterData','courseMethod']),
     ...mapWritableState(filterStore, ['selectCityName', 'selectCourseCategory', 'selectCourseName','selectCourseMethod'])
   },
   methods: {
-    ...mapActions(dataStore, ['getBookmarkCoursesData','toggleBookmark','GetAllCoursesFirebaseData', 'GetOneCoursesFirebaseData']),
+    ...mapActions(dataStore, ['getBookmarkCoursesData','toggleBookmark','GetAllCoursesFirebaseData']),
     ...mapActions(goStore, ['goCoursePage']),
     ...mapActions(filterStore, ['selectCityNameCancel'])
   },

@@ -382,8 +382,9 @@ export default defineStore('dataStore', {
       cityName: '',
       time: 0,
       price: 0,
+      timestamp:'',
     },
-    musicTutorData:[],
+    AllCoursesFirebaseData:[],
     teacherData: {
       uid: '',
       displayName: '',
@@ -436,7 +437,6 @@ export default defineStore('dataStore', {
       console.log(this.beATeacherData)
       await addDoc(collection(db, member), this.beATeacherData)
       alert('新增課程成功')
-
       this.beATeacherData.uid = '',
       this.beATeacherData.displayName = '',
       this.beATeacherData.gender = '',
@@ -450,6 +450,7 @@ export default defineStore('dataStore', {
       this.beATeacherData.cityName = ''
       this.beATeacherData.time = 0
       this.beATeacherData.price = 0
+      this.beATeacherData.timestamp = ''
     },
     addCourseDataToTeacher() {
 
@@ -474,7 +475,6 @@ export default defineStore('dataStore', {
 
 
     async GetTeacherFirebaseData() {
-      // 學生資料要記得取
       const docRef = doc(db, this.user.uid, 'teacher');
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
@@ -496,6 +496,48 @@ export default defineStore('dataStore', {
         console.log("No such student document!");
       }
     },
+    async GetAllCoursesFirebaseData() {
+      this.MusicTutorCourses = []
+      const querySnapshot = await getDocs(collection(db, "MusicTutorCourses"));
+      this.AllCoursesFirebaseData = []
+      querySnapshot._docs.forEach((item) => {
+        // console.log(item._document.data.value.mapValue.fields)
+        const wrap = {
+          id: item.id,
+          createdTime: item._document.createTime.timestamp.seconds,
+          cityName:item._document.data.value.mapValue.fields.cityName.stringValue,
+          courseCategory:item._document.data.value.mapValue.fields.courseCategory.stringValue,
+          courseImg:item._document.data.value.mapValue.fields.courseImg.stringValue,
+          courseIntro:item._document.data.value.mapValue.fields.courseIntro.stringValue,
+          courseMethod:item._document.data.value.mapValue.fields.courseMethod.arrayValue,
+          courseName:item._document.data.value.mapValue.fields.courseName.stringValue,
+          displayName:item._document.data.value.mapValue.fields.displayName.stringValue,
+          gender:item._document.data.value.mapValue.fields.gender.stringValue,
+          price:item._document.data.value.mapValue.fields.price.stringValue,
+          teacherImg:item._document.data.value.mapValue.fields.teacherImg.stringValue,
+          teacherIntro:item._document.data.value.mapValue.fields.teacherIntro.stringValue,
+          time:item._document.data.value.mapValue.fields.time.integerValue,
+          uid:item._document.data.value.mapValue.fields.uid.stringValue,
+        }
+        this.AllCoursesFirebaseData.push(wrap)
+      });
+    },
+    async GetOneCoursesFirebaseData(courseId) {
+      const docRef = doc(db, "MusicTutorCourses", courseId);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        console.log("Document OneCourses data:", docSnap.data());
+        this.courseData = docSnap.data()
+        router.push(`/coursePage/${courseId}`)
+      } else {
+        // docSnap.data() will be undefined in this case
+        console.log("No such OneCourses document!");
+      }
+    },
+
+
+
+
     // 判斷完是否登入後，讀取用戶老師端學生端資料
     onAuthStateChanged() {
       onAuthStateChanged(auth, (user) => {
@@ -529,11 +571,11 @@ export default defineStore('dataStore', {
         }
       });
     },
-    copyUserToTeacherData() {
-      this.teacherData.displayName = this.user.displayName
-      this.teacherData.email = this.user.uid.email
-      this.teacherData.uid = this.user.uid
-    },
+    // copyUserToTeacherData() {
+    //   this.teacherData.displayName = this.user.displayName
+    //   this.teacherData.email = this.user.uid.email
+    //   this.teacherData.uid = this.user.uid
+    // },
     
     
     
