@@ -7,9 +7,9 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <VForm class="mx-auto w-75"
+        <VForm class="mx-auto"
                 v-slot="{ errors }"
-                @submit="SetFirebaseData()">
+                @submit="UpdateFirebaseMemberData()">
           <!-- <div class="mb-3">
             <label for="email" class="form-label ">
               Email：
@@ -26,7 +26,7 @@
             />
             <ErrorMessage class="invalid-feedback" name="email"/>
           </div> -->
-          <div class="mb-3">
+          <div class="mb-3 w-50">
             <label for="phone" class="form-label ">
               手機：
             </label>
@@ -42,6 +42,65 @@
             />
             <ErrorMessage class="invalid-feedback" name="手機"/>
           </div>
+          <div class="mb-3 w-50">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="bi bi-gender-male text-blue"
+              v-model="teacherData.gender">
+              <label class="form-check-label" for="inlineRadio1">男</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="bi bi-gender-female text-pink"
+              v-model="teacherData.gender">
+              <label class="form-check-label" for="inlineRadio2">女</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="bi bi-gender-ambiguous text-teal"
+              v-model="teacherData.gender">
+              <label class="form-check-label" for="inlineRadio3">雙性</label>
+            </div> 
+          </div>
+          <div class="mb-3 w-100">
+            <label for="Facebook" class="form-label ">
+              Facebook：
+            </label>
+            <input
+              name="Facebook"
+              id="Facebook"
+              type="text"
+              class="form-control"
+              placeholder="請輸入Facebook網址"
+              v-model="teacherData.facebook"
+            />
+          </div>
+          <div class="mb-3 w-100">
+            <label for="instagram" class="form-label ">
+              Instagram：
+            </label>
+            <input
+              name="instagram"
+              id="instagram"
+              type="text"
+              class="form-control"
+              placeholder="請輸入Instagram網址"
+              v-model="teacherData.instagram"
+            />
+          </div>
+          <div class="mb-3 w-100">
+            <label for="discord" class="form-label ">
+              Discord：
+            </label>
+            <input
+              name="discord"
+              id="discord"
+              type="text"
+              class="form-control"
+              placeholder="請輸入Discord網址"
+              v-model="teacherData.discord"
+            />
+          </div>
+          
+
+
           <div class="mb-3">
             <label for="teacherIntro" class="form-label">
             自我介紹(限定80字元內)：
@@ -84,8 +143,6 @@
 <script>
 import { mapState, mapActions, mapWritableState } from 
 'pinia' 
-import logInStore from '../stores/logInStore';
-import goStore from '../stores/goStore';
 import dataStore from '../stores/dataStore';
 
 
@@ -96,9 +153,7 @@ export default {
     ...mapWritableState(dataStore, ['teacherData'])
   },
   methods: {  
-    ...mapActions(dataStore, ['SetFirebaseData'])
-    // ...mapActions(goStore, ['goHomePage', 'goLoginPage']),
-    // ...mapActions(logInStore, ['signUp', 'logIn', 'signInWithGoogle','updateProfile', 'signOut']),
+    ...mapActions(dataStore, ['UpdateFirebaseMemberData'])
   },
   created() {
 

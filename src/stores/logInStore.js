@@ -35,7 +35,7 @@ export default defineStore('logInStore', {
   }),
   actions: {
    signOut() {
-    this.googleUserName = ''
+    // this.googleUserName = ''
     signOut(auth)
     router.push('/UserLogin')
     
@@ -59,11 +59,11 @@ export default defineStore('logInStore', {
       console.log(res)
       this.logInPage = true
       alert('恭喜註冊成功')
-
     })
     .catch((err) => {
       alert(err)
     })  
+    // 更新自訂名字&清除暫存表單資料
     updateProfile(auth.currentUser, {
       displayName: this.signUpForm.user.displayName
     }).then(() => { 
@@ -71,11 +71,15 @@ export default defineStore('logInStore', {
       this.signUpForm.user.email = ''
       this.signUpForm.user.password = ''
       this.signUpForm.user.confirmation = ''
+      // 建立一份老師學生端物件上傳
+      data.SetFirebaseMemberData()
     }).catch(() => {
-      console.log('失敗')
+      console.log('更新名字失敗')
     });
-     
    },
+
+
+
    signInWithGoogle () {
     const provider = new GoogleAuthProvider()
     signInWithPopup(auth, provider)
@@ -83,6 +87,12 @@ export default defineStore('logInStore', {
       console.log(res.user)
       router.push('/')
       data.isMember = true
+      console.log(res.user.uid,"登入成功")
+      // 判斷如果是第一次登入，建立一份老師學生端物件上傳
+      if(res.user.metadata.createdAt === res.user.metadata.lastLoginAt) {
+        console.log("第一次登入")
+        data.SetFirebaseMemberData()
+      }
     })
     .catch((err) => {
       alert(err)
