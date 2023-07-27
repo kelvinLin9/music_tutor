@@ -14,6 +14,7 @@ import {getFirestore,
        } from 'firebase/firestore/lite'
 import { getAuth, onAuthStateChanged,} from 'firebase/auth'
 import { defineStore } from 'pinia'
+import router from '../router'
 
 const auth = getAuth();
 const db = getFirestore()
@@ -369,9 +370,10 @@ export default defineStore('dataStore', {
     // 成為老師表單數據，老師名稱來自會員(先預設)
     beATeacherData:{
       uid: '',
+      displayName: '',
+      gender: '',
       courseImg: '',
       teacherImg: '',
-      teacherName: '',
       teacherIntro: '',
       courseName: '',
       courseIntro: '',
@@ -382,78 +384,116 @@ export default defineStore('dataStore', {
       price: 0,
     },
     musicTutorData:[],
-    userData:{
-      email: '',
-      accessToken: '',
-      metadata:{},
-      uid: '',
-    },
     teacherData: {
-      phoneNumber: '',
+      uid: '',
+      displayName: '',
       gender: '',
       address: '',
+      teachArea: [],
       teacherIntro: '',
       instagram: '',
-      FaceBook: '',
-      Discord: '',
+      facebook: '',
+      discord: '',
+      expertise: '',
+      educationalBackground: '',
+      courses: [],
+      language: [],
+      musicStyle:[], 
+      myTeachCourses:[],
+      allTeachTime:0,
+      studentAssess:[]
     },
-    student: {},
+    studentData: {
+      myCourses:[],
+      myCoursesDown:[],
+      allStudyTime:0,
+      myBookmarkCourses:[],
+      myBookmarkTeacher:[],
+    },
     user:{},
     isMember: false,
 
   }),
   actions: {
-    async SetFirebaseData() {   
+    async SetFirebaseMemberData() {   
+      console.log('Set Firebase Member')
       const member = this.user.uid
-      const identity = "teacher"
-      await setDoc(doc(db, member , identity), 
+      const identity1 = "teacher"
+      const identity2 = "student"
+      await setDoc(doc(db, member , identity1), 
       this.teacherData);
-      console.log('ok')
+      await setDoc(doc(db, member , identity2), 
+      this.studentData);
+      console.log('成功建立老師端學生端物件')
     },
     async SetFirebaseCourseData() {   
       this.beATeacherData.uid = this.user.uid
+      this.beATeacherData.displayName = this.user.displayName
+      this.beATeacherData.gender = this.teacherData.gender
+      this.beATeacherData.teacherImg = this.user.photoURL
+      this.beATeacherData.teacherIntro = this.teacherData.teacherIntro
       const member = "MusicTutorCourses"
-      // const identity = "teacher"
-      await addDoc(collection(db, member), this.beATeacherData);
+      console.log(this.beATeacherData)
+      await addDoc(collection(db, member), this.beATeacherData)
       alert('新增課程成功')
-    },
-    async UpdateFirebaseData() {
-      const docRef = doc(db, 'Kelvin', 'teacher');
-      await updateDoc(docRef, {
-        id: 778899555,
-        timestamp: serverTimestamp()
-      });
-    },
-    async DeleteFirebaseData() {
-      // 刪集合
-      // await deleteDoc(doc(db, "Kelvin", "teacher"));
 
-      const cityRef = doc(db, 'Kelvin', 'teacher');
-      await updateDoc(cityRef, {
-        id: deleteField()
-      });
-    console.log('ok')
+      this.beATeacherData.uid = '',
+      this.beATeacherData.displayName = '',
+      this.beATeacherData.gender = '',
+      this.beATeacherData.courseImg = ''
+      this.beATeacherData.teacherImg = ''
+      this.beATeacherData.teacherIntro = ''
+      this.beATeacherData.courseName = ''
+      this.beATeacherData.courseIntro = ''
+      this.beATeacherData.courseCategory = ''
+      this.beATeacherData.courseMethod = []
+      this.beATeacherData.cityName = ''
+      this.beATeacherData.time = 0
+      this.beATeacherData.price = 0
     },
+    addCourseDataToTeacher() {
+
+    },
+    async UpdateFirebaseMemberData() {
+      const teacherRef = doc(db, this.user.uid, 'teacher')
+      const studentRef = doc(db, this.user.uid, 'student')
+      await updateDoc(teacherRef, this.teacherData)
+      await updateDoc(studentRef, this.studentData)
+      console.log('學生老師端資料更新成功')
+    },
+    // async DeleteFirebaseData() {
+    //   // 刪集合
+    //   // await deleteDoc(doc(db, "Kelvin", "teacher"));
+
+    //   const cityRef = doc(db, 'Kelvin', 'teacher');
+    //   await updateDoc(cityRef, {
+    //     id: deleteField()
+    //   });
+    // console.log('ok')
+    // },
+
+
     async GetTeacherFirebaseData() {
+      // 學生資料要記得取
       const docRef = doc(db, this.user.uid, 'teacher');
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
-        console.log("Document data:", docSnap.data());
+        console.log("Document teacher data:", docSnap.data());
         this.teacherData = docSnap.data()
       } else {
         // docSnap.data() will be undefined in this case
-        console.log("No such document!");
+        console.log("No such teacher document!");
       }
     },
     async GetStudentFirebaseData() {
       const docRef = doc(db, this.user.uid, 'student');
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
-        console.log("Document data:", docSnap.data());
+        console.log("Document student data:", docSnap.data());
         this.studentData = docSnap.data()
       } else {
         // docSnap.data() will be undefined in this case
-        console.log("No such document!");
+        console.log("No such student document!");
       }
     },
     // 判斷完是否登入後，讀取用戶老師端學生端資料
@@ -464,14 +504,39 @@ export default defineStore('dataStore', {
           this.user = user;
           this.isMember = true
           this.GetTeacherFirebaseData()
+          this.GetStudentFirebaseData()
         } else {
           this.isMember = false
           console.log('已登出')
         }
       });
      },
-
-
+    onAuthStateChangedForCreateCourse() {
+      onAuthStateChanged(auth, (user) => {
+        if (!user) {
+          this.isMember = false
+          router.push('/UserLogin')
+          console.log('已登出') 
+        } else {
+          this.user = user;
+          this.isMember = true
+          this.GetTeacherFirebaseData()
+          this.GetStudentFirebaseData()
+          if (!user.displayName || !this.teacherData.teacherIntro) {
+            alert('請先填寫老師姓名及自我介紹')
+            router.push('/MemberPage')
+          }
+        }
+      });
+    },
+    copyUserToTeacherData() {
+      this.teacherData.displayName = this.user.displayName
+      this.teacherData.email = this.user.uid.email
+      this.teacherData.uid = this.user.uid
+    },
+    
+    
+    
 
 
 
@@ -552,11 +617,13 @@ export default defineStore('dataStore', {
 
         if (!isValidFileType) {
           errorMessages.push('You can only upload JPG or PNG file!')
+          alert('You can only upload JPG or PNG file!')
         }
 
         const isValidFileSize = fileObject.size / 1024 / 1024 < 2
         if (!isValidFileSize) {
           errorMessages.push('Image must smaller than 2MB!')
+          alert('Image must smaller than 2MB!')
         }
         resolve({
           isValid: isValidFileType && isValidFileSize,

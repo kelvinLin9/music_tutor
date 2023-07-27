@@ -30,7 +30,7 @@
           <div class="col-2">
             <img :src="user.photoURL" alt="老師照片" class="user-photo">
           </div>
-          <div class="col-10">
+          <div class="col-10 fs-2">
             {{ user.displayName }}
           </div>
         </div>
@@ -136,8 +136,8 @@ img {
 }
 .user-photo {
   width: 100px;
-    height: 100px;
-    border-radius: 50px;
-    object-fit: cover;
+  height: 100px;
+  border-radius: 50px;
+  object-fit: cover;
 }
 </style>
