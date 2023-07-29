@@ -35,19 +35,7 @@
 </template>
 
 <script>
-import { mapState, mapActions, mapWritableState } from 
-'pinia' 
-import dataStore from '@/stores/dataStore'
 
-export default {
-  computed: {
-    ...mapWritableState(dataStore, ['beATeacherData']),
-  },
-
-  created () {
-    console.log(this.$route.fullPath)
-  }
-}
 </script>
 
 <style lang="scss" scoped>

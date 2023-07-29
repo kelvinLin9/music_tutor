@@ -28,7 +28,7 @@
       <div class="col-12 col-lg-8">
         <div class="row align-items-center">
           <div class="col-2">
-            <img :src="user.photoURL" alt="老師照片" class="user-photo">
+            <img :src="teacherData.teacherImg" alt="老師照片" class="user-photo">
           </div>
           <div class="col-10 fs-2">
             {{ user.displayName }}

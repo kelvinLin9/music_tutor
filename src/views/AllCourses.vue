@@ -191,10 +191,10 @@
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-2">
       <div class="col"
       v-for="item in AllCoursesFirebaseData" :key="item.id">
-        <div class="card rounded-3 scale"
-        @click="GetOneCoursesFirebaseData(item.id)">
+        <div class="card rounded-3 scale h-100"
+        @click="getOneCoursesFirebaseData(item.id)">
           <div class="card-img overflow-hidden position-relative">
-            <img src="https://fakeimg.pl/200x150/" alt="" class="card-img-top">
+            <img :src="item.courseImg" alt="" class="card-img-top">
             <i class="bookmark"
             :class="bookmarkState(item.id)"
             @click.stop="toggleBookmark(item.id)"
@@ -240,7 +240,7 @@
     </div>
   </div>
 
-  <PaginationCom />
+  <!-- <PaginationCom /> -->
 </template>
   
 <script>
@@ -259,13 +259,12 @@ export default {
     ...mapWritableState(filterStore, ['selectCityName', 'selectCourseCategory', 'selectCourseName','selectCourseMethod'])
   },
   methods: {
-    ...mapActions(dataStore, ['getBookmarkCoursesData','toggleBookmark','GetAllCoursesFirebaseData', 'GetOneCoursesFirebaseData']),
-    ...mapActions(goStore, ['goCoursePage']),
+    ...mapActions(dataStore, ['getBookmarkCoursesData','toggleBookmark', 'getOneCoursesFirebaseData', 'getAllCoursesFirebaseData']),
     ...mapActions(filterStore, ['selectCityNameCancel'])
   },
   created () {
     this.getBookmarkCoursesData()
-    this.GetAllCoursesFirebaseData()
+    this.getAllCoursesFirebaseData()
   }
 }
 </script>
@@ -273,6 +272,7 @@ export default {
 <style lang="scss" scoped>
 .card-img-top { 
   // width: 100%;
+  height: 150px;
   object-fit: cover;
   transition: 0.5s;
 }

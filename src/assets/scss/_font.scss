@@ -3,8 +3,12 @@
   font-family: 'Kalam', cursive;
 }
 .test {
-  border: 1px solid red;
+  outline: 1px solid red;
 }
+.cursor-pointer {
+  cursor:pointer;
+}
+
 
 @import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
 body{

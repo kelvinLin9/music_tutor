@@ -2,7 +2,7 @@
   <div class="container mt-5">
     <div class="row">
       <div class="col-12 col-lg-8">
-        <img :src="courseData.courseImg" alt="">
+        <img :src="courseData.courseImg" alt="課程圖片" class="course-photo">
       </div>
       <div class="col-12 col-lg-4 d-flex flex-column">
         <h1>{{ courseData.courseName }}</h1>
@@ -27,7 +27,7 @@
             <img :src="courseData.teacherImg" alt="老師照片" class="user-photo">
           </div>
           <div class="col-10 fs-2">
-            {{ user.displayName }}
+            {{ courseData.displayName }}
           </div>
         </div>
         <div class="row my-3">
@@ -53,11 +53,11 @@
                   {{ courseData.courseMethod[0] }}
                 </span>
                 <span class="bg-info rounded-2 px-2 me-2"
-                v-if="courseData.courseMethod[1]">
+                      v-if="courseData.courseMethod[1]">
                   {{ courseData.courseMethod[1] }}
                 </span>
                 <span class="bg-info rounded-2 px-2 me-2"
-                v-if="courseData.courseMethod[2]">
+                      v-if="courseData.courseMethod[2]">
                   {{ courseData.courseMethod[2] }}
                 </span>
               </div>
@@ -71,10 +71,11 @@
           </div>
         </div>
        </div>
-      <div class="col-12 col-lg-4 p-4 border">
+      <div class="col-12 col-lg-4 p-4 border"
+          v-if="this.user.uid !== courseData.uid">
         <h4 class="border-bottom pb-2">購買單堂課程</h4>
         <div class="mb-3">
-          <span class="fs-5">售價</span>
+          <span class="fs-5 me-1">售價</span>
           <span class="fs-1">NT${{ courseData.price }}</span> 
         </div>
         <div class="d-flex justify-content-between">
@@ -84,40 +85,68 @@
           <button type="button" class="btn btn-danger"
                   data-bs-toggle="tooltip"
                   data-bs-placement="top"
-                  title="加入購物車">
+                  title="加入購物車"
+                  @click="addCart(user.uid, courseData)">
             <i class="bi bi-cart-fill"></i>
+          </button>
+        </div>
+      </div>
+      <div class="col-12 col-lg-4 p-4 border"
+          v-if="this.user.uid === courseData.uid">
+        <h4 class="border-bottom pb-2">購買人數</h4>
+        <div class="mb-3">
+          <span class="fs-5 me-1">共</span>
+          <span class="fs-1">?????人</span> 
+        </div>
+        <div class="d-flex justify-content-between">
+          <button type="button" class="btn btn-outline-danger w-25"
+          data-bs-toggle="modal" data-bs-target="#editMyCourseModal">
+            編輯
           </button>
         </div>
       </div>
     </div>
   </div>
+  <edit-my-course-modal></edit-my-course-modal>
 </template>
   
 <script>
-import { mapState, mapActions } from 
+import { mapState, mapActions, mapWritableState } from 
 'pinia'  
 import dataStore from '@/stores/dataStore'
 import goStore from '@/stores/goStore'
+import EditMyCourseModal from '../components/EditMyCourseModal.vue'
+import cartStore from '../stores/cartStore'
 
 export default {
+  components: { EditMyCourseModal },
+  data () {
+    return {
+      id: ''
+    }
+  },
   computed: {
-    ...mapState(dataStore, ['courseData', 'bookmarkState','user']),
+    ...mapState(dataStore, ['bookmarkState','user']),
+    ...mapWritableState(dataStore, ['courseData']),
+  
   },
   methods: {
-    ...mapActions(dataStore, ['getCourseData', 'getBookmarkCoursesData','toggleBookmark']),
-    ...mapActions(goStore, ['goCoursePage'])
+    ...mapActions(dataStore, ['getCourseData', 'getBookmarkCoursesData','toggleBookmark','getOneCoursesFirebaseData']),
+    ...mapActions(goStore, ['goCoursePage']),
+    ...mapActions(cartStore, ['addCart']),
     
   },
   created () {
     this.getBookmarkCoursesData()
+    this.id = this.$route.params.coursePageId
+    this.getOneCoursesFirebaseData(this.id)
+    // this.getOneCoursesFirebaseData()
+
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.cursor-pointer {
-  cursor:pointer;
-}
 img {
   width: 100%;
   object-fit: cover;
@@ -127,5 +156,10 @@ img {
   height: 100px;
   border-radius: 50px;
   object-fit: cover;
+}
+.course-photo {
+  height: 500px;
+  object-fit: cover;
+
 }
 </style>
