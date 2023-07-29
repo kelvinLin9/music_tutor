@@ -4,10 +4,10 @@
       <div class="col-4">
         <div class="d-flex align-items-center">
           <div class="user-photo position-relative">
-            <img :src="user.photoURL" alt="大頭照"
-                v-if="user.photoURL">
+            <img :src="teacherData.teacherImg" alt="大頭照"
+                v-if="teacherData.teacherImg">
             <img src="../assets/images/預設大頭貼.png" alt="預設大頭照"
-                v-if="!user.photoURL">
+                v-if="!teacherData.teacherImg">
           </div>
           <h1 class="ms-5"> {{ user.displayName }} </h1>
         </div>
@@ -20,11 +20,11 @@
           </div>
           <div class="col text-center">
             <h5>已開課程</h5>
-            <p class="fs-1">{{  }}</p>
+            <p class="fs-1">{{ userTeacherCourses.length }}</p>
           </div>
           <div class="col text-center">
             <h5>目前收藏</h5>
-            <p class="fs-1">{{ bookmarksCoursesData.length }}</p>
+            <p class="fs-1">{{  }}</p>
           </div>
         </div>
       </div>
@@ -110,7 +110,7 @@
       v-else-if="myCoursesState === 'teacher'">
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-2">
       <div class="col"
-      v-for="item in getUserTeacherCourses " :key="item.id">
+      v-for="item in userTeacherCourses " :key="item.id">
         <div class="card rounded-3 scale h-100"
         @click="getOneCoursesFirebaseData(item.id)">
           <div class="card-img overflow-hidden position-relative">
@@ -223,15 +223,16 @@ import goStore from '@/stores/goStore'
 
 export default {
   computed: {
-    ...mapState(dataStore, ['bookmarksCoursesData', 'bookmarkState', 'user']),
+    ...mapState(dataStore, ['user', 'teacherData', 'userTeacherCourses', 'userStudentCourses', 'userBookmarkCourses', 'bookmarkState']),
     ...mapWritableState(dataStore, ['myCoursesState'])
   },
   methods: {
-    ...mapActions(dataStore, ['getBookmarkCoursesData','toggleBookmark', 'getOneCoursesFirebaseData', 'getUserTeacherCourses']),
+    ...mapActions(dataStore, ['onAuthStateChanged', 'toggleBookmark']),
     
   },
   created () {
-    this.getBookmarkCoursesData()
+    this.onAuthStateChanged()
+    
 
   }
 }
