@@ -1,49 +1,100 @@
 <template>
   <div class="container mt-3">
-    <div class="row">
-      <div class="col-12 col-lg-8 mx-auto">
+    <div class="row" v-if="studentData.myCart.length !== 0">
+      <h1 class="my-3">購物車</h1>
+      <div class="col-12 col-lg-8 mx-auto border rounded-2">
         <table class="table table-hover align-middle">
-          <tbody>
+          <thead>
             <tr>
-              <td width="100">
-                X
+              <th colspan="5">全選框</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="item in studentData.myCart" :key="item.timestamp">
+              <td width="50" class="text-center">
+                勾選框
               </td>
               <td width="100">
-                <img src="https://fakeimg.pl/640x830/" alt="" class="table-image">
+                <img :src="item.courseImg" alt="" class="table-image">
               </td>
               <td>
-                從零開始學鋼琴
+                {{ item.displayName }}
               </td>
-              <td>
-                <select name="" id="">
-                  <option value="">1</option>
-                </select>
+              <td class="">
+                NT$ {{ item.price }}
               </td>
               <td class="text-end">
-                6000
+                <div class="cursor-pointer"
+                  @click="deleteCart(user.uid, item.timestamp)">
+                  可以刪除
+                </div>
               </td>
             </tr>
           </tbody>
-          <tfoot>
-    
-          </tfoot>
+
         </table>
       </div>
-
-
-      <div class="text-center">購物車無任何品項</div>
+      <div class="col-12 col-lg-4">
+        <div class="card">
+          <div class="card-header">
+            <p>訂單明細</p>
+          </div>
+          <div class="card-body">
+            <div class="d-flex justify-content-between">
+              <p>{{ userCart.cartNum }}件小計</p>
+              <p>NT$ {{ userCart.total }}</p>
+            </div>
+            <div class="text-end fs-2">
+              <p>NT$ {{ userCart.total }}</p>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="">
+              優惠碼之後再弄
+            </div>
+            <div>
+              <button type="button" class="btn btn-primary w-100">
+                還不能來去結帳
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+    <div class="text-center fs-1"
+      v-if="studentData.myCart.length === 0">購物車無任何品項</div>
+    </div>
 </template>
 
 <script>
-  
+import { mapState, mapActions, mapWritableState } from 
+'pinia' 
+import cartStore from '@/stores/cartStore'
+import dataStore from '@/stores/dataStore'
+
+export default {
+  computed: {
+    ...mapWritableState(cartStore, ['','']),
+    ...mapWritableState(dataStore, ['studentData','user', 'userCart']),
+    // ...mapState(dataStore, ['isMember','','teacherData','user']),
+
+  },
+  methods: {
+    ...mapActions(cartStore, ['deleteCart']),
+    // ...mapActions(dataStore, ['onAuthStateChangedForCreateCourse']),
+  },
+  created () {
+    // this.onAuthStateChangedForCreateCourse()
+    console.log(this.studentData.myCart)
+  }
+}
 </script>
 
 <style lang="scss" scoped>
 .table-image {
-  width: 80px;
+  width: 100px;
   height: 80px;
   object-fit: cover;
+  border-radius: 10px;
 }
 </style>

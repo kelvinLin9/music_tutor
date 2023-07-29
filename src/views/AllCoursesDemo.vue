@@ -259,13 +259,13 @@ export default {
     ...mapWritableState(filterStore, ['selectCityName', 'selectCourseCategory', 'selectCourseName','selectCourseMethod'])
   },
   methods: {
-    ...mapActions(dataStore, ['getBookmarkCoursesData','toggleBookmark','GetAllCoursesFirebaseData']),
+    ...mapActions(dataStore, ['getBookmarkCoursesData','toggleBookmark','getAllCoursesFirebaseData']),
     ...mapActions(goStore, ['goCoursePage']),
     ...mapActions(filterStore, ['selectCityNameCancel'])
   },
   created () {
     this.getBookmarkCoursesData()
-    this.GetAllCoursesFirebaseData()
+    this.getAllCoursesFirebaseData()
   }
 }
 </script>

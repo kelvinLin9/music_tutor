@@ -3,72 +3,39 @@
     <div class="row">
       <div class="col text-center">
         <h1 class="border-top border-bottom border-5 py-2 w-75 mx-auto">
-          自我介紹
+          課程介紹
         </h1>
-        <h2>想吸引同學來上您的課，必須在這邊好好介紹自己</h2>
+        <h2>想吸引同學來上您的課，必須在這邊好好介紹課程</h2>
       </div>
     </div>
   </div>
 
+  
   <div class="container mt-5">
     <VForm  v-slot="{ errors }"
            @submit="goBeATeacherStep3()">
-      <div class="row justify-content-center mb-3">
-        <div class="col-12 col-lg-8"
-              v-if="!teacherData.teacherIntro">
-          <label for="teacherIntro" class="form-label">
-            自我介紹(限定80字元內)：
-          </label>
-          <textarea 
-                class="form-control" 
-                id="teacherIntro" 
-                rows="5"
-                placeholder="限定80字元內"
-                v-model="teacherData.teacherIntro"
-                >
-          </textarea>
-        </div>
-      </div>
       <div class="row justify-content-center mb-3">
         <div class="col-12 col-lg-8">
           <label for="courseIntro" class="form-label">
             課程介紹：
           </label>
-          <textarea 
+          <VField 
+                name="課程介紹"
                 class="form-control" 
                 id="courseIntro" 
+                as="textarea"
                 rows="5"
-                placeholder="限定200字元內"
+                rules="required|max:500"
+                :class="{ 'is-invalid': errors['課程介紹'] }"
+                placeholder="限定500字元內"
                 v-model="beATeacherData.courseIntro"
                 >
-          </textarea>
+          </VField>
+          <ErrorMessage class="invalid-feedback" name="課程介紹"/>
         </div>
       </div>
 
       <div class="row justify-content-center mb-3">
-        <!-- <div class="col-12 col-lg-8 mb-3">
-          <div class="row">
-            <div class="col-4">
-              <label for="teacherPhoto" 
-                    class="col-form-label"
-                    accept="image/png, image/jpeg">
-                上傳一張個人形象照：
-              </label>
-            </div>
-            <div class="col-8">
-              <input
-                  type="file"
-                  id="teacherPhoto"
-                  class="form-control"
-                  @change="uploadPhoto('teacher', $event)"
-                />
-                <img class="img-fluid mt-3" 
-                    :src="beATeacherData.teacherImg" 
-                    alt="個人形象照"
-                    v-if="beATeacherData.teacherImg"/>
-            </div>
-          </div>
-        </div> -->
         <div class="col-12 col-lg-8 mb-3">
           <div class="row">
             <div class="col-4">

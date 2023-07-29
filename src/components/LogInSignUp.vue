@@ -54,7 +54,7 @@
             <div class="d-flex justify-content-between">
               <a href="#">忘記密碼</a>
               <a href="#" class="d-inline-block"
-                @click="logInPage = false">
+                @click.prevent="logInPage = false">
                 前往註冊
               </a>
             </div>
@@ -134,11 +134,11 @@
               <button type="submit" class="btn btn-sm btn-primary">
                 註冊
               </button>
-              <button type="reset" class="btn btn-sm btn-danger">
+              <!-- <button type="reset" class="btn btn-sm btn-danger">
                 重設
-              </button>
+              </button> -->
               <button type="button" class="btn btn-sm btn-primary me-2"
-              @click="logInPage = true">
+                      @click="logInPage = true">
                 登入
               </button>
             </div>
@@ -147,24 +147,6 @@
       </div>
     </div>
   </div>
-
-
-  <!-- <button type="button" class="btn btn-primary me-5"
-  @click="testSetData()">
-    trySet
-  </button>
-  <button type="button" class="btn btn-primary me-5"
-  @click="testUpdateData()">
-    tryUpdate
-  </button>
-  <button type="button" class="btn btn-primary me-5"
-  @click="testDeleteData()">
-    tryDelete
-  </button>
-  <button type="button" class="btn btn-primary me-5"
-  @click="updateProfile()">
-  updateProfile
-  </button> -->
 </template>
   
 <script>
