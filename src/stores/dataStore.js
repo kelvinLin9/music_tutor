@@ -415,9 +415,10 @@ export default defineStore('dataStore', {
     },
     user:{},
     isMember: false,
-    // teacherCoursesData:[],
-    // studentCoursesData:[],
+    userTeacherCourses:[],
+    userStudentCourses:[],
     userBookmarkCourses:[],
+    userCartCourses:[],
     userCart:{
       total:0,
       finalTotal:0,
@@ -534,14 +535,13 @@ export default defineStore('dataStore', {
       if (docSnap.exists()) {
         console.log("用戶學生端資料:", docSnap.data());
         this.studentData = docSnap.data()
-        this.calculateMyCart()
       } else {
         alert("No such student document!");
       }
     },
     async getAllCoursesFirebaseData() {
       const querySnapshot = await getDocs(collection(db, "MusicTutorCourses"));
-      
+      // 這邊有留開課時間
       this.AllCoursesFirebaseData = []
       querySnapshot._docs.forEach((item) => {
         // console.log(item.data());
@@ -568,6 +568,7 @@ export default defineStore('dataStore', {
       console.log(this.AllCoursesFirebaseData)
       this.getUserTeacherCourses()
       // this.getUserStudentCourses()
+      this.getUserCartCourses()
     },
     async getOneCoursesFirebaseData(courseId) {
       const docRef = doc(db, "MusicTutorCourses", courseId)
@@ -586,22 +587,35 @@ export default defineStore('dataStore', {
       }
     },
 
-    // 再多用一個return解決
+    // 我的課程頁面for老師
     getUserTeacherCourses() {
-      return this.AllCoursesFirebaseData.filter((item) => {
-        return item.uid.includes(this.user.uid)
+      this.userTeacherCourses = this.AllCoursesFirebaseData.filter((item) => {
+        // console.log(item.uid)
+        // console.log(this.user.uid)
+        return item.uid === this.user.uid
       })
-      // console.log("用戶老師端課程資料",this.user.uid, this.userTeacherCourses)
+      console.log("用戶老師端課程資料",this.userTeacherCourses)
+    },
+    getUserCartCourses() {
+      this.userCartCourses = []
+      this.studentData.myCart.forEach((item) => {
+        let warp = {}
+        warp = this.AllCoursesFirebaseData.filter((i) => {
+          return i.id === item.courseId
+        })
+        warp.timestamp = item.timestamp
+        this.userCartCourses.push(warp)
+      })
+      console.log(this.userCartCourses)
+      this.calculateMyCart()
     },
     calculateMyCart() {
-      if(this.studentData.myCart){
-        this.studentData.myCart.forEach((item) => {
-          this.userCart.total += parseInt(item.price)
+      if(this.userCartCourses){
+        this.userCartCourses.forEach((item) => {
+          this.userCart.total += parseInt(item[0].price)
         })
-        this.userCart.cartNum = this.studentData.myCart.length
+        this.userCart.cartNum = this.userCartCourses.length
       }
-
-      // console.log(this.userCart.total, this.userCart.cartNum)
     },
 
 
