@@ -5,43 +5,62 @@
       <img src="../assets/images/logo_default.png" alt="logo" class="d-none d-lg-block">
       <img src="../assets/images/logo_default_sm.png" alt="logo" class="d-block d-lg-none">
     </RouterLink>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <!-- 手機板購物車 -->
+    <li class="nav-item position-relative fs-5 d-lg-none d-block ms-auto" 
+        v-if="this.isMember === true">
+      <RouterLink to="/CoursesCart" class="nav-link"
+        :class="{ 'text-primary':  $route.name === 'CoursesCart'}">
+        <i class="bi bi-cart-fill me-lg-2"></i>
+        <div class="bg-danger text-white rounded-circle text-center position-absolute cart-num-mobile"
+          v-if="userCart.cartNum">
+          {{ userCart.cartNum }}
+        </div>
+      </RouterLink>
+    </li>
+
+    <button class="navbar-toggler ms-4" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
+        <li class="nav-item fs-5">
           <RouterLink to="/CreateCourses/BeATeacherStep1" class="nav-link"
             :class="{ 'text-primary':  $route.matched[1].path === '/CreateCourses'}">
             我要開課
           </RouterLink>
         </li>
-        <li class="nav-item">
+        <li class="nav-item fs-5">
           <RouterLink to="/AllCourses" class="nav-link"
             :class="{ 'text-primary':  $route.name === 'AllCourses'}">
             所有課程
           </RouterLink>
         </li>
-        <RouterLink to="/UserLogin" class="nav-link"
-            :class="{ 'text-primary':  $route.name === 'UserLogin'}"
-            v-if="this.isMember === false">
-            登入
+        <li class="nav-item fs-5">
+          <RouterLink to="/UserLogin" class="nav-link"
+              :class="{ 'text-primary':  $route.name === 'UserLogin'}"
+              v-if="this.isMember === false">
+              登入
           </RouterLink> 
+        </li>
           <!-- 登入後出現 -->
-        <li class="nav-item" 
+        <li class="nav-item position-relative fs-5 d-none d-lg-block" 
             v-if="this.isMember === true">
           <RouterLink to="/CoursesCart" class="nav-link"
             :class="{ 'text-primary':  $route.name === 'CoursesCart'}">
             <i class="bi bi-cart-fill me-lg-2"></i>
+            <div class="bg-danger text-white rounded-circle text-center position-absolute cart-num"
+              v-if="userCart.cartNum">
+              {{ userCart.cartNum }}
+            </div>
           </RouterLink>
         </li>
         <li class="nav-item dropdown">  
-          <button class="btn dropdown-toggle text-primary"
+          <button class="btn dropdown-toggle text-primary ps-0 ps-lg-2"
                   type="button" id="dropdownLogin" 
                   data-bs-toggle="dropdown" aria-expanded="false"
                   :class="{ 'text-primary':  $route.name === 'UserLogin'}"
                   v-if="this.isMember === true">
-            <i class="bi bi-person-circle me-2"></i>
+            <i class="bi bi-person-circle me-2 fs-5"></i>
             {{ user.displayName }}
           </button>
           <ul class="dropdown-menu dropdown-menu-end text-primary" aria-labelledby="dropdownLogin"
@@ -88,7 +107,7 @@ import goStore from '@/stores/goStore'
 
 export default {
   computed: {
-    ...mapState(dataStore, ['user', 'isMember'])
+    ...mapState(dataStore, ['user', 'isMember', 'userCart'])
   },
   methods: {
     ...mapActions(logInStore, ['signOut'])
@@ -101,5 +120,18 @@ export default {
 
 
 <style scoped>
-
+.cart-num {
+  width:20px;
+  height: 20px;
+  top: 3px;
+  left: 20px;
+  font-size: 12px;
+}
+.cart-num-mobile{
+  width:20px;
+  height: 20px;
+  top: 0px;
+  left: 15px;
+  font-size: 12px;
+}
 </style>

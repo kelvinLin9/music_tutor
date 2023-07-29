@@ -16,7 +16,7 @@ import { getAuth, onAuthStateChanged,} from 'firebase/auth'
 import { defineStore } from 'pinia'
 import router from '../router'
 
-const auth = getAuth();
+const auth = getAuth()
 const db = getFirestore()
 
 export default defineStore('dataStore', {
@@ -361,8 +361,6 @@ export default defineStore('dataStore', {
       // },
     ],
     courseData:{},
-    teacherCoursesData:[],
-    studentCoursesData:[],
     myCoursesState: 'student', // 我的課程換頁用
     bookmarksCoursesData:[],
     bookmarkIds: [],
@@ -373,8 +371,6 @@ export default defineStore('dataStore', {
       displayName: '',
       gender: '',
       courseImg: '',
-      teacherImg: '',
-      teacherIntro: '',
       courseName: '',
       courseIntro: '',
       courseCategory: '',
@@ -387,9 +383,15 @@ export default defineStore('dataStore', {
     AllCoursesFirebaseData:[],
     teacherData: {
       uid: '',
+      accountCreateTime: '',
+      lastLogInTime: '',
+      email: '',
       displayName: '',
+      teacherImg: '',
       gender: '',
+      birthday: '',
       address: '',
+      phoneNumber:'',
       teachArea: [],
       teacherIntro: '',
       instagram: '',
@@ -397,25 +399,39 @@ export default defineStore('dataStore', {
       discord: '',
       expertise: '',
       educationalBackground: '',
-      courses: [],
+      myTeachCourses:[],
       language: [],
       musicStyle:[], 
-      myTeachCourses:[],
       allTeachTime:0,
       studentAssess:[]
     },
     studentData: {
-      myCourses:[],
-      myCoursesDown:[],
+      myStudyCourses:[],
+      myStudyCoursesDown:[],
+      myCart:[],
       allStudyTime:0,
       myBookmarkCourses:[],
       myBookmarkTeacher:[],
     },
     user:{},
     isMember: false,
+    // teacherCoursesData:[],
+    // studentCoursesData:[],
+    userBookmarkCourses:[],
+    userCart:{
+      total:0,
+      finalTotal:0,
+      cartNum:0,
+      coupon:{
+        "打到骨折" : 0.5
+      },
+      couponUse:''
+    }
 
   }),
   actions: {
+    // 上傳資料----------------------------------
+    // 註冊帳號後建立老師端學生端物件
     async SetFirebaseMemberData() {   
       console.log('Set Firebase Member')
       const member = this.user.uid
@@ -427,11 +443,12 @@ export default defineStore('dataStore', {
       this.studentData);
       console.log('成功建立老師端學生端物件')
     },
+    // 開課後上傳課程
     async SetFirebaseCourseData() {   
       this.beATeacherData.uid = this.user.uid
       this.beATeacherData.displayName = this.user.displayName
       this.beATeacherData.gender = this.teacherData.gender
-      this.beATeacherData.teacherImg = this.user.photoURL
+      this.beATeacherData.teacherImg = this.teacherData.teacherImg
       this.beATeacherData.teacherIntro = this.teacherData.teacherIntro
       const member = "MusicTutorCourses"
       console.log(this.beATeacherData)
@@ -452,56 +469,83 @@ export default defineStore('dataStore', {
       this.beATeacherData.price = 0
       this.beATeacherData.timestamp = ''
     },
-    addCourseDataToTeacher() {
-
-    },
+    // user端複製一些必要資料到老師端
     async UpdateFirebaseMemberData() {
+      this.teacherData.uid = this.user.uid 
+      this.teacherData.email = this.user.email
+      this.teacherData.displayName = this.user.displayName
+      this.teacherData.teacherImg = this.user.photoURL
+      this.teacherData.accountCreateTime = this.user.metadata.creationTime
+      this.teacherData.lastLogInTime = this.user.metadata.lastSignInTime
       const teacherRef = doc(db, this.user.uid, 'teacher')
-      const studentRef = doc(db, this.user.uid, 'student')
       await updateDoc(teacherRef, this.teacherData)
-      await updateDoc(studentRef, this.studentData)
-      console.log('學生老師端資料更新成功')
+      alert('老師端資料更新成功')
     },
-    // async DeleteFirebaseData() {
-    //   // 刪集合
-    //   // await deleteDoc(doc(db, "Kelvin", "teacher"));
+    // 單一課程頁面編輯用
+    async UpdateFirebaseUserCourseData(id) {
+      // console.log(this.courseData.courseImg)
+      if (this.beATeacherData.courseImg) {
+        this.courseData.courseImg = this.beATeacherData.courseImg
+      }
+      // console.log(this.courseData.courseImg)
+      if (this.beATeacherData.teacherImg) {
+        this.courseData.teacherImg = this.beATeacherData.teacherImg
+      }
+      console.log(this.courseData)
+      const CoursesRef = doc(db, 'MusicTutorCourses', id)
+      await updateDoc(CoursesRef, this.courseData)
+      alert('課程資料更新成功')
+    },
+    async UpdateFirebaseCartData() {
+      const studentRef = doc(db, this.user.uid, 'student')
+      await updateDoc(studentRef, this.studentData)
+      alert('學生老師端資料更新成功')
+    },
+    async UpdateTeacherImg() {
+      const teacherRef = doc(db, this.user.uid, 'teacher')
+      await updateDoc(teacherRef, this.teacherData)
+      alert('大頭照更新成功')
+    },
 
-    //   const cityRef = doc(db, 'Kelvin', 'teacher');
-    //   await updateDoc(cityRef, {
-    //     id: deleteField()
-    //   });
-    // console.log('ok')
-    // },
 
 
-    async GetTeacherFirebaseData() {
+
+    // 取得資料---------------------------------------------
+    async getTeacherFirebaseData() {
       const docRef = doc(db, this.user.uid, 'teacher');
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
-        console.log("Document teacher data:", docSnap.data());
+        console.log("用戶老師端資料:", docSnap.data());
         this.teacherData = docSnap.data()
+        if(router.currentRoute._value.fullPath === "/CreateCourses/BeATeacherStep1") {
+          if (!this.user.displayName || !this.teacherData.teacherIntro ||!this.teacherData.teacherImg) {
+            console.log(this.user.displayName, this.teacherData.teacherIntro)
+            alert('請先填寫老師姓名、大頭照、自我介紹')
+            router.push('/MemberPage')
+          }
+        }
       } else {
-        // docSnap.data() will be undefined in this case
-        console.log("No such teacher document!");
+        alert("No such teacher document!");
       }
     },
-    async GetStudentFirebaseData() {
+    async getStudentFirebaseData() {
       const docRef = doc(db, this.user.uid, 'student');
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
-        console.log("Document student data:", docSnap.data());
+        console.log("用戶學生端資料:", docSnap.data());
         this.studentData = docSnap.data()
+        this.calculateMyCart()
       } else {
-        // docSnap.data() will be undefined in this case
-        console.log("No such student document!");
+        alert("No such student document!");
       }
     },
-    async GetAllCoursesFirebaseData() {
-      this.MusicTutorCourses = []
+    async getAllCoursesFirebaseData() {
       const querySnapshot = await getDocs(collection(db, "MusicTutorCourses"));
+      
       this.AllCoursesFirebaseData = []
       querySnapshot._docs.forEach((item) => {
-        // console.log(item._document.data.value.mapValue.fields)
+        // console.log(item.data());
+        // 之後要再想不麻煩的方法
         const wrap = {
           id: item.id,
           createdTime: item._document.createTime.timestamp.seconds,
@@ -521,39 +565,82 @@ export default defineStore('dataStore', {
         }
         this.AllCoursesFirebaseData.push(wrap)
       });
+      console.log(this.AllCoursesFirebaseData)
+      this.getUserTeacherCourses()
+      // this.getUserStudentCourses()
     },
-    async GetOneCoursesFirebaseData(courseId) {
-      const docRef = doc(db, "MusicTutorCourses", courseId);
+    async getOneCoursesFirebaseData(courseId) {
+      const docRef = doc(db, "MusicTutorCourses", courseId)
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
-        console.log("Document OneCourses data:", docSnap.data());
+        // console.log("單一課程資料", docSnap.data())
         this.courseData = docSnap.data()
+        // 自己加上課程id，後便要編輯上傳才會有值
+        const wrap = {id : courseId}
+        this.courseData = Object.assign(this.courseData, wrap,)
+        // console.log(this.courseData);
         router.push(`/coursePage/${courseId}`)
       } else {
         // docSnap.data() will be undefined in this case
-        console.log("No such OneCourses document!");
+        console.log("No such OneCourses document!")
       }
+    },
+
+    // 再多用一個return解決
+    getUserTeacherCourses() {
+      return this.AllCoursesFirebaseData.filter((item) => {
+        return item.uid.includes(this.user.uid)
+      })
+      // console.log("用戶老師端課程資料",this.user.uid, this.userTeacherCourses)
+    },
+    calculateMyCart() {
+      if(this.studentData.myCart){
+        this.studentData.myCart.forEach((item) => {
+          this.userCart.total += parseInt(item.price)
+        })
+        this.userCart.cartNum = this.studentData.myCart.length
+      }
+
+      // console.log(this.userCart.total, this.userCart.cartNum)
     },
 
 
 
 
+    // 刪除資料-----------------------------------------
+    // async DeleteFirebaseData() {
+    //   // 刪集合
+    //   // await deleteDoc(doc(db, "Kelvin", "teacher"));
+
+    //   const cityRef = doc(db, 'Kelvin', 'teacher');
+    //   await updateDoc(cityRef, {
+    //     id: deleteField()
+    //   });
+    // console.log('ok')
+    // },
+
+
+
+
+    // 註冊登入------------------------------------------
     // 判斷完是否登入後，讀取用戶老師端學生端資料
     onAuthStateChanged() {
       onAuthStateChanged(auth, (user) => {
-        console.log(user)
+        console.log('user端資料', user)
         if (user) {
           this.user = user;
           this.isMember = true
-          this.GetTeacherFirebaseData()
-          this.GetStudentFirebaseData()
+          this.getTeacherFirebaseData()
+          this.getStudentFirebaseData()
+          this.getAllCoursesFirebaseData()
         } else {
           this.isMember = false
           console.log('已登出')
         }
       });
      },
-    onAuthStateChangedForCreateCourse() {
+     // 判斷完是否登入後，讀取用戶老師端學生端資料(開課頁面用)
+    async onAuthStateChangedForCreateCourse() {
       onAuthStateChanged(auth, (user) => {
         if (!user) {
           this.isMember = false
@@ -562,20 +649,12 @@ export default defineStore('dataStore', {
         } else {
           this.user = user;
           this.isMember = true
-          this.GetTeacherFirebaseData()
-          this.GetStudentFirebaseData()
-          if (!user.displayName || !this.teacherData.teacherIntro) {
-            alert('請先填寫老師姓名及自我介紹')
-            router.push('/MemberPage')
-          }
+          this.getTeacherFirebaseData()
+          this.getStudentFirebaseData()
         }
       });
     },
-    // copyUserToTeacherData() {
-    //   this.teacherData.displayName = this.user.displayName
-    //   this.teacherData.email = this.user.uid.email
-    //   this.teacherData.uid = this.user.uid
-    // },
+
     
     
     
@@ -585,7 +664,7 @@ export default defineStore('dataStore', {
 
 
 
-
+// --------------------------舊資料用------------------------------
     // 單一課程頁面用
     getCourseData(id) { 
       this.courseData = this.coursesData.filter((item) => {
@@ -658,14 +737,12 @@ export default defineStore('dataStore', {
         const errorMessages = []
 
         if (!isValidFileType) {
-          errorMessages.push('You can only upload JPG or PNG file!')
-          alert('You can only upload JPG or PNG file!')
+          errorMessages.push('需上傳 JPG 或 PNG 檔!')
         }
 
-        const isValidFileSize = fileObject.size / 1024 / 1024 < 2
+        const isValidFileSize = fileObject.size / 1024 / 1024 < 0.5
         if (!isValidFileSize) {
-          errorMessages.push('Image must smaller than 2MB!')
-          alert('Image must smaller than 2MB!')
+          errorMessages.push('圖片大小需小於0.5MB!')
         }
         resolve({
           isValid: isValidFileType && isValidFileSize,
@@ -685,10 +762,15 @@ export default defineStore('dataStore', {
       reader.onload = e => {
         if (/^image\/[jpeg|png|gif]/.test(fileType)) {
           if (item === 'teacher'){
+            // 創建課程、編輯課程用
             this.beATeacherData.teacherImg = e.target.result
+            // 編輯個人大頭照用，寫這邊可以綁定課程換大頭照也會一起換避免不一致
+            this.teacherData.teacherImg = e.target.result
+            this.UpdateTeacherImg()
+            
           } else if (item === 'course') {
             this.beATeacherData.courseImg = e.target.result
-          }
+          } 
         }
       }
     }   
