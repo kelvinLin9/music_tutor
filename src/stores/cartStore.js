@@ -10,19 +10,18 @@ export default defineStore('cartStore', {
     
   }),
   actions: {
-    async addCart(uid, course) {
+    async addCart(uid, id) {
       // 加入時間戳，方便區分同商品
-      const wrap = { timestamp : new Date().getTime()}
-      course = Object.assign(course, wrap,)
-
+      const wrap = { timestamp : new Date().getTime(),
+                     courseId : id}
+      console.log(wrap)
       const cart = doc(db, uid, 'student');
       await updateDoc(cart, {
-      myCart: arrayUnion(course)
+        myCart: arrayUnion(wrap)
       });
       alert('成功加入購物車')
       data.getStudentFirebaseData()
     },
-
     async deleteCart(uid, dTimestamp){
       console.log(uid,dTimestamp);
       const course = data.studentData.myCart.filter((item) => {
@@ -34,7 +33,7 @@ export default defineStore('cartStore', {
         myCart: arrayRemove(course[0])
       });
       alert('成功刪除購物車項目')
-      data.getStudentFirebaseData()
+      data.onAuthStateChanged()
     },
 
 

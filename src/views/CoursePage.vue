@@ -86,7 +86,7 @@
                   data-bs-toggle="tooltip"
                   data-bs-placement="top"
                   title="加入購物車"
-                  @click="addCart(user.uid, courseData)">
+                  @click="addCart(user.uid, courseData.id)">
             <i class="bi bi-cart-fill"></i>
           </button>
         </div>

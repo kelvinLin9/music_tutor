@@ -10,18 +10,19 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="item in studentData.myCart" :key="item.timestamp">
+            <tr v-for="item in userCartCourses" :key="item.timestamp">
               <td width="50" class="text-center">
                 勾選框
               </td>
-              <td width="100">
-                <img :src="item.courseImg" alt="" class="table-image">
+              <td width="100"
+              @click="getOneCoursesFirebaseData(item[0].id)">
+                <img :src="item[0].courseImg" alt="" class="table-image cursor-pointer">
               </td>
               <td>
-                {{ item.displayName }}
+                {{ item[0].displayName }}
               </td>
               <td class="">
-                NT$ {{ item.price }}
+                NT$ {{ item[0].price }}
               </td>
               <td class="text-end">
                 <div class="cursor-pointer"
@@ -75,17 +76,16 @@ import dataStore from '@/stores/dataStore'
 export default {
   computed: {
     ...mapWritableState(cartStore, ['','']),
-    ...mapWritableState(dataStore, ['studentData','user', 'userCart']),
+    ...mapWritableState(dataStore, ['studentData','user', 'userCartCourses', 'userCart']),
     // ...mapState(dataStore, ['isMember','','teacherData','user']),
 
   },
   methods: {
-    ...mapActions(cartStore, ['deleteCart']),
-    // ...mapActions(dataStore, ['onAuthStateChangedForCreateCourse']),
+    ...mapActions(cartStore, ['deleteCart', '']),
+    ...mapActions(dataStore, ['onAuthStateChanged','getOneCoursesFirebaseData']),
   },
   created () {
-    // this.onAuthStateChangedForCreateCourse()
-    console.log(this.studentData.myCart)
+    this.onAuthStateChanged()
   }
 }
 </script>

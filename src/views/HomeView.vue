@@ -25,7 +25,7 @@ export default {
   },
   created () {
     console.log(this.$route.name)
-    this.onAuthStateChanged()
+    // this.onAuthStateChanged()
   }
 }
 </script>
