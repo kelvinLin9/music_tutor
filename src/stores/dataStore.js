@@ -611,6 +611,7 @@ export default defineStore('dataStore', {
     },
     calculateMyCart() {
       if(this.userCartCourses){
+        this.userCart.total = 0
         this.userCartCourses.forEach((item) => {
           this.userCart.total += parseInt(item[0].price)
         })
