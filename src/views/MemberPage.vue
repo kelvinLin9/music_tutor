@@ -3,11 +3,19 @@
     <div class="row test">
       <div class="col-12 col-md-4 d-flex flex-column justify-content-center align-items-center mt-3">
         <div class="user-photo position-relative">
-          <img :src="user.photoURL" alt="大頭照"
-                v-if="user.photoURL">
+          <img :src="teacherData.teacherImg" alt="大頭照"
+                v-if="teacherData.teacherImg">
           <img src="../assets/images/預設大頭貼.png" alt="預設大頭照"
-                v-if="!user.photoURL">
-          <i class="bi bi-cloud-arrow-up-fill"></i>
+                v-if="!teacherData.teacherImg">
+          <label for="file-upload">
+            <i class="bi bi-cloud-arrow-up-fill cursor-pointer upload-icon"></i>
+          </label>
+          <input
+                  type="file"
+                  id="file-upload"
+                  class="d-none"
+                  @change="uploadPhoto('teacher',$event)"
+                />
         </div>
         <div class="mb-2 fs-2">
           {{ user.displayName }}
@@ -68,6 +76,7 @@ export default {
   },
   methods: {
     ...mapActions(logInStore, ['signOut']),  
+    ...mapActions(dataStore, ['uploadPhoto']),
   },
   created () {
 
@@ -88,12 +97,18 @@ export default {
     height: 100px;
     border-radius: 50px;
   }
-  i {
-    position: absolute;
-    right: -5px;
-    bottom: -5px;
-    z-index: 10;
-    font-size: 32px;
-  }
+
+  // input {
+  //   width: 1px;
+  //   height: 1px;
+  // }
+}
+.upload-icon { 
+  position: absolute;
+  right: -10px;
+  bottom: 10px;
+  z-index: 10;
+  font-size: 40px;
+  
 }
 </style> 

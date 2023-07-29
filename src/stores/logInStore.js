@@ -35,8 +35,57 @@ export default defineStore('logInStore', {
   }),
   actions: {
    signOut() {
-    // this.googleUserName = ''
     signOut(auth)
+    data.user = {}
+    data.isMember = false
+    data.studentData = {
+      myStudyCourses:[],
+      myStudyCoursesDown:[],
+      myCart:[],
+      allStudyTime:0,
+      myBookmarkCourses:[],
+      myBookmarkTeacher:[],
+    }
+    data.teacher = {
+      uid: '',
+      accountCreateTime: '',
+      lastLogInTime: '',
+      email: '',
+      displayName: '',
+      teacherImg: '',
+      gender: '',
+      birthday: '',
+      address: '',
+      phoneNumber:'',
+      teachArea: [],
+      teacherIntro: '',
+      instagram: '',
+      facebook: '',
+      discord: '',
+      expertise: '',
+      educationalBackground: '',
+      myTeachCourses:[],
+      language: [],
+      musicStyle:[], 
+      allTeachTime:0,
+      studentAssess:[]
+    }
+    data.AllCoursesFirebaseData = []
+    data.beATeacherData = {
+      uid: '',
+      displayName: '',
+      gender: '',
+      courseImg: '',
+      courseName: '',
+      courseIntro: '',
+      courseCategory: '',
+      courseMethod: [],      
+      cityName: '',
+      time: 0,
+      price: 0,
+      timestamp:'',
+    }
+
     router.push('/UserLogin')
     
    },
@@ -63,7 +112,7 @@ export default defineStore('logInStore', {
     .catch((err) => {
       alert(err)
     })  
-    // 更新自訂名字&清除暫存表單資料
+    // 更新自訂名字到user&清除暫存表單資料
     updateProfile(auth.currentUser, {
       displayName: this.signUpForm.user.displayName
     }).then(() => { 
@@ -73,8 +122,9 @@ export default defineStore('logInStore', {
       this.signUpForm.user.confirmation = ''
       // 建立一份老師學生端物件上傳
       data.SetFirebaseMemberData()
+      router.push('/')
     }).catch(() => {
-      console.log('更新名字失敗')
+      alert('更新名字失敗')
     });
    },
 
@@ -87,7 +137,7 @@ export default defineStore('logInStore', {
       console.log(res.user)
       router.push('/')
       data.isMember = true
-      console.log(res.user.uid,"登入成功")
+      alert (res.user.uid,"登入成功")
       // 判斷如果是第一次登入，建立一份老師學生端物件上傳
       if(res.user.metadata.createdAt === res.user.metadata.lastLoginAt) {
         console.log("第一次登入")

@@ -1,25 +1,22 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col text-center">
-        <h1 class="border-top border-bottom border-5 py-2 w-75 mx-auto">
-          四個步驟，讓你成為老師
-        </h1>
-        <h2>首先設定必要資訊</h2>
+<div class="modal fade" id="editMyCourseModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">編輯我的課程資料</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-    </div>
-  </div>
-
-  <div class="container mt-5">
-    <VForm  v-slot="{ errors }"
-           @submit="goBeATeacherStep2()">
-      <div class="row justify-content-center mb-3">
-        <div class="col-auto">
+      <div class="modal-body">
+        <VForm class="mx-auto"
+                v-slot="{ errors }"
+                @submit="UpdateFirebaseUserCourseData(courseData.id)">
+          <div class="row mb-3">
+            <div class="col-auto">
           <label for="courseName" class="col-form-label">
             課程名稱：
           </label>
-        </div>
-        <div class="col-8 col-lg-6">
+            </div>
+            <div class="col-4">
           <VField
             name="課程名稱"
             id="courseName"
@@ -28,47 +25,46 @@
             class="form-control"
             :class="{ 'is-invalid': errors['課程名稱'] }"
             placeholder="請輸入課程名稱"
-            v-model="beATeacherData.courseName"
+            v-model="courseData.courseName"
           />
           <ErrorMessage class="invalid-feedback" name="課程名稱"/>
-        </div>
-      </div>
-      <div class="row justify-content-center mb-3">
+            </div>
+          </div>
+          <div class="row mb-3">
         <div class="col-auto">
           <label for="coursePrice" class="col-form-label">
             課程費用：
           </label>
         </div>
-        <div class="col-8 col-lg-6">
+        <div class="col-4">
           <VField
             name="課程費用"
             id="coursePrice"
-            type="text"
+            type="number"
             rules="required|min_value:100|max_value:100000"
             class="form-control"
             :class="{ 'is-invalid': errors['課程費用'] }"
             placeholder="請輸入課程費用"
-            v-model="beATeacherData.price"
+            v-model="courseData.price"
           />
           <ErrorMessage class="invalid-feedback" name="課程費用"/>
         </div>
-      </div>
-
-      <div class="row justify-content-center mb-3">
-        <div class="col-auto">
-          <label for="courseCategory" class="col-form-label">
-            教學項目：
-          </label>
-        </div>
-        <div class="col-8 col-lg-6">
-          <VField name="教學項目" 
-                  as="select" 
-                  class="form-select" 
-                  aria-label="Default select example"
-                  id="courseCategory"
-                  rules="required"
-                  :class="{ 'is-invalid': errors['教學項目'] }"
-                  v-model="beATeacherData.courseCategory">
+          </div>
+          <div class="row mb-3">
+            <div class="col-auto">
+              <label for="courseCategory" class="col-form-label">
+                教學項目：
+              </label>
+            </div>
+            <div class="col-6">
+            <VField name="教學項目" 
+                    as="select" 
+                    class="form-select" 
+                    aria-label="Default select example"
+                    id="courseCategory"
+                    rules="required"
+                    :class="{ 'is-invalid': errors['教學項目'] }"
+                    v-model="courseData.courseCategory">
             <option value="" selected>請選擇教學項目</option>
             <option value="短笛">短笛</option>
             <option value="長笛">長笛</option>
@@ -148,24 +144,17 @@
             <option value="音樂軟體">音樂軟體</option>
             <option value="樂器製作">樂器製作</option>
             <option value="其它非樂器類">其它非樂器類</option>
-          </VField>
+            </VField>
           <ErrorMessage class="invalid-feedback" name="教學項目"/>
-          <div class="mt-1">
-            熱門項目：
-            <span class="badge rounded-pill text-bg-danger me-1">鋼琴</span>
-            <span class="badge rounded-pill text-bg-danger me-1">木吉他</span>
-            <span class="badge rounded-pill text-bg-danger me-1">流行歌唱</span>
+            </div>
           </div>
-        </div>
-      </div>
-
-      <div class="row justify-content-center mb-3">
+          <div class="row mb-3">
         <div class="col-auto">
           <label for="courseTime" class="col-form-label">
             授課時間：
           </label>
         </div>
-        <div class="col-8 col-lg-6">
+        <div class="col-4">
           <VField
             name="授課時間"
             id="courseTime"
@@ -174,61 +163,61 @@
             class="form-control"
             :class="{ 'is-invalid': errors['授課時間'] }"
             placeholder="請輸入授課時間(分鐘)"
-            v-model="beATeacherData.time"
+            v-model="courseData.time"
           />
           <ErrorMessage class="invalid-feedback" name="授課時間"/>
         </div>
-      </div>
-      <div class="row justify-content-center mb-3">
-        <div class="col-auto">
-            上課方式：
-        </div>
-        <div class="col-8 col-lg-6">
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" 
-                  type="checkbox" 
-                  id="studentHome" 
-                  value="在學生家" 
-                  name="courseMethod1" 
-                  v-model="beATeacherData.courseMethod"> 
-            <label for="studentHome">在學生家</label>
           </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" 
-                  type="checkbox" 
-                  id="teacherHome" 
-                  value="在老師家" 
-                  name="courseMethod2" 
-                  v-model="beATeacherData.courseMethod">
-            <label for="teacherHome">在老師家</label>
+          <div class="row mb-3">
+            <div class="col-auto">
+          上課方式：
+            </div>
+            <div class="col-8">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" 
+                      type="checkbox" 
+                      id="studentHome" 
+                      value="在學生家" 
+                      name="courseMethod1" 
+                      v-model="courseData.courseMethod"> 
+                <label for="studentHome">在學生家</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" 
+                      type="checkbox" 
+                      id="teacherHome" 
+                      value="在老師家" 
+                      name="courseMethod2" 
+                      v-model="courseData.courseMethod">
+                <label for="teacherHome">在老師家</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" 
+                      type="checkbox" 
+                      id="online" 
+                      value="線上" 
+                      name="courseMethod3" 
+                      v-model="courseData.courseMethod">
+                <label for="online">線上</label>
+              </div>
+            </div>
           </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" 
-                  type="checkbox" 
-                  id="online" 
-                  value="線上" 
-                  name="courseMethod3" 
-                  v-model="beATeacherData.courseMethod">
-            <label for="online">線上</label>
-          </div>
-        </div>
-      </div>
-      <div class="row justify-content-center mb-3">
-        <div class="col-auto">
-          <label for="cityName" class="col-form-label"
-              :class="{'d-none' : beATeacherData.courseMethod.length == 1 && beATeacherData.courseMethod[0] == '線上'}">
-            上課地點：
-          </label>
-        </div>
-        <div class="col-8 col-lg-6"
-        :class="{'d-none' : beATeacherData.courseMethod.length == 1 && beATeacherData.courseMethod[0] == '線上'}">
-          <VField name="上課地點" 
+          <div class="row mb-3">
+            <div class="col-auto">
+              <label for="cityName" class="col-form-label"
+              :class="{'d-none' : courseData.courseMethod.length == 1 && courseData.courseMethod[0] == '線上'}">
+                上課地點：
+              </label>
+            </div>
+            <div class="col-6"
+            :class="{'d-none' :courseData.courseMethod.length == 1 && courseData.courseMethod[0] == '線上'}">
+              <VField name="上課地點" 
                       as="select" 
                       class="form-select" 
                       aria-label="Default select example"
                       id="cityName"
                       :class="{ 'is-invalid': errors['上課地點'] }"
-                      v-model="beATeacherData.cityName">
+                      v-model="courseData.cityName">
                 <option value="" selected>請選擇上課地點</option>
                 <option value="台北市">台北市</option>
                 <option value="基隆市">基隆市</option>
@@ -254,37 +243,121 @@
                 <option value="連江縣">連江縣</option>
               </VField>
               <ErrorMessage class="invalid-feedback" name="上課地點"/>
-        </div>
-      </div>
-      <div class="row justify-content-center">
-        <div class="col-6 text-end">
-          <button type="submit" class="btn btn-primary">
-            &emsp;&emsp;下一步&emsp;&emsp;
-          </button>
-        </div>
-      </div>
-    </VForm>
-  </div>
-</template>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-12 col-lg-8">
+              <label for="courseIntro" class="form-label">
+                課程介紹：
+              </label>
+              <VField 
+                name="課程介紹"
+                class="form-control" 
+                id="courseIntro" 
+                as="textarea"
+                rows="5"
+                rules="required|max:500"
+                :class="{ 'is-invalid': errors['課程介紹'] }"
+                placeholder="限定500字元內"
+                v-model="courseData.courseIntro"
+                >
+              </VField>
+              <ErrorMessage class="invalid-feedback" name="課程介紹"/>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-12 col-lg-8 mb-3">
+              <div class="row">
+                <div class="col-4">
+                  <label for="coursePhoto" 
+                      class="col-form-label"
+                      accept="image/png, image/jpeg">
+                    上傳一張課程封面照：
+                  </label>
+                </div>
+                <div class="col-8">
+                  <input
+                    type="file"
+                    id="coursePhoto"
+                    class="form-control"
+                    @change="uploadPhoto('course',$event)"
+                  />
+                  <img class="img-fluid mt-3" 
+                      :src="beATeacherData.courseImg" 
+                      alt="課程封面照(舊)"
+                      v-if="beATeacherData.courseImg"/>
+                  <img class="img-fluid mt-3" 
+                      :src="courseData.courseImg" 
+                      alt="課程封面照(新)"
+                      v-else/>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-12 col-lg-8 mb-3">
+              <div class="row">
+                <div class="col-4">
+                  <label for="teacherPhoto" 
+                      class="col-form-label"
+                      accept="image/png, image/jpeg">
+                    上傳一張老師大頭照：
+                  </label>
+                </div>
+                <div class="col-8">
+                  <input
+                    type="file"
+                    id="teacherPhoto"
+                    class="form-control"
+                    @change="uploadPhoto('teacher',$event)"
+                  />
+                  <img class="img-fluid mt-3" 
+                      :src="beATeacherData.teacherImg" 
+                      alt="老師大頭照(舊)"
+                      v-if="beATeacherData.teacherImg"/>
+                  <img class="img-fluid mt-3" 
+                      :src="courseData.teacherImg" 
+                      alt="老師大頭照(新)"
+                      v-else/>
+                </div>
+              </div>
+            </div>
+          </div>
 
+
+
+
+          <button type="button" class="btn btn-secondary me-3" data-bs-dismiss="modal">
+            取消
+          </button>
+          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">
+            確認
+          </button>
+        </VForm>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+</template>
+  
 <script>
 import { mapState, mapActions, mapWritableState } from 
 'pinia' 
-import goStore from '@/stores/goStore'
-import dataStore from '@/stores/dataStore'
+import dataStore from '../stores/dataStore';
+
+
 
 export default {
   computed: {
-    ...mapWritableState(dataStore, ['beATeacherData','teacherData']),
-    ...mapState(dataStore, ['isMember','','teacherData','user']),
-
+    ...mapWritableState(dataStore, ['courseData', 'beATeacherData']),
   },
-  methods: {
-    ...mapActions(goStore, ['goBeATeacherStep1', 'goBeATeacherStep2']),
-    ...mapActions(dataStore, ['onAuthStateChangedForCreateCourse']),
+  methods: {  
+    ...mapActions(dataStore, ['UpdateFirebaseUserCourseData', 'uploadPhoto'])
   },
-  created () {
-    this.onAuthStateChangedForCreateCourse()
+  created() {
+    // console.log(this.courseData)
   }
 }
 </script>

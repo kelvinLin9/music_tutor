@@ -3,24 +3,19 @@
     <div class="row align-items-center mb-3">
       <div class="col-4">
         <div class="d-flex align-items-center">
-          <div class="user-photo position-relative">
-            <img :src="user.photoURL" alt="大頭照"
-                v-if="user.photoURL">
-            <img src="../assets/images/預設大頭貼.png" alt="預設大頭照"
-                v-if="!user.photoURL">
-          </div>
-          <h1 class="ms-5"> {{ user.displayName }} </h1>
+          <img src="https://fakeimg.pl/80x80/" alt="" class="t">
+          <h1 class="ms-5">陳先生</h1>
         </div>
       </div>
       <div class="col-6 ms-auto">
         <div class="row align-items-center">
           <div class="col text-center">
             <h5 class="">參加課程</h5>
-            <p class="fs-1">{{  }}</p>
+            <p class="fs-1">{{ studentCoursesData.length }}</p>
           </div>
           <div class="col text-center">
             <h5>已開課程</h5>
-            <p class="fs-1">{{  }}</p>
+            <p class="fs-1">{{ teacherCoursesData.length }}</p>
           </div>
           <div class="col text-center">
             <h5>目前收藏</h5>
@@ -56,9 +51,9 @@
       v-if="myCoursesState === 'student'">
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-2">
       <div class="col"
-      v-for="item in userStudentCourses" :key="item.id">
-        <div class="card rounded-3 scale h-100"
-        @click="getOneCoursesFirebaseData(item.id)">
+      v-for="item in studentCoursesData" :key="item.id">
+        <div class="card rounded-3 scale"
+        @click="goCoursePage(item.id)">
           <div class="card-img overflow-hidden position-relative">
             <img src="https://fakeimg.pl/200x150/" alt="" class="card-img-top">
             <i class="bookmark"
@@ -75,27 +70,13 @@
               <span class="">&ensp;{{ item.courseName }}</span>   
             </div>
             <div class="mb-1 text-primary">
-              by {{ item.displayName }}
+              by {{ item.teacherName }}
             </div>
             <div class="mb-1">
               <i class="bi bi-clock-fill"></i>
               {{ item.time }}
               <i class="bi bi-geo-alt-fill"></i>
               {{ item.cityName }}
-            </div>
-            <div class="mb-1">
-              <span class="bg-info rounded-2 px-2 me-2"
-                    v-if="item.courseMethod.values[0]">
-                {{ item.courseMethod.values[0].stringValue }}
-              </span>
-              <span class="bg-info rounded-2 px-2 me-2"
-                    v-if="item.courseMethod.values[1]">
-                {{ item.courseMethod.values[0].stringValue }}
-              </span>
-              <span class="bg-info rounded-2 px-2 me-2"
-                    v-if="item.courseMethod.values[2]">
-                {{ item.courseMethod.values[2].stringValue }}
-              </span>
             </div>
             <div class="mb-1">
               NT$ {{ item.price }}
@@ -110,9 +91,9 @@
       v-else-if="myCoursesState === 'teacher'">
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-2">
       <div class="col"
-      v-for="item in getUserTeacherCourses " :key="item.id">
-        <div class="card rounded-3 scale h-100"
-        @click="getOneCoursesFirebaseData(item.id)">
+      v-for="item in teacherCoursesData" :key="item.id">
+        <div class="card rounded-3 scale"
+        @click="goCoursePage(item.id)">
           <div class="card-img overflow-hidden position-relative">
             <img src="https://fakeimg.pl/200x150/" alt="" class="card-img-top">
             <i class="bookmark"
@@ -129,27 +110,13 @@
               <span class="">&ensp;{{ item.courseName }}</span>   
             </div>
             <div class="mb-1 text-primary">
-              by {{ item.displayName }}
+              by {{ item.teacherName }}
             </div>
             <div class="mb-1">
               <i class="bi bi-clock-fill"></i>
               {{ item.time }}
               <i class="bi bi-geo-alt-fill"></i>
               {{ item.cityName }}
-            </div>
-            <div class="mb-1">
-              <span class="bg-info rounded-2 px-2 me-2"
-                    v-if="item.courseMethod.values[0]">
-                {{ item.courseMethod.values[0].stringValue }}
-              </span>
-              <span class="bg-info rounded-2 px-2 me-2"
-                    v-if="item.courseMethod.values[1]">
-                {{ item.courseMethod.values[0].stringValue }}
-              </span>
-              <span class="bg-info rounded-2 px-2 me-2"
-                    v-if="item.courseMethod.values[2]">
-                {{ item.courseMethod.values[2].stringValue }}
-              </span>
             </div>
             <div class="mb-1">
               NT$ {{ item.price }}
@@ -164,9 +131,9 @@
       v-else>
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-2">
       <div class="col"
-      v-for="item in 1" :key="item.id">
-        <div class="card rounded-3 scale h-100"
-        @click="getOneCoursesFirebaseData(item.id)">
+      v-for="item in bookmarksCoursesData" :key="item.id">
+        <div class="card rounded-3 scale"
+        @click="goCoursePage(item.id)">
           <div class="card-img overflow-hidden position-relative">
             <img src="https://fakeimg.pl/200x150/" alt="" class="card-img-top">
             <i class="bookmark"
@@ -183,27 +150,13 @@
               <span class="">&ensp;{{ item.courseName }}</span>   
             </div>
             <div class="mb-1 text-primary">
-              by {{ item.displayName }}
+              by {{ item.teacherName }}
             </div>
             <div class="mb-1">
               <i class="bi bi-clock-fill"></i>
               {{ item.time }}
               <i class="bi bi-geo-alt-fill"></i>
               {{ item.cityName }}
-            </div>
-            <div class="mb-1">
-              <span class="bg-info rounded-2 px-2 me-2"
-                    v-if="item.courseMethod.values[0]">
-                {{ item.courseMethod.values[0].stringValue }}
-              </span>
-              <span class="bg-info rounded-2 px-2 me-2"
-                    v-if="item.courseMethod.values[1]">
-                {{ item.courseMethod.values[0].stringValue }}
-              </span>
-              <span class="bg-info rounded-2 px-2 me-2"
-                    v-if="item.courseMethod.values[2]">
-                {{ item.courseMethod.values[2].stringValue }}
-              </span>
             </div>
             <div class="mb-1">
               NT$ {{ item.price }}
@@ -223,16 +176,18 @@ import goStore from '@/stores/goStore'
 
 export default {
   computed: {
-    ...mapState(dataStore, ['bookmarksCoursesData', 'bookmarkState', 'user']),
+    ...mapState(dataStore, ['teacherCoursesData', 'studentCoursesData' , 'bookmarksCoursesData', 'bookmarkState']),
     ...mapWritableState(dataStore, ['myCoursesState'])
   },
   methods: {
-    ...mapActions(dataStore, ['getBookmarkCoursesData','toggleBookmark', 'getOneCoursesFirebaseData', 'getUserTeacherCourses']),
+    ...mapActions(dataStore, ['getTeacherCoursesData', 'getStudentCoursesData', 'getBookmarkCoursesData', 'toggleBookmark']),
+    ...mapActions(goStore, ['goCoursePage'])
     
   },
   created () {
+    this.getTeacherCoursesData()
+    this.getStudentCoursesData()
     this.getBookmarkCoursesData()
-
   }
 }
 </script>
@@ -265,24 +220,4 @@ export default {
   top: -15px;
   z-index: 10;
 }
-.user-photo {
-  // width: 100px;
-  // height: 100px;
-  // border-radius: 50px;
-  img {
-    width: 100%;
-    display: block;
-    object-fit: cover;
-    width: 100px;
-    height: 100px;
-    border-radius: 50px;
-  }
-  i {
-    position: absolute;
-    right: -5px;
-    bottom: -5px;
-    z-index: 10;
-    font-size: 32px;
-    }
-  }
 </style>

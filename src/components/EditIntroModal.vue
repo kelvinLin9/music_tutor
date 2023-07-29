@@ -34,7 +34,7 @@
               name="手機"
               id="phone"
               type="phone"
-              rules="required"
+              rules="required|"
               class="form-control"
               :class="{ 'is-invalid': errors['手機'] }"
               placeholder="請輸入手機"
@@ -98,21 +98,30 @@
               v-model="teacherData.discord"
             />
           </div>
-          
-
-
           <div class="mb-3">
             <label for="teacherIntro" class="form-label">
-            自我介紹(限定80字元內)：
-          </label>
-          <textarea 
+              自我介紹(限定150字元內)：
+            </label>
+            <VField 
+                name="自我介紹"
                 class="form-control" 
                 id="teacherIntro" 
-                rows="3"
-                placeholder="限定80字元內"
+                as="textarea"
+                rows="5"
+                rules="required|max:300"
+                :class="{ 'is-invalid': errors['自我介紹'] }"
+                placeholder="限定150字元內"
                 v-model="teacherData.teacherIntro"
                 >
-          </textarea>
+            </VField>
+            <ErrorMessage class="invalid-feedback" name="自我介紹"/>
+
+            <button type="button" class="btn btn-secondary me-3 mt-3" data-bs-dismiss="modal">
+              取消
+            </button>
+            <button type="submit" class="btn btn-primary mt-3" data-bs-dismiss="modal">
+              確認
+            </button>
           </div>
 
           <!-- <div class="mb-3">
@@ -125,12 +134,7 @@
           </div> -->
 
 
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-            取消
-          </button>
-          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">
-            確認
-          </button>
+
         </VForm>
       </div>
       <div class="modal-footer">
