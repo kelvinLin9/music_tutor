@@ -36,8 +36,33 @@ export default defineStore('logInStore', {
   actions: {
    signOut() {
     signOut(auth)
+    data.courseData={}
     data.user = {}
     data.isMember = false
+    data.teacherData = {
+      uid: '',
+      accountCreateTime: '',
+      lastLogInTime: '',
+      email: '',
+      displayName: '',
+      teacherImg: '',
+      gender: '',
+      birthday: '',
+      address: '',
+      phoneNumber:'',
+      teachArea: [],
+      teacherIntro: '',
+      instagram: '',
+      facebook: '',
+      discord: '',
+      expertise: '',
+      educationalBackground: '',
+      myTeachCourses:[],
+      language: [],
+      musicStyle:[], 
+      allTeachTime:0,
+      studentAssess:[]
+    },
     data.studentData = {
       myStudyCourses:[],
       myStudyCoursesDown:[],
@@ -85,7 +110,11 @@ export default defineStore('logInStore', {
       price: 0,
       timestamp:'',
     }
-
+    data.user = {}
+    data.userTeacherCourses=[]
+    data.userStudentCourses=[]
+    data.userBookmarkCourses=[]
+    data.userCartCourses=[]
     router.push('/UserLogin')
     
    },
@@ -124,7 +153,7 @@ export default defineStore('logInStore', {
       data.SetFirebaseMemberData()
       router.push('/')
     }).catch(() => {
-      alert('更新名字失敗')
+      // alert('更新名字失敗')
     });
    },
 
