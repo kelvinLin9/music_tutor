@@ -20,7 +20,7 @@ export default defineStore('cartStore', {
         myCart: arrayUnion(wrap)
       });
       alert('成功加入購物車')
-      data.getStudentFirebaseData()
+      data.onAuthStateChanged()
     },
     async deleteCart(uid, dTimestamp){
       console.log(uid,dTimestamp);

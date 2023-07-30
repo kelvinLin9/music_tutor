@@ -160,7 +160,7 @@
       </div>
     </div>
   </div>
-  <div class="container courses mt-3"
+  <!-- <div class="container courses mt-3"
       v-else>
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-2">
       <div class="col"
@@ -212,7 +212,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </template>
   
 <script>
@@ -227,7 +227,7 @@ export default {
     ...mapWritableState(dataStore, ['myCoursesState'])
   },
   methods: {
-    ...mapActions(dataStore, ['onAuthStateChanged', 'toggleBookmark']),
+    ...mapActions(dataStore, ['onAuthStateChanged', 'toggleBookmark', 'getOneCoursesFirebaseData']),
     
   },
   created () {
