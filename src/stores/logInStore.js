@@ -110,11 +110,19 @@ export default defineStore('logInStore', {
       price: 0,
       timestamp:'',
     }
-    data.user = {}
     data.userTeacherCourses=[]
     data.userStudentCourses=[]
     data.userBookmarkCourses=[]
     data.userCartCourses=[]
+    data.userCart={
+      total:0,
+      finalTotal:0,
+      cartNum:0,
+      coupon:{
+        "打到骨折" : 0.5
+      },
+      couponUse:''
+    }
     router.push('/UserLogin')
     
    },
