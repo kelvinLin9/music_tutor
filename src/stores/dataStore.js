@@ -442,7 +442,9 @@ export default defineStore('dataStore', {
       this.teacherData);
       await setDoc(doc(db, member , identity2), 
       this.studentData);
-      console.log('成功建立老師端學生端物件')
+      alert('成功建立老師端學生端物件')
+      this.copyUserDataToTeacher()
+      alert('成功複製用戶端資料')
     },
     // 開課後上傳課程
     async SetFirebaseCourseData() {   
@@ -470,17 +472,21 @@ export default defineStore('dataStore', {
       this.beATeacherData.price = 0
       this.beATeacherData.timestamp = ''
     },
-    // user端複製一些必要資料到老師端
-    async UpdateFirebaseMemberData() {
+    // 只有第一次登入需要
+    async copyUserDataToTeacher() {
       this.teacherData.uid = this.user.uid 
       this.teacherData.email = this.user.email
       this.teacherData.displayName = this.user.displayName
-      this.teacherData.teacherImg = this.user.photoURL
       this.teacherData.accountCreateTime = this.user.metadata.creationTime
-      this.teacherData.lastLogInTime = this.user.metadata.lastSignInTime
+    },
+
+
+    // 個人頁面編輯個資用
+    async UpdateFirebaseMemberData() {
       const teacherRef = doc(db, this.user.uid, 'teacher')
       await updateDoc(teacherRef, this.teacherData)
       alert('老師端資料更新成功')
+      this.onAuthStateChanged()
     },
     // 單一課程頁面編輯用
     async UpdateFirebaseUserCourseData(id) {
@@ -519,9 +525,9 @@ export default defineStore('dataStore', {
         console.log("用戶老師端資料:", docSnap.data());
         this.teacherData = docSnap.data()
         if(router.currentRoute._value.fullPath === "/CreateCourses/BeATeacherStep1") {
-          if (!this.user.displayName || !this.teacherData.teacherIntro ||!this.teacherData.teacherImg) {
-            console.log(this.user.displayName, this.teacherData.teacherIntro)
-            alert('請先填寫老師姓名、大頭照、自我介紹')
+          if (!this.user.displayName || !this.teacherData.teacherIntro || !this.teacherData.teacherImg || !this.teacherData.gender) {
+            console.log(this.user.displayName, this.teacherData.teacherIntro, this.teacherData.gender, this.teacherData.teacherImg)
+            alert('請先填寫老師姓名、大頭照、性別、自我介紹')
             router.push('/MemberPage')
           }
         }
@@ -606,7 +612,7 @@ export default defineStore('dataStore', {
         warp.timestamp = item.timestamp
         this.userCartCourses.push(warp)
       })
-      console.log(this.userCartCourses)
+      // console.log(this.userCartCourses)
       this.calculateMyCart()
     },
     calculateMyCart() {
@@ -641,7 +647,7 @@ export default defineStore('dataStore', {
     // 判斷完是否登入後，讀取用戶老師端學生端資料
     onAuthStateChanged() {
       onAuthStateChanged(auth, (user) => {
-        console.log('user端資料', user)
+        // console.log('user端資料', user)
         if (user) {
           this.user = user;
           this.isMember = true
@@ -666,6 +672,7 @@ export default defineStore('dataStore', {
           this.isMember = true
           this.getTeacherFirebaseData()
           this.getStudentFirebaseData()
+          this.getAllCoursesFirebaseData()
         }
       });
     },

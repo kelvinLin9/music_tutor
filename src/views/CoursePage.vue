@@ -24,7 +24,7 @@
       <div class="col-12 col-lg-8">
         <div class="row align-items-center">
           <div class="col-2">
-            <img :src="courseData.teacherImg" alt="老師照片" class="user-photo">
+            <img :src="teacherData.teacherImg" alt="老師照片" class="user-photo">
           </div>
           <div class="col-10 fs-2">
             {{ courseData.displayName }}
@@ -126,7 +126,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(dataStore, ['bookmarkState','user']),
+    ...mapState(dataStore, ['bookmarkState','user','teacherData']),
     ...mapWritableState(dataStore, ['courseData']),
   
   },

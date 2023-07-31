@@ -33,8 +33,7 @@
             <VField
               name="手機"
               id="phone"
-              type="phone"
-              rules="required|"
+              type="tel"
               class="form-control"
               :class="{ 'is-invalid': errors['手機'] }"
               placeholder="請輸入手機"
@@ -108,7 +107,7 @@
                 id="teacherIntro" 
                 as="textarea"
                 rows="5"
-                rules="required|max:300"
+                rules="max:300"
                 :class="{ 'is-invalid': errors['自我介紹'] }"
                 placeholder="限定150字元內"
                 v-model="teacherData.teacherIntro"
