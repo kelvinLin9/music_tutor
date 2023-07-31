@@ -32,12 +32,21 @@
 
 <script>
 import FeaturedCourses from '../components/FeaturedCourses.vue'
+import { mapActions, mapState } from 'pinia'
+import dataStore from '../stores/dataStore';
+
 export default {
   components: { FeaturedCourses },
   data() {
     return {
       data: {}
     }
+  },
+  methods: {
+    ...mapActions(dataStore, ['onAuthStateChanged']),
+  },
+  created() {
+    this.onAuthStateChanged()
   },
   mounted() {
     const url = import.meta.env.VITE_PATH
