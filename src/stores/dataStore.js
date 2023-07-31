@@ -360,6 +360,7 @@ export default defineStore('dataStore', {
       //   price: 2000,
       // },
     ],
+    // 單一課程頁面用
     courseData:{},
     myCoursesState: 'student', // 我的課程換頁用
     bookmarksCoursesData:[],
@@ -379,6 +380,7 @@ export default defineStore('dataStore', {
       time: 0,
       price: 0,
       timestamp:'',
+      whoBuy:[],
     },
     AllCoursesFirebaseData:[],
     teacherData: {
@@ -549,25 +551,15 @@ export default defineStore('dataStore', {
       const querySnapshot = await getDocs(collection(db, "MusicTutorCourses"));
       // 這邊有留開課時間
       this.AllCoursesFirebaseData = []
+      
       querySnapshot._docs.forEach((item) => {
         // console.log(item.data());
+        // console.log(item.id);
         // 之後要再想不麻煩的方法
         const wrap = {
           id: item.id,
           createdTime: item._document.createTime.timestamp.seconds,
-          cityName:item._document.data.value.mapValue.fields.cityName.stringValue,
-          courseCategory:item._document.data.value.mapValue.fields.courseCategory.stringValue,
-          courseImg:item._document.data.value.mapValue.fields.courseImg.stringValue,
-          courseIntro:item._document.data.value.mapValue.fields.courseIntro.stringValue,
-          courseMethod:item._document.data.value.mapValue.fields.courseMethod.arrayValue,
-          courseName:item._document.data.value.mapValue.fields.courseName.stringValue,
-          displayName:item._document.data.value.mapValue.fields.displayName.stringValue,
-          gender:item._document.data.value.mapValue.fields.gender.stringValue,
-          price:item._document.data.value.mapValue.fields.price.stringValue,
-          teacherImg:item._document.data.value.mapValue.fields.teacherImg.stringValue,
-          teacherIntro:item._document.data.value.mapValue.fields.teacherIntro.stringValue,
-          time:item._document.data.value.mapValue.fields.time.integerValue,
-          uid:item._document.data.value.mapValue.fields.uid.stringValue,
+          data: item.data()
         }
         this.AllCoursesFirebaseData.push(wrap)
       });
@@ -596,7 +588,7 @@ export default defineStore('dataStore', {
     // 我的課程頁面for老師
     getUserTeacherCourses() {
       this.userTeacherCourses = this.AllCoursesFirebaseData.filter((item) => {
-        return item.uid === this.user.uid
+        return item.data.uid === this.user.uid
       })
       console.log("用戶老師端課程資料",this.userTeacherCourses)
     },
@@ -610,20 +602,21 @@ export default defineStore('dataStore', {
         warp.timestamp = item.timestamp
         this.userCartCourses.push(warp)
       })
+      console.log(this.userCartCourses)
       this.calculateMyCart()
     },
     calculateMyCart() {
       if(this.userCartCourses){
         this.userCart.total = 0
         this.userCartCourses.forEach((item) => {
-          this.userCart.total += parseInt(item[0].price)
+          this.userCart.total += parseInt(item[0].data.price)
         })
         this.userCart.cartNum = this.userCartCourses.length
       }
     },
     getUserStudentCourses() {
       this.userStudentCourses = []
-      this.studentData.userCartCourses.forEach((item) => {
+      this.studentData.userCourses.forEach((item) => {
         let warp = {}
         warp = this.AllCoursesFirebaseData.filter((i) => {
           return i.id === item.courseId
@@ -655,7 +648,7 @@ export default defineStore('dataStore', {
     // 判斷完是否登入後，讀取用戶老師端學生端資料
     onAuthStateChanged() {
       onAuthStateChanged(auth, (user) => {
-        // console.log('user端資料', user)
+        console.log('user端資料', user)
         if (user) {
           this.user = user;
           this.isMember = true

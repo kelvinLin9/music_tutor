@@ -40,15 +40,25 @@ export default defineStore('cartStore', {
     },
     async buyNow() {
       console.log(this.buyNowData.id, this.buyNowData.uid)
+      // 買的人的學生端課程+1
       const wrap = { timestamp : new Date().getTime(),
         courseId : this.buyNowData.id }
       const cart = doc(db, this.buyNowData.uid, 'student');
       await updateDoc(cart, {
-        userCartCourses: arrayUnion(wrap)
+        userCourses: arrayUnion(wrap)
+      });
+      // 該課程購買人數+1
+      const wrap2 = { timestamp : new Date().getTime(),
+        uid : this.buyNowData.id }
+      const cart2 = doc(db, "MusicTutorCourses", this.buyNowData.id);
+      await updateDoc(cart2, {
+        whoBuy: arrayUnion(wrap2)
       });
       alert('成功購買課程')
+      //該課程購買名單添加
       this.buyNowData.id = ''
       this.buyNowData.uid = ''
+      
       data.onAuthStateChanged()
 
     }
