@@ -166,7 +166,10 @@ export default defineStore('logInStore', {
       console.log(res.user)
       router.push('/')
       data.isMember = true
-      alert (res.user.uid,"登入成功")
+      alert(res.user.uid + "登入成功")
+      alert(`帳號創立時間${res.user.metadata.creationTime
+      }`)
+      alert(`上次登入時間${res.user.metadata.lastSignInTime}`)
       // 判斷如果是第一次登入，建立一份老師學生端物件上傳
       if(res.user.metadata.createdAt === res.user.metadata.lastLoginAt) {
         console.log("第一次登入")
