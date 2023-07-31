@@ -171,7 +171,7 @@ export default defineStore('logInStore', {
       }`)
       alert(`上次登入時間${res.user.metadata.lastSignInTime}`)
       // 判斷如果是第一次登入，建立一份老師學生端物件上傳
-      if(res.user.metadata.createdAt === res.user.metadata.lastLoginAt) {
+      if(res.user.metadata.creationTime === res.user.metadata.lastSignInTime) {
         console.log("第一次登入")
         data.SetFirebaseMemberData()
       }

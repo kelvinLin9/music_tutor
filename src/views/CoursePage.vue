@@ -24,7 +24,7 @@
       <div class="col-12 col-lg-8">
         <div class="row align-items-center">
           <div class="col-2">
-            <img :src="teacherData.teacherImg" alt="老師照片" class="user-photo">
+            <img :src="courseData.teacherImg" alt="老師照片" class="user-photo">
           </div>
           <div class="col-10 fs-2">
             {{ courseData.displayName }}
@@ -79,7 +79,8 @@
           <span class="fs-1">NT${{ courseData.price }}</span> 
         </div>
         <div class="d-flex justify-content-between">
-          <button type="button" class="btn btn-outline-danger w-75">
+          <button type="button" class="btn btn-outline-danger w-75"
+            @click="goCheckoutPage(),buyNowData.id = courseData.id ,buyNowData.uid = user.uid">
             立即購買
           </button>
           <button type="button" class="btn btn-danger"
@@ -128,11 +129,12 @@ export default {
   computed: {
     ...mapState(dataStore, ['bookmarkState','user','teacherData']),
     ...mapWritableState(dataStore, ['courseData']),
+    ...mapWritableState(cartStore, ['buyNowData'])
   
   },
   methods: {
     ...mapActions(dataStore, ['getCourseData', 'getBookmarkCoursesData','toggleBookmark','getOneCoursesFirebaseData']),
-    ...mapActions(goStore, ['goCoursePage']),
+    ...mapActions(goStore, ['goCheckoutPage']),
     ...mapActions(cartStore, ['addCart']),
     
   },

@@ -7,7 +7,10 @@ const data = dataStore()
 
 export default defineStore('cartStore', {
   state: () => ({
-    
+    buyNowData:{
+      uid:'',
+      id:''
+    }
   }),
   actions: {
     async addCart(uid, id) {
@@ -35,7 +38,19 @@ export default defineStore('cartStore', {
       alert('成功刪除購物車項目')
       data.onAuthStateChanged()
     },
+    async buyNow() {
+      console.log(this.buyNowData.id, this.buyNowData.uid)
+      const wrap = { timestamp : new Date().getTime(),
+        courseId : this.buyNowData.id }
+      const cart = doc(db, this.buyNowData.uid, 'student');
+      await updateDoc(cart, {
+        userCartCourses: arrayUnion(wrap)
+      });
+      alert('成功購買課程')
+      this.buyNowData.id = ''
+      this.buyNowData.uid = ''
+      data.onAuthStateChanged()
 
-
+    }
   }
 })

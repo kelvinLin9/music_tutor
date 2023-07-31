@@ -571,9 +571,9 @@ export default defineStore('dataStore', {
         }
         this.AllCoursesFirebaseData.push(wrap)
       });
-      console.log(this.AllCoursesFirebaseData)
+      console.log('全部課程資料',this.AllCoursesFirebaseData)
       this.getUserTeacherCourses()
-      // this.getUserStudentCourses()
+      this.getUserStudentCourses()
       this.getUserCartCourses()
     },
     async getOneCoursesFirebaseData(courseId) {
@@ -596,8 +596,6 @@ export default defineStore('dataStore', {
     // 我的課程頁面for老師
     getUserTeacherCourses() {
       this.userTeacherCourses = this.AllCoursesFirebaseData.filter((item) => {
-        // console.log(item.uid)
-        // console.log(this.user.uid)
         return item.uid === this.user.uid
       })
       console.log("用戶老師端課程資料",this.userTeacherCourses)
@@ -612,7 +610,6 @@ export default defineStore('dataStore', {
         warp.timestamp = item.timestamp
         this.userCartCourses.push(warp)
       })
-      // console.log(this.userCartCourses)
       this.calculateMyCart()
     },
     calculateMyCart() {
@@ -624,7 +621,18 @@ export default defineStore('dataStore', {
         this.userCart.cartNum = this.userCartCourses.length
       }
     },
-
+    getUserStudentCourses() {
+      this.userStudentCourses = []
+      this.studentData.userCartCourses.forEach((item) => {
+        let warp = {}
+        warp = this.AllCoursesFirebaseData.filter((i) => {
+          return i.id === item.courseId
+        })
+        warp.timestamp = item.timestamp
+        this.userStudentCourses.push(warp)
+      })
+      console.log("用戶學生端課程資料",this.userStudentCourses)
+    },
 
 
 
