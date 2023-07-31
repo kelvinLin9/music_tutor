@@ -79,7 +79,7 @@ export default {
     ...mapActions(dataStore, ['uploadPhoto']),
   },
   created () {
-
+    this.onAuthStateChanged()
   }
 }
 </script>

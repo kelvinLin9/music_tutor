@@ -1,5 +1,8 @@
 <template>
-結帳頁面
+  <button type="button" class="btn btn-primary"
+   @click="buyNow()">
+    我要結帳
+  </button>
 </template>
   
 <script>
@@ -10,11 +13,11 @@ import dataStore from '@/stores/dataStore'
 
 export default {
   computed: {
-
+    ...mapState(dataStore, ['bookmarkState','user','teacherData']),
 
   },
   methods: {
-
+    ...mapActions(cartStore, ['buyNow']),
   },
   created () {
 
