@@ -15,14 +15,14 @@
                 勾選框
               </td>
               <td width="100"
-              @click="getOneCoursesFirebaseData(item[0].id)">
-                <img :src="item[0].courseImg" alt="" class="table-image cursor-pointer">
+              @click="getOneCoursesFirebaseData(item[0].data.id)">
+                <img :src="item[0].data.courseImg" alt="" class="table-image cursor-pointer">
               </td>
               <td>
-                {{ item[0].displayName }}
+                {{ item[0].data.displayName }}
               </td>
               <td class="">
-                NT$ {{ item[0].price }}
+                NT$ {{ item[0].data.price }}
               </td>
               <td class="text-end">
                 <div class="cursor-pointer"

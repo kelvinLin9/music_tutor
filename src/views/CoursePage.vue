@@ -97,7 +97,7 @@
         <h4 class="border-bottom pb-2">購買人數</h4>
         <div class="mb-3">
           <span class="fs-5 me-1">共</span>
-          <span class="fs-1">?????人</span> 
+          <span class="fs-1">{{ courseData.whoBuy.length }}人</span> 
         </div>
         <div class="d-flex justify-content-between">
           <button type="button" class="btn btn-outline-danger w-25"
@@ -142,7 +142,6 @@ export default {
     this.getBookmarkCoursesData()
     this.id = this.$route.params.coursePageId
     this.getOneCoursesFirebaseData(this.id)
-    // this.getOneCoursesFirebaseData()
 
   }
 }

@@ -16,7 +16,7 @@
         <div class="row align-items-center">
           <div class="col text-center">
             <h5 class="">參加課程</h5>
-            <p class="fs-1">{{  }}</p>
+            <p class="fs-1">{{ userStudentCourses.length }}</p>
           </div>
           <div class="col text-center">
             <h5>已開課程</h5>
@@ -56,14 +56,14 @@
       v-if="myCoursesState === 'student'">
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-2">
       <div class="col"
-      v-for="item in userStudentCourses" :key="item[0].id">
+      v-for="item in userStudentCourses" :key="item[0].data.id">
         <div class="card rounded-3 scale h-100"
-        @click="getOneCoursesFirebaseData(item[0].id)">
+        @click="getOneCoursesFirebaseData(item[0].data.id)">
           <div class="card-img overflow-hidden position-relative">
-            <img :src="item[0].courseImg" alt="課程圖片" class="card-img-top">
+            <img :src="item[0].data.courseImg" alt="課程圖片" class="card-img-top">
             <i class="bookmark"
-            :class="bookmarkState(item[0].id)"
-            @click.stop="toggleBookmark(item[0].id)"        
+            :class="bookmarkState(item[0].data.id)"
+            @click.stop="toggleBookmark(item[0].data.id)"        
             data-bs-toggle="tooltip"
             data-bs-placement="top"
             title="加入 / 移除收藏"
@@ -71,34 +71,34 @@
           </div>
           <div class="card-body">
             <div class="mb-1">
-              <span class="badge rounded-pill text-bg-danger test align-middle">{{ item[0].courseCategory }}</span>
-              <span class="">&ensp;{{ item[0].courseName }}</span>   
+              <span class="badge rounded-pill text-bg-danger test align-middle">{{ item[0].data.courseCategory }}</span>
+              <span class="">&ensp;{{ item[0].data.courseName }}</span>   
             </div>
             <div class="mb-1 text-primary">
-              by {{ item[0].displayName }}
+              by {{ item[0].data.displayName }}
             </div>
             <div class="mb-1">
               <i class="bi bi-clock-fill"></i>
-              {{ item[0].time }}
+              {{ item[0].data.time }}
               <i class="bi bi-geo-alt-fill"></i>
-              {{ item[0].cityName }}
+              {{ item[0].data.cityName }}
             </div>
             <div class="mb-1">
               <span class="bg-info rounded-2 px-2 me-2"
-                    v-if="item[0].courseMethod.values[0]">
-                {{ item[0].courseMethod.values[0].stringValue }}
+                    v-if="item[0].data.courseMethod[0]">
+                {{ item[0].data.courseMethod[0] }}
               </span>
               <span class="bg-info rounded-2 px-2 me-2"
-                    v-if="item[0].courseMethod.values[1]">
-                {{ item[0].courseMethod.values[0].stringValue }}
+                    v-if="item[0].data.courseMethod[1]">
+                {{ item[0].data.courseMethod[0] }}
               </span>
               <span class="bg-info rounded-2 px-2 me-2"
-                    v-if="item[0].courseMethod.values[2]">
-                {{ item[0].courseMethod.values[2].stringValue }}
+                    v-if="item[0].data.courseMethod[2]">
+                {{ item[0].data.courseMethod[2] }}
               </span>
             </div>
             <div class="mb-1">
-              NT$ {{ item[0].price }}
+              NT$ {{ item[0].data.price }}
             </div>
           </div>
 
@@ -110,14 +110,14 @@
       v-else-if="myCoursesState === 'teacher'">
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-2">
       <div class="col"
-      v-for="item in userTeacherCourses " :key="item.id">
+      v-for="item in userTeacherCourses " :key="item.data.id">
         <div class="card rounded-3 scale h-100"
-        @click="getOneCoursesFirebaseData(item.id)">
+        @click="getOneCoursesFirebaseData(item.data.id)">
           <div class="card-img overflow-hidden position-relative">
-            <img :src="item.courseImg" alt="課程圖片" class="card-img-top">
+            <img :src="item.data.courseImg" alt="課程圖片" class="card-img-top">
             <i class="bookmark"
-            :class="bookmarkState(item.id)"
-            @click.stop="toggleBookmark(item.id)"
+            :class="bookmarkState(item.data.id)"
+            @click.stop="toggleBookmark(item.data.id)"
             data-bs-toggle="tooltip"
             data-bs-placement="top"
             title="加入 / 移除收藏"
@@ -125,34 +125,34 @@
           </div>
           <div class="card-body">
             <div class="mb-1">
-              <span class="badge rounded-pill text-bg-danger test align-middle">{{ item.courseCategory }}</span>
-              <span class="">&ensp;{{ item.courseName }}</span>   
+              <span class="badge rounded-pill text-bg-danger test align-middle">{{ item.data.courseCategory }}</span>
+              <span class="">&ensp;{{ item.data.courseName }}</span>   
             </div>
             <div class="mb-1 text-primary">
-              by {{ item.displayName }}
+              by {{ item.data.displayName }}
             </div>
             <div class="mb-1">
               <i class="bi bi-clock-fill"></i>
-              {{ item.time }}
+              {{ item.data.time }}
               <i class="bi bi-geo-alt-fill"></i>
-              {{ item.cityName }}
+              {{ item.data.cityName }}
             </div>
             <div class="mb-1">
               <span class="bg-info rounded-2 px-2 me-2"
-                    v-if="item.courseMethod.values[0]">
-                {{ item.courseMethod.values[0].stringValue }}
+                    v-if="item.data.courseMethod[0]">
+                {{ item.data.courseMethod[0] }}
               </span>
-              <span class="bg-info rounded-2 px-2 me-2"
-                    v-if="item.courseMethod.values[1]">
-                {{ item.courseMethod.values[0].stringValue }}
+       <span class="bg-info rounded-2 px-2 me-2"
+                    v-if="item.data.courseMethod[1]">
+                {{ item.data.courseMethod[0] }}
               </span>
-              <span class="bg-info rounded-2 px-2 me-2"
-                    v-if="item.courseMethod.values[2]">
-                {{ item.courseMethod.values[2].stringValue }}
+       <span class="bg-info rounded-2 px-2 me-2"
+                    v-if="item.data.courseMethod[2]">
+                {{ item.data.courseMethod[2] }}
               </span>
-            </div>
+     </div>
             <div class="mb-1">
-              NT$ {{ item.price }}
+              NT$ {{ item.data.price }}
             </div>
           </div>
 
