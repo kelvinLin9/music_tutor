@@ -190,14 +190,14 @@
     </div>
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-2">
       <div class="col"
-      v-for="item in AllCoursesFirebaseData" :key="item.data.id">
+      v-for="item in AllCoursesFirebaseData" :key="item.id">
         <div class="card rounded-3 scale h-100"
-        @click="getOneCoursesFirebaseData(item.data.id)">
+        @click="getOneCoursesFirebaseData(item.id)">
           <div class="card-img overflow-hidden position-relative">
             <img :src="item.data.courseImg" alt="" class="card-img-top">
             <i class="bookmark"
-            :class="bookmarkState(item.data.id)"
-            @click.stop="toggleBookmark(item.data.id)"
+            :class="bookmarkState(item.id)"
+            @click.stop="toggleBookmark(item.id)"
             data-bs-toggle="tooltip"
             data-bs-placement="top"
             title="加入 / 移除收藏"
@@ -231,13 +231,11 @@
                 {{ item.data.courseMethod[2] }}
               </span>
             </div>
-            <div class="mb-1 d-flex">
-              <p class="w-50">
-                NT$ {{ item.data.price }}
-              </p>
-              <p class="w-50 ">
-                <i class="bi bi-people-fill me-2"></i>{{ item.data.whoBuy.length}}
-              </p>
+            <div class="mb-1">
+              <div class="row">
+                <div class="col-auto">NT$ {{ item.data.price }}</div>
+                <div class="col-auto"><i class="bi bi-people-fill me-2"></i>{{ item.data.whoBuy.length}}</div>
+              </div>
             </div>
             
           </div>

@@ -602,7 +602,6 @@ export default defineStore('dataStore', {
         warp.timestamp = item.timestamp
         this.userCartCourses.push(warp)
       })
-      console.log(this.userCartCourses)
       this.calculateMyCart()
     },
     calculateMyCart() {
@@ -688,24 +687,8 @@ export default defineStore('dataStore', {
 
 
 // --------------------------舊資料用------------------------------
-    // 單一課程頁面用
-    getCourseData(id) { 
-      this.courseData = this.coursesData.filter((item) => {
-        return item.id == id
-      })
-    },
-    // 我的課程頁面用(老師端隨便選些測試)
-    getTeacherCoursesData () {
-      this.teacherCoursesData = this.coursesData.filter((item) => {
-        return item.id > 6
-      })
-    },
-    // 我的課程頁面用(學生端隨便選些測試)
-    getStudentCoursesData () {
-      this.studentCoursesData = this.coursesData.filter((item) => {
-        return item.id > 8
-      })
-    },
+
+
     // 我的課程頁面用(收藏)
     getBookmarkIds () {
       this.bookmarkIds = JSON.parse(localStorage.getItem('bookmarkIds')) || []

@@ -133,7 +133,7 @@ export default {
   
   },
   methods: {
-    ...mapActions(dataStore, ['getCourseData', 'getBookmarkCoursesData','toggleBookmark','getOneCoursesFirebaseData']),
+    ...mapActions(dataStore, ['getBookmarkCoursesData','toggleBookmark','getOneCoursesFirebaseData']),
     ...mapActions(goStore, ['goCheckoutPage']),
     ...mapActions(cartStore, ['addCart']),
     
