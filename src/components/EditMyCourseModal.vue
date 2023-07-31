@@ -294,39 +294,6 @@
               </div>
             </div>
           </div>
-          <div class="row mb-3">
-            <div class="col-12 col-lg-8 mb-3">
-              <div class="row">
-                <div class="col-4">
-                  <label for="teacherPhoto" 
-                      class="col-form-label"
-                      accept="image/png, image/jpeg">
-                    上傳一張老師大頭照：
-                  </label>
-                </div>
-                <div class="col-8">
-                  <input
-                    type="file"
-                    id="teacherPhoto"
-                    class="form-control"
-                    @change="uploadPhoto('teacher',$event)"
-                  />
-                  <img class="img-fluid mt-3" 
-                      :src="beATeacherData.teacherImg" 
-                      alt="老師大頭照(舊)"
-                      v-if="beATeacherData.teacherImg"/>
-                  <img class="img-fluid mt-3" 
-                      :src="courseData.teacherImg" 
-                      alt="老師大頭照(新)"
-                      v-else/>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-
-
           <button type="button" class="btn btn-secondary me-3" data-bs-dismiss="modal">
             取消
           </button>
