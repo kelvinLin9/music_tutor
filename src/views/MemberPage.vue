@@ -76,7 +76,8 @@ export default {
   },
   methods: {
     ...mapActions(logInStore, ['signOut']),  
-    ...mapActions(dataStore, ['uploadPhoto']),
+    ...mapActions(dataStore, ['uploadPhoto', 'onAuthStateChanged']),
+    
   },
   created () {
     this.onAuthStateChanged()
@@ -86,9 +87,6 @@ export default {
 
 <style lang="scss" scoped>
 .user-photo {
-  // width: 100px;
-  // height: 100px;
-  // border-radius: 50px;
   img {
     width: 100%;
     display: block;
