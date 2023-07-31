@@ -56,14 +56,14 @@
       v-if="myCoursesState === 'student'">
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-2">
       <div class="col"
-      v-for="item in userStudentCourses" :key="item.id">
+      v-for="item in userStudentCourses" :key="item[0].id">
         <div class="card rounded-3 scale h-100"
-        @click="getOneCoursesFirebaseData(item.id)">
+        @click="getOneCoursesFirebaseData(item[0].id)">
           <div class="card-img overflow-hidden position-relative">
-            <img src="https://fakeimg.pl/200x150/" alt="" class="card-img-top">
+            <img :src="item[0].courseImg" alt="課程圖片" class="card-img-top">
             <i class="bookmark"
-            :class="bookmarkState(item.id)"
-            @click.stop="toggleBookmark(item.id)"        
+            :class="bookmarkState(item[0].id)"
+            @click.stop="toggleBookmark(item[0].id)"        
             data-bs-toggle="tooltip"
             data-bs-placement="top"
             title="加入 / 移除收藏"
@@ -71,34 +71,34 @@
           </div>
           <div class="card-body">
             <div class="mb-1">
-              <span class="badge rounded-pill text-bg-danger test align-middle">{{ item.courseCategory }}</span>
-              <span class="">&ensp;{{ item.courseName }}</span>   
+              <span class="badge rounded-pill text-bg-danger test align-middle">{{ item[0].courseCategory }}</span>
+              <span class="">&ensp;{{ item[0].courseName }}</span>   
             </div>
             <div class="mb-1 text-primary">
-              by {{ item.displayName }}
+              by {{ item[0].displayName }}
             </div>
             <div class="mb-1">
               <i class="bi bi-clock-fill"></i>
-              {{ item.time }}
+              {{ item[0].time }}
               <i class="bi bi-geo-alt-fill"></i>
-              {{ item.cityName }}
+              {{ item[0].cityName }}
             </div>
             <div class="mb-1">
               <span class="bg-info rounded-2 px-2 me-2"
-                    v-if="item.courseMethod.values[0]">
-                {{ item.courseMethod.values[0].stringValue }}
+                    v-if="item[0].courseMethod.values[0]">
+                {{ item[0].courseMethod.values[0].stringValue }}
               </span>
               <span class="bg-info rounded-2 px-2 me-2"
-                    v-if="item.courseMethod.values[1]">
-                {{ item.courseMethod.values[0].stringValue }}
+                    v-if="item[0].courseMethod.values[1]">
+                {{ item[0].courseMethod.values[0].stringValue }}
               </span>
               <span class="bg-info rounded-2 px-2 me-2"
-                    v-if="item.courseMethod.values[2]">
-                {{ item.courseMethod.values[2].stringValue }}
+                    v-if="item[0].courseMethod.values[2]">
+                {{ item[0].courseMethod.values[2].stringValue }}
               </span>
             </div>
             <div class="mb-1">
-              NT$ {{ item.price }}
+              NT$ {{ item[0].price }}
             </div>
           </div>
 
@@ -114,7 +114,7 @@
         <div class="card rounded-3 scale h-100"
         @click="getOneCoursesFirebaseData(item.id)">
           <div class="card-img overflow-hidden position-relative">
-            <img src="https://fakeimg.pl/200x150/" alt="" class="card-img-top">
+            <img :src="item.courseImg" alt="課程圖片" class="card-img-top">
             <i class="bookmark"
             :class="bookmarkState(item.id)"
             @click.stop="toggleBookmark(item.id)"
@@ -168,7 +168,7 @@
         <div class="card rounded-3 scale h-100"
         @click="getOneCoursesFirebaseData(item.id)">
           <div class="card-img overflow-hidden position-relative">
-            <img src="https://fakeimg.pl/200x150/" alt="" class="card-img-top">
+            <img :src="item.courseImg" alt="課程圖片" class="card-img-top">
             <i class="bookmark"
             :class="bookmarkState(item.id)"
             @click.stop="toggleBookmark(item.id)"
@@ -243,7 +243,7 @@ export default {
   cursor:pointer;
 }
 .card-img-top { 
-  // width: 100%;
+  height: 150px;
   object-fit: cover;
   transition: 0.5s;
 }
