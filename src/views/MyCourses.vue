@@ -56,21 +56,21 @@
       v-if="myCoursesState === 'student'">
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-2">
       <div class="col"
-      v-for="item in userStudentCourses" :key="item[0].data.id">
+      v-for="item in userStudentCourses" :key="item[0].id">
         <div class="card rounded-3 scale h-100"
-        @click="getOneCoursesFirebaseData(item[0].data.id)">
+        @click="getOneCoursesFirebaseData(item[0].id)">
           <div class="card-img overflow-hidden position-relative">
             <img :src="item[0].data.courseImg" alt="課程圖片" class="card-img-top">
             <i class="bookmark"
-            :class="bookmarkState(item[0].data.id)"
-            @click.stop="toggleBookmark(item[0].data.id)"        
+            :class="bookmarkState(item[0].id)"
+            @click.stop="toggleBookmark(item[0].id)"        
             data-bs-toggle="tooltip"
             data-bs-placement="top"
             title="加入 / 移除收藏"
             ></i>
           </div>
           <div class="card-body">
-            <div class="mb-1">
+            <div class="mb-1"> {{ }}
               <span class="badge rounded-pill text-bg-danger test align-middle">{{ item[0].data.courseCategory }}</span>
               <span class="">&ensp;{{ item[0].data.courseName }}</span>   
             </div>
@@ -98,7 +98,10 @@
               </span>
             </div>
             <div class="mb-1">
-              NT$ {{ item[0].data.price }}
+              <div class="row">
+                <div class="col-auto">NT$ {{ item[0].data.price }}</div>
+                <div class="col-auto"><i class="bi bi-people-fill me-2"></i>{{ item[0].data.whoBuy.length}}</div>
+              </div>
             </div>
           </div>
 
@@ -110,14 +113,14 @@
       v-else-if="myCoursesState === 'teacher'">
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-2">
       <div class="col"
-      v-for="item in userTeacherCourses " :key="item.data.id">
+      v-for="item in userTeacherCourses " :key="item.id">
         <div class="card rounded-3 scale h-100"
-        @click="getOneCoursesFirebaseData(item.data.id)">
+        @click="getOneCoursesFirebaseData(item.id)">
           <div class="card-img overflow-hidden position-relative">
             <img :src="item.data.courseImg" alt="課程圖片" class="card-img-top">
             <i class="bookmark"
-            :class="bookmarkState(item.data.id)"
-            @click.stop="toggleBookmark(item.data.id)"
+            :class="bookmarkState(item.id)"
+            @click.stop="toggleBookmark(item.id)"
             data-bs-toggle="tooltip"
             data-bs-placement="top"
             title="加入 / 移除收藏"
@@ -142,17 +145,20 @@
                     v-if="item.data.courseMethod[0]">
                 {{ item.data.courseMethod[0] }}
               </span>
-       <span class="bg-info rounded-2 px-2 me-2"
+              <span class="bg-info rounded-2 px-2 me-2"
                     v-if="item.data.courseMethod[1]">
                 {{ item.data.courseMethod[0] }}
               </span>
-       <span class="bg-info rounded-2 px-2 me-2"
+              <span class="bg-info rounded-2 px-2 me-2"
                     v-if="item.data.courseMethod[2]">
                 {{ item.data.courseMethod[2] }}
               </span>
-     </div>
+            </div>
             <div class="mb-1">
-              NT$ {{ item.data.price }}
+              <div class="row">
+                <div class="col-auto">NT$ {{ item.data.price }}</div>
+                <div class="col-auto"><i class="bi bi-people-fill me-2"></i>{{ item.data.whoBuy.length}}</div>
+              </div>
             </div>
           </div>
 
