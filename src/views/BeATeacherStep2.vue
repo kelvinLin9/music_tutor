@@ -46,12 +46,17 @@
               </label>
             </div>
             <div class="col-8">
-              <input
+              <VField
+                  name="課程封面"
                   type="file"
                   id="coursePhoto"
                   class="form-control"
+                  rules="required"
+                  :class="{ 'is-invalid': errors['課程封面'] }"
                   @change="uploadPhoto('course',$event)"
-                />
+                >
+              </VField>
+              <ErrorMessage class="invalid-feedback" name="課程封面"/>
                 <img class="img-fluid mt-3" 
                     :src="beATeacherData.courseImg" 
                     alt="課程封面照"
