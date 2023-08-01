@@ -18,15 +18,15 @@
       </div>
     </div>
   </div>
-
   <div class="container mt-3">
     <div class="row align-items-center">
       <div class="col-12 col-lg-8">
-        <div class="row align-items-center">
-          <div class="col-2">
+        <div class="row align-items-center"
+          @click="getOneTeacherFirebaseData(courseData.uid)">
+          <div class="col-2 cursor-pointer">
             <img :src="courseData.teacherImg" alt="老師照片" class="user-photo">
           </div>
-          <div class="col-10 fs-2">
+          <div class="col-auto fs-2 cursor-pointer">
             {{ courseData.displayName }}
           </div>
         </div>
@@ -37,13 +37,19 @@
         </div>
         <div class="row my-3">
           <p>關於課程</p>
-          <div class="col-3">
+          <div class="col-auto">
             <div class="d-flex align-items-center">
               <i class="bi bi-clock me-2"></i>
               課程時長<br>{{ courseData.time }}分鐘
             </div>
           </div>
-          <div class="col-4">
+          <div class="col-auto">
+            <div class="d-flex align-items-center">
+              <i class="bi bi-people-fill me-2"></i>
+              已被購買 <br> {{ courseData.whoBuy.length }}次
+            </div>
+          </div>
+          <div class="col-auto">
             <div class="d-flex align-items-center">
               <i class="bi bi-tools me-2"></i>
               <div>
@@ -63,7 +69,8 @@
               </div>
             </div>
           </div>
-          <div class="col-3">
+          <div class="col-auto"
+                v-if="courseData.cityName">
             <div class="d-flex align-items-center">
               <i class="bi bi-geo-alt-fill me-2"></i>
               上課地點<br> {{ courseData.cityName }}
@@ -133,13 +140,14 @@ export default {
   
   },
   methods: {
-    ...mapActions(dataStore, ['getBookmarkCoursesData','toggleBookmark','getOneCoursesFirebaseData']),
+    ...mapActions(dataStore, ['onAuthStateChanged' ,'toggleBookmark','getOneCoursesFirebaseData', 'getOneTeacherFirebaseData']),
     ...mapActions(goStore, ['goCheckoutPage']),
     ...mapActions(cartStore, ['addCart']),
     
   },
   created () {
-    this.getBookmarkCoursesData()
+    this.onAuthStateChanged()
+    // 防止從新整理產生讀不到資料
     this.id = this.$route.params.coursePageId
     this.getOneCoursesFirebaseData(this.id)
 
@@ -161,6 +169,11 @@ img {
 .course-photo {
   height: 500px;
   object-fit: cover;
-
+  @media (max-width: 768px)  {
+    height: 300px;
+  }
+  @media (max-width: 576px)  {
+    height: 200px;
+  }
 }
 </style>

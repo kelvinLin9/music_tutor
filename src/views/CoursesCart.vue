@@ -15,7 +15,7 @@
                 勾選框
               </td>
               <td width="100"
-              @click="getOneCoursesFirebaseData(item[0].data.id)">
+              @click="getOneCoursesFirebaseData(item[0].id)">
                 <img :src="item[0].data.courseImg" alt="" class="table-image cursor-pointer">
               </td>
               <td>
