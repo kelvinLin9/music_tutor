@@ -89,7 +89,7 @@ export default {
     ...mapActions(goStore, ['goCoursePage'])
   },
   created () {
-    this.getBookmarkCoursesData()
+    // this.getBookmarkCoursesData()
   }
 };
 </script>

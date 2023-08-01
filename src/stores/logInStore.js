@@ -96,6 +96,7 @@ export default defineStore('logInStore', {
       studentAssess:[]
     }
     data.AllCoursesFirebaseData = []
+    data.otherTeacherData = []
     data.beATeacherData = {
       uid: '',
       displayName: '',
