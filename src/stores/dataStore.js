@@ -360,8 +360,7 @@ export default defineStore('dataStore', {
       //   price: 2000,
       // },
     ],
-    // 單一課程頁面用
-    courseData:{},
+    courseData:{},   // 單一課程頁面用
     myCoursesState: 'student', // 我的課程換頁用
     bookmarkIds: [],
     bookmarkNum: 0,
@@ -382,6 +381,7 @@ export default defineStore('dataStore', {
       whoBuy:[],
     },
     AllCoursesFirebaseData:[],
+    otherTeacherData:[],
     teacherData: {
       uid: '',
       accountCreateTime: '',
@@ -585,6 +585,14 @@ export default defineStore('dataStore', {
         console.log("No such OneCourses document!")
       }
     },
+    async getOneTeacherFirebaseData(TeacherId) {
+      alert(TeacherId)
+      const docRef = doc(db, TeacherId, 'teacher');
+      const docSnap = await getDoc(docRef);
+      console.log("某某老師資料", docSnap.data()) 
+      this.otherTeacherData = docSnap.data()
+      router.push(`/${TeacherId}`)
+    },
 
     // 我的課程頁面for老師
     getUserTeacherCourses() {
@@ -695,7 +703,6 @@ export default defineStore('dataStore', {
       this.bookmarkIds = JSON.parse(localStorage.getItem('bookmarkIds')) || []
     },
     getBookmarkCoursesData () {
-      console.log(123)
       this.getBookmarkIds ()
       this.userBookmarkCourses = []
       this.AllCoursesFirebaseData.forEach((item) => {
@@ -704,7 +711,7 @@ export default defineStore('dataStore', {
         }
       })
       this.bookmarkNum = this.userBookmarkCourses.length
-      console.log(this.userBookmarkCourses)
+      console.log('用戶收藏課程資料', this.userBookmarkCourses)
     },
     toggleBookmark (item) {
       const clickId = item

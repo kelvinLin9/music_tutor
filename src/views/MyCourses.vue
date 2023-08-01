@@ -236,7 +236,7 @@ export default {
     ...mapWritableState(dataStore, ['myCoursesState'])
   },
   methods: {
-    ...mapActions(dataStore, ['onAuthStateChanged', 'toggleBookmark', 'getOneCoursesFirebaseData', 'getBookmarkCoursesData']),
+    ...mapActions(dataStore, ['onAuthStateChanged', 'toggleBookmark', 'getOneCoursesFirebaseData']),
     
   },
   created () {
