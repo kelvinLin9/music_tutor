@@ -585,13 +585,17 @@ export default defineStore('dataStore', {
         console.log("No such OneCourses document!")
       }
     },
+    // 進入其他老師頁面用，點自己課程就導向個人主頁
     async getOneTeacherFirebaseData(TeacherId) {
-      alert(TeacherId)
-      const docRef = doc(db, TeacherId, 'teacher');
-      const docSnap = await getDoc(docRef);
-      console.log("某某老師資料", docSnap.data()) 
-      this.otherTeacherData = docSnap.data()
-      router.push(`/${TeacherId}`)
+      if (TeacherId === this.user.uid) {
+        router.push('/MemberPage')
+      } else {
+        const docRef = doc(db, TeacherId, 'teacher');
+        const docSnap = await getDoc(docRef);
+        console.log("某某老師資料", docSnap.data()) 
+        this.otherTeacherData = docSnap.data()
+        router.push(`/${TeacherId}`)
+      }
     },
 
     // 我的課程頁面for老師
