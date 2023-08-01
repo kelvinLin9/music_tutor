@@ -1,12 +1,13 @@
 <template>
+  <h1> {{ otherTeacherData.displayName }} 老師的頁面</h1>
   <div class="container">
     <div class="row test">
       <div class="col-12 col-md-4 d-flex flex-column justify-content-center align-items-center mt-3">
         <div class="user-photo position-relative">
-          <img :src="teacherData.teacherImg" alt="大頭照"
-                v-if="teacherData.teacherImg">
+          <img :src="otherTeacherData.teacherImg" alt="大頭照"
+                v-if="otherTeacherData.teacherImg">
           <img src="../assets/images/預設大頭貼.png" alt="預設大頭照"
-                v-if="!teacherData.teacherImg">
+                v-if="!otherTeacherData.teacherImg">
           <label for="file-upload">
             <i class="bi bi-cloud-arrow-up-fill cursor-pointer upload-icon"></i>
           </label>
@@ -18,38 +19,34 @@
                 />
         </div>
         <div class="mb-2 fs-2">
-          {{ user.displayName }}
-          <i :class="teacherData.gender"></i>
+          {{ otherTeacherData.displayName }}
+          <i :class="otherTeacherData.gender"></i>
         </div>
         <div class="mb-2 w-100">
           <i class="bi bi-envelope-fill"></i>：{{ user.email }}
         </div>
         <div class="mb-2 w-100">
-          <i class="bi bi-telephone-fill"></i>：{{ teacherData.phoneNumber }}
+          <i class="bi bi-telephone-fill"></i>：{{ otherTeacherData.phoneNumber }}
         </div>
         <div class="mb-2 w-100">
           <p class="">自我介紹：</p>
           <p class="border border-secondary rounded-4 p-3">
-            {{ teacherData.teacherIntro }}
+            {{ otherTeacherData.teacherIntro }}
           </p>
         </div>
         <div class="d-flex justify-content-around w-75 mb-2">
-          <a :href="teacherData.facebook" target="_black">
+          <a :href="otherTeacherData.facebook" target="_black">
             <i class="bi bi-facebook fs-3 text-secondary"
-              :class="{'text-blue': teacherData.facebook}"></i>
+              :class="{'text-blue': otherTeacherData.facebook}"></i>
           </a>
-          <a :href="teacherData.instagram" target="_black">
+          <a :href="otherTeacherData.instagram" target="_black">
             <i class="bi bi-instagram fs-3 text-secondary"
-              :class="{'text-red': teacherData.instagram}"></i>
+              :class="{'text-red': otherTeacherData.instagram}"></i>
           </a>
-          <a :href="teacherData.discord" target="_black">
+          <a :href="otherTeacherData.discord" target="_black">
             <i class="bi bi-discord fs-3 text-secondary"
-              :class="{'text-purple': teacherData.discord}"></i>
+              :class="{'text-purple': otherTeacherData.discord}"></i>
           </a>
-          
-        </div>
-        <div class="mb-2">
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">編輯個人資料</button>
         </div>
       </div>
       <div class="col-12 col-md-8">
@@ -57,7 +54,6 @@
       </div>
     </div>
   </div>
-  <EditIntroModal />
 </template>
   
 <script>
@@ -66,21 +62,27 @@ import { mapState, mapActions, mapWritableState } from
 import logInStore from '@/stores/logInStore'
 import goStore from '@/stores/goStore'
 import dataStore from '../stores/dataStore';
-import EditIntroModal from '../components/EditIntroModal.vue'
 
 export default {
-  components: { EditIntroModal },
+  data () {
+    return {
+      uid: ''
+    }
+  },
   computed: {
-    ...mapState(dataStore, ['user','isMember', 'teacherData']),
+    ...mapState(dataStore, ['user','isMember', 'otherTeacherData']),
     ...mapWritableState(dataStore, [])
   },
   methods: {
     ...mapActions(logInStore, ['signOut']),  
-    ...mapActions(dataStore, ['uploadPhoto', 'onAuthStateChanged']),
+    ...mapActions(dataStore, ['uploadPhoto', 'onAuthStateChanged', 'getOneCoursesFirebaseData']),
     
   },
   created () {
     this.onAuthStateChanged()
+    // alert(this.$route.params.TeacherPageId)
+    this.uid = this.$route.params.TeacherPageId
+    this.getOneCoursesFirebaseData(this.uid)
   }
 }
 </script>

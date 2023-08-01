@@ -48,8 +48,13 @@ const router = createRouter({
         },
         {
           path: 'coursePage/:coursePageId',
-          name: 'coursePage',
+          name: 'coursePageId',
           component: () => import('../views/coursePage.vue')
+        },
+        {
+          path: ':TeacherPageId',
+          name: 'TeacherPageId',
+          component: () => import('../views/TeacherPage.vue')
         },
         {
           path: 'MyCourses',
