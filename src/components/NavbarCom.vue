@@ -13,7 +13,7 @@
           :class="{ 'text-primary':  $route.name === 'MyCourses'}">
         <i class="bi bi-bookmarks-fill me-lg-2"></i>
         <div class="bg-danger text-white rounded-circle text-center position-absolute small-num-mobile"
-          v-if="userCart.cartNum">
+          v-if="bookmarkNum">
           {{ bookmarkNum }}
         </div>
       </RouterLink>
@@ -63,7 +63,7 @@
             :class="{ 'text-primary':  $route.name === 'MyCourses'}">
             <i class="bi bi-bookmarks-fill me-lg-2"></i>
             <div class="bg-danger text-white rounded-circle text-center position-absolute small-num"
-              v-if="userCart.cartNum">
+              v-if="bookmarkNum">
               {{ bookmarkNum }}
             </div>
           </RouterLink>
