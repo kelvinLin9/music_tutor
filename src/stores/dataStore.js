@@ -598,10 +598,14 @@ export default defineStore('dataStore', {
 
     // 我的課程頁面for老師
     getUserTeacherCourses() {
-      this.userTeacherCourses = this.AllCoursesFirebaseData.filter((item) => {
-        return item.data.uid === this.user.uid
-      })
-      console.log("用戶老師端課程資料",this.userTeacherCourses)
+      if (!this.AllCoursesFirebaseData) {
+        console.log('完全沒有課程')
+      } else {
+        this.userTeacherCourses = this.AllCoursesFirebaseData.filter((item) => {
+          return item.data.uid === this.user.uid
+        })
+        console.log("用戶老師端課程資料",this.userTeacherCourses)
+      }
     },
     getUserCartCourses() {
       this.userCartCourses = []
@@ -613,6 +617,7 @@ export default defineStore('dataStore', {
         warp.timestamp = item.timestamp
         this.userCartCourses.push(warp)
       })
+      console.log("用戶購物車內課程", this.userCartCourses)
       this.calculateMyCart()
     },
     calculateMyCart() {
@@ -625,16 +630,20 @@ export default defineStore('dataStore', {
       }
     },
     getUserStudentCourses() {
-      this.userStudentCourses = []
-      this.studentData.userCourses.forEach((item) => {
-        let warp = {}
-        warp = this.AllCoursesFirebaseData.filter((i) => {
-          return i.id === item.courseId
+      if(!this.studentData.userCourses) {
+        console.log('尚未購買課程')
+      } else {
+        this.userStudentCourses = []
+        this.studentData.userCourses.forEach((item) => {
+          let warp = {}
+          warp = this.AllCoursesFirebaseData.filter((i) => {
+            return i.id === item.courseId
+          })
+          warp.timestamp = item.timestamp
+          this.userStudentCourses.push(warp)
         })
-        warp.timestamp = item.timestamp
-        this.userStudentCourses.push(warp)
-      })
-      console.log("用戶學生端課程資料",this.userStudentCourses)
+        console.log("用戶學生端課程資料",this.userStudentCourses)
+      }
     },
 
 
@@ -699,7 +708,6 @@ export default defineStore('dataStore', {
 
 
 
-
     // 我的課程頁面用(收藏)先練習存在本地端
     getBookmarkIds () {
       this.bookmarkIds = JSON.parse(localStorage.getItem('bookmarkIds')) || []
@@ -713,7 +721,7 @@ export default defineStore('dataStore', {
         }
       })
       this.bookmarkNum = this.userBookmarkCourses.length
-      console.log('用戶收藏課程資料', this.userBookmarkCourses)
+      console.log('用戶收藏課程資料', this.bookmarkNum, this.userBookmarkCourses)
     },
     toggleBookmark (item) {
       const clickId = item
