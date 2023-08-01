@@ -377,7 +377,6 @@ export default defineStore('dataStore', {
       cityName: '',
       time: 0,
       price: 0,
-      timestamp:'',
       whoBuy:[],
     },
     AllCoursesFirebaseData:[],
@@ -471,7 +470,6 @@ export default defineStore('dataStore', {
       this.beATeacherData.cityName = ''
       this.beATeacherData.time = 0
       this.beATeacherData.price = 0
-      this.beATeacherData.timestamp = ''
     },
     // 只有第一次登入需要
     async copyUserDataToTeacher() {
