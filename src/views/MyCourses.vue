@@ -15,7 +15,7 @@
       <div class="col-6 ms-auto">
         <div class="row align-items-center">
           <div class="col text-center">
-            <h5 class="">參加課程</h5>
+            <h5>參加課程</h5>
             <p class="fs-1">{{ userStudentCourses.length }}</p>
           </div>
           <div class="col text-center">
@@ -24,7 +24,7 @@
           </div>
           <div class="col text-center">
             <h5>目前收藏</h5>
-            <p class="fs-1">{{  }}</p>
+            <p class="fs-1">{{ userBookmarkCourses.length }}</p>
           </div>
         </div>
       </div>
@@ -166,15 +166,15 @@
       </div>
     </div>
   </div>
-  <!-- <div class="container courses mt-3"
+  <div class="container courses mt-3"
       v-else>
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-2">
       <div class="col"
-      v-for="item in 1" :key="item.id">
+      v-for="item in userBookmarkCourses" :key="item.id">
         <div class="card rounded-3 scale h-100"
         @click="getOneCoursesFirebaseData(item.id)">
           <div class="card-img overflow-hidden position-relative">
-            <img :src="item.courseImg" alt="課程圖片" class="card-img-top">
+            <img :src="item.data.courseImg" alt="課程圖片" class="card-img-top">
             <i class="bookmark"
             :class="bookmarkState(item.id)"
             @click.stop="toggleBookmark(item.id)"
@@ -185,40 +185,43 @@
           </div>
           <div class="card-body">
             <div class="mb-1">
-              <span class="badge rounded-pill text-bg-danger test align-middle">{{ item.courseCategory }}</span>
-              <span class="">&ensp;{{ item.courseName }}</span>   
+              <span class="badge rounded-pill text-bg-danger test align-middle">{{ item.data.courseCategory }}</span>
+              <span class="">&ensp;{{ item.data.courseName }}</span>   
             </div>
             <div class="mb-1 text-primary">
-              by {{ item.displayName }}
+              by {{ item.data.displayName }}
             </div>
             <div class="mb-1">
               <i class="bi bi-clock-fill"></i>
-              {{ item.time }}
+              {{ item.data.time }}
               <i class="bi bi-geo-alt-fill"></i>
-              {{ item.cityName }}
+              {{ item.data.cityName }}
             </div>
             <div class="mb-1">
               <span class="bg-info rounded-2 px-2 me-2"
-                    v-if="item.courseMethod.values[0]">
-                {{ item.courseMethod.values[0].stringValue }}
+                    v-if="item.data.courseMethod[0]">
+                {{ item.data.courseMethod[0] }}
               </span>
               <span class="bg-info rounded-2 px-2 me-2"
-                    v-if="item.courseMethod.values[1]">
-                {{ item.courseMethod.values[0].stringValue }}
+                    v-if="item.data.courseMethod[1]">
+                {{ item.data.courseMethod[0] }}
               </span>
               <span class="bg-info rounded-2 px-2 me-2"
-                    v-if="item.courseMethod.values[2]">
-                {{ item.courseMethod.values[2].stringValue }}
+                    v-if="item.data.courseMethod[2]">
+                {{ item.data.courseMethod[2] }}
               </span>
             </div>
             <div class="mb-1">
-              NT$ {{ item.price }}
+              <div class="row">
+                <div class="col-auto">NT$ {{ item.data.price }}</div>
+                <div class="col-auto"><i class="bi bi-people-fill me-2"></i>{{ item.data.whoBuy.length}}</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div> -->
+  </div>
 </template>
   
 <script>
@@ -233,13 +236,11 @@ export default {
     ...mapWritableState(dataStore, ['myCoursesState'])
   },
   methods: {
-    ...mapActions(dataStore, ['onAuthStateChanged', 'toggleBookmark', 'getOneCoursesFirebaseData']),
+    ...mapActions(dataStore, ['onAuthStateChanged', 'toggleBookmark', 'getOneCoursesFirebaseData', 'getBookmarkCoursesData']),
     
   },
   created () {
     this.onAuthStateChanged()
-    
-
   }
 }
 </script>
