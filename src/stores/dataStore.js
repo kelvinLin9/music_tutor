@@ -363,7 +363,6 @@ export default defineStore('dataStore', {
     // 單一課程頁面用
     courseData:{},
     myCoursesState: 'student', // 我的課程換頁用
-    bookmarksCoursesData:[],
     bookmarkIds: [],
     bookmarkNum: 0,
     // 成為老師表單數據，老師名稱來自會員(先預設)
@@ -564,9 +563,11 @@ export default defineStore('dataStore', {
         this.AllCoursesFirebaseData.push(wrap)
       });
       console.log('全部課程資料',this.AllCoursesFirebaseData)
+      // 用ID抓出其他想要渲染的資料
       this.getUserTeacherCourses()
       this.getUserStudentCourses()
       this.getUserCartCourses()
+      this.getBookmarkCoursesData()
     },
     async getOneCoursesFirebaseData(courseId) {
       const docRef = doc(db, "MusicTutorCourses", courseId)
@@ -686,22 +687,24 @@ export default defineStore('dataStore', {
 
 
 
-// --------------------------舊資料用------------------------------
 
 
-    // 我的課程頁面用(收藏)
+
+    // 我的課程頁面用(收藏)先練習存在本地端
     getBookmarkIds () {
       this.bookmarkIds = JSON.parse(localStorage.getItem('bookmarkIds')) || []
     },
     getBookmarkCoursesData () {
+      console.log(123)
       this.getBookmarkIds ()
-      this.bookmarksCoursesData = []
-      this.coursesData.forEach((item) => {
+      this.userBookmarkCourses = []
+      this.AllCoursesFirebaseData.forEach((item) => {
         if (this.bookmarkIds.indexOf(item.id) > -1) {
-          this.bookmarksCoursesData.push(item)
+          this.userBookmarkCourses.push(item)
         }
       })
-      this.bookmarkNum = this.bookmarksCoursesData.length
+      this.bookmarkNum = this.userBookmarkCourses.length
+      console.log(this.userBookmarkCourses)
     },
     toggleBookmark (item) {
       const clickId = item
