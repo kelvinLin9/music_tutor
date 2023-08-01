@@ -6,17 +6,30 @@
       <img src="../assets/images/logo_default_sm.png" alt="logo" class="d-block d-lg-none">
     </RouterLink>
     <!-- 手機板購物車 -->
-    <li class="nav-item position-relative fs-5 d-lg-none d-block ms-auto" 
+    <li class="nav-item position-relative fs-5 d-lg-none d-block ms-auto me-4" 
+        v-if="this.isMember === true"
+        @click="myCoursesState = 'bookmark'">
+      <RouterLink to="/MyCourses" class="nav-link"
+          :class="{ 'text-primary':  $route.name === 'MyCourses'}">
+        <i class="bi bi-bookmarks-fill me-lg-2"></i>
+        <div class="bg-danger text-white rounded-circle text-center position-absolute small-num-mobile"
+          v-if="userCart.cartNum">
+          {{ bookmarkNum }}
+        </div>
+      </RouterLink>
+    </li>
+    <li class="nav-item position-relative fs-5 d-lg-none d-block" 
         v-if="this.isMember === true">
       <RouterLink to="/CoursesCart" class="nav-link"
         :class="{ 'text-primary':  $route.name === 'CoursesCart'}">
         <i class="bi bi-cart-fill me-lg-2"></i>
-        <div class="bg-danger text-white rounded-circle text-center position-absolute cart-num-mobile"
+        <div class="bg-danger text-white rounded-circle text-center position-absolute small-num-mobile"
           v-if="userCart.cartNum">
           {{ userCart.cartNum }}
         </div>
       </RouterLink>
     </li>
+
 
     <button class="navbar-toggler ms-4" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -44,11 +57,23 @@
         </li>
           <!-- 登入後出現 -->
         <li class="nav-item position-relative fs-5 d-none d-lg-block" 
+            v-if="this.isMember === true"
+            @click="myCoursesState = 'bookmark'">
+          <RouterLink to="/MyCourses" class="nav-link"
+            :class="{ 'text-primary':  $route.name === 'MyCourses'}">
+            <i class="bi bi-bookmarks-fill me-lg-2"></i>
+            <div class="bg-danger text-white rounded-circle text-center position-absolute small-num"
+              v-if="userCart.cartNum">
+              {{ bookmarkNum }}
+            </div>
+          </RouterLink>
+        </li>
+        <li class="nav-item position-relative fs-5 d-none d-lg-block" 
             v-if="this.isMember === true">
           <RouterLink to="/CoursesCart" class="nav-link"
             :class="{ 'text-primary':  $route.name === 'CoursesCart'}">
             <i class="bi bi-cart-fill me-lg-2"></i>
-            <div class="bg-danger text-white rounded-circle text-center position-absolute cart-num"
+            <div class="bg-danger text-white rounded-circle text-center position-absolute small-num"
               v-if="userCart.cartNum">
               {{ userCart.cartNum }}
             </div>
@@ -107,11 +132,11 @@ import goStore from '@/stores/goStore'
 
 export default {
   computed: {
-    ...mapState(dataStore, ['user', 'isMember', 'userCart'])
+    ...mapState(dataStore, ['user', 'isMember', 'userCart', 'bookmarkNum']),
+    ...mapWritableState(dataStore, ['myCoursesState'])
   },
   methods: {
     ...mapActions(logInStore, ['signOut'])
-    
   },
   created () {
   }
@@ -120,14 +145,14 @@ export default {
 
 
 <style scoped>
-.cart-num {
+.small-num {
   width:20px;
   height: 20px;
   top: 3px;
   left: 20px;
   font-size: 12px;
 }
-.cart-num-mobile{
+.small-num-mobile{
   width:20px;
   height: 20px;
   top: 0px;
