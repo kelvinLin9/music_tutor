@@ -409,25 +409,19 @@ export default defineStore('dataStore', {
       myStudyCourses:[],
       myStudyCoursesDown:[],
       myCart:[],
+      payHistory:[],
       allStudyTime:0,
       myBookmarkCourses:[],
       myBookmarkTeacher:[],
     },
+    couponData:[],
     user:{},
     isMember: false,
     userTeacherCourses:[],
     userStudentCourses:[],
     userBookmarkCourses:[],
     userCartCourses:[],
-    userCart:{
-      total:0,
-      finalTotal:0,
-      cartNum:0,
-      coupon:{
-        "打到骨折" : 0.5
-      },
-      couponUse:''
-    }
+    
 
   }),
   actions: {
@@ -435,16 +429,15 @@ export default defineStore('dataStore', {
     // 註冊帳號後建立老師端學生端物件
     async SetFirebaseMemberData() {   
       console.log('Set Firebase Member')
-      const member = this.user.uid
       const identity1 = "teacher"
       const identity2 = "student"
-      await setDoc(doc(db, member , identity1), 
+      console.log(this.user.uid)
+      await setDoc(doc(db, this.user.uid , identity1), 
       this.teacherData);
-      await setDoc(doc(db, member , identity2), 
+      await setDoc(doc(db, this.user.uid , identity2), 
       this.studentData);
       alert('成功建立老師端學生端物件')
       this.copyUserDataToTeacher()
-      alert('成功複製用戶端資料')
     },
     // 開課後上傳課程
     async SetFirebaseCourseData() {   
@@ -457,9 +450,10 @@ export default defineStore('dataStore', {
       console.log(this.beATeacherData)
       await addDoc(collection(db, member), this.beATeacherData)
       alert('新增課程成功')
-      this.beATeacherData.uid = '',
-      this.beATeacherData.displayName = '',
-      this.beATeacherData.gender = '',
+      this.onAuthStateChanged()
+      this.beATeacherData.uid = ''
+      this.beATeacherData.displayName = ''
+      this.beATeacherData.gender = ''
       this.beATeacherData.courseImg = ''
       this.beATeacherData.teacherImg = ''
       this.beATeacherData.teacherIntro = ''
@@ -475,8 +469,13 @@ export default defineStore('dataStore', {
     async copyUserDataToTeacher() {
       this.teacherData.uid = this.user.uid 
       this.teacherData.email = this.user.email
-      this.teacherData.displayName = this.user.displayName
+      // this.teacherData.displayName = this.user.displayName
       this.teacherData.accountCreateTime = this.user.metadata.creationTime
+      console.log(this.teacherData)
+      const teacherRef = doc(db, this.user.uid, 'teacher')
+      await updateDoc(teacherRef, this.teacherData)
+      alert('成功複製用戶端資料')
+      router.push('/')
     },
 
 
@@ -501,16 +500,19 @@ export default defineStore('dataStore', {
       const CoursesRef = doc(db, 'MusicTutorCourses', id)
       await updateDoc(CoursesRef, this.courseData)
       alert('課程資料更新成功')
+      // this.onAuthStateChanged()
     },
     async UpdateFirebaseCartData() {
       const studentRef = doc(db, this.user.uid, 'student')
       await updateDoc(studentRef, this.studentData)
       alert('學生老師端資料更新成功')
+      // this.onAuthStateChanged()
     },
     async UpdateTeacherImg() {
       const teacherRef = doc(db, this.user.uid, 'teacher')
       await updateDoc(teacherRef, this.teacherData)
       alert('大頭照更新成功')
+      // this.onAuthStateChanged()
     },
 
 
@@ -566,6 +568,18 @@ export default defineStore('dataStore', {
       this.getUserStudentCourses()
       this.getUserCartCourses()
       this.getBookmarkCoursesData()
+      this.getCouponData()
+    },
+    async getCouponData() {
+      const docRef = doc(db, "MusicTutorCourses", 'coupon')
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        console.log(docSnap.data())
+        this.couponData = docSnap.data()
+        console.log("後台優惠券資料:", this.couponData);
+      } else {
+        console.log("No such OneCourses document!")
+      }
     },
     async getOneCoursesFirebaseData(courseId) {
       const docRef = doc(db, "MusicTutorCourses", courseId)
@@ -610,24 +624,14 @@ export default defineStore('dataStore', {
     getUserCartCourses() {
       this.userCartCourses = []
       this.studentData.myCart.forEach((item) => {
-        let warp = {}
-        warp = this.AllCoursesFirebaseData.filter((i) => {
+        let wrap = {}
+        wrap = this.AllCoursesFirebaseData.filter((i) => {
           return i.id === item.courseId
         })
-        warp.timestamp = item.timestamp
-        this.userCartCourses.push(warp)
+        wrap.timestamp = item.timestamp
+        this.userCartCourses.push(wrap)
       })
       console.log("用戶購物車內課程", this.userCartCourses)
-      this.calculateMyCart()
-    },
-    calculateMyCart() {
-      if(this.userCartCourses){
-        this.userCart.total = 0
-        this.userCartCourses.forEach((item) => {
-          this.userCart.total += parseInt(item[0].data.price)
-        })
-        this.userCart.cartNum = this.userCartCourses.length
-      }
     },
     getUserStudentCourses() {
       if(!this.studentData.userCourses) {
@@ -635,12 +639,12 @@ export default defineStore('dataStore', {
       } else {
         this.userStudentCourses = []
         this.studentData.userCourses.forEach((item) => {
-          let warp = {}
-          warp = this.AllCoursesFirebaseData.filter((i) => {
+          let wrap = {}
+          wrap = this.AllCoursesFirebaseData.filter((i) => {
             return i.id === item.courseId
           })
-          warp.timestamp = item.timestamp
-          this.userStudentCourses.push(warp)
+          wrap.timestamp = item.timestamp
+          this.userStudentCourses.push(wrap)
         })
         console.log("用戶學生端課程資料",this.userStudentCourses)
       }
@@ -721,7 +725,7 @@ export default defineStore('dataStore', {
         }
       })
       this.bookmarkNum = this.userBookmarkCourses.length
-      console.log('用戶收藏課程資料', this.bookmarkNum, this.userBookmarkCourses)
+      console.log('用戶收藏課程資料', this.userBookmarkCourses)
     },
     toggleBookmark (item) {
       const clickId = item

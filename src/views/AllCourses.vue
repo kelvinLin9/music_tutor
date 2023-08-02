@@ -234,7 +234,7 @@
             <div class="mb-1">
               <div class="row">
                 <div class="col-auto">NT$ {{ item.data.price }}</div>
-                <!-- <div class="col-auto"><i class="bi bi-people-fill me-2"></i>{{ item.data.whoBuy.length}}</div> -->
+                <div class="col-auto"><i class="bi bi-people-fill me-2"></i>{{ item.data.whoBuy.length}}</div>
               </div>
             </div>
           </div>
@@ -257,7 +257,7 @@ import goStore from '@/stores/goStore'
 export default {
   components: { PaginationCom },
   computed: {
-    ...mapState(dataStore, ['coursesData', 'bookmarkState', 'AllCoursesFirebaseData']),
+    ...mapState(dataStore, ['coursesData', 'bookmarkState', 'AllCoursesFirebaseData', 'onAuthStateChanged']),
     ...mapState(filterStore, ['filterData','courseMethod']),
     ...mapWritableState(filterStore, ['selectCityName', 'selectCourseCategory', 'selectCourseName','selectCourseMethod'])
   },
@@ -266,15 +266,14 @@ export default {
     ...mapActions(filterStore, ['selectCityNameCancel'])
   },
   created () {
-    this.getAllCoursesFirebaseData()
+    this.onAuthStateChanged()
   }
 }
 </script>
 
 <style lang="scss" scoped>
 .card-img-top { 
-  // width: 100%;
-  height: 150px;
+  height: 180px;
   object-fit: cover;
   transition: 0.5s;
 }

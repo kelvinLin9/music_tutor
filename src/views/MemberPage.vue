@@ -18,7 +18,7 @@
                 />
         </div>
         <div class="mb-2 fs-2">
-          {{ user.displayName }}
+          {{ teacherData.displayName }}
           <i :class="teacherData.gender"></i>
         </div>
         <div class="mb-2 w-100">
