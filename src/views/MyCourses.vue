@@ -250,7 +250,7 @@ export default {
   cursor:pointer;
 }
 .card-img-top { 
-  height: 150px;
+  height: 180px;
   object-fit: cover;
   transition: 0.5s;
 }
@@ -274,9 +274,6 @@ export default {
   z-index: 10;
 }
 .user-photo {
-  // width: 100px;
-  // height: 100px;
-  // border-radius: 50px;
   img {
     width: 100%;
     display: block;

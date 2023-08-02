@@ -140,7 +140,7 @@ export default {
   
   },
   methods: {
-    ...mapActions(dataStore, ['onAuthStateChanged' ,'toggleBookmark','getOneCoursesFirebaseData', 'getOneTeacherFirebaseData']),
+    ...mapActions(dataStore, ['onAuthStateChanged','toggleBookmark','getOneCoursesFirebaseData', 'getOneTeacherFirebaseData']),
     ...mapActions(goStore, ['goCheckoutPage']),
     ...mapActions(cartStore, ['addCart']),
     

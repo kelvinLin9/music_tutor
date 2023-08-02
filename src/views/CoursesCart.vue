@@ -1,70 +1,99 @@
 <template>
   <div class="container mt-3">
-    <div class="row" v-if="studentData.myCart.length !== 0">
-      <h1 class="my-3">購物車</h1>
-      <div class="col-12 col-lg-8 mx-auto border rounded-2">
-        <table class="table table-hover align-middle">
-          <thead>
-            <tr>
-              <th colspan="5">全選框</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="item in userCartCourses" :key="item.timestamp">
-              <td width="50" class="text-center">
-                勾選框
-              </td>
-              <td width="100"
-              @click="getOneCoursesFirebaseData(item[0].id)">
-                <img :src="item[0].data.courseImg" alt="" class="table-image cursor-pointer">
-              </td>
-              <td>
-                {{ item[0].data.displayName }}
-              </td>
-              <td class="">
-                NT$ {{ item[0].data.price }}
-              </td>
-              <td class="text-end">
-                <div class="cursor-pointer"
-                  @click="deleteCart(user.uid, item.timestamp)">
-                  可以刪除
-                </div>
-              </td>
-            </tr>
-          </tbody>
+    <div class="row">
+      <pay-com v-if="cartPageState === 'pay'" />
+      <cart-com v-if="cartPageState === 'cart'" />
 
-        </table>
-      </div>
-      <div class="col-12 col-lg-4">
+      <div class="col-12 col-lg-4"
+      v-if="cartPageState === 'cart'">
         <div class="card">
           <div class="card-header">
             <p>訂單明細</p>
           </div>
           <div class="card-body">
             <div class="d-flex justify-content-between">
-              <p>{{ userCart.cartNum }}件小計</p>
-              <p>NT$ {{ userCart.total }}</p>
+              <p>{{ cartCheckboxWrap.length }}件小計</p>
+              <p>NT$ {{ cartTotal() }}</p>
+            </div>
+            <div class="text-end fs-6 text-primary"
+                v-if="couponValue != 1">
+              <p>折扣 - {{ cartTotal() - cartTotal() * couponValue }}</p>
             </div>
             <div class="text-end fs-2">
-              <p>NT$ {{ userCart.total }}</p>
+              <p>NT$ {{ cartTotal() * couponValue }}</p>
             </div>
           </div>
           <div class="card-footer">
-            <div class="">
-              優惠碼之後再弄
+            <div class="row mb-2">
+              <div class="col-9">
+                <label for="coupon">折扣碼：</label>
+                <input class="col-form-label w-75" 
+                    type="text" 
+                    id="coupon"  
+                    name="coupon" 
+                    v-model="couponCode"> 
+                
+              </div>
+              <div class="col-3">
+                <button type="button" class="btn btn-secondary ms-auto d-block"
+                          @click="addCouponCode()">
+                    確認
+                </button>
+              </div>
+            </div>
+            <button type="button" class="btn btn-primary w-100"
+                    @click="addToPayWrap()">
+              來去結帳
+            </button>
+          </div>
+        </div>
+        試用折扣碼:2023666
+      </div>
+
+      <div class="col-12 col-lg-4"
+      v-if="cartPageState === 'pay'">
+        <div class="card">
+          <div class="card-header">
+            <p>訂單明細</p>
+          </div>
+          <div class="card-body">
+            <div class="d-flex justify-content-between">
+              <p>{{ payWrap.payData.length }}件小計</p>
+              <p>NT$ {{  payWrap.total }}</p>
+            </div>
+            <div class="text-end fs-6 text-primary"
+                v-if="couponValue != 1">
+              <p>折扣 - {{ payWrap.total - payWrap.total * couponValue }}</p>
+            </div>
+            <div class="text-end fs-2">
+              <p>NT$ {{  payWrap.total * couponValue }}</p>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="text-danger">
+              我已詳閱並同意〈服務契約〉及服務內容
             </div>
             <div>
               <button type="button" class="btn btn-primary w-100">
-                還不能來去結帳
+                同意並送出
               </button>
             </div>
           </div>
         </div>
       </div>
+
     </div>
-    <div class="text-center fs-1"
-      v-if="studentData.myCart.length === 0">購物車無任何品項</div>
-    </div>
+
+  </div>
+  
+    
+    {{ cartCheckboxWrap }}<br>
+    <!-- {{ cartTotal() }}<br> -->
+    <!-- {{ payWrap[0] }}<br> -->
+    <!-- {{ payWrap[1] }}<br> -->
+    {{ payWrap }}<hr>
+    {{ payWrap.payData }}<hr>
+
 </template>
 
 <script>
@@ -72,16 +101,18 @@ import { mapState, mapActions, mapWritableState } from
 'pinia' 
 import cartStore from '@/stores/cartStore'
 import dataStore from '@/stores/dataStore'
+import CartCom from '../components/CartCom.vue'
+import PayCom from '../components/PayCom.vue'
 
 export default {
+  components: { CartCom, PayCom },
   computed: {
-    ...mapWritableState(cartStore, ['','']),
-    ...mapWritableState(dataStore, ['studentData','user', 'userCartCourses', 'userCart']),
-    // ...mapState(dataStore, ['isMember','','teacherData','user']),
-
+    ...mapWritableState(cartStore, ['cartCheckboxWrap','payWrap', 'cartPageState', 'couponCode']),
+    ...mapWritableState(dataStore, ['studentData','user', 'userCartCourses', 'couponData']),
+    ...mapState(cartStore, ['cartTotal', 'couponValue'])
   },
   methods: {
-    ...mapActions(cartStore, ['deleteCart', '']),
+    ...mapActions(cartStore, ['deleteCart', 'addToPayWrap', 'addCouponCode']),
     ...mapActions(dataStore, ['onAuthStateChanged','getOneCoursesFirebaseData']),
   },
   created () {

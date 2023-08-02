@@ -14,6 +14,7 @@ import dataStore from '@/stores/dataStore'
 export default {
   computed: {
     ...mapState(dataStore, ['bookmarkState','user','teacherData']),
+    ...mapState(cartStore, ['payWrap'])
 
   },
   methods: {

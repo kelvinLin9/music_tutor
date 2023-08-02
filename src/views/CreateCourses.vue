@@ -35,7 +35,22 @@
 </template>
 
 <script>
+import { mapState, mapActions, mapWritableState } from 
+'pinia'  
+import dataStore from '@/stores/dataStore'
 
+export default {
+  computed: {
+  
+  },
+  methods: {
+    ...mapActions(dataStore, ['onAuthStateChanged']),
+  },
+  created () {
+    // 先不要
+    // this.onAuthStateChanged()
+  }
+}
 </script>
 
 <style lang="scss" scoped>
