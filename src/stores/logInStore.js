@@ -67,6 +67,7 @@ export default defineStore('logInStore', {
       myStudyCourses:[],
       myStudyCoursesDown:[],
       myCart:[],
+      payHistory:[],
       allStudyTime:0,
       myBookmarkCourses:[],
       myBookmarkTeacher:[],
@@ -111,19 +112,13 @@ export default defineStore('logInStore', {
       price: 0,
       timestamp:'',
     }
+    data.couponData=[]
     data.userTeacherCourses=[]
     data.userStudentCourses=[]
     data.userBookmarkCourses=[]
-    data.userCartCourses=[]
-    data.userCart={
-      total:0,
-      finalTotal:0,
-      cartNum:0,
-      coupon:{
-        "打到骨折" : 0.5
-      },
-      couponUse:''
-    }
+    data.userCartCourses=[],
+    
+
     router.push('/UserLogin')
     
    },
@@ -140,31 +135,28 @@ export default defineStore('logInStore', {
       alert(err.message)
     })
    },
+
+
    async signUp () {
     await createUserWithEmailAndPassword(auth, this.signUpForm.user.email, this.signUpForm.user.password)
     .then((res) => {
-      console.log(res)
-      this.logInPage = true
+      console.log(res.user)
+      data.user = res.user
+      // 只有用戶名要跟google登入用不同方式取得
+      data.teacherData.displayName = this.signUpForm.user.displayName
       alert('恭喜註冊成功')
-    })
-    .catch((err) => {
-      alert(err)
-    })  
-    // 更新自訂名字到user&清除暫存表單資料
-    updateProfile(auth.currentUser, {
-      displayName: this.signUpForm.user.displayName
-    }).then(() => { 
+      this.logInPage = true
       this.signUpForm.user.displayName = ''
       this.signUpForm.user.email = ''
       this.signUpForm.user.password = ''
       this.signUpForm.user.confirmation = ''
-      // 建立一份老師學生端物件上傳
       data.SetFirebaseMemberData()
-      router.push('/')
-    }).catch(() => {
-      // alert('更新名字失敗')
-    });
-   },
+    })
+    .catch((err) => {
+      alert(err)
+    })  
+  },
+
 
 
 
@@ -173,16 +165,20 @@ export default defineStore('logInStore', {
     signInWithPopup(auth, provider)
     .then((res) => {
       console.log(res.user)
-      router.push('/')
+      data.user = res.user
       data.isMember = true
       alert(res.user.uid + "登入成功")
       alert(`帳號創立時間${res.user.metadata.creationTime
       }`)
       alert(`上次登入時間${res.user.metadata.lastSignInTime}`)
+      
       // 判斷如果是第一次登入，建立一份老師學生端物件上傳
       if(res.user.metadata.creationTime === res.user.metadata.lastSignInTime) {
         console.log("第一次登入")
+        data.teacherData.displayName = res.user.displayName
         data.SetFirebaseMemberData()
+      } else {
+        router.push('/')
       }
     })
     .catch((err) => {
