@@ -131,13 +131,14 @@
               <ErrorMessage class="invalid-feedback" name="驗證密碼"/>
             </div>
             <div class="mb-3 d-flex justify-content-between">
-              <button type="submit" class="btn btn-sm btn-primary">
+
+              <button type="submit" class="btn btn-sm btn-primary w-25">
                 註冊
               </button>
               <!-- <button type="reset" class="btn btn-sm btn-danger">
                 重設
               </button> -->
-              <button type="button" class="btn btn-sm btn-primary me-2"
+              <button type="button" class="btn btn-sm btn-primary w-25"
                       @click="logInPage = true">
                 登入
               </button>

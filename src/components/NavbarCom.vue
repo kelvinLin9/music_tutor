@@ -24,8 +24,8 @@
         :class="{ 'text-primary':  $route.name === 'CoursesCart'}">
         <i class="bi bi-cart-fill me-lg-2"></i>
         <div class="bg-danger text-white rounded-circle text-center position-absolute small-num-mobile"
-          v-if="userCart.cartNum">
-          {{ userCart.cartNum }}
+          v-if="studentData.myCart.length">
+          {{ studentData.myCart.length }}
         </div>
       </RouterLink>
     </li>
@@ -74,8 +74,8 @@
             :class="{ 'text-primary':  $route.name === 'CoursesCart'}">
             <i class="bi bi-cart-fill me-lg-2"></i>
             <div class="bg-danger text-white rounded-circle text-center position-absolute small-num"
-              v-if="userCart.cartNum">
-              {{ userCart.cartNum }}
+              v-if="studentData.myCart.length">
+              {{ studentData.myCart.length }}
             </div>
           </RouterLink>
         </li>
@@ -86,7 +86,7 @@
                   :class="{ 'text-primary':  $route.name === 'UserLogin'}"
                   v-if="this.isMember === true">
             <i class="bi bi-person-circle me-2 fs-5"></i>
-            {{ user.displayName }}
+            {{ teacherData.displayName }}
           </button>
           <ul class="dropdown-menu dropdown-menu-end text-primary" aria-labelledby="dropdownLogin"
                   v-if="this.isMember === true">
@@ -132,7 +132,7 @@ import goStore from '@/stores/goStore'
 
 export default {
   computed: {
-    ...mapState(dataStore, ['user', 'isMember', 'userCart', 'bookmarkNum']),
+    ...mapState(dataStore, ['user','teacherData', 'isMember', 'studentData', 'bookmarkNum']),
     ...mapWritableState(dataStore, ['myCoursesState'])
   },
   methods: {
