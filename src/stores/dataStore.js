@@ -571,7 +571,7 @@ export default defineStore('dataStore', {
       this.getCouponData()
     },
     async getCouponData() {
-      const docRef = doc(db, "MusicTutorCourses", 'coupon')
+      const docRef = doc(db, "coupon", 'code')
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         console.log(docSnap.data())
