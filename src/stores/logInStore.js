@@ -175,7 +175,7 @@ export default defineStore('logInStore', {
     const provider = new GoogleAuthProvider()
     signInWithPopup(auth, provider)
     .then((res) => {
-      console.log(res.user)
+      // console.log(res.user)
       data.user = res.user
       data.isMember = true
       alert(res.user.uid + "登入成功")

@@ -17,10 +17,10 @@
             </div>
             <div class="text-end fs-6 text-primary"
                 v-if="couponValue != 1">
-              <p>折扣 - {{ cartTotal() - cartTotal() * couponValue }}</p>
+              <p>折扣 - {{ $filters.currency(cartTotal() - cartTotal() * couponValue) }}</p>
             </div>
             <div class="text-end fs-2">
-              <p>NT$ {{ cartTotal() * couponValue }}</p>
+              <p>NT$ {{ $filters.currency(cartTotal() * couponValue) }}</p>
             </div>
           </div>
           <div class="card-footer">
@@ -65,23 +65,23 @@
             </div>
             <div class="text-end fs-6 text-primary"
                 v-if="couponValue != 1">
-              <p>折扣 - {{ payWrap.total - payWrap.total * couponValue }}</p>
+              <p>折扣 - {{ $filters.currency(payWrap.total - payWrap.total * couponValue) }}</p>
             </div>
             <div class="text-end fs-2">
-              <p>NT$ {{  payWrap.total * couponValue }}</p>
+              <p>NT$ {{  $filters.currency(payWrap.total * couponValue) }}</p>
             </div>
           </div>
           <div class="card-footer">
-            <div class="text-danger">
+            <div class="text-danger mb-2">
               我已詳閱並同意〈服務契約〉及服務內容
             </div>
-            <div>
-              <button type="button" class="btn btn-secondary w-50"
+            <div class="row">
+              <button type="button" class="btn btn-secondary col-5"
                     @click="cartPageState = 'cart', 
                             payWrap.payData = []">
                 重新選擇
               </button>
-              <button type="button" class="btn btn-primary w-50"
+              <button type="button" class="btn btn-primary col-5 ms-auto"
                     @click="confirmToPay()">
                 同意並送出
               </button>
@@ -94,7 +94,7 @@
 
   </div>
   
-    
+    對應選到哪個<br>
     {{ cartCheckboxWrap }}<br>
     <!-- {{ cartTotal() }}<br> -->
     <!-- {{ payWrap[0] }}<br> -->
@@ -124,6 +124,7 @@ export default {
     ...mapActions(dataStore, ['onAuthStateChanged','getOneCoursesFirebaseData']),
   },
   created () {
+    this.cartPageState = 'cart'
     this.onAuthStateChanged()
   }
 }
