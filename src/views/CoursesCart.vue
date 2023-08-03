@@ -47,7 +47,9 @@
             </button>
           </div>
         </div>
-        試用折扣碼:2023666
+        試用折扣碼:<br>
+        2023666 (6折)<br>
+        hexschoolsogood (3折)
       </div>
 
       <div class="col-12 col-lg-4"
@@ -74,7 +76,13 @@
               我已詳閱並同意〈服務契約〉及服務內容
             </div>
             <div>
-              <button type="button" class="btn btn-primary w-100">
+              <button type="button" class="btn btn-secondary w-50"
+                    @click="cartPageState = 'cart', 
+                            payWrap.payData = []">
+                重新選擇
+              </button>
+              <button type="button" class="btn btn-primary w-50"
+                    @click="confirmToPay()">
                 同意並送出
               </button>
             </div>
@@ -94,6 +102,12 @@
     {{ payWrap }}<hr>
     {{ payWrap.payData }}<hr>
 
+    <hr>
+    <button type="button" class="btn btn-primary"
+      @click="confirmToPay()">
+      我要練習
+    </button>
+
 </template>
 
 <script>
@@ -112,7 +126,7 @@ export default {
     ...mapState(cartStore, ['cartTotal', 'couponValue'])
   },
   methods: {
-    ...mapActions(cartStore, ['deleteCart', 'addToPayWrap', 'addCouponCode']),
+    ...mapActions(cartStore, ['deleteCart', 'addToPayWrap', 'addCouponCode','confirmToPay']),
     ...mapActions(dataStore, ['onAuthStateChanged','getOneCoursesFirebaseData']),
   },
   created () {
