@@ -213,6 +213,7 @@
           </div>
         </div>
       </div>
+      {{  beATeacherData.courseMethod }}
       <div class="row justify-content-center mb-3">
         <div class="col-auto">
           <label for="cityName" class="col-form-label"

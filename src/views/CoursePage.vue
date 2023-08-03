@@ -87,7 +87,7 @@
         </div>
         <div class="d-flex justify-content-between">
           <button type="button" class="btn btn-outline-danger w-75"
-            @click="goCheckoutPage()">
+          @click="buyNow(user.uid, courseData.id)">
             立即購買
           </button>
           <button type="button" class="btn btn-danger"
@@ -141,7 +141,7 @@ export default {
   methods: {
     ...mapActions(dataStore, ['onAuthStateChanged','toggleBookmark','getOneCoursesFirebaseData', 'getOneTeacherFirebaseData']),
     ...mapActions(goStore, ['goCheckoutPage']),
-    ...mapActions(cartStore, ['addCart']),
+    ...mapActions(cartStore, ['addCart','buyNow']),
     
   },
   created () {

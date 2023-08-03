@@ -428,10 +428,8 @@ export default defineStore('dataStore', {
     // 上傳資料----------------------------------
     // 註冊帳號後建立老師端學生端物件
     async SetFirebaseMemberData() {   
-      console.log('Set Firebase Member')
       const identity1 = "teacher"
       const identity2 = "student"
-      console.log(this.user.uid)
       await setDoc(doc(db, this.user.uid , identity1), 
       this.teacherData);
       await setDoc(doc(db, this.user.uid , identity2), 
@@ -471,7 +469,6 @@ export default defineStore('dataStore', {
       this.teacherData.email = this.user.email
       // this.teacherData.displayName = this.user.displayName
       this.teacherData.accountCreateTime = this.user.metadata.creationTime
-      console.log(this.teacherData)
       const teacherRef = doc(db, this.user.uid, 'teacher')
       await updateDoc(teacherRef, this.teacherData)
       alert('成功複製用戶端資料')
@@ -574,7 +571,7 @@ export default defineStore('dataStore', {
       const docRef = doc(db, "coupon", 'code')
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
-        console.log(docSnap.data())
+        // console.log(docSnap.data())
         this.couponData = docSnap.data()
         console.log("後台優惠券資料:", this.couponData);
       } else {
@@ -634,11 +631,11 @@ export default defineStore('dataStore', {
       console.log("用戶購物車內課程", this.userCartCourses)
     },
     getUserStudentCourses() {
-      if(!this.studentData.userCourses) {
+      if(!this.studentData.myStudyCourses) {
         console.log('尚未購買課程')
       } else {
         this.userStudentCourses = []
-        this.studentData.userCourses.forEach((item) => {
+        this.studentData.myStudyCourses.forEach((item) => {
           let wrap = {}
           wrap = this.AllCoursesFirebaseData.filter((i) => {
             return i.id === item.courseId

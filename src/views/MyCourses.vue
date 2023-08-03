@@ -69,38 +69,40 @@
             title="加入 / 移除收藏"
             ></i>
           </div>
-          <div class="card-body">
+          <div class="card-body d-flex flex-column">
             <div class="mb-1"> {{ }}
               <span class="badge rounded-pill text-bg-danger test align-middle">{{ item[0].data.courseCategory }}</span>
               <span class="">&ensp;{{ item[0].data.courseName }}</span>   
             </div>
-            <div class="mb-1 text-primary">
-              by {{ item[0].data.displayName }}
-            </div>
-            <div class="mb-1">
-              <i class="bi bi-clock-fill"></i>
-              {{ item[0].data.time }}
-              <i class="bi bi-geo-alt-fill"></i>
-              {{ item[0].data.cityName }}
-            </div>
-            <div class="mb-1">
-              <span class="bg-info rounded-2 px-2 me-2"
-                    v-if="item[0].data.courseMethod[0]">
-                {{ item[0].data.courseMethod[0] }}
-              </span>
-              <span class="bg-info rounded-2 px-2 me-2"
-                    v-if="item[0].data.courseMethod[1]">
-                {{ item[0].data.courseMethod[0] }}
-              </span>
-              <span class="bg-info rounded-2 px-2 me-2"
-                    v-if="item[0].data.courseMethod[2]">
-                {{ item[0].data.courseMethod[2] }}
-              </span>
-            </div>
-            <div class="mb-1">
-              <div class="row">
-                <div class="col-auto">NT$ {{ item[0].data.price }}</div>
-                <div class="col-auto"><i class="bi bi-people-fill me-2"></i>{{ item[0].data.whoBuy.length}}</div>
+            <div class="mt-auto">
+              <div class="mb-1 text-primary">
+                by {{ item[0].data.displayName }}
+              </div>
+              <div class="mb-1">
+                <i class="bi bi-clock-fill"></i>
+                {{ item[0].data.time }}
+                <i class="bi bi-geo-alt-fill"></i>
+                {{ item[0].data.cityName }}
+              </div>
+              <div class="mb-1">
+                <span class="bg-info rounded-2 px-2 me-2"
+                      v-if="item[0].data.courseMethod[0]">
+                  {{ item[0].data.courseMethod[0] }}
+                </span>
+                <span class="bg-info rounded-2 px-2 me-2"
+                      v-if="item[0].data.courseMethod[1]">
+                  {{ item[0].data.courseMethod[1] }}
+                </span>
+                <span class="bg-info rounded-2 px-2 me-2"
+                      v-if="item[0].data.courseMethod[2]">
+                  {{ item[0].data.courseMethod[2] }}
+                </span>
+              </div>
+              <div class="mb-1">
+                <div class="row">
+                  <div class="col-auto">NT$ {{ item[0].data.price }}</div>
+                  <div class="col-auto"><i class="bi bi-people-fill me-2"></i>{{ item[0].data.whoBuy.length}}</div>
+                </div>
               </div>
             </div>
           </div>
@@ -126,38 +128,40 @@
             title="加入 / 移除收藏"
             ></i>
           </div>
-          <div class="card-body">
+          <div class="card-body d-flex flex-column">
             <div class="mb-1">
               <span class="badge rounded-pill text-bg-danger test align-middle">{{ item.data.courseCategory }}</span>
               <span class="">&ensp;{{ item.data.courseName }}</span>   
             </div>
-            <div class="mb-1 text-primary">
-              by {{ item.data.displayName }}
-            </div>
-            <div class="mb-1">
-              <i class="bi bi-clock-fill"></i>
-              {{ item.data.time }}
-              <i class="bi bi-geo-alt-fill"></i>
-              {{ item.data.cityName }}
-            </div>
-            <div class="mb-1">
-              <span class="bg-info rounded-2 px-2 me-2"
-                    v-if="item.data.courseMethod[0]">
-                {{ item.data.courseMethod[0] }}
-              </span>
-              <span class="bg-info rounded-2 px-2 me-2"
-                    v-if="item.data.courseMethod[1]">
-                {{ item.data.courseMethod[0] }}
-              </span>
-              <span class="bg-info rounded-2 px-2 me-2"
-                    v-if="item.data.courseMethod[2]">
-                {{ item.data.courseMethod[2] }}
-              </span>
-            </div>
-            <div class="mb-1">
-              <div class="row">
-                <div class="col-auto">NT$ {{ item.data.price }}</div>
-                <div class="col-auto"><i class="bi bi-people-fill me-2"></i>{{ item.data.whoBuy.length}}</div>
+            <div class="mt-auto">
+              <div class="mb-1 text-primary">
+                by {{ item.data.displayName }}
+              </div>
+              <div class="mb-1">
+                <i class="bi bi-clock-fill"></i>
+                {{ item.data.time }}
+                <i class="bi bi-geo-alt-fill"></i>
+                {{ item.data.cityName }}
+              </div>
+              <div class="mb-1">
+                <span class="bg-info rounded-2 px-2 me-2"
+                      v-if="item.data.courseMethod[0]">
+                  {{ item.data.courseMethod[0] }}
+                </span>
+                <span class="bg-info rounded-2 px-2 me-2"
+                      v-if="item.data.courseMethod[1]">
+                  {{ item.data.courseMethod[1] }}
+                </span>
+                <span class="bg-info rounded-2 px-2 me-2"
+                      v-if="item.data.courseMethod[2]">
+                  {{ item.data.courseMethod[2] }}
+                </span>
+              </div>
+              <div class="mb-1">
+                <div class="row">
+                  <div class="col-auto">NT$ {{ item.data.price }}</div>
+                  <div class="col-auto"><i class="bi bi-people-fill me-2"></i>{{ item.data.whoBuy.length}}</div>
+                </div>
               </div>
             </div>
           </div>
@@ -183,38 +187,40 @@
             title="加入 / 移除收藏"
             ></i>
           </div>
-          <div class="card-body">
+          <div class="card-body d-flex flex-column">
             <div class="mb-1">
               <span class="badge rounded-pill text-bg-danger test align-middle">{{ item.data.courseCategory }}</span>
               <span class="">&ensp;{{ item.data.courseName }}</span>   
             </div>
-            <div class="mb-1 text-primary">
-              by {{ item.data.displayName }}
-            </div>
-            <div class="mb-1">
-              <i class="bi bi-clock-fill"></i>
-              {{ item.data.time }}
-              <i class="bi bi-geo-alt-fill"></i>
-              {{ item.data.cityName }}
-            </div>
-            <div class="mb-1">
-              <span class="bg-info rounded-2 px-2 me-2"
-                    v-if="item.data.courseMethod[0]">
-                {{ item.data.courseMethod[0] }}
-              </span>
-              <span class="bg-info rounded-2 px-2 me-2"
-                    v-if="item.data.courseMethod[1]">
-                {{ item.data.courseMethod[0] }}
-              </span>
-              <span class="bg-info rounded-2 px-2 me-2"
-                    v-if="item.data.courseMethod[2]">
-                {{ item.data.courseMethod[2] }}
-              </span>
-            </div>
-            <div class="mb-1">
-              <div class="row">
-                <div class="col-auto">NT$ {{ item.data.price }}</div>
-                <div class="col-auto"><i class="bi bi-people-fill me-2"></i>{{ item.data.whoBuy.length}}</div>
+            <div class="mt-auto">
+              <div class="mb-1 text-primary">
+                by {{ item.data.displayName }}
+              </div>
+              <div class="mb-1">
+                <i class="bi bi-clock-fill"></i>
+                {{ item.data.time }}
+                <i class="bi bi-geo-alt-fill"></i>
+                {{ item.data.cityName }}
+              </div>
+              <div class="mb-1">
+                <span class="bg-info rounded-2 px-2 me-2"
+                      v-if="item.data.courseMethod[0]">
+                  {{ item.data.courseMethod[0] }}
+                </span>
+                <span class="bg-info rounded-2 px-2 me-2"
+                      v-if="item.data.courseMethod[1]">
+                  {{ item.data.courseMethod[1] }}
+                </span>
+                <span class="bg-info rounded-2 px-2 me-2"
+                      v-if="item.data.courseMethod[2]">
+                  {{ item.data.courseMethod[2] }}
+                </span>
+              </div>
+              <div class="mb-1">
+                <div class="row">
+                  <div class="col-auto">NT$ {{ item.data.price }}</div>
+                  <div class="col-auto"><i class="bi bi-people-fill me-2"></i>{{ item.data.whoBuy.length}}</div>
+                </div>
               </div>
             </div>
           </div>
