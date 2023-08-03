@@ -87,7 +87,7 @@
         </div>
         <div class="d-flex justify-content-between">
           <button type="button" class="btn btn-outline-danger w-75"
-            @click="goCheckoutPage(),buyNowData.id = courseData.id ,buyNowData.uid = user.uid">
+            @click="goCheckoutPage()">
             立即購買
           </button>
           <button type="button" class="btn btn-danger"
@@ -136,7 +136,6 @@ export default {
   computed: {
     ...mapState(dataStore, ['bookmarkState','user','teacherData']),
     ...mapWritableState(dataStore, ['courseData']),
-    ...mapWritableState(cartStore, ['buyNowData'])
   
   },
   methods: {

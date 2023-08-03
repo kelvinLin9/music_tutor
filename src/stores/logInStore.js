@@ -10,10 +10,11 @@ import { getAuth,
          signOut
         } from 'firebase/auth'
 import dataStore from './dataStore';
-
+import cartStore from './cartStore';
 
 const auth = getAuth();
 const data = dataStore()
+const cart = cartStore()
 
 export default defineStore('logInStore', {
   state: () => ({
@@ -117,6 +118,16 @@ export default defineStore('logInStore', {
     data.userStudentCourses=[]
     data.userBookmarkCourses=[]
     data.userCartCourses=[],
+    // 購物車
+    cart.couponCode = '',
+    cart.couponValue = 1,
+    cart.cartCheckboxWrap = [],
+    cart.payWrap = {
+      payData:[],
+      total:0,
+      finalTotal:0,
+      couponUse:''
+    }
     
 
     router.push('/UserLogin')

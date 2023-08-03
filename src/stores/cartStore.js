@@ -11,17 +11,12 @@ export default defineStore('cartStore', {
     cartPageState: 'cart',
     couponCode:'',
     couponValue:1,
-    buyNowData:{
-      uid:'',
-      id:'',
-      coupon:''
-    },
     cartCheckboxWrap: [],
     payWrap:{
       payData:[],
       total:0,
       finalTotal:0,
-      couponUse:{} 
+      couponUse:''
     }
 
   }),
@@ -83,54 +78,122 @@ export default defineStore('cartStore', {
           this.payWrap.payData.push(wrap)
         })
         this.payWrap.total = total
-        this.cartCheckboxWrap = []
+        this.payWrap.finalTotal = total * this.couponValue
       }
     },
     addCouponCode () {
-      alert(this.couponCode)
-      for (let i in data.couponData.code){
+      for (let i in data.couponData){
         console.log(i)
-        console.log(data.couponData.code[i])
+        console.log(data.couponData[i])
         if (this.couponCode === i) {
           alert('成功加入折扣碼')
-          this.couponValue = data.couponData.code[i]
+          this.couponValue = data.couponData[i]
+          this.payWrap.couponUse = i
           return
         }
       }
       alert('折扣碼不存在')
     },
 
+    async confirmToPay() {
+      alert('go')
+      // 1. 新增歷史付款資訊(買的人)
+      const wrap = { 
+        timestamp : new Date().getTime(),
+        payData: this.payWrap,
+      }
+      const cart = doc(db, data.user.uid, 'student');
 
-
-
-    async buyNow() {
-      console.log(this.buyNowData.id, this.buyNowData.uid)
-      // 買的人的學生端課程+1
-      const wrap = { timestamp : new Date().getTime(),
-        courseId : this.buyNowData.id }
-      const cart = doc(db, this.buyNowData.uid, 'student');
       await updateDoc(cart, {
-        userCourses: arrayUnion(wrap)
-      });
-      // 該課程購買人數+1
-      const wrap2 = { timestamp : new Date().getTime(),
-        uid : this.buyNowData.id }
-      const cart2 = doc(db, "MusicTutorCourses", this.buyNowData.id);
-      await updateDoc(cart2, {
-        whoBuy: arrayUnion(wrap2)
-      });
-      alert('成功購買課程')
-      //該課程購買名單添加
-      this.buyNowData.id = ''
-      this.buyNowData.uid = ''
+        payHistory: arrayUnion(wrap)
+      })
+
+
+      // 2. 新增到學生課程的部分(買的人)
+      alert(this.payWrap.payData.length)
+      for (let i = 0; i < this.payWrap.payData.length; i++) {
+        console.log('2', this.payWrap.payData[i].courseId)
+        let wrap2 = { 
+        timestamp : new Date().getTime(),
+        courseId: this.payWrap.payData[i].courseId,
+        }
+        // console.log(wrap2)
+        await updateDoc(cart, {
+          userCourses: arrayUnion(wrap2)
+        })
+      }
+
+
+      // 3. 新增到學生課程的部分(賣的人)
+      for (let i = 0; i < this.payWrap.payData.length; i++) {
+        console.log('3', this.payWrap.payData[i].courseId)
+        const cart3 = doc(db, "MusicTutorCourses", this.payWrap.payData[i].courseId);
+        let wrap3 = { 
+          timestamp : new Date().getTime(),
+          uid : data.user.uid ,
+          }
+        await updateDoc(cart3, {
+          whoBuy: arrayUnion(wrap3)
+        })
+      }
+      // 4. 從購物車移除的部分
+
+
+
+      alert('開始刪除購物車項目')
+      const cart4 = doc(db, data.user.uid, 'student')
+      for (let i = 0; i < this.cartCheckboxWrap.length; i++) {
+        await updateDoc(cart4, {
+          myCart: arrayRemove(data.studentData.myCart[this.cartCheckboxWrap[i]])
+        })
+      }
+      alert('成功刪除購物車項目')
       
+      // 5. 結帳完記得清空所有暫存資料
+      this.cartPageState =  'cart',
+      this.couponCode = '',
+      this.couponValue = 1,
+      this.cartCheckboxWrap =  [],
+      this.payWrap = {
+        payData:[],
+        total:0,
+        finalTotal:0,
+        couponUse:''
+      }
+      alert('成功完成付款')
       data.onAuthStateChanged()
-      router.push('/')
-    }
+    },
+
+
+
+    // async buyNow() {
+    //   console.log(this.buyNowData.id, this.buyNowData.uid)
+    //   // 買的人的學生端課程+1
+    //   const wrap = { timestamp : new Date().getTime(),
+    //     courseId : this.buyNowData.id }
+    //   const cart = doc(db, this.buyNowData.uid, 'student');
+    //   await updateDoc(cart, {
+    //     userCourses: arrayUnion(wrap)
+    //   });
+    //   // 該課程購買人數+1
+    //   const wrap2 = { timestamp : new Date().getTime(),
+    //     uid : this.buyNowData.id }
+    //   const cart2 = doc(db, "MusicTutorCourses", this.buyNowData.id);
+    //   await updateDoc(cart2, {
+    //     whoBuy: arrayUnion(wrap2)
+    //   });
+    //   alert('成功購買課程')
+    //   //該課程購買名單添加
+    //   this.buyNowData.id = ''
+    //   this.buyNowData.uid = ''
+      
+    //   data.onAuthStateChanged()
+    //   router.push('/')
+    // }
   },
   getters: {
     cartTotal () {
-      console.log(data.userCartCourses)
+      // console.log(data.userCartCourses)
       return () => {
         let total = 0
         this.cartCheckboxWrap.forEach((item) => {

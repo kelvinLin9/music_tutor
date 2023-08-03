@@ -33,7 +33,7 @@ export default {
     ...mapActions(dataStore, ['onAuthStateChanged','getOneCoursesFirebaseData']),
   },
   created () {
-    this.onAuthStateChanged()
+    // this.onAuthStateChanged()
   }
 }
 </script>
