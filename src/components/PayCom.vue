@@ -1,6 +1,7 @@
 <template>
-  <h1 class="my-3">結帳清單</h1>
+  
   <div class="col-12 col-lg-8 mx-auto border rounded-2">
+    <h1 class="my-3">結帳清單</h1>
     <table class="table table-hover align-middle">
       <tbody>
         <tr v-for="item, index in payWrap.payData " :key="index">
