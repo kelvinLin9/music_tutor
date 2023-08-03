@@ -1,11 +1,11 @@
 <template>
-  <h1 class="my-3">購物車</h1>
   <div class="text-center fs-1"
       v-if="studentData.myCart.length === 0">
       購物車無任何品項
   </div>
   <div class="col-12 col-lg-8 mx-auto border rounded-2"
         v-if="studentData.myCart.length !== 0">
+    <h1 class="my-3">購物車</h1>
     <table class="table table-hover align-middle">
       <thead>
         <tr>
@@ -44,6 +44,8 @@
     
     </table>
   </div>
+
+  
 </template>
 
 <script>

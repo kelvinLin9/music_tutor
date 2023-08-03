@@ -5,7 +5,7 @@
       <cart-com v-if="cartPageState === 'cart'" />
 
       <div class="col-12 col-lg-4"
-      v-if="cartPageState === 'cart'">
+        v-if="cartPageState === 'cart' && studentData.myCart.length !== 0">
         <div class="card">
           <div class="card-header">
             <p>訂單明細</p>
@@ -53,7 +53,7 @@
       </div>
 
       <div class="col-12 col-lg-4"
-      v-if="cartPageState === 'pay'">
+            v-if="cartPageState === 'pay'">
         <div class="card">
           <div class="card-header">
             <p>訂單明細</p>
@@ -99,14 +99,8 @@
     <!-- {{ cartTotal() }}<br> -->
     <!-- {{ payWrap[0] }}<br> -->
     <!-- {{ payWrap[1] }}<br> -->
-    {{ payWrap }}<hr>
-    {{ payWrap.payData }}<hr>
-
-    <hr>
-    <button type="button" class="btn btn-primary"
-      @click="confirmToPay()">
-      我要練習
-    </button>
+    <!-- {{ payWrap }}<hr>
+    {{ payWrap.payData }}<hr> -->
 
 </template>
 
