@@ -1,6 +1,6 @@
 <template>
-  <h1> {{ otherTeacherData.displayName }} 老師的頁面</h1>
   <div class="container">
+    <h1> {{ otherTeacherData.displayName }} 老師的頁面</h1>
     <div class="row test">
       <div class="col-12 col-md-4 d-flex flex-column justify-content-center align-items-center mt-3">
         <div class="user-photo position-relative">
@@ -23,7 +23,7 @@
           <i :class="otherTeacherData.gender"></i>
         </div>
         <div class="mb-2 w-100">
-          <i class="bi bi-envelope-fill"></i>：{{ user.email }}
+          <i class="bi bi-envelope-fill"></i>：{{ otherTeacherData.email }}
         </div>
         <div class="mb-2 w-100">
           <i class="bi bi-telephone-fill"></i>：{{ otherTeacherData.phoneNumber }}
