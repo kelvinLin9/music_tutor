@@ -21,6 +21,7 @@ export default defineStore('cartStore', {
 
   }),
   actions: {
+    // 單一課程頁面用--------------------------
     async addCart(uid, id) {
       // 加入時間戳，方便區分同商品
       const wrap = { timestamp : new Date().getTime(),
@@ -33,37 +34,55 @@ export default defineStore('cartStore', {
       alert('成功加入購物車')
       data.onAuthStateChanged()
     },
-    async deleteCart(uid, dTimestamp , index){
-      console.log(uid,dTimestamp, index)
-      // 刪除購物車資料前，要順便刪除佔存陣列的內容，才不會渲染出問題
-      const num = this.cartCheckboxWrap.findIndex((item) => {
-        // console.log(item)
-        // console.log(index)
-        return item === index
-      })
-      console.log(num)
-      this.cartCheckboxWrap.splice(num, 1)
+    async buyNow(uid, id) {
+      // 加入時間戳，方便區分同商品
+      const wrap = { timestamp : new Date().getTime(),
+        courseId : id}
+      console.log(wrap)
+      const cart = doc(db, uid, 'student');
+      await updateDoc(cart, {
+      myCart: arrayUnion(wrap)
+      });
+      alert('成功加入購物車')
+      router.push('/CoursesCart')
 
-      // // 透過timestamp找出要刪的檔
-      // const course = data.studentData.myCart.filter((item) => {
-      //   return item.timestamp === dTimestamp
-      // })
-      // console.log('要刪的檔', course[0])
-      // const cart = doc(db, uid, 'student');
-      // await updateDoc(cart, {
-      //   myCart: arrayRemove(course[0])
-      // });
-      // alert('成功刪除購物車項目')
-      // alert(this.cartTotal())
-      // data.onAuthStateChanged()
     },
 
+    // 購物車頁面用---------------------------
+    async deleteCart(uid, dTimestamp , index){
+      console.log(uid,dTimestamp, index)
+      // 刪除購物車資料前，要順便刪除佔存陣列的內容，才不會渲染出問題(保留找問題)
+      // const num = this.cartCheckboxWrap.findIndex((item) => {
+      //   return item === index
+      // })
+      // console.log(num)
+      // this.cartCheckboxWrap.splice(num, 1)
+
+      // 暫時先全刪
+
+      this.cartCheckboxWrap = []
+
+      // 透過timestamp找出要刪的檔
+      const course = data.studentData.myCart.filter((item) => {
+        return item.timestamp === dTimestamp
+      })
+      console.log('要刪的檔', course[0])
+      const cart = doc(db, uid, 'student');
+      await updateDoc(cart, {
+        myCart: arrayRemove(course[0])
+      });
+      alert('成功刪除購物車項目')
+      data.onAuthStateChanged()
+    },
+    // 新增資料進到結帳頁面
     addToPayWrap() {
       if (this.cartCheckboxWrap.length === 0) {
         alert('請選擇結帳項目')
       } else {
         this.cartPageState = 'pay'
         let total = 0
+
+        // 先重算一次給結帳頁面，之後看能不能跟getter合併
         this.cartCheckboxWrap.forEach((item) => {
           total += parseInt(data.userCartCourses[item][0].data.price)
           let wrap = {
@@ -78,7 +97,7 @@ export default defineStore('cartStore', {
           this.payWrap.payData.push(wrap)
         })
         this.payWrap.total = total
-        this.payWrap.finalTotal = total * this.couponValue
+        this.payWrap.finalTotal = Math.trunc(total * this.couponValue)
       }
     },
     addCouponCode () {
@@ -96,7 +115,7 @@ export default defineStore('cartStore', {
     },
 
     async confirmToPay() {
-      alert('go')
+      alert('新增歷史付款資訊')
       // 1. 新增歷史付款資訊(買的人)
       const wrap = { 
         timestamp : new Date().getTime(),
@@ -110,7 +129,7 @@ export default defineStore('cartStore', {
 
 
       // 2. 新增到學生課程的部分(買的人)
-      alert(this.payWrap.payData.length)
+      alert('新增到學生課程')
       for (let i = 0; i < this.payWrap.payData.length; i++) {
         console.log('2', this.payWrap.payData[i].courseId)
         let wrap2 = { 
@@ -119,12 +138,13 @@ export default defineStore('cartStore', {
         }
         // console.log(wrap2)
         await updateDoc(cart, {
-          userCourses: arrayUnion(wrap2)
+          myStudyCourses: arrayUnion(wrap2)
         })
       }
 
 
       // 3. 新增到學生課程的部分(賣的人)
+      alert('新增到該課程購買名單')
       for (let i = 0; i < this.payWrap.payData.length; i++) {
         console.log('3', this.payWrap.payData[i].courseId)
         const cart3 = doc(db, "MusicTutorCourses", this.payWrap.payData[i].courseId);
@@ -136,19 +156,16 @@ export default defineStore('cartStore', {
           whoBuy: arrayUnion(wrap3)
         })
       }
+
+    
       // 4. 從購物車移除的部分
-
-
-
-      alert('開始刪除購物車項目')
+      alert('刪除購物車項目')
       const cart4 = doc(db, data.user.uid, 'student')
       for (let i = 0; i < this.cartCheckboxWrap.length; i++) {
         await updateDoc(cart4, {
           myCart: arrayRemove(data.studentData.myCart[this.cartCheckboxWrap[i]])
         })
       }
-      alert('成功刪除購物車項目')
-      
       // 5. 結帳完記得清空所有暫存資料
       this.cartPageState =  'cart',
       this.couponCode = '',
@@ -163,33 +180,10 @@ export default defineStore('cartStore', {
       alert('成功完成付款')
       data.onAuthStateChanged()
     },
+    checkAll() {
+      alert('ya')
+    }
 
-
-
-    // async buyNow() {
-    //   console.log(this.buyNowData.id, this.buyNowData.uid)
-    //   // 買的人的學生端課程+1
-    //   const wrap = { timestamp : new Date().getTime(),
-    //     courseId : this.buyNowData.id }
-    //   const cart = doc(db, this.buyNowData.uid, 'student');
-    //   await updateDoc(cart, {
-    //     userCourses: arrayUnion(wrap)
-    //   });
-    //   // 該課程購買人數+1
-    //   const wrap2 = { timestamp : new Date().getTime(),
-    //     uid : this.buyNowData.id }
-    //   const cart2 = doc(db, "MusicTutorCourses", this.buyNowData.id);
-    //   await updateDoc(cart2, {
-    //     whoBuy: arrayUnion(wrap2)
-    //   });
-    //   alert('成功購買課程')
-    //   //該課程購買名單添加
-    //   this.buyNowData.id = ''
-    //   this.buyNowData.uid = ''
-      
-    //   data.onAuthStateChanged()
-    //   router.push('/')
-    // }
   },
   getters: {
     cartTotal () {

@@ -39,10 +39,12 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import "./assets/scss/all.scss";
 
 
-
 //firebase
-
 import { initializeApp } from 'firebase/app';
+
+
+import { currency } from './methods/filters'
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyBurMB5RDdvNOV8jMh0M6zi4gNx8r5xNyU",
@@ -64,6 +66,11 @@ initializeApp(firebaseConfig)
 
 
 const app = createApp(App)
+
+app.config.globalProperties.$filters = {
+  currency
+}
+
 
 app.use(createPinia())
 app.use(router)
