@@ -83,7 +83,7 @@
         <h4 class="border-bottom pb-2">購買單堂課程</h4>
         <div class="mb-3">
           <span class="fs-5 me-1">售價</span>
-          <span class="fs-1">NT${{ courseData.price }}</span> 
+          <span class="fs-1">NT${{ $filters.currency(courseData.price) }}</span> 
         </div>
         <div class="d-flex justify-content-between">
           <button type="button" class="btn btn-outline-danger w-75"

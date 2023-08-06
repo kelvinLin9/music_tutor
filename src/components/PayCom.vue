@@ -10,7 +10,7 @@
             {{ item.courseName }}
           </td>
           <td class="">
-            NT$ {{ item.price }}
+            NT$ {{ $filters.currency(item.price) }}
           </td>
         </tr>
       </tbody>
