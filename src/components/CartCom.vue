@@ -16,8 +16,9 @@
                 id="checkAll" 
                 name="checkAll"
                 value=""
-                @click="checkAll()"> 
-              <label for="checkAll" class="text-danger fs-5">全選(還不能用)</label>
+                @click="checkAll()"
+                v-model="checkAllValue"> 
+              <label for="checkAll" class="text-danger fs-5">全選</label>
             </div>
           </th>
         </tr>
@@ -40,15 +41,15 @@
             <img :src="item[0].data.courseImg" alt="" class="table-image cursor-pointer">
           </td>
           <td>
-            {{ item[0].data.courseName }} {{ item.timestamp }}
+            {{ item[0].data.courseName }}
           </td>
           <td class="">
-            NT$ {{ item[0].data.price }}
+            NT$ {{ $filters.currency(item[0].data.price) }}
           </td>
           <td class="text-end">
             <div class="cursor-pointer"
               @click="deleteCart(user.uid, item.timestamp, index)">
-              <i class="bi bi-trash3-fill"></i> {{ index }}
+              <i class="bi bi-trash3-fill"></i>
             </div>
           </td>
         </tr>
@@ -68,7 +69,7 @@ import dataStore from '@/stores/dataStore'
 
 export default {
   computed: {
-    ...mapWritableState(cartStore, ['cartCheckboxWrap','payWrap']),
+    ...mapWritableState(cartStore, ['cartCheckboxWrap','payWrap', 'checkAllValue']),
     ...mapWritableState(dataStore, ['studentData','user', 'userCartCourses','couponData']),
     ...mapState(cartStore, ['cartTotal'])
   },

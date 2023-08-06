@@ -11,6 +11,7 @@ export default defineStore('cartStore', {
     cartPageState: 'cart',
     couponCode:'',
     couponValue:1,
+    checkAllValue:false,
     cartCheckboxWrap: [],
     payWrap:{
       payData:[],
@@ -178,16 +179,22 @@ export default defineStore('cartStore', {
         couponUse:''
       }
       alert('成功完成付款')
+      router.push('/AllCourses')
       data.onAuthStateChanged()
     },
     checkAll() {
-      alert('ya')
+      if(!this.checkAllValue){
+        data.userCartCourses.forEach((item,index) => {
+          this.cartCheckboxWrap.push(index)
+        })
+      } else {
+        this.cartCheckboxWrap = []
+      }
     }
 
   },
   getters: {
     cartTotal () {
-      // console.log(data.userCartCourses)
       return () => {
         let total = 0
         this.cartCheckboxWrap.forEach((item) => {
