@@ -299,13 +299,13 @@ $cyans: (
 
 // scss-docs-start theme-color-variables
 $primary:       rgba(168, 128, 48, 1)  !default;
-$secondary:     #6C757D !default;
-$success:       #69CB5C !default;
-$info:          #90F1EF !default;
-$warning:       #FFC107 !default;
-$danger:        #DC3545 !default;
+$secondary:     rgba(108, 117, 125, 1) !default;
+$success:       rgba(25, 135, 84, 1) !default;
+$info:          rgba(13, 202, 240, 1) !default;
+$warning:       rgba(255, 193, 7, 1) !default;
+$danger:        rgba(220, 53, 69, 1) !default;
 $light:         $gray-100 !default;
-$dark:          $gray-900 !default;
+$dark:          rgba(37, 32, 22, 1);
 // scss-docs-end theme-color-variables
 
 // scss-docs-start theme-colors-map
@@ -321,8 +321,6 @@ $theme-colors: (
   "blue":       $blue,
   "pink":       $pink,
   "teal":       $teal,
-  "purple":     $purple,
-  "red":        $red,
 ) !default;
 // scss-docs-end theme-colors-map
 
@@ -650,7 +648,9 @@ $font-sizes: (
   3: $h3-font-size,
   4: $h4-font-size,
   5: $h5-font-size,
-  6: $h6-font-size
+  6: $h6-font-size,
+  28: 28px,
+  30: 30px,
 ) !default;
 // scss-docs-end font-sizes
 
@@ -845,7 +845,8 @@ $btn-link-hover-color:        var(--#{$prefix}link-hover-color) !default;
 $btn-link-disabled-color:     $gray-600 !default;
 
 // Allows for customizing button radius independently from global border radius
-$btn-border-radius:           var(--#{$prefix}border-radius) !default;
+// $btn-border-radius:           var(--#{$prefix}border-radius) !default;
+$btn-border-radius:           0;
 $btn-border-radius-sm:        var(--#{$prefix}border-radius-sm) !default;
 $btn-border-radius-lg:        var(--#{$prefix}border-radius-lg) !default;
 
