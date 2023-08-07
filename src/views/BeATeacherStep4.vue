@@ -3,6 +3,7 @@
     <div class="row text-center">
       <div class="col-12">
         <h1>恭喜完成開課</h1>
+        <p>課程審核需要2~3個工作天</p>
       </div>
     </div>
     <div class="row justify-content-center mt-5">

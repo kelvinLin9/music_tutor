@@ -13,7 +13,7 @@
           <div class="card-body">
             <div class="d-flex justify-content-between">
               <p>{{ cartCheckboxWrap.length }}件小計</p>
-              <p>NT$ {{ cartTotal() }}</p>
+              <p>NT$ {{ $filters.currency(cartTotal()) }}</p>
             </div>
             <div class="text-end fs-6 text-primary"
                 v-if="couponValue != 1">
@@ -61,7 +61,7 @@
           <div class="card-body">
             <div class="d-flex justify-content-between">
               <p>{{ payWrap.payData.length }}件小計</p>
-              <p>NT$ {{  payWrap.total }}</p>
+              <p>NT$ {{  $filters.currency(payWrap.total) }}</p>
             </div>
             <div class="text-end fs-6 text-primary"
                 v-if="couponValue != 1">

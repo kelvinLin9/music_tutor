@@ -190,7 +190,7 @@
     </div>
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-2">
       <div class="col"
-      v-for="item in AllCoursesFirebaseData" :key="item.id">
+            v-for="item in AllCoursesFirebaseData" :key="item.id">
         <div class="card rounded-3 scale h-100"
         @click="getOneCoursesFirebaseData(item.id)">
           <div class="card-img overflow-hidden position-relative">
@@ -283,9 +283,6 @@ export default {
 .scale{
   cursor:pointer;
   &:hover{
-    .btn{
-      opacity: 1;
-    }
     img{
       transform: scale(1.15);
     }
