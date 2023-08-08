@@ -11,8 +11,10 @@ export default defineStore('filterStore', {
     selectCityName: '',
     selectCourseCategory: '',
     selectCourseName: '',
-    courseMethod: ['在學生家', '在老師家', '線上'],
-    selectCourseMethod: ''
+    courseMethod: ['在學生家', '在老師家', '線上'], // 下拉選單用
+    selectCourseMethod: '',
+    sortMethod: ['依新舊', '依人氣', '依金額'], // 下拉選單用
+    selectSortMethod: '',
   }),
   actions: {
     selectCityNameCancel () {
@@ -20,17 +22,34 @@ export default defineStore('filterStore', {
       if (this.selectCourseMethod === '') {
         this.selectCityName = ''
       }
+    },
+    courseSort () {
+      console.log(this.selectSortMethod)
+      if (this.selectSortMethod === '依金額') {
+        data.AllCoursesFirebaseData.sort((a,b)  => {
+          return b.data.price - a.data.price
+        }) 
+      } else if (this.selectSortMethod === '依新舊') {
+        data.AllCoursesFirebaseData.sort((a,b)  => {
+          return b.createdTime - a.createdTime
+        }) 
+      } else if (this.selectSortMethod === '依人氣') {
+        data.AllCoursesFirebaseData.sort((a,b)  => {
+          return b.data.whoBuy.length - a.data.whoBuy.length
+        }) 
+      } 
     }
   },
   getters: {
     filterData () {
+      console.log('filter')
       if (this.selectCourseMethod === '') {
-        return data.coursesData.filter((item) => {
-          return item.cityName.match(this.selectCityName) && item.courseCategory.match(this.selectCourseCategory) && item.courseName.match(this.selectCourseName) 
+        return data.AllCoursesFirebaseData.filter((item) => {
+          return item.data.cityName.match(this.selectCityName) && item.data.courseCategory.match(this.selectCourseCategory) && item.data.courseName.match(this.selectCourseName) 
         }) 
       } else {
-        return data.coursesData.filter((item) => {
-          return item.cityName.match(this.selectCityName) && item.courseCategory.match(this.selectCourseCategory) && item.courseName.match(this.selectCourseName) && item.courseMethod.includes(this.selectCourseMethod)
+        return data.AllCoursesFirebaseData.filter((item) => {
+          return item.data.cityName.match(this.selectCityName) && item.data.courseCategory.match(this.selectCourseCategory) && item.data.courseName.match(this.selectCourseName) && item.data.courseMethod.includes(this.selectCourseMethod)
         })
       }
     },

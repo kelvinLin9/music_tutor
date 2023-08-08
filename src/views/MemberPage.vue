@@ -34,15 +34,15 @@
           </p>
         </div>
         <div class="d-flex justify-content-around w-75 mb-2">
-          <a :href="teacherData.facebook" target="_black">
+          <a :href="teacherData.facebook" target="_black" @click.prevent>
             <i class="bi bi-facebook fs-3 text-secondary"
               :class="{'text-blue': teacherData.facebook}"></i>
           </a>
-          <a :href="teacherData.instagram" target="_black">
+          <a :href="teacherData.instagram" target="_black" @click.prevent>
             <i class="bi bi-instagram fs-3 text-secondary"
-              :class="{'text-red': teacherData.instagram}"></i>
+              :class="{'text-danger': teacherData.instagram}"></i>
           </a>
-          <a :href="teacherData.discord" target="_black">
+          <a :href="teacherData.discord" target="_black" @click.prevent>
             <i class="bi bi-discord fs-3 text-secondary"
               :class="{'text-purple': teacherData.discord}"></i>
           </a>

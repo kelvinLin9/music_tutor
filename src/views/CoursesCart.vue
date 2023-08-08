@@ -89,13 +89,11 @@
           </div>
         </div>
       </div>
-
     </div>
-
   </div>
   
-    對應選到哪個<br>
-    {{ cartCheckboxWrap }}<br>
+    <!-- 對應選到哪個<br> -->
+    <!-- {{ cartCheckboxWrap }}<br> -->
     <!-- {{ cartTotal() }}<br> -->
     <!-- {{ payWrap[0] }}<br> -->
     <!-- {{ payWrap[1] }}<br> -->

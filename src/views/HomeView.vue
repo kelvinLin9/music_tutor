@@ -12,8 +12,8 @@
 import NavbarCom from '@/components/NavbarCom.vue'
 import GoTop from '@/components/GoTop.vue'
 import { mapActions, mapState } from 'pinia'
-import dataStore from '../stores/dataStore';
-import FooterCom from '../components/FooterCom.vue';
+import dataStore from '../stores/dataStore'
+import FooterCom from '../components/FooterCom.vue'
 
 
 export default {

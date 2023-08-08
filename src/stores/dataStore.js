@@ -805,7 +805,7 @@ export default defineStore('dataStore', {
   getters: {
     bookmarkState () {
       return (id) => {
-        return this.bookmarkIds.indexOf(id) > -1 ? 'bi bi bi-bookmark-fill text-primary bookmark-on' : 'bi bi-bookmark-plus text-primary bookmark-off'
+        return this.bookmarkIds.indexOf(id) > -1 ? 'bi bi bi-bookmark-fill text-teal bookmark-on' : 'bi bi-bookmark-plus text-teal bookmark-off'
       }
     }
   }
