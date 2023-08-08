@@ -63,10 +63,13 @@
                 </span>
               </div> -->
               <div class="mb-1">
-                <div class="row">
-                  <div class="col-auto">NT$ {{ $filters.currency(item.data.price) }}</div>
-                  <div class="col-auto"><i class="bi bi-people-fill me-2"></i>{{ item.data.whoBuy.length}}</div>
-                </div>
+                <span class="me-3">
+                  NT$ {{ $filters.currency(item.data.price) }}
+                </span>
+                <span class="">
+                  <i class="bi bi-people-fill me-2"></i>
+                  {{ item.data.whoBuy.length}}
+                </span>
               </div>
             </div>
           </div>
