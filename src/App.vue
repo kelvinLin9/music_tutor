@@ -1,5 +1,7 @@
 <template>
-  <RouterView />
+  <!-- <div data-bs-theme="dark"> -->
+    <RouterView />
+  <!-- </div> -->
 </template>
 
 <script setup>
