@@ -362,6 +362,7 @@ export default defineStore('dataStore', {
     ],
     courseData:{},   // 單一課程頁面用
     myCoursesState: 'student', // 我的課程換頁用
+    displayState: 'grid', // 我的課程換呈現方式用
     bookmarkIds: [],
     bookmarkNum: 0,
     // 成為老師表單數據，老師名稱來自會員(先預設)
@@ -561,11 +562,13 @@ export default defineStore('dataStore', {
       });
       console.log('全部課程資料',this.AllCoursesFirebaseData)
       // 用ID抓出其他想要渲染的資料
-      this.getUserTeacherCourses()
-      this.getUserStudentCourses()
-      this.getUserCartCourses()
-      this.getBookmarkCoursesData()
-      this.getCouponData()
+      if (this.user.uid) {
+        this.getUserTeacherCourses()
+        this.getUserStudentCourses()
+        this.getUserCartCourses()
+        this.getBookmarkCoursesData()
+        this.getCouponData()
+      } 
     },
     async getCouponData() {
       const docRef = doc(db, "coupon", 'code')
@@ -632,7 +635,7 @@ export default defineStore('dataStore', {
     },
     getUserStudentCourses() {
       if(!this.studentData.myStudyCourses) {
-        console.log('尚未購買課程')
+        alert('尚未購買課程')
       } else {
         this.userStudentCourses = []
         this.studentData.myStudyCourses.forEach((item) => {
@@ -677,6 +680,7 @@ export default defineStore('dataStore', {
           this.getAllCoursesFirebaseData()
         } else {
           this.isMember = false
+          this.getAllCoursesFirebaseData()
           console.log('已登出')
         }
       });
