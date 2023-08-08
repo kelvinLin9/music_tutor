@@ -1,13 +1,13 @@
 <template>
-  <div class="bg-dark">
-    <nav class="container navbar navbar-expand-lg navbar-dark bg-block sticky-top">
+  <div class="bg-dark sticky-top">
+    <nav class="container navbar navbar-expand-lg navbar-dark bg-block">
       <div class="container-fluid">
         <RouterLink to="/" class="navbar-brand nav-link" href="#">
           <img src="../assets/images/logo_white.png" alt="logo" class="d-none d-lg-block">
           <img src="../assets/images/logo_white_sm.png" alt="logo" class="d-block d-lg-none">
         </RouterLink>
-        <!-- 手機板購物車 -->
-        <li class="nav-item position-relative fs-5 d-lg-none d-block ms-auto me-4 text-light" 
+        <!-- 手機板收藏圖示 -->
+        <!-- <li class="nav-item position-relative fs-5 d-lg-none d-block ms-auto me-4 text-light" 
             v-if="this.isMember === true"
             @click="myCoursesState = 'bookmark'">
           <RouterLink to="/MyCourses" class="nav-link"
@@ -18,8 +18,9 @@
               {{ bookmarkNum }}
             </div>
           </RouterLink>
-        </li>
-        <li class="nav-item position-relative fs-5 d-lg-none d-block text-light" 
+        </li> -->
+         <!-- 手機板購物車圖示 -->
+        <li class="nav-item position-relative fs-5 d-lg-none d-block ms-auto text-light" 
             v-if="this.isMember === true">
           <RouterLink to="/CoursesCart" class="nav-link"
             :class="{ 'text-primary':  $route.name === 'CoursesCart'}">

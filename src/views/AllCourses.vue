@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid banner">
+  <div class="">
     <div class="card">
       <img src="https://fakeimg.pl/180x20/" alt="" class="card-img">
       <div class="card-img-overlay d-flex justify-content-center  align-items-center">
@@ -10,8 +10,10 @@
     </div>
   </div>
 
+  <!-- 搜尋 -->
   <div class="container mt-3">
     <div class="row align-items-center g-2">
+      <!-- 技能 -->
       <div class="col-12 col-md-6 col-lg-auto me-lg-5">
         <div class="row g-1 align-items-center">
           <div class="col-auto">
@@ -110,7 +112,7 @@
 
         </div>      
       </div>
-
+      <!-- 地點 -->
       <div class="col-12 col-md-6 col-lg-auto me-lg-5">
         <div class="row g-1 align-items-center">
           <div class="col-auto">
@@ -133,7 +135,7 @@
           </div>
 
           <div class="col-auto"
-              v-if="selectCourseMethod === '在老師家'">
+              v-if="selectCourseMethod === '在老師家' || selectCourseMethod === '在學生家'">
             <select class="form-select" aria-label="Default select example"
                     id="selectCityName"
                     v-model="selectCityName">
@@ -165,7 +167,7 @@
 
         </div>
       </div>
-
+      <!-- 名稱 -->
       <div class="col-12 col-md-6 col-lg-auto">
         <div class="row g-1 align-items-center">
           <div class="col-auto">
@@ -178,9 +180,28 @@
           </div>
         </div>
       </div>
+      <!-- 排序 -->
+      <div class="col-auto ms-auto">
+        <label for="selectCityName" class="col-form-label">
+          排序：
+        </label>
+      </div>
+      <div class="col-auto">
+        <select class="form-select" 
+                aria-label="Default select example"
+                id="selectCityName"
+                v-model="selectSortMethod"
+                @change="courseSort()">
+          <option value="" selected>請選擇</option>
+          <option v-for="item in sortMethod" 
+                  :key="item" :value="item">
+            {{ item }}
+          </option>
+        </select>
+      </div>
     </div>
   </div>
-
+  <!-- 課程 -->
   <div class="container mt-3">
     <div class="row"
      v-if="filterData.length == 0">
@@ -190,21 +211,21 @@
     </div>
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-2">
       <div class="col"
-            v-for="item in AllCoursesFirebaseData" :key="item.id">
-        <div class="card rounded-3 scale h-100"
-        @click="getOneCoursesFirebaseData(item.id)">
+            v-for="item in filterData" :key="item.id">
+            <div class="card rounded-3 scale h-100"
+            @click="getOneCoursesFirebaseData(item.id)">
           <div class="card-img overflow-hidden position-relative">
-            <img :src="item.data.courseImg" alt="" class="card-img-top">
-            <i class="bookmark"
-            :class="bookmarkState(item.id)"
-            @click.stop="toggleBookmark(item.id)"
-            data-bs-toggle="tooltip"
-            data-bs-placement="top"
-            title="加入 / 移除收藏"
+            <img :src="item.data.courseImg" alt="商品圖片" class="card-img-top filter-grayscale">
+            <i class=""
+              :class="bookmarkState(item.id)"
+              @click.stop="toggleBookmark(item.id)"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              title="加入 / 移除收藏"
             ></i>
           </div>
           <div class="card-body d-flex flex-column">
-            <div class="mb-1">
+            <div class="mb-1 sw-title">
               <span class="badge rounded-pill text-bg-danger test align-middle">{{ item.data.courseCategory }}</span>
               <span class="">&ensp;{{ item.data.courseName }}</span>   
             </div>
@@ -216,9 +237,9 @@
                 <i class="bi bi-clock-fill"></i>
                 {{ item.data.time }}
                 <i class="bi bi-geo-alt-fill ms-2"></i>
-                {{ item.data.cityName }}
+                {{ item.data.cityName || '線上' }}
               </div>
-              <div class="mb-1">
+              <!-- <div class="mb-1">
                 <span class="bg-info rounded-2 px-2 me-2"
                       v-if="item.data.courseMethod[0]">
                   {{ item.data.courseMethod[0] }}
@@ -231,7 +252,7 @@
                       v-if="item.data.courseMethod[2]">
                   {{ item.data.courseMethod[2] }}
                 </span>
-              </div>
+              </div> -->
               <div class="mb-1">
                 <div class="row">
                   <div class="col-auto">NT$ {{ $filters.currency(item.data.price) }}</div>
@@ -260,39 +281,56 @@ export default {
   components: { PaginationCom },
   computed: {
     ...mapState(dataStore, ['coursesData', 'bookmarkState', 'AllCoursesFirebaseData', 'onAuthStateChanged']),
-    ...mapState(filterStore, ['filterData','courseMethod']),
-    ...mapWritableState(filterStore, ['selectCityName', 'selectCourseCategory', 'selectCourseName','selectCourseMethod'])
+    ...mapState(filterStore, ['filterData','courseMethod', 'sortMethod']),
+    ...mapWritableState(filterStore, ['selectCityName', 'selectCourseCategory', 'selectCourseName','selectCourseMethod', 'selectSortMethod'])
   },
   methods: {
     ...mapActions(dataStore, ['toggleBookmark', 'getOneCoursesFirebaseData', 'getAllCoursesFirebaseData']),
-    ...mapActions(filterStore, ['selectCityNameCancel'])
+    ...mapActions(filterStore, ['selectCityNameCancel', 'courseSort'])
   },
   created () {
     this.onAuthStateChanged()
+    this.courseSort()
   }
 }
 </script>
 
 <style lang="scss" scoped>
+  .scale{
+    cursor:pointer;
+    &:hover{
+      img{
+        transform: scale(1.15);
+      }
+      .bookmark-off{
+        top: -15px;
+      }
+      .filter-grayscale {
+        -webkit-filter:grayscale(0);
+      }
+    }
+  }
 .card-img-top { 
   height: 180px;
   object-fit: cover;
   transition: 0.5s;
 }
-
-.scale{
-  cursor:pointer;
-  &:hover{
-    img{
-      transform: scale(1.15);
-    }
-  }
+.bookmark-off {
+  font-size: 40px;
+  position: absolute;
+  right: 5px;
+  top: -55px;
+  z-index: 10;
+  transition: 0.5s;
 }
-.bookmark {
+.bookmark-on {
   font-size: 40px;
   position: absolute;
   right: 5px;
   top: -15px;
   z-index: 10;
+}
+.filter-grayscale {
+  -webkit-filter:grayscale(0);
 }
 </style>
