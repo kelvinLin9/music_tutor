@@ -1,4 +1,5 @@
 <template>
+  <!-- 課程圖片&說明 -->
   <div class="container mt-5">
     <div class="row">
       <div class="col-12 col-lg-8">
@@ -18,13 +19,14 @@
       </div>
     </div>
   </div>
-  
+  <!-- 其他說明 -->
   <div class="container mt-3">
     <div class="row align-items-center">
+      <!-- 老師簡介&課程細項 -->
       <div class="col-12 col-lg-8">
         <div class="row align-items-center"
           @click="getOneTeacherFirebaseData(courseData.uid)">
-          <div class="col-2 cursor-pointer">
+          <div class="col-auto cursor-pointer">
             <img :src="courseData.teacherImg" alt="老師照片" class="user-photo">
           </div>
           <div class="col-auto fs-2 cursor-pointer">
@@ -32,12 +34,12 @@
           </div>
         </div>
         <div class="row my-3">
-          <div class="col-10">
+          <div class="col-12 col-lg-10">
             {{ courseData.teacherIntro }}
           </div>
         </div>
         <div class="row my-3">
-          <p>關於課程</p>
+          <p class="fs-4">關於課程</p>
           <div class="col-auto">
             <div class="d-flex align-items-center">
               <i class="bi bi-clock me-2"></i>
@@ -78,7 +80,8 @@
             </div>
           </div>
         </div>
-       </div>
+      </div>
+      <!-- 別人的課顯示 -->
       <div class="col-12 col-lg-4 p-4 border"
           v-if="this.user.uid !== courseData.uid">
         <h4 class="border-bottom pb-2">購買單堂課程</h4>
@@ -100,6 +103,7 @@
           </button>
         </div>
       </div>
+      <!-- 自己的課顯示 -->
       <div class="col-12 col-lg-4 p-4 border"
           v-if="this.user.uid === courseData.uid">
         <h4 class="border-bottom pb-2">購買人數</h4>
@@ -107,16 +111,27 @@
           <span class="fs-5 me-1">共</span>
           <span class="fs-1">{{ courseData.whoBuy.length }}人</span> 
         </div>
-        <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between align-items-center">
           <button type="button" class="btn btn-outline-danger w-25"
           data-bs-toggle="modal" data-bs-target="#editMyCourseModal">
             編輯
           </button>
+          <span class="text-danger fs-8">(課程審核通過後將無法再編輯)</span>
         </div>
       </div>
     </div>
   </div>
   <edit-my-course-modal></edit-my-course-modal>
+
+
+  <!-- 課程評價 -->
+    <div class="container mt-3">
+    <p class="fs-4">課程評價</p>
+  </div>
+  <!-- 猜你喜歡 -->
+  <div class="container mt-3">
+    <p class="fs-4">猜你喜歡</p>
+  </div>
 </template>
   
 <script>

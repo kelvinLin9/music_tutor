@@ -41,5 +41,8 @@
 // 8. Add additional custom code here
 @import "bootstrap/scss/bootstrap";
 @import "font";
-@import "reset"
+@import "reset";
 
+* {
+  // outline: 1px solid  red;
+}

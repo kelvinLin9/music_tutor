@@ -11,10 +11,10 @@
   </div>
 
   <!-- 搜尋 -->
-  <div class="container mt-3">
+  <div class="container mt-3 fs-8">
     <div class="row align-items-center g-2">
       <!-- 技能 -->
-      <div class="col-12 col-md-6 col-lg-auto me-lg-5">
+      <div class="col-12 col-lg-auto me-lg-1">
         <div class="row g-1 align-items-center">
           <div class="col-auto">
             <label for="selectCourseCategory" class="col-form-label">
@@ -22,7 +22,7 @@
             </label>
           </div>
           <div class="col-auto">
-            <select class="form-select" aria-label="Default select example"
+            <select class="form-select fs-8" aria-label="Default select example"
                   id="selectCourseCategory"
                   v-model="selectCourseCategory">
             <option value="" selected>請選擇</option>
@@ -113,7 +113,7 @@
         </div>      
       </div>
       <!-- 地點 -->
-      <div class="col-12 col-md-6 col-lg-auto me-lg-5">
+      <div class="col-12 col-lg-auto me-lg-1">
         <div class="row g-1 align-items-center">
           <div class="col-auto">
             <label for="selectCityName" class="col-form-label">
@@ -121,7 +121,7 @@
             </label>
           </div>
           <div class="col-auto">
-            <select class="form-select" 
+            <select class="form-select fs-8" 
                     aria-label="Default select example"
                     id="selectCityName"
                     v-model="selectCourseMethod"
@@ -133,10 +133,9 @@
               </option>
             </select>
           </div>
-
           <div class="col-auto"
               v-if="selectCourseMethod === '在老師家' || selectCourseMethod === '在學生家'">
-            <select class="form-select" aria-label="Default select example"
+            <select class="form-select fs-8" aria-label="Default select example"
                     id="selectCityName"
                     v-model="selectCityName">
               <option value="" selected>請選擇地點</option>
@@ -164,45 +163,48 @@
               <option value="連江縣">連江縣</option>
             </select>
           </div>
-
         </div>
       </div>
       <!-- 名稱 -->
-      <div class="col-12 col-md-6 col-lg-auto">
+      <div class="col-12 col-sm-auto  col-lg-auto">
         <div class="row g-1 align-items-center">
           <div class="col-auto">
             <label for="selectCourseName" class="col-form-label">課程名稱：</label>
           </div>
           <div class="col-auto">
-            <input type="search" id="selectCourseName" class="form-control w-75" aria-labelledby="searchHelpInline"
+            <input type="search" id="selectCourseName" class="form-control fs-8" aria-labelledby="searchHelpInline"
             placeholder="請輸入課程名稱"
             v-model="selectCourseName">
           </div>
         </div>
       </div>
       <!-- 排序 -->
-      <div class="col-auto ms-auto">
-        <label for="selectCityName" class="col-form-label">
-          排序：
-        </label>
-      </div>
-      <div class="col-auto">
-        <select class="form-select" 
-                aria-label="Default select example"
-                id="selectCityName"
-                v-model="selectSortMethod"
-                @change="courseSort()">
-          <option value="" selected>請選擇</option>
-          <option v-for="item in sortMethod" 
-                  :key="item" :value="item">
-            {{ item }}
-          </option>
-        </select>
+      <div class="col-auto ms-sm-auto">
+        <div class="row g-1 align-items-center">
+          <div class="col-auto">
+            <label for="selectCityName" class="col-form-label">
+              排序：
+            </label>
+          </div>
+          <div class="col-auto">
+            <select class="form-select fs-8" 
+                    aria-label="Default select example"
+                    id="selectCityName"
+                    v-model="selectSortMethod"
+                    @change="courseSort()">
+              <option value="" selected>請選擇</option>
+              <option v-for="item in sortMethod" 
+                      :key="item" :value="item">
+                {{ item }}
+              </option>
+            </select>
+          </div>
+        </div>
       </div>
     </div>
   </div>
   <!-- 課程 -->
-  <div class="container mt-3">
+  <div class="container my-3">
     <div class="row"
      v-if="filterData.length == 0">
       <div class="col text-center">
@@ -225,7 +227,7 @@
             ></i>
           </div>
           <div class="card-body d-flex flex-column">
-            <div class="mb-1 sw-title">
+            <div class="mb-1">
               <span class="badge rounded-pill text-bg-danger test align-middle">{{ item.data.courseCategory }}</span>
               <span class="">&ensp;{{ item.data.courseName }}</span>   
             </div>
@@ -254,10 +256,13 @@
                 </span>
               </div> -->
               <div class="mb-1">
-                <div class="row">
-                  <div class="col-auto">NT$ {{ $filters.currency(item.data.price) }}</div>
-                  <div class="col-auto"><i class="bi bi-people-fill me-2"></i>{{ item.data.whoBuy.length}}</div>
-                </div>
+                <span class="me-3">
+                  NT$ {{ $filters.currency(item.data.price) }}
+                </span>
+                <span class="">
+                  <i class="bi bi-people-fill me-2"></i>
+                  {{ item.data.whoBuy.length}}
+                </span>
               </div>
             </div>
           </div>
