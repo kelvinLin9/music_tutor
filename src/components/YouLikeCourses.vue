@@ -9,12 +9,20 @@
       navigation
       :scrollbar="{ draggable: true }"
       :breakpoints="{
+      '576': {
+        slidesPerView: 1,
+        spaceBetween: 20,
+        },
       '768': {
         slidesPerView: 2,
         spaceBetween: 20,
         },
       '992': {
-        slidesPerView: 4,
+        slidesPerView: 2,
+        spaceBetween: 20,
+        },
+      '1400': {
+        slidesPerView: 3,
         spaceBetween: 20,
         },
       }"
@@ -76,12 +84,6 @@
         </div>
       </SwiperSlide>
     </swiper>
-
-    <RouterLink to="/AllCourses" class="text-center d-block">
-      <button type="button" class="btn btn-dark col-9 col-sm-6 col-md-3">
-        更多課程
-      </button>
-    </RouterLink>
   </div>
 </template>
 <script>

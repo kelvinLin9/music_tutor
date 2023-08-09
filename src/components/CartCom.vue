@@ -1,15 +1,20 @@
 <template>
   <div class="text-center fs-1"
       v-if="studentData.myCart.length === 0">
-      購物車無任何品項
+      <p>購物車無任何品項</p>
+      <RouterLink to="/AllCourses">
+        <button type="button" class="btn btn-outline-primary">
+          繼續購物
+        </button>
+      </RouterLink> 
   </div>
-  <div class="col-12 col-lg-8 mx-auto border rounded-2"
+  <div class="col-12 col-lg-8 mx-auto mb-3 border rounded-2"
         v-if="studentData.myCart.length !== 0">
     <h1 class="my-3">購物車</h1>
     <table class="table table-hover align-middle">
       <thead>
         <tr>
-          <th width="" class="" colspan="5">
+          <th width="" class="" colspan="4">
             <div class="form-check align-items-center">
               <input class="form-check-input me-3" 
                 type="checkbox" 
@@ -36,17 +41,32 @@
               <label :for="item.timestamp"></label>
             </div>
           </td>
-          <td width="100"
+          <td width="50"
           @click="getOneCoursesFirebaseData(item[0].id)">
             <img :src="item[0].data.courseImg" alt="" class="table-image cursor-pointer">
           </td>
-          <td>
-            {{ item[0].data.courseName }}
+          <td width="300">
+            <div class="container">
+              <div class="row">
+                <div class="col-12 col-lg-8">
+                  {{ item[0].data.courseName }}
+                </div>
+                <div class="col-12 col-lg-4 text-lg-end">
+                  <p v-if="couponValue == 1">
+                    NT$ {{ $filters.currency(item[0].data.price) }}
+                  </p>
+                  <p v-if="couponValue != 1">
+                    NT$ {{ $filters.currency(item[0].data.price * couponValue) }}
+                  </p>
+                  <p class="fs-8 text-delete text-decoration-line-through" 
+                        v-if="couponValue != 1">
+                    NT$ {{ $filters.currency(item[0].data.price) }}
+                  </p>
+                </div>
+              </div>
+            </div>
           </td>
-          <td class="">
-            NT$ {{ $filters.currency(item[0].data.price) }}
-          </td>
-          <td class="text-end">
+          <td width="10" class="text-end">
             <div class="cursor-pointer"
               @click="deleteCart(user.uid, item.timestamp, index)">
               <i class="bi bi-trash3-fill"></i>
@@ -71,7 +91,7 @@ export default {
   computed: {
     ...mapWritableState(cartStore, ['cartCheckboxWrap','payWrap', 'checkAllValue']),
     ...mapWritableState(dataStore, ['studentData','user', 'userCartCourses','couponData']),
-    ...mapState(cartStore, ['cartTotal'])
+    ...mapState(cartStore, ['cartTotal', 'couponValue'])
   },
   methods: {
     ...mapActions(cartStore, ['deleteCart', 'addToPayWrap', 'checkAll']),
@@ -89,6 +109,11 @@ export default {
   height: 80px;
   object-fit: cover;
   border-radius: 10px;
+  @media (max-width:768px) {
+    width: 50px;
+    height: 40px;
+    border-radius: 10px;
+  }
 }
 input {
   width: 25px;
