@@ -3,14 +3,14 @@
   信箱驗證
   手機驗證
   修改密碼
-  <div class="m-5"
+  <!-- <div class="m-5"
     @click="test">
     真難
   </div>
   <div class="m-5"
     @click="test2">
     真難欸
-  </div>
+  </div> -->
 </template>
   
 <script>
@@ -23,10 +23,11 @@ import { doc, setDoc, Timestamp, getFirestore, updateDoc} from "firebase/firesto
 const db = getFirestore()
 export default {
   computed: {
-
+    ...mapState(dataStore, ['testD']),
 
   },
   methods: {
+    
     async test() {
       const docData = {
           stringExample: "Hello world!",
@@ -49,13 +50,14 @@ export default {
 
           // Set the "capital" field of the city 'DC'
           await updateDoc(washingtonRef, {
-            capital: [{sss : 5566}, {ssss : 55667788}]
+            // capital: [{sss : 5566}, {ssss : 55667788}]
+            capital: this.testD
       });
     }
   },
   created () {
     // this.onAuthStateChangedForCreateCourse()
-    // console.log(this.studentData.myCart)
+    console.log(this.testD)
   }
 }
 </script>
