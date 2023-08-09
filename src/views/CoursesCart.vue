@@ -4,7 +4,8 @@
       <pay-com v-if="cartPageState === 'pay'" />
       <cart-com v-if="cartPageState === 'cart'" />
 
-      <div class="col-12 col-lg-4"
+      <!-- 購物車用 -->
+      <div class="col-12 col-lg-4 mb-3"
         v-if="cartPageState === 'cart' && studentData.myCart.length !== 0">
         <div class="card">
           <div class="card-header">
@@ -24,18 +25,18 @@
             </div>
           </div>
           <div class="card-footer">
-            <div class="row mb-2">
+            <div class="row mb-2 align-items-center">
               <div class="col-9">
-                <label for="coupon">折扣碼：</label>
-                <input class="col-form-label w-75" 
+                <label for="coupon" class="fs-7">折扣碼：</label>
+                <input class="col-form-label w-75 p-0" 
                     type="text" 
                     id="coupon"  
                     name="coupon" 
                     v-model="couponCode"> 
                 
               </div>
-              <div class="col-3">
-                <button type="button" class="btn btn-secondary ms-auto d-block"
+              <div class="col-auto ms-auto">
+                <button type="button" class="btn btn-sm btn-secondary"
                           @click="addCouponCode()">
                     確認
                 </button>
@@ -51,8 +52,8 @@
         2023666 (6折)<br>
         hexschoolsogood (3折)
       </div>
-
-      <div class="col-12 col-lg-4"
+      <!-- 結帳用 -->
+      <div class="col-12 col-lg-4 mb-3"
             v-if="cartPageState === 'pay'">
         <div class="card">
           <div class="card-header">

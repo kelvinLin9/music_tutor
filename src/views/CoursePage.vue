@@ -20,7 +20,7 @@
     </div>
   </div>
   <!-- 其他說明 -->
-  <div class="container mt-3">
+  <div class="container mt-3 other">
     <div class="row align-items-center">
       <!-- 老師簡介&課程細項 -->
       <div class="col-12 col-lg-8">
@@ -82,7 +82,7 @@
         </div>
       </div>
       <!-- 別人的課顯示 -->
-      <div class="col-12 col-lg-4 p-4 border"
+      <div class="col-12 col-lg-4 p-4 border sticky-course-page"
           v-if="this.user.uid !== courseData.uid">
         <h4 class="border-bottom pb-2">購買單堂課程</h4>
         <div class="mb-3">
@@ -104,7 +104,7 @@
         </div>
       </div>
       <!-- 自己的課顯示 -->
-      <div class="col-12 col-lg-4 p-4 border"
+      <div class="col-12 col-lg-4 p-4 border sticky-course-page"
           v-if="this.user.uid === courseData.uid">
         <h4 class="border-bottom pb-2">購買人數</h4>
         <div class="mb-3">
@@ -119,18 +119,30 @@
           <span class="text-danger fs-8">(課程審核通過後將無法再編輯)</span>
         </div>
       </div>
+      <!-- 課程評價 -->
+      <div class="row">
+        <div class="col-12 col-lg-8">
+          <p class="fs-4 mb-3">課程評價</p>
+          <feedback-com/>
+        </div>
+      </div>
+      <!-- 猜你喜歡 -->
+      <div class="row">
+        <div class="col-12 col-lg-8">
+          <p class="fs-4 mb-3">猜你喜歡</p>
+          <you-like-courses />
+        </div>
+      </div>
     </div>
   </div>
+    
+
+  <!-- 編輯Modal -->
   <edit-my-course-modal></edit-my-course-modal>
 
 
-  <!-- 課程評價 -->
-    <div class="container mt-3">
-    <p class="fs-4">課程評價</p>
-  </div>
-  <!-- 猜你喜歡 -->
+  
   <div class="container mt-3">
-    <p class="fs-4">猜你喜歡</p>
   </div>
 </template>
   
@@ -141,9 +153,11 @@ import dataStore from '@/stores/dataStore'
 import goStore from '@/stores/goStore'
 import EditMyCourseModal from '../components/EditMyCourseModal.vue'
 import cartStore from '../stores/cartStore'
+import FeedbackCom from '../components/FeedbackCom.vue'
+import YouLikeCourses from '../components/YouLikeCourses.vue'
 
 export default {
-  components: { EditMyCourseModal },
+  components: { EditMyCourseModal, FeedbackCom, YouLikeCourses,  },
   data () {
     return {
       id: ''
@@ -189,6 +203,13 @@ img {
   }
   @media (max-width: 576px)  {
     height: 200px;
+  }
+}
+// 桌面版才有固定效果
+.sticky-course-page {
+  @media (min-width:992px) {
+    position: sticky;
+    top: 100px;
   }
 }
 </style>

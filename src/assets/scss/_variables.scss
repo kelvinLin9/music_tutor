@@ -305,7 +305,8 @@ $info:          rgba(13, 202, 240, 1) !default;
 $warning:       rgba(255, 193, 7, 1) !default;
 $danger:        rgba(220, 53, 69, 1) !default;
 $light:         $gray-100 !default;
-$dark:          rgba(37, 32, 22, 1);
+$dark:          rgba(37, 32, 22, 1) !default;
+$delete:        rgba(140,140,140,1) !default;
 // scss-docs-end theme-color-variables
 
 // scss-docs-start theme-colors-map
@@ -324,6 +325,7 @@ $theme-colors: (
   "purple":     $purple,
   "orange":     $orange,
   "teal":       $teal,
+  "delete":        $delete,
 ) !default;
 // scss-docs-end theme-colors-map
 
