@@ -51,8 +51,9 @@ const router = createRouter({
           name: 'coursePageId',
           component: () => import('../views/coursePage.vue')
         },
+        // 直接:TeacherPageId這樣寫會跟404衝突
         {
-          path: ':TeacherPageId',
+          path: 'teacherPage/:TeacherPageId',
           name: 'TeacherPageId',
           component: () => import('../views/TeacherPage.vue')
         },

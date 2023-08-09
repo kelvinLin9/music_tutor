@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container px-0">
     <swiper
       :loop="true"
       :slidesPerView="1"
@@ -18,7 +18,7 @@
         spaceBetween: 20,
         },
       }"
-      class="mySwiper"
+      class="mySwiper px-3"
     >
       <SwiperSlide v-for="(item) in AllCoursesFirebaseData" :key="item.id" class="mb-5">
         <div class="card rounded-3 scale h-100"
@@ -163,4 +163,5 @@ export default {
 .sw-title {
   height: 50px;
 }
+
 </style>
