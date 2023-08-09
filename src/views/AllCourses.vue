@@ -259,7 +259,7 @@
                 <span class="me-3">
                   NT$ {{ $filters.currency(item.data.price) }}
                 </span>
-                <span class="">
+                <span v-if="item.data.whoBuy">
                   <i class="bi bi-people-fill me-2"></i>
                   {{ item.data.whoBuy.length}}
                 </span>
