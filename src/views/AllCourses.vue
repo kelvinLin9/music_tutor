@@ -207,7 +207,7 @@
   <div class="container my-3">
     <div class="row"
      v-if="filterData.length == 0">
-      <div class="col text-center">
+      <div class="col text-center fs-2 mt-5">
         很抱歉，沒有符合條件課程
       </div>
     </div>
