@@ -2,7 +2,7 @@
   <div class="goTop"
       :class="{'d-none' : !goTopIcon }">
     <a href="#" @click.prevent="top">
-      <i class="bi-caret-up-square text-primary"></i>
+      <img src="../assets/images/gotop.png" alt="">
     </a>
   </div>
 </template>

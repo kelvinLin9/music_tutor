@@ -1,0 +1,27 @@
+.swiper-button-prev {
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 20px;
+  background: white!important;
+  border: 2px solid rgba(168, 128, 48, 1) !important;
+  margin-left: -20px !important;
+  &::after {
+    color: rgba(168, 128, 48, 1) !important;
+    font-size: 24px !important;
+    font-weight: bold;
+  }
+}
+.swiper-button-next {
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 20px;
+  background: white!important;
+  border: 2px solid rgba(168, 128, 48, 1) !important;
+  margin-right: -20px !important;
+  &::after {
+    color: rgba(168, 128, 48, 1) !important;
+    font-size: 24px !important;
+    font-weight: bold;
+    margin-left: 5px !important;
+  }
+}
