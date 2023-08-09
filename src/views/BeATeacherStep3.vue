@@ -11,7 +11,7 @@
 
   <div class="container mt-5">
     <div class="row">
-      <div class="col-12 col-lg-8 test">
+      <div class="col-12 col-lg-8">
         <img :src="beATeacherData.courseImg" alt="課程照片">
       </div>
       <div class="col-12 col-lg-4 d-flex flex-column">
@@ -23,7 +23,7 @@
     </div>
   </div>
 
-  <div class="container mt-3">
+  <div class="container my-5">
     <div class="row align-items-center">
       <div class="col-12 col-lg-8">
         <div class="row align-items-center">

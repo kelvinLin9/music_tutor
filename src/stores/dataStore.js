@@ -141,6 +141,7 @@ export default defineStore('dataStore', {
       this.beATeacherData.cityName = ''
       this.beATeacherData.time = 0
       this.beATeacherData.price = 0
+      this.beATeacherData.whoBuy = []
     },
     // 只有第一次登入需要
     async copyUserDataToTeacher() {
