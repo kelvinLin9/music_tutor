@@ -454,9 +454,9 @@ export default defineStore('dataStore', {
           errorMessages.push('需上傳 JPG 或 PNG 檔!')
         }
 
-        const isValidFileSize = fileObject.size / 1024 / 1024 < 0.5
+        const isValidFileSize = fileObject.size / 1024 / 1024 < 0.8
         if (!isValidFileSize) {
-          errorMessages.push('圖片大小需小於0.5MB!')
+          errorMessages.push('圖片大小需小於0.8MB!')
         }
         resolve({
           isValid: isValidFileType && isValidFileSize,
