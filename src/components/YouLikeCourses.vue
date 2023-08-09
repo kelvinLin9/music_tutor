@@ -5,7 +5,6 @@
       :slidesPerView="1"
       :spaceBetween="20"
       :freeMode="true"
-      :pagination="{clickable: true}"
       navigation
       :scrollbar="{ draggable: true }"
       :breakpoints="{

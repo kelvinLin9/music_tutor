@@ -75,7 +75,6 @@
     <div class="mb-5">
       <img src="../assets/images/b-feature.png" alt="">
     </div>
-
     <div class="container mb-5">
       <div class="row d-flex align-items-center mb-4 mb-lg-0">
         <div class="col-12 col-lg-6">
@@ -83,7 +82,7 @@
         </div>
         <div class="col-12 col-lg-6">
           <h3 class="fs-28 fw-bold text-primary text-center text-lg-start my-4">燃點才華，擁抱成功！</h3>
-          <p class="col-9 col-lg-12 mx-auto">在我們的音樂家教媒合平台，任何擁有音樂才華的人都能藉此賺取額外收入。無論你是一名專業音樂家、學院派音樂學生，或是熱愛音樂並擁有一定水平的業餘愛好者，這裡都是你展現才華、實現夢想的舞台。</p>
+          <p class="col-9 col-lg-12 mx-auto mb-3">在我們的音樂家教媒合平台，任何擁有音樂才華的人都能藉此賺取額外收入。無論你是一名專業音樂家、學院派音樂學生，或是熱愛音樂並擁有一定水平的業餘愛好者，這裡都是你展現才華、實現夢想的舞台。</p>
           <div class="text-center text-lg-start">
             <RouterLink to="/AllCourses">
               <button type="button" class="btn btn-outline-primary col-9 col-lg-auto ">
@@ -99,7 +98,7 @@
         </div>
         <div class="col-12 col-lg-6">
           <h3 class="fs-28 fw-bold text-primary text-center text-lg-start my-4">尋找音樂共鳴，啟發個人旋律！</h3>
-          <p class="col-9 col-lg-12 mx-auto">在我們的音樂家教媒合平台，你將找到一個與你個人需求完美契合的音樂老師。無論你是想尋找經濟實惠的價格方案、靈活的上課方式，或是特定音樂風格的專業指導，我們的平台將提供你多元且個性化的選擇。</p>
+          <p class="col-9 col-lg-12 mx-auto mb-3">在我們的音樂家教媒合平台，你將找到一個與你個人需求完美契合的音樂老師。無論你是想尋找經濟實惠的價格方案、靈活的上課方式，或是特定音樂風格的專業指導，我們的平台將提供你多元且個性化的選擇。</p>
           <div class="text-center text-lg-start">
             <RouterLink to="/CreateCourses/BeATeacherStep1">
               <button type="button" class="btn btn-outline-primary col-9 col-lg-auto">
