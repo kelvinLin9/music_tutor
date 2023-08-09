@@ -100,8 +100,6 @@ export default defineStore('dataStore', {
     userStudentCourses:[],
     userBookmarkCourses:[],
     userCartCourses:[],
-    
-
   }),
   actions: {
     // 上傳資料----------------------------------
