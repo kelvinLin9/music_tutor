@@ -8,15 +8,6 @@
                 v-if="otherTeacherData.teacherImg">
           <img src="../assets/images/預設大頭貼.png" alt="預設大頭照"
                 v-if="!otherTeacherData.teacherImg">
-          <label for="file-upload">
-            <i class="bi bi-cloud-arrow-up-fill cursor-pointer upload-icon"></i>
-          </label>
-          <input
-                  type="file"
-                  id="file-upload"
-                  class="d-none"
-                  @change="uploadPhoto('teacher',$event)"
-                />
         </div>
         <div class="mb-2 fs-2">
           {{ otherTeacherData.displayName }}
@@ -41,7 +32,7 @@
           </a>
           <a :href="otherTeacherData.instagram" target="_black">
             <i class="bi bi-instagram fs-3 text-secondary"
-              :class="{'text-red': otherTeacherData.instagram}"></i>
+              :class="{'text-danger': otherTeacherData.instagram}"></i>
           </a>
           <a :href="otherTeacherData.discord" target="_black">
             <i class="bi bi-discord fs-3 text-secondary"
@@ -75,14 +66,14 @@ export default {
   },
   methods: {
     ...mapActions(logInStore, ['signOut']),  
-    ...mapActions(dataStore, ['uploadPhoto', 'onAuthStateChanged', 'getOneCoursesFirebaseData']),
+    ...mapActions(dataStore, ['uploadPhoto', 'onAuthStateChanged', 'getOneTeacherFirebaseData']),
     
   },
   created () {
     this.onAuthStateChanged()
-    // alert(this.$route.params.TeacherPageId)
+    // 防止從新整理產生讀不到資料
     this.uid = this.$route.params.TeacherPageId
-    this.getOneCoursesFirebaseData(this.uid)
+    this.getOneTeacherFirebaseData(this.uid)
   }
 }
 </script>

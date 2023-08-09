@@ -606,7 +606,7 @@ export default defineStore('dataStore', {
         const docSnap = await getDoc(docRef);
         console.log("某某老師資料", docSnap.data()) 
         this.otherTeacherData = docSnap.data()
-        router.push(`/${TeacherId}`)
+        router.push(`/teacherPage/${TeacherId}`)
       }
     },
 

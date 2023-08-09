@@ -26,7 +26,7 @@
         spaceBetween: 20,
         },
       }"
-      class="mySwiper"
+      class="mySwiper px-3"
     >
       <SwiperSlide v-for="(item) in AllCoursesFirebaseData" :key="item.id" class="mb-5">
         <div class="card rounded-3 scale h-100"

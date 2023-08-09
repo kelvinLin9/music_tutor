@@ -1,6 +1,6 @@
 <template>
-  <div class="bg-dark sticky-top">
-    <nav class="container navbar navbar-expand-lg navbar-dark bg-block">
+  <div class="sticky-top bg-dark">
+    <nav class="container navbar navbar-expand-lg navbar-dark">
       <div class="container-fluid">
         <RouterLink to="/" class="navbar-brand nav-link" href="#">
           <img src="../assets/images/logo_white.png" alt="logo" class="d-none d-lg-block">
@@ -80,7 +80,7 @@
                 </div>
               </RouterLink>
             </li>
-            <li class="nav-item dropdown">  
+            <li class="nav-item dropdown bg-dark">  
               <button class="btn dropdown-toggle text-primary ps-0 ps-lg-2"
                       type="button" id="dropdownLogin" 
                       data-bs-toggle="dropdown" aria-expanded="false"
@@ -89,7 +89,7 @@
                 <i class="bi bi-person-circle me-2 fs-5"></i>
                 {{ teacherData.displayName }}
               </button>
-              <ul class="dropdown-menu dropdown-menu-end text-primary" aria-labelledby="dropdownLogin"
+              <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="dropdownLogin"
                       v-if="this.isMember === true">
                 <li>
                   <RouterLink to="/MemberPage" class="dropdown-item">

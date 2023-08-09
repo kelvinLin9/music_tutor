@@ -73,7 +73,7 @@
             </div>
           </div>
           <div class="card-footer">
-            <div class="text-danger mb-2">
+            <div class="text-danger fs-8 mb-2">
               我已詳閱並同意〈服務契約〉及服務內容
             </div>
             <div class="row">
