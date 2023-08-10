@@ -66,7 +66,7 @@ export default {
   },
   methods: {
     ...mapActions(logInStore, ['signOut']),  
-    ...mapActions(dataStore, ['uploadPhoto', 'onAuthStateChanged', 'getOneTeacherFirebaseData']),
+    ...mapActions(dataStore, ['onAuthStateChanged', 'getOneTeacherFirebaseData']),
     
   },
   created () {

@@ -37,15 +37,20 @@ import router from './router'
 
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import "./assets/scss/all.scss";
+// 金額
+import { currency } from './methods/filters'
 
+//引入SweetAlert及其附帶的css
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
+// sweetalert2
+const options = {
+  confirmButtonColor: 'rgba(168, 128, 48, 1)',
+  cancelButtonColor: 'rgba(108, 117, 125, 1)'
+}
 
 //firebase
 import { initializeApp } from 'firebase/app';
-
-
-import { currency } from './methods/filters'
-
-
 const firebaseConfig = {
   apiKey: "AIzaSyBurMB5RDdvNOV8jMh0M6zi4gNx8r5xNyU",
   authDomain: "music-tutor-909ea.firebaseapp.com",
@@ -55,7 +60,6 @@ const firebaseConfig = {
   appId: "1:653538731223:web:7d9fdd8b43e991ab6bfc92",
   measurementId: "G-D8YY5SWYN2"
 };
-
 initializeApp(firebaseConfig)
 
 
@@ -75,6 +79,7 @@ app.config.globalProperties.$filters = {
 app.use(createPinia())
 app.use(router)
 app.use(VueAxios, axios)
+app.use(VueSweetalert2, options)
 app.component('VField', Field);
 app.component('VForm', Form);
 app.component('ErrorMessage', ErrorMessage);
