@@ -10,7 +10,9 @@
 
 
         <div class="col-12 col-lg-6 p-4 d-none d-lg-block">
-          <h2 class="fs-2 fw-bold text-primary mb-3">找尋像好友一樣的音樂導師</h2>
+          <h2 class="fs-2 fw-bold text-primary mb-3">
+            找尋像好友一樣的音樂導師
+          </h2>
           <h3 class="fs-5 fw-bold mb-5">
             在這裡與熱愛音樂的導師相遇，將你的音樂激情傾注其中。
           </h3>
@@ -25,8 +27,10 @@
           </div>
         </div>
         <div class="col-12 col-lg-6 p-4 d-block d-lg-none">
-          <h2 class="fs-2 fw-bold text-primary mb-3">找尋像好友一樣的音樂導師</h2>
-          <h3 class="fs-5 fw-bold mb-5">
+          <h2 class="fs-4 text-center fw-bold text-primary mb-3">
+            找尋像好友一樣的音樂導師
+          </h2>
+          <h3 class="fs-6 text-center mb-5">
             在這裡與熱愛音樂的導師相遇，將你的音樂激情傾注其中。
           </h3>
           <div class="mb-2">

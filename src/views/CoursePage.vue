@@ -49,7 +49,9 @@
           <div class="col-auto">
             <div class="d-flex align-items-center">
               <i class="bi bi-people-fill me-2"></i>
-              已被購買 <br> {{ courseData.whoBuy.length || 0 }}次
+              <span v-if="courseData.whoBuy">
+                已被購買 <br> {{ courseData.whoBuy.length || 0 }} 次
+              </span>
             </div>
           </div>
           <div class="col-auto">
@@ -58,17 +60,21 @@
               <div>
                 上課方式<br>
                 <span class="bg-info rounded-2 px-2 me-2"
+                      v-for="item in courseData.courseMethod" :key="item">
+                  {{ item }}
+                </span>
+                <!-- <span class="bg-info rounded-2 px-2 me-2"
                       v-if="courseData.courseMethod[0]">
                   {{ courseData.courseMethod[0] }}
-                </span>
-                <span class="bg-info rounded-2 px-2 me-2"
+                </span> -->
+                <!-- <span class="bg-info rounded-2 px-2 me-2"
                       v-if="courseData.courseMethod[1]">
                   {{ courseData.courseMethod[1] }}
                 </span>
                 <span class="bg-info rounded-2 px-2 me-2"
                       v-if="courseData.courseMethod[2]">
                   {{ courseData.courseMethod[2] }}
-                </span>
+                </span> -->
               </div>
             </div>
           </div>
@@ -109,7 +115,9 @@
         <h4 class="border-bottom pb-2">購買人數</h4>
         <div class="mb-3">
           <span class="fs-5 me-1">共</span>
-          <span class="fs-1">{{ courseData.whoBuy.length }}人</span> 
+          <span class="fs-1" v-if="courseData.whoBuy">
+            {{ courseData.whoBuy.length || 0}}人
+          </span> 
         </div>
         <div class="d-flex justify-content-between align-items-center">
           <button type="button" class="btn btn-outline-danger w-25"
@@ -138,7 +146,7 @@
     
 
   <!-- 編輯Modal -->
-  <edit-my-course-modal></edit-my-course-modal>
+  <!-- <edit-my-course-modal></edit-my-course-modal> -->
 
 
   
