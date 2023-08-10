@@ -117,7 +117,9 @@ export default defineStore('logInStore', {
     data.userTeacherCourses=[]
     data.userStudentCourses=[]
     data.userBookmarkCourses=[]
-    data.userCartCourses=[],
+    data.userCartCourses=[]
+    data.top6courses=[]
+    data.youLikeCourses =[]
     // 購物車
     cart.couponCode = '',
     cart.couponValue = 1,
