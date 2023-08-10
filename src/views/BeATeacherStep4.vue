@@ -1,24 +1,5 @@
 <template>
-  <div class="container">
-    <div class="row text-center">
-      <div class="col-12">
-        <h1>恭喜完成開課</h1>
-        <p>課程審核需要2~3個工作天</p>
-      </div>
-    </div>
-    <div class="row justify-content-center mt-5">
-      <div class="col-6 d-flex justify-content-between">
-        <button type="button" class="btn btn-outline-primary"
-                   @click="goHomePage()">
-            &emsp;&emsp;回到首頁&emsp;&emsp;
-        </button>
-        <button type="button" class="btn btn-primary"
-                  @click="goBeATeacherStep1()">
-            &emsp;&emsp;繼續開課&emsp;&emsp;
-        </button>
-      </div>
-    </div>
-  </div>
+<div class=""></div>
 </template>
 
 <script>
@@ -32,12 +13,31 @@ export default {
   methods: {
     ...mapActions(goStore, ['goHomePage', 'goBeATeacherStep1'])
   },
-  created () {
-
+  mounted () {
+    this.$swal.fire({
+      title: '<h1>恭喜完成開課</h1>',
+      icon: 'success',
+      text: '課程審核需要2~3個工作天',
+      // showCloseButton: true,
+      showCancelButton: true,
+      reverseButtons: true,
+      cancelButtonText: '回到首頁',
+      confirmButtonText: '繼續開課',
+      
+    })
+      .then((result) => {
+        if (result.isConfirmed) {
+          this.$router.push('/CreateCourses/BeATeacherStep1')
+        } else {
+          this.$router.push('/')
+        }
+      })
   }
 }
 </script>
 
 <style lang="scss" scoped>
-
+.BeATeacherStep4-vh {
+  height: calc(100vh - 194px - 184px - 48px);
+}
 </style>
