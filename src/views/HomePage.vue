@@ -26,21 +26,22 @@
             <span class="badge border border-primary rounded-pill text-primary fw-bold px-3 me-2">大鼓</span>
           </div>
         </div>
+
         <div class="col-12 col-lg-6 p-4 d-block d-lg-none">
-          <h2 class="fs-4 text-center fw-bold text-primary mb-3">
+          <h2 class="fs-4 text-center fw-bold text-primary">
             找尋像好友一樣的音樂導師
           </h2>
-          <h3 class="fs-6 text-center mb-5">
+          <h3 class="fs-6 text-center">
             在這裡與熱愛音樂的導師相遇，將你的音樂激情傾注其中。
           </h3>
-          <div class="mb-2">
-            <input class="form-control mt-0" list="datalistOptions" id="exampleDataList" placeholder="我想學習...">
+          <div class="">
+            <input class="form-control py-0" list="datalistOptions" id="exampleDataList" placeholder="我想學習...">
           </div>
-          <div class="pills">
-            <span class="badge border border-primary rounded-pill text-primary fw-bold px-3 me-2">鋼琴</span>
-            <span class="badge border border-primary rounded-pill text-primary fw-bold px-3 me-2">吉他</span>
-            <span class="badge border border-primary rounded-pill text-primary fw-bold px-3 me-2">唱歌</span>
-            <span class="badge border border-primary rounded-pill text-primary fw-bold px-3 me-2">大鼓</span>
+          <div class="pills d-flex justify-content-between">
+            <span class="badge border border-primary rounded-pill text-primary fw-bold px-4 me-2">鋼琴</span>
+            <span class="badge border border-primary rounded-pill text-primary fw-bold px-4 me-2">吉他</span>
+            <span class="badge border border-primary rounded-pill text-primary fw-bold px-4 me-2">唱歌</span>
+            <span class="badge border border-primary rounded-pill text-primary fw-bold px-4 me-2">大鼓</span>
           </div>
         </div>
       </div>
