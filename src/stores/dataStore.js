@@ -123,7 +123,7 @@ export default defineStore('dataStore', {
       const member = "MusicTutorCourses"
       console.log(this.beATeacherData)
       await addDoc(collection(db, member), this.beATeacherData)
-      alert('新增課程成功')
+      router.push('/CreateCourses/BeATeacherStep4')
       this.onAuthStateChanged()
       this.beATeacherData.uid = ''
       this.beATeacherData.displayName = ''
