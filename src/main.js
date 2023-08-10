@@ -62,8 +62,8 @@ const firebaseConfig = {
 };
 initializeApp(firebaseConfig)
 
-
-
+// moment
+import moment from 'moment'
 
 
 
@@ -75,7 +75,7 @@ app.config.globalProperties.$filters = {
   currency
 }
 
-
+app.config.globalProperties.$moment = moment
 app.use(createPinia())
 app.use(router)
 app.use(VueAxios, axios)

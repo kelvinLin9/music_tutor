@@ -15,9 +15,23 @@ import {getFirestore,
 import { getAuth, onAuthStateChanged,} from 'firebase/auth'
 import { defineStore } from 'pinia'
 import router from '../router'
+import Swal from 'sweetalert2/dist/sweetalert2'
 
 const auth = getAuth()
 const db = getFirestore()
+const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 2000,
+  timerProgressBar: true,
+  confirmButtonColor: 'rgba(168, 128, 48, 1)',
+  cancelButtonColor: 'rgba(108, 117, 125, 1)',
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
 
 export default defineStore('dataStore', {
   state: () => ({
@@ -100,6 +114,8 @@ export default defineStore('dataStore', {
     userStudentCourses:[],
     userBookmarkCourses:[],
     userCartCourses:[],
+    top6courses:[],
+    youLikeCourses:[],
   }),
   actions: {
     // 上傳資料----------------------------------
@@ -111,7 +127,7 @@ export default defineStore('dataStore', {
       this.teacherData);
       await setDoc(doc(db, this.user.uid , identity2), 
       this.studentData);
-      alert('成功建立老師端學生端物件')
+      console.log('成功建立老師端學生端物件')
       this.copyUserDataToTeacher()
     },
     // 開課後上傳課程
@@ -147,7 +163,7 @@ export default defineStore('dataStore', {
       this.teacherData.accountCreateTime = this.user.metadata.creationTime
       const teacherRef = doc(db, this.user.uid, 'teacher')
       await updateDoc(teacherRef, this.teacherData)
-      alert('成功複製用戶端資料')
+      console.log('成功複製用戶端資料')
       router.push('/')
     },
 
@@ -156,7 +172,10 @@ export default defineStore('dataStore', {
     async UpdateFirebaseMemberData() {
       const teacherRef = doc(db, this.user.uid, 'teacher')
       await updateDoc(teacherRef, this.teacherData)
-      alert('老師端資料更新成功')
+      Toast.fire({
+        icon: 'success',
+        title: '老師端資料更新成功'
+      })
       this.onAuthStateChanged()
     },
     // 單一課程頁面編輯用
@@ -167,20 +186,26 @@ export default defineStore('dataStore', {
       console.log(this.courseData)
       const CoursesRef = doc(db, 'MusicTutorCourses', id)
       await updateDoc(CoursesRef, this.courseData)
-      alert('課程資料更新成功')
-      // this.onAuthStateChanged()
+      Toast.fire({
+        icon: 'success',
+        title: '課程資料更新成功'
+      })
     },
     async UpdateFirebaseCartData() {
       const studentRef = doc(db, this.user.uid, 'student')
       await updateDoc(studentRef, this.studentData)
-      alert('學生老師端資料更新成功')
-      // this.onAuthStateChanged()
+      Toast.fire({
+        icon: 'success',
+        title: '學生老師端資料更新成功'
+      })
     },
     async UpdateTeacherImg() {
       const teacherRef = doc(db, this.user.uid, 'teacher')
       await updateDoc(teacherRef, this.teacherData)
-      alert('大頭照更新成功')
-      // this.onAuthStateChanged()
+      Toast.fire({
+        icon: 'success',
+        title: '大頭照更新成功'
+      })
     },
 
 
@@ -196,7 +221,7 @@ export default defineStore('dataStore', {
         if(router.currentRoute._value.fullPath === "/CreateCourses/BeATeacherStep1") {
           if (!this.teacherData.displayName || !this.teacherData.teacherIntro || !this.teacherData.teacherImg || !this.teacherData.gender) {
             console.log(this.teacherData.displayName, this.teacherData.teacherIntro, this.teacherData.gender, this.teacherData.teacherImg)
-            alert('請先填寫老師姓名、大頭照、性別、自我介紹')
+            Swal.fire('請先填寫老師姓名、大頭照、性別、自我介紹')
             router.push('/MemberPage')
           }
         }
@@ -210,6 +235,12 @@ export default defineStore('dataStore', {
       if (docSnap.exists()) {
         console.log("用戶學生端資料:", docSnap.data());
         this.studentData = docSnap.data()
+        // 如果在購物車頁就找出購物車詳細資料渲染
+        
+        if(router.currentRoute._value.fullPath === "/CoursesCart") {
+          console.log(router.currentRoute._value.fullPath)
+          this.getUserCartCourses()
+        }
       } else {
         alert("No such student document!");
       }
@@ -231,6 +262,7 @@ export default defineStore('dataStore', {
         this.AllCoursesFirebaseData.push(wrap)
       });
       console.log('全部課程資料',this.AllCoursesFirebaseData)
+      this.getTop6courses()
       // 用ID抓出其他想要渲染的資料
       if (this.user.uid) {
         this.getUserTeacherCourses()
@@ -261,6 +293,7 @@ export default defineStore('dataStore', {
         const wrap = {id : courseId}
         this.courseData = Object.assign(this.courseData, wrap,)
         this.getTeacherPhoto(this.courseData.uid)
+        this.getSameTeacherCourses(this.courseData.uid)
         router.push(`/coursePage/${courseId}`)
       } else {
         console.log("No such OneCourses document!")
@@ -298,20 +331,24 @@ export default defineStore('dataStore', {
       }
     },
     getUserCartCourses() {
-      this.userCartCourses = []
-      this.studentData.myCart.forEach((item) => {
-        let wrap = {}
-        wrap = this.AllCoursesFirebaseData.filter((i) => {
-          return i.id === item.courseId
+      if (!this.AllCoursesFirebaseData) {
+        console.log('完全沒有課程')
+      } else {
+        this.userCartCourses = []
+        this.studentData.myCart.forEach((item) => {
+          let wrap = {}
+          wrap = this.AllCoursesFirebaseData.filter((i) => {
+            return i.id === item.courseId
+          })
+          wrap.timestamp = item.timestamp
+          this.userCartCourses.push(wrap)
         })
-        wrap.timestamp = item.timestamp
-        this.userCartCourses.push(wrap)
-      })
-      console.log("用戶購物車內課程", this.userCartCourses)
+        console.log("用戶購物車內課程", this.userCartCourses)
+      }
     },
     getUserStudentCourses() {
       if(!this.studentData.myStudyCourses) {
-        alert('尚未購買課程')
+        Swal.fire('尚未購買課程')
       } else {
         this.userStudentCourses = []
         this.studentData.myStudyCourses.forEach((item) => {
@@ -325,7 +362,25 @@ export default defineStore('dataStore', {
         console.log("用戶學生端課程資料",this.userStudentCourses)
       }
     },
-
+    getTop6courses() {
+      this.top6courses = []
+      this.AllCoursesFirebaseData.sort((a,b)  => {
+        return b.data.whoBuy.length - a.data.whoBuy.length
+      }) 
+      this.top6courses = this.AllCoursesFirebaseData.slice(0,6)
+      console.log('人氣前6', this.top6courses)
+    },
+    getSameTeacherCourses(uid) {
+      this.youLikeCourses = []
+      if (!this.AllCoursesFirebaseData) {
+        console.log('完全沒有課程')
+      } else {
+        this.youLikeCourses = this.AllCoursesFirebaseData.filter((item) => {
+          return item.data.uid === uid
+        })
+        console.log("猜你喜歡",this.youLikeCourses)
+      }
+    },
 
 
     // 刪除資料-----------------------------------------
@@ -431,7 +486,7 @@ export default defineStore('dataStore', {
         }
         this.to64(item, file)
       } catch (error) {
-        alert(error)
+        Swal.fire(error)
         console.log('Catch Error: ', error)
       } finally {
         e.target.value = ''

@@ -5,6 +5,7 @@
       :slidesPerView="1"
       :spaceBetween="20"
       :freeMode="true"
+      :pagination="{clickable: true}"
       navigation
       :scrollbar="{ draggable: true }"
       :breakpoints="{
@@ -27,7 +28,7 @@
       }"
       class="mySwiper px-3"
     >
-      <SwiperSlide v-for="(item) in AllCoursesFirebaseData" :key="item.id" class="mb-5">
+      <SwiperSlide v-for="(item) in youLikeCourses" :key="item.id" class="mb-5">
         <div class="card rounded-3 scale h-100"
             @click="getOneCoursesFirebaseData(item.id)">
           <div class="card-img overflow-hidden position-relative">
@@ -55,20 +56,6 @@
                 <i class="bi bi-geo-alt-fill ms-2"></i>
                 {{ item.data.cityName || '線上' }}
               </div>
-              <!-- <div class="mb-1">
-                <span class="bg-info rounded-2 px-2 me-2"
-                      v-if="item.data.courseMethod[0]">
-                  {{ item.data.courseMethod[0] }}
-                </span>
-                <span class="bg-info rounded-2 px-2 me-2"
-                      v-if="item.data.courseMethod[1]">
-                  {{ item.data.courseMethod[1] }}
-                </span>
-                <span class="bg-info rounded-2 px-2 me-2"
-                      v-if="item.data.courseMethod[2]">
-                  {{ item.data.courseMethod[2] }}
-                </span>
-              </div> -->
               <div class="mb-1">
                 <span class="me-3">
                   NT$ {{ $filters.currency(item.data.price) }}
@@ -112,10 +99,10 @@ export default {
     }
   },
   computed: {
-    ...mapState(dataStore, ['coursesData', 'bookmarkState', 'AllCoursesFirebaseData'])
+    ...mapState(dataStore, ['coursesData', 'bookmarkState', 'youLikeCourses'])
   },
   methods: {
-    ...mapActions(dataStore, ['toggleBookmark', 'getOneCoursesFirebaseData', 'getAllCoursesFirebaseData']),
+    ...mapActions(dataStore, ['toggleBookmark', 'getOneCoursesFirebaseData']),
   },
   created () {
     // this.getBookmarkCoursesData()

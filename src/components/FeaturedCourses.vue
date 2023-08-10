@@ -24,7 +24,7 @@
       }"
       class="mySwiper px-3"
     >
-      <SwiperSlide v-for="(item) in AllCoursesFirebaseData" :key="item.id" class="mb-5">
+      <SwiperSlide v-for="(item) in top6courses" :key="item.id" class="mb-5">
         <div class="card rounded-3 scale h-100"
             @click="getOneCoursesFirebaseData(item.id)">
           <div class="card-img overflow-hidden position-relative">
@@ -115,10 +115,10 @@ export default {
     }
   },
   computed: {
-    ...mapState(dataStore, ['coursesData', 'bookmarkState', 'AllCoursesFirebaseData'])
+    ...mapState(dataStore, ['coursesData', 'bookmarkState', 'top6courses'])
   },
   methods: {
-    ...mapActions(dataStore, ['toggleBookmark', 'getOneCoursesFirebaseData', 'getAllCoursesFirebaseData']),
+    ...mapActions(dataStore, ['toggleBookmark', 'getOneCoursesFirebaseData']),
   },
   created () {
     // this.getBookmarkCoursesData()

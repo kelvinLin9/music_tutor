@@ -134,7 +134,7 @@
     
 
   <!-- 編輯Modal -->
-  <!-- <edit-my-course-modal></edit-my-course-modal> -->
+  <edit-my-course-modal></edit-my-course-modal>
 
 
   

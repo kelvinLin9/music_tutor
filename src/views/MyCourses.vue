@@ -110,20 +110,6 @@
                 <i class="bi bi-geo-alt-fill"></i>
                 {{ item[0].data.cityName || '線上' }}
               </div>
-              <!-- <div class="mb-1">
-                <span class="bg-info rounded-2 px-2 me-2"
-                      v-if="item[0].data.courseMethod[0]">
-                  {{ item[0].data.courseMethod[0] }}
-                </span>
-                <span class="bg-info rounded-2 px-2 me-2"
-                      v-if="item[0].data.courseMethod[1]">
-                  {{ item[0].data.courseMethod[1] }}
-                </span>
-                <span class="bg-info rounded-2 px-2 me-2"
-                      v-if="item[0].data.courseMethod[2]">
-                  {{ item[0].data.courseMethod[2] }}
-                </span>
-              </div> -->
               <div class="mb-1">
                 <span class="me-3">
                   NT$ {{ $filters.currency(item[0].data.price) }}
@@ -135,7 +121,6 @@
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </div>
@@ -177,7 +162,7 @@
               </td>
               <td class="">
                 購買時間<br>
-                <!-- {{ new Date(item.timestamp)}} -->
+                {{ this.$moment(item.timestamp).format('YYYY/MM/DD')}}
                 <!-- 開課時間{{}} -->
               </td>
             </tr>
