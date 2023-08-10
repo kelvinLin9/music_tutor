@@ -46,7 +46,7 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 // sweetalert2
 const options = {
   confirmButtonColor: 'rgba(168, 128, 48, 1)',
-  cancelButtonColor: 'rgba(108, 117, 125, 1)'
+  cancelButtonColor: 'rgba(108, 117, 125, 1)',
 }
 
 //firebase
