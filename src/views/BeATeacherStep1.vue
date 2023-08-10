@@ -276,7 +276,7 @@ import dataStore from '@/stores/dataStore'
 export default {
   computed: {
     ...mapWritableState(dataStore, ['beATeacherData','teacherData']),
-    ...mapState(dataStore, ['isMember','','teacherData','user']),
+    ...mapState(dataStore, ['isMember','teacherData','user']),
 
   },
   methods: {

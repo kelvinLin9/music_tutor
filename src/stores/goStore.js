@@ -33,9 +33,6 @@ export default defineStore('goStore', {
     },
     goBeATeacherStep4 () {
       router.push('/CreateCourses/BeATeacherStep4')
-    },
-    goCheckoutPage (uid, id) {
-      router.push('/CartCheckout')
     }
   }
 })

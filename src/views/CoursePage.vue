@@ -49,7 +49,7 @@
           <div class="col-auto">
             <div class="d-flex align-items-center">
               <i class="bi bi-people-fill me-2"></i>
-              已被購買 <br> {{ courseData.whoBuy.length }}次
+              已被購買 <br> {{ courseData.whoBuy.length || 0 }}次
             </div>
           </div>
           <div class="col-auto">
@@ -170,7 +170,6 @@ export default {
   },
   methods: {
     ...mapActions(dataStore, ['onAuthStateChanged','toggleBookmark','getOneCoursesFirebaseData', 'getOneTeacherFirebaseData']),
-    ...mapActions(goStore, ['goCheckoutPage']),
     ...mapActions(cartStore, ['addCart','buyNow']),
     
   },

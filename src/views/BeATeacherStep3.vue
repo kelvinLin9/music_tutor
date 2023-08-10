@@ -31,7 +31,7 @@
             <img :src="teacherData.teacherImg" alt="老師照片" class="user-photo">
           </div>
           <div class="col-10 fs-2">
-            {{ user.displayName }}
+            {{ teacherData.displayName }}
           </div>
         </div>
         <div class="row my-3">
