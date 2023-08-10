@@ -63,18 +63,6 @@
                       v-for="item in courseData.courseMethod" :key="item">
                   {{ item }}
                 </span>
-                <!-- <span class="bg-info rounded-2 px-2 me-2"
-                      v-if="courseData.courseMethod[0]">
-                  {{ courseData.courseMethod[0] }}
-                </span> -->
-                <!-- <span class="bg-info rounded-2 px-2 me-2"
-                      v-if="courseData.courseMethod[1]">
-                  {{ courseData.courseMethod[1] }}
-                </span>
-                <span class="bg-info rounded-2 px-2 me-2"
-                      v-if="courseData.courseMethod[2]">
-                  {{ courseData.courseMethod[2] }}
-                </span> -->
               </div>
             </div>
           </div>
