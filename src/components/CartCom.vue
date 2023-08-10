@@ -1,7 +1,7 @@
 <template>
-  <div class="text-center fs-1"
+  <div class="text-center CoursesCart-vh d-flex flex-column justify-content-center align-items-center"
       v-if="studentData.myCart.length === 0">
-      <p>購物車無任何品項</p>
+      <p class="fs-1">購物車無任何品項</p>
       <RouterLink to="/AllCourses">
         <button type="button" class="btn btn-outline-primary">
           繼續購物
@@ -74,11 +74,11 @@
           </td>
         </tr>
       </tbody>
-    
     </table>
+    <!-- {{ studentData.myCart }} -->
+    <!-- {{ userCartCourses }} -->
   </div>
 
-  
 </template>
 
 <script>
@@ -118,5 +118,8 @@ export default {
 input {
   width: 25px;
   height: 25px;
+}
+.CoursesCart-vh {
+  height: calc(100vh - 194px);
 }
 </style>
