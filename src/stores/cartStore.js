@@ -2,9 +2,11 @@ import { defineStore } from 'pinia'
 import dataStore from './dataStore';
 import { doc, setDoc, updateDoc, getFirestore , arrayUnion, arrayRemove} from "firebase/firestore"; 
 import router from '../router'
+import Swal from 'sweetalert2/dist/sweetalert2'
 
 const db = getFirestore()
 const data = dataStore()
+
 
 export default defineStore('cartStore', {
   state: () => ({
@@ -33,6 +35,7 @@ export default defineStore('cartStore', {
         myCart: arrayUnion(wrap)
       });
       alert('成功加入購物車')
+      // Swal.fire('成功加入購物車')
       data.onAuthStateChanged()
     },
     async buyNow(uid, id) {
@@ -44,7 +47,8 @@ export default defineStore('cartStore', {
       await updateDoc(cart, {
       myCart: arrayUnion(wrap)
       });
-      alert('成功加入購物車')
+      // alert('成功加入購物車')
+      
       router.push('/CoursesCart')
 
     },

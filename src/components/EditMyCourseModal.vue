@@ -276,12 +276,6 @@
                   </label>
                 </div>
                 <div class="col-8">
-                  <!-- <input
-                    type="file"
-                    id="coursePhoto"
-                    class="form-control"
-                    @change="uploadPhoto('course',$event)"
-                  /> -->
                   <VField
                   name="課程封面"
                   type="file"
