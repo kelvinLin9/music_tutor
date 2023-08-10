@@ -117,9 +117,8 @@ export default defineStore('dataStore', {
     // 開課後上傳課程
     async SetFirebaseCourseData() {   
       this.beATeacherData.uid = this.user.uid
-      this.beATeacherData.displayName = this.user.displayName
+      this.beATeacherData.displayName = this.teacherData.displayName
       this.beATeacherData.gender = this.teacherData.gender
-      this.beATeacherData.teacherImg = this.teacherData.teacherImg
       this.beATeacherData.teacherIntro = this.teacherData.teacherIntro
       const member = "MusicTutorCourses"
       console.log(this.beATeacherData)
@@ -130,7 +129,6 @@ export default defineStore('dataStore', {
       this.beATeacherData.displayName = ''
       this.beATeacherData.gender = ''
       this.beATeacherData.courseImg = ''
-      this.beATeacherData.teacherImg = ''
       this.beATeacherData.teacherIntro = ''
       this.beATeacherData.courseName = ''
       this.beATeacherData.courseIntro = ''
@@ -163,13 +161,8 @@ export default defineStore('dataStore', {
     },
     // 單一課程頁面編輯用
     async UpdateFirebaseUserCourseData(id) {
-      // console.log(this.courseData.courseImg)
       if (this.beATeacherData.courseImg) {
         this.courseData.courseImg = this.beATeacherData.courseImg
-      }
-      // console.log(this.courseData.courseImg)
-      if (this.beATeacherData.teacherImg) {
-        this.courseData.teacherImg = this.beATeacherData.teacherImg
       }
       console.log(this.courseData)
       const CoursesRef = doc(db, 'MusicTutorCourses', id)
@@ -201,8 +194,8 @@ export default defineStore('dataStore', {
         console.log("用戶老師端資料:", docSnap.data());
         this.teacherData = docSnap.data()
         if(router.currentRoute._value.fullPath === "/CreateCourses/BeATeacherStep1") {
-          if (!this.user.displayName || !this.teacherData.teacherIntro || !this.teacherData.teacherImg || !this.teacherData.gender) {
-            console.log(this.user.displayName, this.teacherData.teacherIntro, this.teacherData.gender, this.teacherData.teacherImg)
+          if (!this.teacherData.displayName || !this.teacherData.teacherIntro || !this.teacherData.teacherImg || !this.teacherData.gender) {
+            console.log(this.teacherData.displayName, this.teacherData.teacherIntro, this.teacherData.gender, this.teacherData.teacherImg)
             alert('請先填寫老師姓名、大頭照、性別、自我介紹')
             router.push('/MemberPage')
           }
@@ -454,9 +447,9 @@ export default defineStore('dataStore', {
           errorMessages.push('需上傳 JPG 或 PNG 檔!')
         }
 
-        const isValidFileSize = fileObject.size / 1024 / 1024 < 0.8
+        const isValidFileSize = fileObject.size / 1024 / 1024 < 0.5
         if (!isValidFileSize) {
-          errorMessages.push('圖片大小需小於0.8MB!')
+          errorMessages.push('圖片大小需小於0.5MB!')
         }
         resolve({
           isValid: isValidFileType && isValidFileSize,
@@ -476,8 +469,6 @@ export default defineStore('dataStore', {
       reader.onload = e => {
         if (/^image\/[jpeg|png|gif]/.test(fileType)) {
           if (item === 'teacher'){
-            // 創建課程、編輯課程用
-            this.beATeacherData.teacherImg = e.target.result
             // 編輯個人大頭照用，寫這邊可以綁定課程換大頭照也會一起換避免不一致
             this.teacherData.teacherImg = e.target.result
             this.UpdateTeacherImg()
