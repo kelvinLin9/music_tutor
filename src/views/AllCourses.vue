@@ -213,7 +213,7 @@
     </div>
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-2">
       <div class="col"
-            v-for="item in filterData" :key="item.id">
+            v-for="item in currentPageCoursesData" :key="item.id">
             <div class="card rounded-3 scale h-100"
             @click="getOneCoursesFirebaseData(item.id)">
           <div class="card-img overflow-hidden position-relative">
@@ -270,8 +270,8 @@
       </div>
     </div>
   </div>
-
-  <!-- <PaginationCom /> -->
+  <!-- {{ currentPageCoursesData }} -->
+  <PaginationCom />
 </template>
   
 <script>
@@ -280,13 +280,13 @@ import { mapState, mapActions, mapWritableState } from
 'pinia'  
 import dataStore from '@/stores/dataStore'
 import filterStore from '@/stores/filterStore'
-import goStore from '@/stores/goStore'
+// import goStore from '@/stores/goStore'
 
 export default {
   components: { PaginationCom },
   computed: {
     ...mapState(dataStore, ['coursesData', 'bookmarkState', 'AllCoursesFirebaseData', 'onAuthStateChanged']),
-    ...mapState(filterStore, ['filterData','courseMethod', 'sortMethod']),
+    ...mapState(filterStore, ['filterData','courseMethod', 'sortMethod', 'currentPageCoursesData']),
     ...mapWritableState(filterStore, ['selectCityName', 'selectCourseCategory', 'selectCourseName','selectCourseMethod', 'selectSortMethod'])
   },
   methods: {
