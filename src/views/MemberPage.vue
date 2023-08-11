@@ -55,7 +55,6 @@
       <div class="col-12 col-md-8 mt-3 px-5">
         <div class="">上傳個人封面框</div>
 
-        <!-- <div id="editor"></div> -->
         <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
         {{ editorData  }}
       </div>
@@ -73,6 +72,7 @@ import dataStore from '../stores/dataStore';
 import EditIntroModal from '../components/EditIntroModal.vue'
 //ckeditor5
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+// import { Base64UploadAdapter } from '@ckeditor/ckeditor5-upload';
 
 
 export default {
@@ -82,6 +82,7 @@ export default {
                 editorData: '<p>Content of the editor.</p>',
                 editorConfig: {
                     // The configuration of the editor.
+                    // plugins: [ Base64UploadAdapter],
                 }
             };
         },
