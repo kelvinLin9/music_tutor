@@ -1,9 +1,10 @@
 import { defineStore } from 'pinia'
 
+
 export default defineStore('paginationStore', {
   state: () => ({
     eachPage: [],
-    pageSize: 12, // 每頁有幾筆資料
+    pageSize: 4, // 每頁有幾筆資料
     page: {
       totalPage: 0, 
       currentPage: 1, 
@@ -13,9 +14,7 @@ export default defineStore('paginationStore', {
     }
   }),
   actions: {
-    pagination(nowPage = 1 , data) {
-      console.log(data.length)
-      this.page.currentPage = nowPage
+    pagination(data) {
       this.page.totalPage = Math.ceil(data.length / this.pageSize)
       this.eachPage = [] 
       if(this.page.currentPage < 1 ){
@@ -67,7 +66,7 @@ export default defineStore('paginationStore', {
         this.page.pageNumBox.push(i);
       }
       console.log(this.page.pageNumBox);
-    },
+    }
   },
 
 })

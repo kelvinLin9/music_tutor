@@ -1,16 +1,6 @@
-import {getFirestore, 
-        collection, 
-        doc, 
-        setDoc, 
-        getDoc,
-        getDocs, 
-        addDoc, 
-        Timestamp,
-        updateDoc, 
-        serverTimestamp,
-        writeBatch,
-        deleteDoc,
-        deleteField,
+import {getFirestore, collection, doc, setDoc, getDoc,getDocs, addDoc, 
+        Timestamp, updateDoc, serverTimestamp, writeBatch, 
+        deleteDoc, deleteField,
        } from 'firebase/firestore/lite'
 import { getAuth, onAuthStateChanged,} from 'firebase/auth'
 import { defineStore } from 'pinia'
