@@ -1,20 +1,32 @@
 import { defineStore } from 'pinia'
 import router from '../router'
-import { getAuth, 
-         createUserWithEmailAndPassword, 
-         signInWithEmailAndPassword,
-         onAuthStateChanged,
-         GoogleAuthProvider,
-         signInWithPopup,
-         updateProfile,
-         signOut
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
+         onAuthStateChanged, GoogleAuthProvider, signInWithPopup,
+         updateProfile, signOut
         } from 'firebase/auth'
 import dataStore from './dataStore';
 import cartStore from './cartStore';
+import Swal from 'sweetalert2/dist/sweetalert2'
+
+
 
 const auth = getAuth();
 const data = dataStore()
 const cart = cartStore()
+const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 2000,
+  timerProgressBar: true,
+  confirmButtonColor: 'rgba(168, 128, 48, 1)',
+  cancelButtonColor: 'rgba(108, 117, 125, 1)',
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
 
 export default defineStore('logInStore', {
   state: () => ({
@@ -142,10 +154,13 @@ export default defineStore('logInStore', {
       this.logInForm.user.email = ''
       this.logInForm.user.password = ''
       router.push('/')
-      alert('恭喜登入成功')
+      Toast.fire({
+        icon: 'success',
+        title: '恭喜登入成功'
+      })
     })
     .catch((err) => {
-      alert(err.message)
+      Toast.fire(err.message)
     })
    },
 
@@ -157,7 +172,10 @@ export default defineStore('logInStore', {
       data.user = res.user
       // 只有用戶名要跟google登入用不同方式取得
       data.teacherData.displayName = this.signUpForm.user.displayName
-      alert('恭喜註冊成功')
+      Toast.fire({
+        icon: 'success',
+        title: '恭喜註冊成功'
+      })
       this.logInPage = true
       this.signUpForm.user.displayName = ''
       this.signUpForm.user.email = ''
@@ -166,25 +184,36 @@ export default defineStore('logInStore', {
       data.SetFirebaseMemberData()
     })
     .catch((err) => {
-      alert(err)
+      Toast.fire({
+        icon: 'success',
+        title: err
+      })
     })  
   },
 
 
 
 
-   signInWithGoogle () {
+  async signInWithGoogle () {
     const provider = new GoogleAuthProvider()
     signInWithPopup(auth, provider)
     .then((res) => {
       // console.log(res.user)
       data.user = res.user
       data.isMember = true
-      alert(res.user.uid + "登入成功")
-      alert(`帳號創立時間${res.user.metadata.creationTime
-      }`)
-      alert(`上次登入時間${res.user.metadata.lastSignInTime}`)
-      
+      Toast.fire({
+        icon: 'success',
+        title: res.user.uid + "登入成功"
+      })
+      Toast.fire({
+        icon: 'success',
+        title: `帳號創立時間${res.user.metadata.creationTime
+        }`
+      })
+      Toast.fire({
+        icon: 'success',
+        title: `上次登入時間${res.user.metadata.lastSignInTime}`
+      })
       // 判斷如果是第一次登入，建立一份老師學生端物件上傳
       if(res.user.metadata.creationTime === res.user.metadata.lastSignInTime) {
         console.log("第一次登入")
@@ -195,7 +224,10 @@ export default defineStore('logInStore', {
       }
     })
     .catch((err) => {
-      alert(err)
+      Toast.fire({
+        icon: 'error',
+        title: err
+      })
     })
    }
   }
