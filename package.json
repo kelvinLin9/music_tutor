@@ -10,6 +10,9 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^39.0.1",
+    "@ckeditor/ckeditor5-vue": "^5.1.0",
+    "@ckeditor/vite-plugin-ckeditor5": "^0.1.3",
     "@popperjs/core": "^2.11.8",
     "@vee-validate/i18n": "^4.10.7",
     "@vee-validate/rules": "^4.10.7",

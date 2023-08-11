@@ -1,5 +1,6 @@
 <template>
-  <div class="container my-4 d-none d-sm-block">
+  <div class="container my-4 d-none d-sm-block"
+        v-if="filterData.length != 0">
     <nav>
       <ul class="pagination d-flex justify-content-center">
         <li class="page-item" 
@@ -39,7 +40,8 @@
     </nav>
   </div>
 
-  <div class="container d-flex justify-content-center my-4 d-block d-sm-none">
+  <div class="container d-flex justify-content-center my-4 d-block d-sm-none"
+        v-if="filterData.length != 0">
     <div class="pagination row g-1 justify-content-center align-items-center">
       <div class="col-auto page-item" 
             :class="{'disabled':!page.hasPrevPage}"
@@ -82,8 +84,6 @@ import filterStore from '@/stores/filterStore'
 
 export default {
   computed: {
-    ...mapState(dataStore, ['coursesData']),
-    ...mapState(paginationStore, []),
     ...mapWritableState(paginationStore, ['page']),
     ...mapState(filterStore, ['filterData']),
   },
