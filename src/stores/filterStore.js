@@ -4,7 +4,7 @@ import PaginationStore from './PaginationStore'
 
 
 const data = dataStore()
-const Pagination = PaginationStore()
+const pagiStore = PaginationStore()
 
 export default defineStore('filterStore', {
   state: () => ({
@@ -53,5 +53,10 @@ export default defineStore('filterStore', {
         })
       }
     },
+    currentPageCoursesData () {
+      console.log(pagiStore.page.currentPage)
+      pagiStore.pagination(this.filterData)
+      return pagiStore.eachPage
+    }
   }
 })

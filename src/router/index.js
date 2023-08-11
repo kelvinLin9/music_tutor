@@ -82,12 +82,12 @@ const router = createRouter({
           name: 'AccountSetting',
           component: () => import('../views/AccountSetting.vue')
         },
-        {
-          path: 'UserLogin',
-          name: 'UserLogin',
-          component: () => import('../views/UserLogin.vue')
-        },
       ],
+    },
+    {
+      path: '/UserLogin',
+      name: 'UserLogin',
+      component: () => import('../views/UserLogin.vue')
     },
     {
       path: '/:pathMatch(.*)*',

@@ -1,12 +1,28 @@
 <template>
-  <div class="container">
-    <div class="row align-items-center">
-      <div class="col-3">
-        <img src="https://fakeimg.pl/180x520/" alt="">
+  <div class="container-fluid ps-0 position-relative">
+    <RouterLink to="/">
+      <img src="../assets/images/logo_default.png" alt="logo" class="login-logo">
+    </RouterLink>
+    <div class="row align-items-center justify-content-center justify-content-md-start login-page ">
+      <div class="col-6 col-lg-4 d-none d-md-block">
+        <img src="../assets/images/login.jpg" alt="登入圖" class="">
       </div>
-      <div class="col-6 mx-auto">
+
+
+      <div class="col-8 col-md-6 col-xl-4">
         <div v-if="logInPage">
-          <h1 class="mx-auto border-bottom my-3 pb-2 w-50 text-center">會員登入</h1>
+          <h1 class="mx-auto border-bottom my-3 pb-2 w-75 text-center fs-1">
+            會員登入
+          </h1>
+          <button type="button" 
+                  class="btn btn-outline-dark d-block mx-auto py-3 d-flex justify-content-center w-75"
+                  @click="signInWithGoogle()">
+            <img src="../assets/images/google.png" alt="google icon" class="google-icon me-2">
+            <span class="google-login-text">使用 Google 登入</span>
+          </button>
+
+          <hr class="mx-auto w-75 mt-4 text-center fs-7 login-hr">
+
           <VForm class="mx-auto w-75"
                 v-slot="{ errors }"
                 @submit="logIn()">
@@ -19,7 +35,7 @@
                 id="email"
                 type="email"
                 rules="required|email"
-                class="form-control"
+                class="form-control fs-7"
                 :class="{ 'is-invalid': errors['email'] }"
                 placeholder="請輸入 Email"
                 v-model="logInForm.user.email"
@@ -27,42 +43,42 @@
               <ErrorMessage class="invalid-feedback" name="email"/>
             </div>
             <div class="mb-3">
-              <label for="password" class="form-label ">
-                password：
-              </label>
+              <div class="d-flex justify-content-between align-items-center">
+                <label for="password" class="form-label">
+                  密碼：
+                </label>
+                <a href="#" class="text-delete fs-7" @click.prevent>
+                  忘記密碼
+                </a>
+              </div>
               <VField
                 name="密碼"
                 id="password"
                 type="password"
                 rules="required|min:8"
-                class="form-control"
+                class="form-control fs-7"
                 :class="{ 'is-invalid': errors['密碼'] }"
                 placeholder="請輸入密碼"
                 v-model="logInForm.user.password"
               />
               <ErrorMessage class="invalid-feedback" name="密碼"/>
             </div>
-            <div class="mb-3 d-flex justify-content-between">
-              <button type="submit" class="btn btn-sm btn-primary">
-                登入
-              </button>
-              <button type="button" class="btn btn-sm btn-outline-primary"
-                      @click="signInWithGoogle()">
-                Google登入
-              </button>
-            </div>
-            <div class="d-flex justify-content-between">
-              <a href="#">忘記密碼</a>
+            <button type="submit" class="btn btn-dark d-block mx-auto py-3 w-100">
+              登入
+            </button>
+            <p class="mx-auto w-75 my-3 text-center fs-7 text-delete">
+              還沒有帳號嗎?
               <a href="#" class="d-inline-block"
                 @click.prevent="logInPage = false">
-                前往註冊
+                 前往註冊
               </a>
-            </div>
+            </p>
+            
           </VForm>
         </div>
 
         <div v-else>
-          <h1 class="mx-auto border-bottom my-3 pb-2 w-50 text-center">會員註冊</h1>
+          <h1 class="mx-auto border-bottom my-3 pb-2 w-75 text-center">會員註冊</h1>
           <VForm class="mx-auto w-75"
           v-slot="{ errors }"
           @submit="signUp()">
@@ -75,7 +91,7 @@
                 id="displayName"
                 type="text"
                 rules="required"
-                class="form-control"
+                class="form-control fs-7"
                 :class="{ 'is-invalid': errors['姓名'] }"
                 placeholder="請輸入姓名"
                 v-model="signUpForm.user.displayName"
@@ -91,7 +107,7 @@
                 id="email"
                 type="email"
                 rules="required|email"
-                class="form-control"
+                class="form-control fs-7"
                 :class="{ 'is-invalid': errors['email'] }"
                 placeholder="請輸入 Email"
                 v-model="signUpForm.user.email"
@@ -100,14 +116,14 @@
             </div>
             <div class="mb-3">
               <label for="password" class="form-label ">
-                password：
+                密碼：
               </label>
               <VField
                 name="密碼"
                 id="password"
                 type="password"
                 rules="required|min:8"
-                class="form-control"
+                class="form-control fs-7"
                 :class="{ 'is-invalid': errors['密碼'] }"
                 placeholder="請輸入密碼"
                 v-model="signUpForm.user.password"
@@ -116,33 +132,31 @@
             </div>
             <div class="mb-3">
               <label for="confirmation" class="form-label ">
-                請再次輸入密碼：
+                再次輸入密碼：
               </label>
               <VField
                 name="驗證密碼"
                 id="confirmation"
                 type="password"
-                rules="confirmed:@密碼"
-                class="form-control"
+                rules="required|confirmed:@密碼"
+                class="form-control fs-7"
                 :class="{ 'is-invalid': errors['驗證密碼'] }"
                 placeholder="請再次輸入密碼"
                 v-model="signUpForm.user.confirmation"
               />
               <ErrorMessage class="invalid-feedback" name="驗證密碼"/>
             </div>
-            <div class="mb-3 d-flex justify-content-between">
 
-              <button type="submit" class="btn btn-sm btn-primary w-25">
-                註冊
-              </button>
-              <!-- <button type="reset" class="btn btn-sm btn-danger">
-                重設
-              </button> -->
-              <button type="button" class="btn btn-sm btn-primary w-25"
-                      @click="logInPage = true">
-                登入
-              </button>
-            </div>
+            <button type="submit" class="btn btn-dark d-block mx-auto py-3 w-100">
+              註冊
+            </button>
+            <p class="mx-auto w-75 my-3 text-center fs-7 text-delete">
+              已經有帳號?
+              <a href="#" class="d-inline-block"
+                @click.prevent="logInPage = true">
+                 前往登入
+              </a>
+            </p>
           </VForm>
         </div>
       </div>
@@ -176,6 +190,47 @@ export default {
 <style lang="scss" scoped>
 img {
   width: 100%;
-  
+  height: 100vh;
+}
+.login-page {
+  height: 100vh;
+}
+.login-logo {
+  width: 228px;
+  height: 40px;
+  position: absolute;
+  z-index: 10;
+  left: 20px;
+  top: 10px;
+}
+.google-icon {
+  width: 16px;
+  height: 16px;
+  @media (min-width:576px) {
+    width: 24px;
+    height: 24px;
+  }
+}
+.google-login-text {
+  font-size: 12px;
+  @media (min-width:576px) {
+    font-size: 16px;
+  }
+}
+.login-hr {
+  height: 1px;
+  overflow: visible;
+  border: none;
+  background-color: rgb(140, 140,140);
+  text-align: center;
+  &::after {
+    content: '或使用信箱登入';
+    display: inline-block;
+    position: relative;
+    top: -7px;
+    padding: 0 16px;
+    background: #fff;
+
+  }
 }
 </style>

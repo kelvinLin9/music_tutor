@@ -1,29 +1,21 @@
 <template>
-  <!-- {{ page.hasPrevPage }}
-  {{ page.currentPage }}
-  {{ page.pageNumBox }}
-  {{ page.totalPage }}
-  {{ page.hasNextPage }} -->
-  <div class="container d-flex justify-content-center mt-4">
-    <nav aria-label="Page navigation example">
-      <ul class="pagination">
+  <div class="container my-4 d-none d-sm-block">
+    <nav>
+      <ul class="pagination d-flex justify-content-center">
         <li class="page-item" 
             :class="{'disabled':!page.hasPrevPage}"
             v-if="page.totalPage > 0">
           <a class="page-link" href="#" 
-            :data-page="page.currentPage - 1" 
-            @click.prevent="changePage">
+            @click.prevent="page.currentPage -= 1">
             <i class="bi bi-caret-left-fill"></i>
           </a>
         </li>
         
-
         <li class="page-item d-flex" 
             v-for="(item,index) in page.pageNumBox" :key="index" 
             :class="{'active': item === page.currentPage}">
           <a class="page-link" href="#" 
-            :data-page="item" 
-            @click.prevent="changePage">{{item}}
+            @click.prevent="page.currentPage = item">{{item}}
           </a>
         </li>
 
@@ -31,33 +23,52 @@
         <li class="page-item"
           v-if="page.totalPage > 5">
           <a class="page-link" href="#"
-          @click.prevent="lastPage">
-            ......{{page.totalPage}}</a>
+          @click.prevent="page.currentPage = page.totalPage">
+            ...{{page.totalPage}}</a>
         </li>
 
         <li class="page-item" 
             :class="{'disabled':!page.hasNextPage}"
             v-if="page.totalPage > 0">
           <a class="page-link" href="#" 
-            :data-page="page.currentPage + 1" 
-            @click.prevent="changePage">
+            @click.prevent="page.currentPage += 1">
             <i class="bi bi-caret-right-fill"></i>
           </a>
         </li>
-
-        <li class="page-item" 
-            :class="{'disabled':!page.hasNextPage}"
-            v-if="page.totalPage > 5">
-          <input class="form-control" type="text" placeholder="請輸入頁碼" aria-label="default input example"
-          v-model="selPage">
-        </li>
-        <button type="button" class="btn btn-primary" 
-                @click.prevent="select"
-                v-if="page.totalPage > 5">
-          確認
-        </button>
       </ul>
     </nav>
+  </div>
+
+  <div class="container d-flex justify-content-center my-4 d-block d-sm-none">
+    <div class="pagination row g-1 justify-content-center align-items-center">
+      <div class="col-auto page-item" 
+            :class="{'disabled':!page.hasPrevPage}"
+            v-if="page.totalPage > 0">
+        <a class="page-link" href="#" 
+            @click.prevent="page.currentPage -= 1">
+            <i class="bi bi-caret-left-fill"></i>
+        </a>
+      </div>
+      <div class="col-3">      
+        <input class="form-control" 
+              type="number"
+              id="selPage" 
+              placeholder="請輸入頁碼" 
+              aria-label="default input example"
+              v-model="page.currentPage">
+      </div>
+      <div class="col-auto ">
+        <label for="selPage" class="fs-7 text-delete">/ {{ page.totalPage }} 頁</label>
+      </div>
+      <div class="col-auto page-item" 
+          :class="{'disabled':!page.hasNextPage}"
+          v-if="page.totalPage > 0">
+        <a class="page-link" href="#" 
+          @click.prevent="page.currentPage += 1">
+          <i class="bi bi-caret-right-fill"></i>
+        </a>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -72,8 +83,8 @@ import filterStore from '@/stores/filterStore'
 export default {
   computed: {
     ...mapState(dataStore, ['coursesData']),
-    ...mapState(paginationStore, ['page']),
-    ...mapWritableState(paginationStore, []),
+    ...mapState(paginationStore, []),
+    ...mapWritableState(paginationStore, ['page']),
     ...mapState(filterStore, ['filterData']),
   },
   methods: {
@@ -81,8 +92,9 @@ export default {
 
     
   },
-  created () {
-    this.pagination(1,this.filterData)
+  mounted () {
+    // console.log(this.filterData)
+    // this.pagination(1,this.filterData)
   }
 }
 </script>
