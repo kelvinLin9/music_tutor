@@ -64,8 +64,8 @@ initializeApp(firebaseConfig)
 
 // moment
 import moment from 'moment'
-
-
+// CKEditor
+import CKEditor from '@ckeditor/ckeditor5-vue';
 
 
 
@@ -84,4 +84,5 @@ app.component('VField', Field);
 app.component('VForm', Form);
 app.component('ErrorMessage', ErrorMessage);
 app.use(register);
+app.use(CKEditor)
 app.mount('#app')

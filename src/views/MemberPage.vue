@@ -52,8 +52,12 @@
           <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">編輯個人資料</button>
         </div>
       </div>
-      <div class="col-12 col-md-8">
+      <div class="col-12 col-md-8 mt-3 px-5">
+        <div class="">上傳個人封面框</div>
 
+        <!-- <div id="editor"></div> -->
+        <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
+        {{ editorData  }}
       </div>
     </div>
   </div>
@@ -67,8 +71,20 @@ import logInStore from '@/stores/logInStore'
 import goStore from '@/stores/goStore'
 import dataStore from '../stores/dataStore';
 import EditIntroModal from '../components/EditIntroModal.vue'
+//ckeditor5
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+
 
 export default {
+  data() {
+            return {
+                editor: ClassicEditor,
+                editorData: '<p>Content of the editor.</p>',
+                editorConfig: {
+                    // The configuration of the editor.
+                }
+            };
+        },
   components: { EditIntroModal },
   computed: {
     ...mapState(dataStore, ['user','isMember', 'teacherData']),
@@ -81,7 +97,10 @@ export default {
   },
   created () {
     this.onAuthStateChanged()
-  }
+  },
+  mounted() {
+
+  },
 }
 </script>
 

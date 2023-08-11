@@ -166,7 +166,7 @@
         </div>
       </div>
       <!-- 名稱 -->
-      <div class="col-12 col-sm-auto  col-lg-auto">
+      <div class="col-12 col-md-auto  col-lg-auto">
         <div class="row g-1 align-items-center">
           <div class="col-auto">
             <label for="selectCourseName" class="col-form-label">課程名稱：</label>
@@ -179,7 +179,7 @@
         </div>
       </div>
       <!-- 排序 -->
-      <div class="col-auto ms-sm-auto">
+      <div class="col-auto ms-md-auto">
         <div class="row g-1 align-items-center">
           <div class="col-auto">
             <label for="selectCityName" class="col-form-label">
@@ -201,9 +201,22 @@
           </div>
         </div>
       </div>
+      <!-- 排列方式 -->
+      <div class="col-auto ms-auto mt-0 cursor-pointer d-block d-md-none ">
+        <i class="bi bi-grid-fill text-danger fs-2"
+            v-if="displayState === 'grid'"
+            @click="displayState = 'list'"
+        >
+        </i>
+        <i class="bi bi-list-task text-danger fs-2"
+            v-if="displayState === 'list'"
+            @click="displayState = 'grid'"
+        >
+        </i>
+      </div>
     </div>
   </div>
-  <!-- 課程 -->
+  <!-- 卡片課程 -->
   <div class="container my-3">
     <div class="row"
      v-if="filterData.length == 0">
@@ -211,7 +224,8 @@
         很抱歉，沒有符合條件課程
       </div>
     </div>
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-2">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-2"
+         v-if="displayState === 'grid'">
       <div class="col"
             v-for="item in currentPageCoursesData" :key="item.id">
             <div class="card rounded-3 scale h-100"
@@ -241,20 +255,6 @@
                 <i class="bi bi-geo-alt-fill ms-2"></i>
                 {{ item.data.cityName || '線上' }}
               </div>
-              <!-- <div class="mb-1">
-                <span class="bg-info rounded-2 px-2 me-2"
-                      v-if="item.data.courseMethod[0]">
-                  {{ item.data.courseMethod[0] }}
-                </span>
-                <span class="bg-info rounded-2 px-2 me-2"
-                      v-if="item.data.courseMethod[1]">
-                  {{ item.data.courseMethod[1] }}
-                </span>
-                <span class="bg-info rounded-2 px-2 me-2"
-                      v-if="item.data.courseMethod[2]">
-                  {{ item.data.courseMethod[2] }}
-                </span>
-              </div> -->
               <div class="mb-1">
                 <span class="me-3">
                   NT$ {{ $filters.currency(item.data.price) }}
@@ -270,7 +270,47 @@
       </div>
     </div>
   </div>
-  <!-- {{ currentPageCoursesData }} -->
+  <!-- 條件課程 -->
+  <div class="container mb-3"
+      v-if="displayState === 'list'">
+    <div class="row">
+      <div class="col-12">
+        <table class="table table-hover align-middle">
+          <thead>
+            <tr>
+              <th width="" class="" colspan="5">
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="item in currentPageCoursesData" :key="item.id">
+              <td width="100"
+                  @click="getOneCoursesFirebaseData(item.id)">
+                  <img :src="item.data.courseImg" alt="課程圖片" class="table-image cursor-pointer">
+              </td>
+              <td>
+                <div class="">
+                  {{item.data.courseName }}
+                </div>
+                <div class="text-primary">
+                  by {{ item.data.displayName }}
+                </div>
+                <div class="">
+                  NT$ {{ $filters.currency(item.data.price) }}
+                  <i class="bi bi-clock-fill ms-2"></i>
+                  {{ item.data.time }}
+                </div>
+                <div >
+                  <i class="bi bi-people-fill me-2"></i>
+                  {{ item.data.whoBuy.length}}
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
   <PaginationCom />
 </template>
   
@@ -283,10 +323,16 @@ import filterStore from '@/stores/filterStore'
 // import goStore from '@/stores/goStore'
 
 export default {
+  data() {
+    return {
+      fullWidth:0,
+    }
+  },
   components: { PaginationCom },
   computed: {
     ...mapState(dataStore, ['coursesData', 'bookmarkState', 'AllCoursesFirebaseData', 'onAuthStateChanged']),
     ...mapState(filterStore, ['filterData','courseMethod', 'sortMethod', 'currentPageCoursesData']),
+    ...mapWritableState(dataStore, ['displayState']),
     ...mapWritableState(filterStore, ['selectCityName', 'selectCourseCategory', 'selectCourseName','selectCourseMethod', 'selectSortMethod'])
   },
   methods: {
@@ -296,6 +342,9 @@ export default {
   created () {
     this.onAuthStateChanged()
     this.courseSort()
+  },
+  mounted () {
+    this.fullWidth = window.innerWidth
   }
 }
 </script>
@@ -337,5 +386,12 @@ export default {
 }
 .filter-grayscale {
   -webkit-filter:grayscale(0);
+}
+  // 橫向專用
+  .table-image {
+  width: 100px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 10px;
 }
 </style>
