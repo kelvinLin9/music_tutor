@@ -64,6 +64,7 @@ initializeApp(firebaseConfig)
 
 // moment
 import moment from 'moment'
+
 // CKEditor
 import CKEditor from '@ckeditor/ckeditor5-vue';
 
