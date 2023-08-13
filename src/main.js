@@ -37,6 +37,7 @@ import router from './router'
 
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import "./assets/scss/all.scss";
+
 // 金額
 import { currency } from './methods/filters'
 

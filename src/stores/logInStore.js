@@ -6,6 +6,8 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
         } from 'firebase/auth'
 import dataStore from './dataStore';
 import cartStore from './cartStore';
+import moment from 'moment'
+
 import Swal from 'sweetalert2/dist/sweetalert2'
 
 
@@ -17,10 +19,7 @@ const Toast = Swal.mixin({
   toast: true,
   position: 'top-end',
   showConfirmButton: false,
-  timer: 2000,
   timerProgressBar: true,
-  confirmButtonColor: 'rgba(168, 128, 48, 1)',
-  cancelButtonColor: 'rgba(108, 117, 125, 1)',
   didOpen: (toast) => {
     toast.addEventListener('mouseenter', Swal.stopTimer)
     toast.addEventListener('mouseleave', Swal.resumeTimer)
@@ -65,6 +64,8 @@ export default defineStore('logInStore', {
       phoneNumber:'',
       teachArea: [],
       teacherIntro: '',
+      ckeditor: '',
+      ckeditorImg:'',
       instagram: '',
       facebook: '',
       discord: '',
@@ -85,30 +86,30 @@ export default defineStore('logInStore', {
       myBookmarkCourses:[],
       myBookmarkTeacher:[],
     }
-    data.teacher = {
-      uid: '',
-      accountCreateTime: '',
-      lastLogInTime: '',
-      email: '',
-      displayName: '',
-      teacherImg: '',
-      gender: '',
-      birthday: '',
-      address: '',
-      phoneNumber:'',
-      teachArea: [],
-      teacherIntro: '',
-      instagram: '',
-      facebook: '',
-      discord: '',
-      expertise: '',
-      educationalBackground: '',
-      myTeachCourses:[],
-      language: [],
-      musicStyle:[], 
-      allTeachTime:0,
-      studentAssess:[]
-    }
+    // data.teacher = {
+    //   uid: '',
+    //   accountCreateTime: '',
+    //   lastLogInTime: '',
+    //   email: '',
+    //   displayName: '',
+    //   teacherImg: '',
+    //   gender: '',
+    //   birthday: '',
+    //   address: '',
+    //   phoneNumber:'',
+    //   teachArea: [],
+    //   teacherIntro: '',
+    //   instagram: '',
+    //   facebook: '',
+    //   discord: '',
+    //   expertise: '',
+    //   educationalBackground: '',
+    //   myTeachCourses:[],
+    //   language: [],
+    //   musicStyle:[], 
+    //   allTeachTime:0,
+    //   studentAssess:[]
+    // }
     data.AllCoursesFirebaseData = []
     data.otherTeacherData = []
     data.beATeacherData = {
@@ -202,18 +203,21 @@ export default defineStore('logInStore', {
       data.user = res.user
       data.isMember = true
       Toast.fire({
+        timer: 3000,
         icon: 'success',
-        title: res.user.uid + "登入成功"
+        title: `登入成功，歡迎${res.user.displayName} `,
+        text: `上次登入時間：${moment(res.user.metadata.lastSignInTime).format('YYYY/MM/DD')}`,
       })
-      Toast.fire({
-        icon: 'success',
-        title: `帳號創立時間${res.user.metadata.creationTime
-        }`
-      })
-      Toast.fire({
-        icon: 'success',
-        title: `上次登入時間${res.user.metadata.lastSignInTime}`
-      })
+      
+      // Toast.fire({
+      //   icon: 'success',
+      //   title: `帳號創立時間${res.user.metadata.creationTime
+      //   }`
+      // })
+      // Toast.fire({
+      //   icon: 'success',
+      //   title: `上次登入時間${res.user.metadata.lastSignInTime}`
+      // })
       // 判斷如果是第一次登入，建立一份老師學生端物件上傳
       if(res.user.metadata.creationTime === res.user.metadata.lastSignInTime) {
         console.log("第一次登入")

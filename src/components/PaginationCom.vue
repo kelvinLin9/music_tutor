@@ -1,5 +1,5 @@
 <template>
-  <div class="container my-4 d-none d-sm-block"
+  <div class="container py-4 d-none d-sm-block"
         v-if="filterData.length != 0">
     <nav>
       <ul class="pagination d-flex justify-content-center">

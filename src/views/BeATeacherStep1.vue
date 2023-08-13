@@ -10,7 +10,7 @@
     </div>
   </div>
 
-  <div class="container mt-5">
+  <div class="container my-5">
     <VForm  v-slot="{ errors }"
            @submit="goBeATeacherStep2()">
       <div class="row justify-content-center mb-3">

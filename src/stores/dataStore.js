@@ -45,6 +45,7 @@ export default defineStore('dataStore', {
     courseData:{},   // 單一課程頁面用
     myCoursesState: 'student', // 我的課程換頁用
     displayState: 'grid', // 我的課程換呈現方式用
+    ckeditorState: false,
     bookmarkIds: [],
     bookmarkNum: 0,
     // 成為老師表單數據，老師名稱來自會員(先預設)
@@ -77,6 +78,8 @@ export default defineStore('dataStore', {
       phoneNumber:'',
       teachArea: [],
       teacherIntro: '',
+      ckeditor:'',
+      ckeditorImg:'',
       instagram: '',
       facebook: '',
       discord: '',
@@ -149,7 +152,7 @@ export default defineStore('dataStore', {
     async copyUserDataToTeacher() {
       this.teacherData.uid = this.user.uid 
       this.teacherData.email = this.user.email
-      // this.teacherData.displayName = this.user.displayName
+      this.teacherData.displayName = this.user.displayName
       this.teacherData.accountCreateTime = this.user.metadata.creationTime
       const teacherRef = doc(db, this.user.uid, 'teacher')
       await updateDoc(teacherRef, this.teacherData)
@@ -184,17 +187,37 @@ export default defineStore('dataStore', {
     async UpdateFirebaseCartData() {
       const studentRef = doc(db, this.user.uid, 'student')
       await updateDoc(studentRef, this.studentData)
+      
       Toast.fire({
         icon: 'success',
         title: '學生老師端資料更新成功'
       })
     },
+    // 個人頁面用----------
     async UpdateTeacherImg() {
       const teacherRef = doc(db, this.user.uid, 'teacher')
       await updateDoc(teacherRef, this.teacherData)
       Toast.fire({
         icon: 'success',
         title: '大頭照更新成功'
+      })
+    },
+    async UpdateTeacherCkeditor() {
+      console.log(this.teacherData.ckeditor)
+      const teacherRef = doc(db, this.user.uid, 'teacher')
+      await updateDoc(teacherRef, this.teacherData)
+      Toast.fire({
+        icon: 'success',
+        title: 'ckeditor資料更新成功'
+      })
+    },
+    async UpdateTeacherCkeditorImg() {
+      console.log(this.teacherData.ckeditorImg)
+      const teacherRef = doc(db, this.user.uid, 'teacher')
+      await updateDoc(teacherRef, this.teacherData)
+      Toast.fire({
+        icon: 'success',
+        title: 'ckeditor圖片更新成功'
       })
     },
 
@@ -253,20 +276,20 @@ export default defineStore('dataStore', {
       });
       console.log('全部課程資料',this.AllCoursesFirebaseData)
       this.getTop6courses()
+      this.getCouponData()
       // 用ID抓出其他想要渲染的資料
       if (this.user.uid) {
         this.getUserTeacherCourses()
         this.getUserStudentCourses()
         this.getUserCartCourses()
         this.getBookmarkCoursesData()
-        this.getCouponData()
+        
       } 
     },
     async getCouponData() {
       const docRef = doc(db, "coupon", 'code')
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
-        // console.log(docSnap.data())
         this.couponData = docSnap.data()
         console.log("後台優惠券資料:", this.couponData);
       } else {
@@ -320,22 +343,6 @@ export default defineStore('dataStore', {
         console.log("用戶老師端課程資料",this.userTeacherCourses)
       }
     },
-    getUserCartCourses() {
-      if (!this.AllCoursesFirebaseData) {
-        console.log('完全沒有課程')
-      } else {
-        this.userCartCourses = []
-        this.studentData.myCart.forEach((item) => {
-          let wrap = {}
-          wrap = this.AllCoursesFirebaseData.filter((i) => {
-            return i.id === item.courseId
-          })
-          wrap.timestamp = item.timestamp
-          this.userCartCourses.push(wrap)
-        })
-        console.log("用戶購物車內課程", this.userCartCourses)
-      }
-    },
     getUserStudentCourses() {
       if(!this.studentData.myStudyCourses) {
         Swal.fire('尚未購買課程')
@@ -352,6 +359,23 @@ export default defineStore('dataStore', {
         console.log("用戶學生端課程資料",this.userStudentCourses)
       }
     },
+    getUserCartCourses() {
+      if (!this.AllCoursesFirebaseData) {
+        console.log('完全沒有課程')
+      } else {
+        this.userCartCourses = []
+        this.studentData.myCart.forEach((item) => {
+          let wrap = {}
+          wrap = this.AllCoursesFirebaseData.filter((i) => {
+            return i.id === item.courseId
+          })
+          wrap.timestamp = item.timestamp
+          this.userCartCourses.push(wrap)
+        })
+        console.log("用戶購物車內課程", this.userCartCourses)
+      }
+    },
+    // 首頁跟單一課程頁面的swiper用
     getTop6courses() {
       this.top6courses = []
       this.AllCoursesFirebaseData.sort((a,b)  => {
@@ -492,9 +516,9 @@ export default defineStore('dataStore', {
           errorMessages.push('需上傳 JPG 或 PNG 檔!')
         }
 
-        const isValidFileSize = fileObject.size / 1024 / 1024 < 0.5
+        const isValidFileSize = fileObject.size / 1024 / 1024 < 0.3
         if (!isValidFileSize) {
-          errorMessages.push('圖片大小需小於0.5MB!')
+          errorMessages.push('圖片大小需小於0.3MB!')
         }
         resolve({
           isValid: isValidFileType && isValidFileSize,
@@ -517,7 +541,9 @@ export default defineStore('dataStore', {
             // 編輯個人大頭照用，寫這邊可以綁定課程換大頭照也會一起換避免不一致
             this.teacherData.teacherImg = e.target.result
             this.UpdateTeacherImg()
-            
+          } else if (item === 'ckeditor') {
+            this.teacherData.ckeditorImg = e.target.result
+            this.UpdateTeacherCkeditorImg()
           } else if (item === 'course') {
             this.beATeacherData.courseImg = e.target.result
           } 

@@ -1,62 +1,114 @@
 <template>
-  <div class="container">
-    <div class="row test">
-      <div class="col-12 col-md-4 d-flex flex-column justify-content-center align-items-center mt-3">
-        <div class="user-photo position-relative">
-          <img :src="teacherData.teacherImg" alt="大頭照"
-                v-if="teacherData.teacherImg">
-          <img src="../assets/images/預設大頭貼.png" alt="預設大頭照"
-                v-if="!teacherData.teacherImg">
-          <label for="file-upload">
-            <i class="bi bi-cloud-arrow-up-fill cursor-pointer upload-icon"></i>
-          </label>
-          <input
-                  type="file"
-                  id="file-upload"
-                  class="d-none"
-                  @change="uploadPhoto('teacher',$event)"
-                />
+  <div class="">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md-4 d-flex flex-column align-items-center mt-3">
+          <div class="user-photo position-relative">
+            <img :src="teacherData.teacherImg" alt="大頭照"
+                  v-if="teacherData.teacherImg">
+            <img src="../assets/images/預設大頭貼.png" alt="預設大頭照"
+                  v-if="!teacherData.teacherImg">
+            <label for="file-upload">
+              <i class="bi bi-cloud-arrow-up-fill cursor-pointer upload-icon"></i>
+            </label>
+            <input
+                    type="file"
+                    id="file-upload"
+                    class="d-none"
+                    @change="uploadPhoto('teacher',$event)"
+                  />
+          </div>
+          <div class="mb-2 fs-2">
+            {{ teacherData.displayName }}
+            <i :class="teacherData.gender"></i>
+          </div>
+          <div class="mb-2 w-100">
+            <i class="bi bi-envelope-fill"></i>：{{ teacherData.email }}
+          </div>
+          <div class="mb-2 w-100">
+            <i class="bi bi-telephone-fill"></i>：{{ teacherData.phoneNumber }}
+          </div>
+          <div class="mb-2 w-100">
+            <p class="">簡介：</p>
+            <p class="border border-secondary rounded-1 p-1">
+              {{ teacherData.teacherIntro }}
+            </p>
+          </div>
+          <div class="d-flex justify-content-around w-75 mb-2">
+            <a :href="teacherData.facebook" target="_black" @click.prevent>
+              <i class="bi bi-facebook fs-3 text-secondary"
+                :class="{'text-blue': teacherData.facebook}"></i>
+            </a>
+            <a :href="teacherData.instagram" target="_black" @click.prevent>
+              <i class="bi bi-instagram fs-3 text-secondary"
+                :class="{'text-danger': teacherData.instagram}"></i>
+            </a>
+            <a :href="teacherData.discord" target="_black" @click.prevent>
+              <i class="bi bi-discord fs-3 text-secondary"
+                :class="{'text-purple': teacherData.discord}"></i>
+            </a>
+            
+          </div>
+          <div class="mb-2">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">編輯個人資料</button>
+          </div>
         </div>
-        <div class="mb-2 fs-2">
-          {{ teacherData.displayName }}
-          <i :class="teacherData.gender"></i>
-        </div>
-        <div class="mb-2 w-100">
-          <i class="bi bi-envelope-fill"></i>：{{ user.email }}
-        </div>
-        <div class="mb-2 w-100">
-          <i class="bi bi-telephone-fill"></i>：{{ teacherData.phoneNumber }}
-        </div>
-        <div class="mb-2 w-100">
-          <p class="">自我介紹：</p>
-          <p class="border border-secondary rounded-4 p-3">
-            {{ teacherData.teacherIntro }}
-          </p>
-        </div>
-        <div class="d-flex justify-content-around w-75 mb-2">
-          <a :href="teacherData.facebook" target="_black" @click.prevent>
-            <i class="bi bi-facebook fs-3 text-secondary"
-              :class="{'text-blue': teacherData.facebook}"></i>
-          </a>
-          <a :href="teacherData.instagram" target="_black" @click.prevent>
-            <i class="bi bi-instagram fs-3 text-secondary"
-              :class="{'text-danger': teacherData.instagram}"></i>
-          </a>
-          <a :href="teacherData.discord" target="_black" @click.prevent>
-            <i class="bi bi-discord fs-3 text-secondary"
-              :class="{'text-purple': teacherData.discord}"></i>
-          </a>
+  
+  
+        <div class="col-12 col-md-8 mt-3">
+          <div v-if="teacherData.ckeditorImg"
+              class="ckeditor-img position-relative border"
+              :style="{ 'background-image': `url(${teacherData.ckeditorImg ||defaultCkeditorImg })` }">
+              
+            <!-- <img :src="teacherData.ckeditorImg" alt="ckeditor大頭照"
+                  v-if="teacherData.ckeditorImg"> -->
+            <!-- <img src="../assets/images/預設大頭貼.png" alt="預設ckeditor大頭照"
+                  v-if="!teacherData.ckeditorImg"> -->
+                  <label for="file-upload-ckeditor">
+                    <i class="bi bi-cloud-arrow-up-fill cursor-pointer upload-icon-ckeditor"></i>
+                  </label>
+                  <input
+                          type="file"
+                          id="file-upload-ckeditor"
+                          class="d-none"
+                          @change="uploadPhoto('ckeditor',$event)"
+                        />
+          </div>
+  
+          <div class="text-end" v-if="!ckeditorState">
+            <a class="text-info fw-bold cursor-pointer"
+                @click="ckeditorState = true">
+                <i class="bi bi-pen-fill me-1"></i>編輯
+            </a>
+          </div>
+  
+          <div v-html="teacherData.ckeditor" class="test">
+            
+          </div>
           
+          <div class="text-delete fs-7 py-1"
+              v-if="ckeditorState">
+            編輯個人頁面，和大家分享更多精彩故事
+            <ckeditor :editor="editor" v-model="teacherData.ckeditor" :config="editorConfig"></ckeditor>
+            
+            
+  
+            <div class="">
+              <button type="button"
+                      @click="ckeditorState = false">
+                取消
+              </button>
+              <button type="button"
+                      @click="UpdateTeacherCkeditor() , ckeditorState = false">
+                確定
+              </button>
+            </div>
+          </div>
+  
+  
+          {{ teacherData.ckeditor }}
         </div>
-        <div class="mb-2">
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">編輯個人資料</button>
-        </div>
-      </div>
-      <div class="col-12 col-md-8 mt-3 px-5">
-        <div class="">上傳個人封面框</div>
-
-        <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
-        {{ editorData  }}
+        
       </div>
     </div>
   </div>
@@ -72,28 +124,28 @@ import dataStore from '../stores/dataStore';
 import EditIntroModal from '../components/EditIntroModal.vue'
 //ckeditor5
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
-// import { Base64UploadAdapter } from '@ckeditor/ckeditor5-upload';
 
 
 export default {
   data() {
-            return {
-                editor: ClassicEditor,
-                editorData: '<p>Content of the editor.</p>',
-                editorConfig: {
-                    // The configuration of the editor.
-                    // plugins: [ Base64UploadAdapter],
-                }
-            };
+    return {
+      editor: ClassicEditor,
+      // this.teacherData.ckeditor: '<p>Content of the editor.</p>',
+      editorConfig: {
+          // The configuration of the editor.
+          // plugins: [ Base64UploadAdapter],
+      },
+      defaultCkeditorImg: 'https://i.imgur.com/EjLcauL.jpg'
+    };
         },
   components: { EditIntroModal },
   computed: {
     ...mapState(dataStore, ['user','isMember', 'teacherData']),
-    ...mapWritableState(dataStore, [])
+    ...mapWritableState(dataStore, ['ckeditorState'])
   },
   methods: {
     ...mapActions(logInStore, ['signOut']),  
-    ...mapActions(dataStore, ['uploadPhoto', 'onAuthStateChanged']),
+    ...mapActions(dataStore, ['uploadPhoto', 'onAuthStateChanged', 'UpdateTeacherCkeditor']),
     
   },
   created () {
@@ -118,10 +170,46 @@ export default {
 }
 .upload-icon { 
   position: absolute;
-  right: -10px;
-  bottom: 10px;
+  right: -3px;
+  bottom: 24px;
   z-index: 10;
-  font-size: 40px;
+  font-size: 20px;
+  background: white;
+  color: rgba(108, 117, 125, 1);
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  border: 2px solid;
   
+}
+.upload-icon-ckeditor {
+  position: absolute;
+  right: 10px;
+  bottom: 7px;
+  z-index: 10;
+  font-size: 20px;
+  background: white;
+  color: rgba(108, 117, 125, 1);
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  border: 2px solid;
+}
+.ckeditor-img {
+  height: 400px;
+  background-size: cover;
+  background-position: center center;
+  @media (max-width: 768px)  {
+    height: 300px;
+  }
+  @media (max-width: 576px)  {
+    height: 200px;
+  }
 }
 </style> 
