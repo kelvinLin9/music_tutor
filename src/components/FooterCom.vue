@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-dark py-4">
+  <div class="bg-dark py-4 border-top">
     <div class="container">
       <div class="row justify-content-center justify-content-lg-between align-items-center">
         <div class="col">
@@ -23,7 +23,7 @@
               </a>
             </li>
             <li class="col-12 col-md-auto text-center py-2">
-              <a href="#" class="text-light" @click.prevent>
+              <a href="#" class="text-light " @click.prevent>
                 <i class="bi bi-twitter"></i>
                 <span class="ms-2">Twitter</span>
               </a>
@@ -45,9 +45,6 @@
 </script>
 
 <style lang="scss" scoped>
-* {
-  // outline: 1px solid red;
-}
 a {
   text-decoration: none;
   & :hover {

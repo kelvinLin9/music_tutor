@@ -1,11 +1,9 @@
 import router from '../router'
 import { defineStore } from 'pinia'
 import logInStore from './logInStore'
-import dataStore from './dataStore'
 
 
 const logIn = logInStore()
-const data = dataStore()
 
 export default defineStore('goStore', {
   actions: {
