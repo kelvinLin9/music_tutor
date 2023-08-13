@@ -12,9 +12,9 @@
                 @submit="UpdateFirebaseUserCourseData(courseData.id)">
           <div class="row mb-3">
             <div class="col-auto">
-          <label for="courseName" class="col-form-label">
-            課程名稱：
-          </label>
+              <label for="courseName" class="col-form-label">
+                課程名稱：
+              </label>
             </div>
             <div class="col-4">
           <VField
@@ -31,24 +31,24 @@
             </div>
           </div>
           <div class="row mb-3">
-        <div class="col-auto">
-          <label for="coursePrice" class="col-form-label">
-            課程費用：
-          </label>
-        </div>
-        <div class="col-4">
-          <VField
-            name="課程費用"
-            id="coursePrice"
-            type="number"
-            rules="required|min_value:100|max_value:100000"
-            class="form-control"
-            :class="{ 'is-invalid': errors['課程費用'] }"
-            placeholder="請輸入課程費用"
-            v-model="courseData.price"
-          />
-          <ErrorMessage class="invalid-feedback" name="課程費用"/>
-        </div>
+            <div class="col-auto">
+              <label for="coursePrice" class="col-form-label">
+                課程費用：
+              </label>
+            </div>
+          <div class="col-4">
+            <VField
+              name="課程費用"
+              id="coursePrice"
+              type="number"
+              rules="required|min_value:100|max_value:100000"
+              class="form-control"
+              :class="{ 'is-invalid': errors['課程費用'] }"
+              placeholder="請輸入課程費用"
+              v-model="courseData.price"
+            />
+            <ErrorMessage class="invalid-feedback" name="課程費用"/>
+          </div>
           </div>
           <div class="row mb-3">
             <div class="col-auto">
@@ -149,28 +149,28 @@
             </div>
           </div>
           <div class="row mb-3">
-        <div class="col-auto">
-          <label for="courseTime" class="col-form-label">
-            授課時間：
-          </label>
-        </div>
-        <div class="col-4">
-          <VField
-            name="授課時間"
-            id="courseTime"
-            type="number"
-            rules="required|min_value:30|max_value:600"
-            class="form-control"
-            :class="{ 'is-invalid': errors['授課時間'] }"
-            placeholder="請輸入授課時間(分鐘)"
-            v-model="courseData.time"
-          />
-          <ErrorMessage class="invalid-feedback" name="授課時間"/>
-        </div>
-          </div>
-          <div class="row mb-3">
             <div class="col-auto">
-          上課方式：
+              <label for="courseTime" class="col-form-label">
+                授課時間：
+              </label>
+            </div>
+            <div class="col-4">
+              <VField
+                name="授課時間"
+                id="courseTime"
+                type="number"
+                rules="required|min_value:30|max_value:600"
+                class="form-control"
+                :class="{ 'is-invalid': errors['授課時間'] }"
+                placeholder="請輸入授課時間(分鐘)"
+                v-model="courseData.time"
+              />
+              <ErrorMessage class="invalid-feedback" name="授課時間"/>
+            </div>
+          </div>
+          <!-- <div class="row mb-3">
+            <div class="col-auto">
+              上課方式：
             </div>
             <div class="col-8">
               <div class="form-check form-check-inline">
@@ -201,8 +201,8 @@
                 <label for="online">線上</label>
               </div>
             </div>
-          </div>
-          <div class="row mb-3">
+          </div> -->
+          <!-- <div class="row mb-3">
             <div class="col-auto">
               <label for="cityName" class="col-form-label"
               :class="{'d-none' : courseData.courseMethod.length == 1 && courseData.courseMethod[0] == '線上'}">
@@ -244,7 +244,7 @@
               </VField>
               <ErrorMessage class="invalid-feedback" name="上課地點"/>
             </div>
-          </div>
+          </div> -->
           <div class="row mb-3">
             <div class="col-12 col-lg-8">
               <label for="courseIntro" class="form-label">
@@ -282,6 +282,7 @@
                   id="coursePhoto"
                   class="form-control"
                   rules="required"
+                  v-model="courseData.courseImg"
                   :class="{ 'is-invalid': errors['課程封面'] }"
                   @change="uploadPhoto('course',$event)"
                 >
@@ -289,11 +290,11 @@
               <ErrorMessage class="invalid-feedback" name="課程封面"/>
                   <img class="img-fluid mt-3" 
                       :src="beATeacherData.courseImg" 
-                      alt="課程封面照(舊)"
+                      alt="課程封面照(新)"
                       v-if="beATeacherData.courseImg"/>
                   <img class="img-fluid mt-3" 
                       :src="courseData.courseImg" 
-                      alt="課程封面照(新)"
+                      alt="課程封面照(舊)"
                       v-else/>
                 </div>
               </div>

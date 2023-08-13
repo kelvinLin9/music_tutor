@@ -10,22 +10,6 @@
         <VForm class="mx-auto"
                 v-slot="{ errors }"
                 @submit="UpdateFirebaseMemberData()">
-          <!-- <div class="mb-3">
-            <label for="email" class="form-label ">
-              Email：
-            </label>
-            <VField
-              name="email"
-              id="email"
-              type="email"
-              rules="required|email"
-              class="form-control"
-              :class="{ 'is-invalid': errors['email'] }"
-              placeholder="請輸入 Email"
-              v-model="user.email"
-            />
-            <ErrorMessage class="invalid-feedback" name="email"/>
-          </div> -->
           <div class="mb-3 w-50">
             <label for="phone" class="form-label ">
               手機：
