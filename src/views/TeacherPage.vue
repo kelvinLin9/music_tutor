@@ -42,6 +42,21 @@
       </div>
       <div class="col-12 col-md-8">
 
+
+        <div class="ckeditor-img position-relative border test"
+            :style="{ 'background-image': `url(${otherTeacherData.ckeditorImg ||defaultCkeditorImg })` }">
+            
+                <label for="file-upload-ckeditor">
+                  <i class="bi bi-cloud-arrow-up-fill cursor-pointer upload-icon-ckeditor text-primary"></i>
+                </label>
+                <input
+                        type="file"
+                        id="file-upload-ckeditor"
+                        class="d-none"
+                        @change="uploadPhoto('ckeditor',$event)"
+                      />
+        </div>
+
       </div>
     </div>
   </div>
@@ -57,7 +72,8 @@ import dataStore from '../stores/dataStore';
 export default {
   data () {
     return {
-      uid: ''
+      uid: '',
+      defaultCkeditorImg: 'https://i.imgur.com/EjLcauL.jpg'
     }
   },
   computed: {
@@ -95,6 +111,19 @@ export default {
   bottom: 10px;
   z-index: 10;
   font-size: 40px;
-  
+}
+
+
+.upload-icon-ckeditor {
+  position: absolute;
+  right: 10px;
+  bottom: -10px;
+  z-index: 10;
+  font-size: 40px;
+}
+.ckeditor-img {
+  height: 400px;
+  background-size: cover;
+  background-position: center center;
 }
 </style> 

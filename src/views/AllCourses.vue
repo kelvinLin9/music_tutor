@@ -229,7 +229,7 @@
       <div class="col"
             v-for="item in currentPageCoursesData" :key="item.id">
             <div class="card rounded-3 scale h-100"
-            @click="getOneCoursesFirebaseData(item.id)">
+            @click="goCoursePage(item.id)">
           <div class="card-img overflow-hidden position-relative">
             <img :src="item.data.courseImg" alt="商品圖片" class="card-img-top filter-grayscale">
             <i class=""
@@ -320,7 +320,7 @@ import { mapState, mapActions, mapWritableState } from
 'pinia'  
 import dataStore from '@/stores/dataStore'
 import filterStore from '@/stores/filterStore'
-// import goStore from '@/stores/goStore'
+import goStore from '@/stores/goStore'
 
 export default {
   data() {
@@ -337,7 +337,9 @@ export default {
   },
   methods: {
     ...mapActions(dataStore, ['toggleBookmark', 'getOneCoursesFirebaseData', 'getAllCoursesFirebaseData']),
-    ...mapActions(filterStore, ['selectCityNameCancel', 'courseSort'])
+    ...mapActions(filterStore, ['selectCityNameCancel', 'courseSort']),
+    ...mapActions(goStore, ['goCoursePage'])
+
   },
   created () {
     this.onAuthStateChanged()
