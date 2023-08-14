@@ -73,9 +73,9 @@ const router = createRouter({
           component: () => import('../views/CoursesCart.vue')
         },
         {
-          path: 'CoursesTime',
-          name: 'CoursesTime',
-          component: () => import('../views/CoursesTime.vue')
+          path: 'MyCalendar',
+          name: 'MyCalendar',
+          component: () => import('../views/MyCalendar.vue')
         },
         {
           path: 'AccountSetting',

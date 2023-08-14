@@ -102,8 +102,8 @@
                   </RouterLink>
                 </li>
                 <li>
-                  <RouterLink to="/CoursesTime" class="dropdown-item">
-                    課表時間
+                  <RouterLink to="/MyCalendar" class="dropdown-item">
+                    我的課表
                   </RouterLink>
                 </li>
                 <li>
