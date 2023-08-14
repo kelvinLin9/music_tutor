@@ -155,15 +155,12 @@
                   <i class="bi bi-clock-fill ms-2"></i>
                   {{ item[0].data.time }}
                 </div>
-                <div class="">
-                  <i class="bi bi-people-fill me-2"></i>
-                  {{ item[0].data.whoBuy.length}}
-                </div>
               </td>
               <td class="">
-                購買時間<br>
-                {{ this.$moment(item.timestamp).format('YYYY/MM/DD')}}
-                <!-- 開課時間{{}} -->
+                購買時間：<br>
+                {{ this.$moment(item.timestamp).format('YYYY/MM/DD')}}<br>
+                開課時間：<br>
+                {{}}
               </td>
             </tr>
           </tbody>
@@ -342,7 +339,7 @@
     </div>
   </div>
     <!-- 收藏橫向呈現 -->
-    <div class="container my-3"
+  <div class="container my-3"
       v-else-if="myCoursesState === 'bookmark' && displayState === 'list'">
     <div class="row">
       <div class="col-12">
@@ -381,7 +378,7 @@
         </table>
       </div>
     </div>
-    </div>
+  </div>
   
     
 
