@@ -69,6 +69,10 @@ import moment from 'moment'
 // CKEditor
 import CKEditor from '@ckeditor/ckeditor5-vue';
 
+// element
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
+
 
 
 const app = createApp(App)
@@ -87,4 +91,5 @@ app.component('VForm', Form);
 app.component('ErrorMessage', ErrorMessage);
 app.use(register);
 app.use(CKEditor)
+app.use(ElementPlus)
 app.mount('#app')
