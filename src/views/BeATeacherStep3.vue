@@ -1,21 +1,11 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col text-center">
-        <h1 class="border-top border-bottom border-5 py-2 w-75 mx-auto">
-          預覽頁面
-        </h1>
-      </div>
-    </div>
-  </div>
-
-  <div class="container mt-5">
+  <div class="container w-75">
     <div class="row">
       <div class="col-12 col-lg-8">
         <img :src="beATeacherData.courseImg" alt="課程照片">
       </div>
       <div class="col-12 col-lg-4 d-flex flex-column">
-        <h1>{{ beATeacherData.courseName }}</h1>
+        <p class="fs-2 fw-bold">{{ beATeacherData.courseName }}</p>
         <p class="">
           {{ beATeacherData.courseIntro }}
         </p>
@@ -23,7 +13,7 @@
     </div>
   </div>
 
-  <div class="container my-5">
+  <div class="container my-5 w-75">
     <div class="row align-items-center">
       <div class="col-12 col-lg-8">
         <div class="row align-items-center">
@@ -41,36 +31,28 @@
         </div>
         <div class="row my-3">
           <p>關於課程</p>
-          <div class="col-3">
+          <div class="col-auto">
             <div class="d-flex align-items-center">
               <i class="bi bi-clock me-2"></i>
               課程時長<br>{{ beATeacherData.time }}分鐘
             </div>
           </div>
-          <div class="col-4">
+          <div class="col-auto">
             <div class="d-flex align-items-center">
               <i class="bi bi-tools me-2"></i>              
               <div>
                 上課方式<br>
                 <span class="bg-info rounded-2 px-2 me-2"
-                      v-if="beATeacherData.courseMethod[0]">
-                  {{ beATeacherData.courseMethod[0] }}
-                </span>
-                <span class="bg-info rounded-2 px-2 me-2"
-                v-if="beATeacherData.courseMethod[1]">
-                  {{ beATeacherData.courseMethod[1] }}
-                </span>
-                <span class="bg-info rounded-2 px-2 me-2"
-                v-if="beATeacherData.courseMethod[2]">
-                  {{ beATeacherData.courseMethod[2] }}
+                      v-for="item in beATeacherData.courseMethod" :key="item">
+                  {{ item }}
                 </span>
               </div>
                 
             </div>
           </div>
-          <div class="col-3">
+          <div class="col-auto" v-if="beATeacherData.cityName">
             <div class="d-flex align-items-center">
-              <i class="bi bi-geo-alt-fill me-2"></i>
+              <i class="bi bi-geo-alt me-2"></i>
               上課地點<br> {{ beATeacherData.cityName }}
             </div>
           </div>
@@ -110,21 +92,31 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 
+import { mapState, mapActions, mapWritableState } from 
 'pinia'  
 import dataStore from '@/stores/dataStore'
 import goStore from '@/stores/goStore'
+import bannerStore from '@/stores/bannerStore'
 
 export default {
   computed: {
-    ...mapState(dataStore, ['beATeacherData','teacherData','user']),
+    ...mapState(dataStore, ['beATeacherData','teacherData']),
+    ...mapWritableState(dataStore, ['createCourseStep'])
   },
   methods: {
     ...mapActions(goStore, ['goBeATeacherStep2', 'goBeATeacherStep4']),
-    ...mapActions(dataStore, ['SetFirebaseCourseData'])
+    ...mapActions(dataStore, ['SetFirebaseCourseData']),
+    ...mapActions(bannerStore, ['getBannerInfo'])
     
   },
-  created () {
+  created () { 
+    this.getBannerInfo(
+      new URL('../assets/images/section3-1.png', import.meta.url).href,
+      'PREVIEW',
+      '頁面預覽 ',
+      '一探學習體驗，預覽您的課程頁面，確保效果完美呈現'
+    )
+    this.createCourseStep = 3
   }
 }
 </script>

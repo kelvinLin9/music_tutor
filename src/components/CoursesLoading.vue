@@ -5,8 +5,6 @@
       :slidesPerView="1"
       :spaceBetween="20"
       :freeMode="true"
-      :pagination="{clickable: true}"
-      navigation
       :scrollbar="{ draggable: true }"
       :breakpoints="{
       '768': {
@@ -25,55 +23,47 @@
       class="mySwiper px-3"
     >
 
-    <!-- // 原本的 -->
-      <SwiperSlide v-for="(item) in top6courses" :key="item.id" class="mb-5">
-        <div class="card rounded-3 scale h-100"
-            @click="goCoursePage(item.id)">
-          <div class="card-img overflow-hidden position-relative">
-            <img :src="item.data.courseImg" alt="商品圖片" class="card-img-top filter-grayscale">
-            <i class=""
-              :class="bookmarkState(item.id)"
-              @click.stop="toggleBookmark(item.id)"
-              data-bs-toggle="tooltip"
-              data-bs-placement="top"
-              title="加入 / 移除收藏"
-            ></i>
-          </div>
-          <div class="card-body d-flex flex-column">
-            <div class="mb-1 d-flex align-items-start">
-              <span class="badge rounded-pill text-bg-danger align-middle mt-2">{{ item.data.courseCategory }}</span>
-              <span class="fs-5 fw-bold ms-2">{{ item.data.courseName }}</span>   
-            </div>
-            <div class="mt-auto">
-              <div class="mb-1">
-                by {{ item.data.displayName }}
+      <SwiperSlide v-for="(item) in 6" :key="item.id" class="mb-5 overflow-hidden">
+        <el-space direction="vertical" alignment="flex-start" class="card">
+          <el-skeleton :loading="loading" animated>
+            <template #template>
+              <el-skeleton-item variant="image" class="loading-img"/>
+              <div style="padding: 14px">
+                <el-skeleton-item variant="h3" style="width: 50%" />
+                <el-skeleton-item variant="h3" style="width: 100%;margin-top: 12px;" />
+                <div
+                  style="
+                    display: flex;
+                    align-items: center;
+                    justify-items: space-between;
+                    margin-top: 12px;
+                    height: 16px;
+                  "
+                >
+                  <el-skeleton-item variant="text" style="width: 25%;margin-right: 16px" />
+                  <el-skeleton-item variant="text" style="width: 25%;margin-right: 16px" />
+                  <el-skeleton-item variant="text" style="width: 25%" />
+                </div>
+                <div
+                  style="
+                    display: flex;
+                    align-items: center;
+                    justify-items: space-between;
+                    margin-top: 12px;
+                    height: 16px;
+                  "
+                >
+                <el-skeleton-item variant="h3" style="width: 80%;margin-top: 12px;" />
+                </div>
               </div>
-              <div class="mb-1">
-                <i class="bi bi-clock"></i>
-                {{ item.data.time }}
-                <i class="bi bi-geo-alt ms-2"></i>
-                {{ item.data.cityName || '線上' }}
-                <i class="bi bi-people ms-2"></i>
-                {{ item.data.whoBuy.length}}
-              </div>
-              <div class="mb-1">
-                <span class="me-3 fs-4 fw-bold">
-                  NT$ {{ $filters.currency(item.data.price) }}
-                </span>
-                <span v-if="item.data.whoBuy">
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
+            </template>
+
+          </el-skeleton>
+        </el-space>
       </SwiperSlide>
     </swiper>
 
-    <RouterLink to="/AllCourses" class="text-center d-block">
-      <button type="button" class="btn btn-dark col-9 col-sm-6 col-md-3">
-        更多課程
-      </button>
-    </RouterLink>
+
   </div>
 </template>
 <script>
@@ -135,7 +125,7 @@ export default {
   transition: 0.5s;
 }
 .bookmark-off {
-  font-size: 35px;
+  font-size: 40px;
   position: absolute;
   right: 5px;
   top: -55px;
@@ -143,7 +133,7 @@ export default {
   transition: 0.5s;
 }
 .bookmark-on {
-  font-size: 35px;
+  font-size: 40px;
   position: absolute;
   right: 5px;
   top: -15px;
@@ -169,6 +159,9 @@ export default {
   }
   @media (min-width: 1199.8px) {
     width: 260px;
+  }
+  @media (min-width: 1399.8px) {
+    width: 300px;
   }
 }
 

@@ -1,38 +1,51 @@
 <template>
-<div class=""></div>
+  <div class="container"></div>
 </template>
 
 <script>
 import { mapState, mapActions, mapWritableState } from 
 'pinia' 
+import dataStore from '@/stores/dataStore'
 import goStore from '@/stores/goStore'
+import bannerStore from '@/stores/bannerStore'
 
 export default {
   computed: {
+    ...mapWritableState(dataStore, ['createCourseStep'])
   },
   methods: {
-    ...mapActions(goStore, ['goHomePage', 'goBeATeacherStep1'])
+    ...mapActions(goStore, ['goHomePage', 'goBeATeacherStep1']),
+    ...mapActions(bannerStore, ['getBannerInfo'])
   },
-  mounted () {
-    this.$swal.fire({
-      title: '<h1>恭喜完成開課</h1>',
-      icon: 'success',
-      text: '課程審核需要2~3個工作天',
-      // showCloseButton: true,
-      showCancelButton: true,
-      reverseButtons: true,
-      cancelButtonText: '回到首頁',
-      confirmButtonText: '繼續開課',
+  created () { 
+    this.getBannerInfo(
+      new URL('../assets/images/section3-1.png', import.meta.url).href,
+      'COMPLETE',
+      '完成 ',
+      '準備好了!您的課程將準備好在平台上展示。'
+    )
+    this.createCourseStep = 4
+  },
+  // mounted () {
+  //   this.$swal.fire({
+  //     title: '<h1>恭喜完成開課</h1>',
+  //     icon: 'success',
+  //     text: '課程審核需要2~3個工作天',
+  //     // showCloseButton: true,
+  //     showCancelButton: true,
+  //     reverseButtons: true,
+  //     cancelButtonText: '回到首頁',
+  //     confirmButtonText: '繼續開課',
       
-    })
-      .then((result) => {
-        if (result.isConfirmed) {
-          this.$router.push('/CreateCourses/BeATeacherStep1')
-        } else {
-          this.$router.push('/')
-        }
-      })
-  }
+  //   })
+  //     .then((result) => {
+  //       if (result.isConfirmed) {
+  //         this.$router.push('/CreateCourses/BeATeacherStep1')
+  //       } else {
+  //         this.$router.push('/')
+  //       }
+  //     })
+  // }
 }
 </script>
 

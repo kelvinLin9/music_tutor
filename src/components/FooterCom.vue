@@ -47,8 +47,8 @@
 <style lang="scss" scoped>
 a {
   text-decoration: none;
-  & :hover {
-    color: rgba(168, 128, 48, 1);
+  &:hover {
+    color: rgba(168, 128, 48, 1) !important;
   }
 }
 </style>

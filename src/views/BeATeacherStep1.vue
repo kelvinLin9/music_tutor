@@ -1,16 +1,5 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col text-center">
-        <h1 class="border-top border-bottom border-5 py-2 w-75 mx-auto">
-          四個步驟，讓你成為老師
-        </h1>
-        <h2>首先設定必要資訊</h2>
-      </div>
-    </div>
-  </div>
-
-  <div class="container my-5">
+  <div class="container my-3">
     <VForm  v-slot="{ errors }"
            @submit="goBeATeacherStep2()">
       <div class="row justify-content-center mb-3">
@@ -99,7 +88,7 @@
             <option value="木琴">木琴</option>
             <option value="馬林巴琴">馬林巴琴</option>
             <option value="鋼琴">鋼琴</option>
-            <option value="數位鋼琴(電鋼琴)">數位鋼琴(電鋼琴)</option>
+            <option value="數位鋼琴">數位鋼琴</option>
             <option value="傳統電子琴">傳統電子琴</option>
             <option value="電子琴">電子琴</option>
             <option value="電子合成器">電子合成器</option>
@@ -272,19 +261,29 @@ import { mapState, mapActions, mapWritableState } from
 'pinia' 
 import goStore from '@/stores/goStore'
 import dataStore from '@/stores/dataStore'
+import bannerStore from '@/stores/bannerStore'
+
 
 export default {
   computed: {
-    ...mapWritableState(dataStore, ['beATeacherData','teacherData']),
+    ...mapWritableState(dataStore, ['beATeacherData','teacherData', 'createCourseStep']),
     ...mapState(dataStore, ['isMember','teacherData','user']),
 
   },
   methods: {
     ...mapActions(goStore, ['goBeATeacherStep1', 'goBeATeacherStep2']),
     ...mapActions(dataStore, ['onAuthStateChangedForCreateCourse']),
+    ...mapActions(bannerStore, ['getBannerInfo'])
   },
   created () {
     this.onAuthStateChangedForCreateCourse()
+    this.getBannerInfo(
+      new URL('../assets/images/section3-1.png', import.meta.url).href,
+      'COURSE INFORMATION',
+      '四個步驟，讓你成為老師',
+      '首先設定必要資訊'
+    )
+    this.createCourseStep = 1
   }
 }
 </script>
