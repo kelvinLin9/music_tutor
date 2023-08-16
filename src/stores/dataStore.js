@@ -63,6 +63,7 @@ export default defineStore('dataStore', {
       time: 0,
       price: 0,
       whoBuy:[],
+      onSale:true,
     },
     createCourseStep: 0,
     AllCoursesFirebaseData:[],

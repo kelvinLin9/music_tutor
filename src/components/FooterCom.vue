@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-dark py-4 border-top">
+  <div class="bg-dark py-4">
     <div class="container">
       <div class="row justify-content-center justify-content-lg-between align-items-center">
         <div class="col">
