@@ -1,9 +1,9 @@
 <template>
   
   <div class="col-12 col-lg-8 mx-auto mb-3 border rounded-2">
-    <h1 class="my-3 pb-2 ps-3 border-bottom">結帳清單
-      <span class="fs-5 text-secondary">總共{{ payWrap.payData.length }}件</span>
-    </h1>
+    <div class="my-3 pb-2 ps-3 ms-1 border-bottom fs-3 fw-bold text-secondary">
+      總共{{ payWrap.payData.length }}件
+    </div>
     <table class="table table-hover align-middle">
       <tbody>
         <tr v-for="item, index in payWrap.payData " :key="index">
@@ -51,7 +51,7 @@ export default {
     ...mapActions(dataStore, ['onAuthStateChanged','getOneCoursesFirebaseData']),
   },
   created () {
-    // this.onAuthStateChanged()
+
   }
 }
 </script>
