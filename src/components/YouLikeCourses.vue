@@ -47,13 +47,13 @@
               <span class="">&ensp;{{ item.data.courseName }}</span>   
             </div>
             <div class="mt-auto">
-              <div class="mb-1 text-primary">
+              <div class="mb-1">
                 by {{ item.data.displayName }}
               </div>
               <div class="mb-1">
-                <i class="bi bi-clock-fill"></i>
+                <i class="bi bi-clock"></i>
                 {{ item.data.time }}
-                <i class="bi bi-geo-alt-fill ms-2"></i>
+                <i class="bi bi-geo-alt ms-2"></i>
                 {{ item.data.cityName || '線上' }}
               </div>
               <div class="mb-1">
@@ -61,7 +61,7 @@
                   NT$ {{ $filters.currency(item.data.price) }}
                 </span>
                 <span v-if="item.data.whoBuy">
-                  <i class="bi bi-people-fill me-2"></i>
+                  <i class="bi bi-people me-2"></i>
                   {{ item.data.whoBuy.length }}
                 </span>
               </div>
@@ -69,6 +69,44 @@
           </div>
         </div>
       </SwiperSlide>
+
+      <!-- <SwiperSlide v-for="(item) in 6" :key="item.id" class="mb-5 overflow-hidden">
+        <el-space direction="vertical" alignment="flex-start" class="card">
+          <el-skeleton :loading="loading" animated>
+            <template #template>
+              <el-skeleton-item variant="image" class="loading-img"/>
+              <div style="padding: 14px">
+                <el-skeleton-item variant="h3" style="width: 50%" />
+                <el-skeleton-item variant="h3" style="width: 100%;margin-top: 12px;" />
+                <div
+                  style="
+                    display: flex;
+                    align-items: center;
+                    justify-items: space-between;
+                    margin-top: 12px;
+                    height: 16px;
+                  "
+                >
+                  <el-skeleton-item variant="text" style="width: 30%;margin-right: 16px" />
+                  <el-skeleton-item variant="text" style="width: 30%" />
+                </div>
+                <div
+                  style="
+                    display: flex;
+                    align-items: center;
+                    justify-items: space-between;
+                    margin-top: 12px;
+                    height: 16px;
+                  "
+                >
+                  <el-skeleton-item variant="text" style="width: 30%;margin-right: 16px" />
+                  <el-skeleton-item variant="text" style="width: 30%" />
+                </div>
+              </div>
+            </template>
+          </el-skeleton>
+        </el-space>
+      </SwiperSlide> -->
     </swiper>
   </div>
 </template>
@@ -99,7 +137,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(dataStore, ['coursesData', 'bookmarkState', 'youLikeCourses'])
+    ...mapState(dataStore, ['coursesData', 'bookmarkState', 'youLikeCourses', 'loading'])
   },
   methods: {
     ...mapActions(dataStore, ['toggleBookmark', 'getOneCoursesFirebaseData']),
@@ -150,5 +188,21 @@ export default {
 }
 .sw-title {
   height: 50px;
+}
+.loading-img{
+  height: 180px;
+  width: 1508px;
+  @media (min-width: 575.8px) {
+    width: 506px;
+  }
+  @media (min-width: 767.8px) {
+    width: 332px;
+  }
+  @media (min-width: 991.8px) {
+    width: 290px;
+  }
+  @media (min-width: 1199.8px) {
+    width: 260px;
+  }
 }
 </style>

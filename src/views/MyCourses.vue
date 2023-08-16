@@ -10,7 +10,7 @@
             <img src="../assets/images/預設大頭貼.png" alt="預設大頭照"
                 v-if="!teacherData.teacherImg">
           </div>
-          <h1 class="ms-5"> {{ user.displayName }} </h1>
+          <h1 class="ms-5"> {{ teacherData.displayName }} </h1>
         </div>
       </div>
       <div class="col-12 col-lg-6 ms-auto">
@@ -77,57 +77,25 @@
       </div>
     </div>
   </div>
-  <!-- 學生 -->
+  <!-- Loading -->
+  <CoursesLoading class="my-3" v-if="loading"/>
+  <!-- grid -->
   <div class="container my-3"
-        v-if="myCoursesState === 'student' && displayState === 'grid'">
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-2">
-      <div class="col"
-      v-for="item in userStudentCourses" :key="item[0].id">
-        <div class="card rounded-3 scale h-100"
-        @click="getOneCoursesFirebaseData(item[0].id)">
-          <div class="card-img overflow-hidden position-relative">
-            <img :src="item[0].data.courseImg" alt="課程圖片" class="card-img-top">
-            <i class="bookmark"
-            :class="bookmarkState(item[0].id)"
-            @click.stop="toggleBookmark(item[0].id)"        
-            data-bs-toggle="tooltip"
-            data-bs-placement="top"
-            title="加入 / 移除收藏"
-            ></i>
-          </div>
-          <div class="card-body d-flex flex-column">
-            <div class="mb-1">
-              <span class="badge rounded-pill text-bg-danger test align-middle">{{ item[0].data.courseCategory }}</span>
-              <span class="">&ensp;{{ item[0].data.courseName }}</span>   
-            </div>
-            <div class="mt-auto">
-              <div class="mb-1 text-primary">
-                by {{ item[0].data.displayName }}
-              </div>
-              <div class="mb-1">
-                <i class="bi bi-clock-fill"></i>
-                {{ item[0].data.time }}
-                <i class="bi bi-geo-alt-fill"></i>
-                {{ item[0].data.cityName || '線上' }}
-              </div>
-              <div class="mb-1">
-                <span class="me-3">
-                  NT$ {{ $filters.currency(item[0].data.price) }}
-                </span>
-                <span class="">
-                  <i class="bi bi-people-fill me-2"></i>
-                  {{ item[0].data.whoBuy.length}}
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      v-if="displayState === 'grid' && !loading">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-2">
+      <CourseCard/>
     </div>
   </div>
+
+
+
+
+
+
+
     <!-- 學生橫向呈現 -->
   <div class="container my-3"
-      v-else-if="myCoursesState === 'student' && displayState === 'list'">
+      v-if="myCoursesState === 'student' && displayState === 'list' && !loading">
     <div class="row">
       <div class="col-12">
         <table class="table table-hover align-middle">
@@ -138,22 +106,22 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="item in userStudentCourses" :key="item[0].id">
+            <tr v-for="item in userStudentCourses" :key="item.id">
               <td width="100"
-                  @click="getOneCoursesFirebaseData(item[0].id)">
-                  <img :src="item[0].data.courseImg" alt="課程圖片" class="table-image cursor-pointer">
+                  @click="getOneCoursesFirebaseData(item.id)">
+                  <img :src="item.data.courseImg" alt="課程圖片" class="table-image cursor-pointer">
               </td>
               <td>
                 <div class="">
-                  {{item[0].data.courseName }}
+                  {{item.data.courseName }}
                 </div>
                 <div class="text-primary">
-                  by {{ item[0].data.displayName }}
+                  by {{ item.data.displayName }}
                 </div>
                 <div class="">
-                  NT$ {{ $filters.currency(item[0].data.price) }}
-                  <i class="bi bi-clock-fill ms-2"></i>
-                  {{ item[0].data.time }}
+                  NT$ {{ $filters.currency(item.data.price) }}
+                  <i class="bi bi-clock ms-2"></i>
+                  {{ item.data.time }}
                 </div>
               </td>
               <td class="">
@@ -168,71 +136,9 @@
       </div>
     </div>
   </div>
-  <!-- 老師 -->
-  <div class="container my-3"
-      v-else-if="myCoursesState === 'teacher' && displayState === 'grid'">
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-2">
-      <div class="col"
-      v-for="item in userTeacherCourses " :key="item.id">
-        <div class="card rounded-3 scale h-100"
-        @click="getOneCoursesFirebaseData(item.id)">
-          <div class="card-img overflow-hidden position-relative">
-            <img :src="item.data.courseImg" alt="課程圖片" class="card-img-top">
-            <i class="bookmark"
-            :class="bookmarkState(item.id)"
-            @click.stop="toggleBookmark(item.id)"
-            data-bs-toggle="tooltip"
-            data-bs-placement="top"
-            title="加入 / 移除收藏"
-            ></i>
-          </div>
-          <div class="card-body d-flex flex-column">
-            <div class="mb-1">
-              <span class="badge rounded-pill text-bg-danger test align-middle">{{ item.data.courseCategory }}</span>
-              <span class="">&ensp;{{ item.data.courseName }}</span>   
-            </div>
-            <div class="mt-auto">
-              <div class="mb-1 text-primary">
-                by {{ item.data.displayName }}
-              </div>
-              <div class="mb-1">
-                <i class="bi bi-clock-fill"></i>
-                {{ item.data.time }}
-                <i class="bi bi-geo-alt-fill"></i>
-                {{ item.data.cityName || '線上' }}
-              </div>
-              <!-- <div class="mb-1">
-                <span class="bg-info rounded-2 px-2 me-2"
-                      v-if="item.data.courseMethod[0]">
-                  {{ item.data.courseMethod[0] }}
-                </span>
-                <span class="bg-info rounded-2 px-2 me-2"
-                      v-if="item.data.courseMethod[1]">
-                  {{ item.data.courseMethod[1] }}
-                </span>
-                <span class="bg-info rounded-2 px-2 me-2"
-                      v-if="item.data.courseMethod[2]">
-                  {{ item.data.courseMethod[2] }}
-                </span>
-              </div> -->
-              <div class="mb-1">
-                <span class="me-3">
-                  NT$ {{ $filters.currency(item.data.price) }}
-                </span>
-                <span v-if="item.data.whoBuy">
-                  <i class="bi bi-people-fill me-2"></i>
-                  {{ item.data.whoBuy.length}}
-                </span>
-              </div>
-            </div>
-          </div>
 
-        </div>
-      </div>
-    </div>
-  </div>
   <!-- 老師橫向呈現 -->
-  <div class="container my-3"
+  <!-- <div class="container my-3"
       v-else-if="myCoursesState === 'teacher' && displayState === 'list'">
     <div class="row">
       <div class="col-12">
@@ -258,88 +164,27 @@
                 </div>
                 <div class="">
                   NT$ {{ $filters.currency(item.data.price) }}
-                  <i class="bi bi-clock-fill ms-2"></i>
+                  <i class="bi bi-clock ms-2"></i>
                   {{ item.data.time }}
                 </div>
                 <div v-if="item.data.whoBuy">
-                  <i class="bi bi-people-fill me-2"></i>
+                  <i class="bi bi-people me-2"></i>
                   {{ item.data.whoBuy.length}}
                 </div>
               </td>
               <td class="">
                 我的學生
-                <!-- {{ item.data.whoBuy[0].uid }} -->
+                {{ item.data.whoBuy[0].uid }}
               </td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
-  </div>
-  <!-- 收藏 -->
-  <div class="container my-3"
-        v-else-if="myCoursesState === 'bookmark' && displayState === 'grid'">
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-2">
-      <div class="col"
-      v-for="item in userBookmarkCourses" :key="item.id">
-        <div class="card rounded-3 scale h-100"
-        @click="getOneCoursesFirebaseData(item.id)">
-          <div class="card-img overflow-hidden position-relative">
-            <img :src="item.data.courseImg" alt="課程圖片" class="card-img-top">
-            <i class="bookmark"
-            :class="bookmarkState(item.id)"
-            @click.stop="toggleBookmark(item.id)"
-            data-bs-toggle="tooltip"
-            data-bs-placement="top"
-            title="加入 / 移除收藏"
-            ></i>
-          </div>
-          <div class="card-body d-flex flex-column">
-            <div class="mb-1">
-              <span class="badge rounded-pill text-bg-danger test align-middle">{{ item.data.courseCategory }}</span>
-              <span class="">&ensp;{{ item.data.courseName }}</span>   
-            </div>
-            <div class="mt-auto">
-              <div class="mb-1 text-primary">
-                by {{ item.data.displayName }}
-              </div>
-              <div class="mb-1">
-                <i class="bi bi-clock-fill"></i>
-                {{ item.data.time }}
-                <i class="bi bi-geo-alt-fill"></i>
-                {{ item.data.cityName || '線上' }}
-              </div>
-              <!-- <div class="mb-1">
-                <span class="bg-info rounded-2 px-2 me-2"
-                      v-if="item.data.courseMethod[0]">
-                  {{ item.data.courseMethod[0] }}
-                </span>
-                <span class="bg-info rounded-2 px-2 me-2"
-                      v-if="item.data.courseMethod[1]">
-                  {{ item.data.courseMethod[1] }}
-                </span>
-                <span class="bg-info rounded-2 px-2 me-2"
-                      v-if="item.data.courseMethod[2]">
-                  {{ item.data.courseMethod[2] }}
-                </span>
-              </div> -->
-              <div class="mb-1">
-                <span class="me-3">
-                  NT$ {{ $filters.currency(item.data.price) }}
-                </span>
-                <span v-if="item.data.whoBuy">
-                  <i class="bi bi-people-fill me-2"></i>
-                  {{ item.data.whoBuy.length}}
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  </div> -->
+
     <!-- 收藏橫向呈現 -->
-  <div class="container my-3"
+  <!-- <div class="container my-3"
       v-else-if="myCoursesState === 'bookmark' && displayState === 'list'">
     <div class="row">
       <div class="col-12">
@@ -365,11 +210,11 @@
                 </div>
                 <div class="">
                   NT$ {{ $filters.currency(item.data.price) }}
-                  <i class="bi bi-clock-fill ms-2"></i>
+                  <i class="bi bi-clock ms-2"></i>
                   {{ item.data.time }}
                 </div>
                 <div >
-                  <i class="bi bi-people-fill me-2"></i>
+                  <i class="bi bi-people me-2"></i>
                   {{ item.data.whoBuy.length}}
                 </div>
               </td>
@@ -378,29 +223,46 @@
         </table>
       </div>
     </div>
-  </div>
+  </div> -->
   
     
 
 </template>
   
 <script>
+import CoursesLoading from '../components/CoursesLoading.vue'
+import CourseCard from '../components/CourseCard.vue'
 import { mapState, mapActions, mapWritableState } from 
 'pinia'  
 import dataStore from '@/stores/dataStore'
 import goStore from '@/stores/goStore'
+import courseCardStore from '@/stores/courseCardStore'
 
 export default {
+  components: { CourseCard, CoursesLoading },
+  watch: {
+    myCoursesState() {
+      if(this.myCoursesState === 'teacher') {
+        this.courseCardData = this.userTeacherCourses
+      } else if (this.myCoursesState === 'bookmark') {
+        this.courseCardData = this.userBookmarkCourses
+      } else if (this.myCoursesState === 'student') {
+        this.courseCardData = this.userStudentCourses
+      } 
+    }
+  },
   computed: {
-    ...mapState(dataStore, ['user', 'teacherData', 'userTeacherCourses', 'userStudentCourses', 'userBookmarkCourses', 'bookmarkState']),
-    ...mapWritableState(dataStore, ['myCoursesState', 'displayState'])
+    ...mapState(dataStore, ['teacherData', 'userTeacherCourses', 'userStudentCourses', 'userBookmarkCourses', 'loading']),
+    ...mapWritableState(dataStore, ['myCoursesState', 'displayState']),
+    ...mapWritableState(courseCardStore, ['courseCardData']),
   },
   methods: {
-    ...mapActions(dataStore, ['onAuthStateChanged', 'toggleBookmark', 'getOneCoursesFirebaseData']),
+    ...mapActions(dataStore, ['onAuthStateChanged', 'getOneCoursesFirebaseData']),
     
   },
   created () {
     this.onAuthStateChanged()
+    this.courseCardData = this.userTeacherCourses
   }
 }
 </script>

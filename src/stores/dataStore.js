@@ -25,6 +25,7 @@ const Toast = Swal.mixin({
 
 export default defineStore('dataStore', {
   state: () => ({
+    loading: true,
     // 自己創的測試用數據
     coursesData: [
       {
@@ -63,6 +64,7 @@ export default defineStore('dataStore', {
       price: 0,
       whoBuy:[],
     },
+    createCourseStep: 0,
     AllCoursesFirebaseData:[],
     otherTeacherData:[],
     teacherData: {
@@ -259,6 +261,7 @@ export default defineStore('dataStore', {
       }
     },
     async getAllCoursesFirebaseData() {
+      this.loading = true;
       const querySnapshot = await getDocs(collection(db, "MusicTutorCourses"));
       // 這邊有留開課時間
       this.AllCoursesFirebaseData = []
@@ -275,6 +278,7 @@ export default defineStore('dataStore', {
         this.AllCoursesFirebaseData.push(wrap)
       });
       console.log('全部課程資料',this.AllCoursesFirebaseData)
+      this.loading = false;
       this.getTop6courses()
       this.getCouponData()
       // 用ID抓出其他想要渲染的資料
@@ -353,8 +357,9 @@ export default defineStore('dataStore', {
           wrap = this.AllCoursesFirebaseData.filter((i) => {
             return i.id === item.courseId
           })
-          wrap.timestamp = item.timestamp
-          this.userStudentCourses.push(wrap)
+          wrap[0].timestamp = item.timestamp
+          // console.log(wrap[0])
+          this.userStudentCourses.push(wrap[0])
         })
         console.log("用戶學生端課程資料",this.userStudentCourses)
       }
@@ -516,9 +521,9 @@ export default defineStore('dataStore', {
           errorMessages.push('需上傳 JPG 或 PNG 檔!')
         }
 
-        const isValidFileSize = fileObject.size / 1024 / 1024 < 0.3
+        const isValidFileSize = fileObject.size / 1024 / 1024 < 0.15
         if (!isValidFileSize) {
-          errorMessages.push('圖片大小需小於0.3MB!')
+          errorMessages.push('圖片大小需小於0.15MB!')
         }
         resolve({
           isValid: isValidFileType && isValidFileSize,

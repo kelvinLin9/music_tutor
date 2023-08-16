@@ -1,5 +1,6 @@
 <template>
-  <div class="container my-5">
+  <banner-com />
+  <!-- <div class="container my-5">
     <div class="row justify-content-center">
       <div class="col-9 timeline">
       </div>
@@ -30,16 +31,23 @@
         </div> 
       </div>
     </div>
-  </div>
-  <RouterView/>
+  </div> -->
+
+
+  <ProgressBar />
+  <RouterView />
 </template>
 
 <script>
 import { mapState, mapActions, mapWritableState } from 
 'pinia'  
 import dataStore from '@/stores/dataStore'
+import BannerCom from '../components/BannerCom.vue'
+import ProgressBar from '../components/ProgressBar.vue'
+
 
 export default {
+  components: { BannerCom, ProgressBar },
   computed: {
   
   },
@@ -47,8 +55,7 @@ export default {
     ...mapActions(dataStore, ['onAuthStateChanged']),
   },
   created () {
-    // 先不要
-    // this.onAuthStateChanged()
+
   }
 }
 </script>
