@@ -42,19 +42,9 @@
       </div>
       <div class="col-12 col-md-8">
 
-
+        <!-- 先用背景圖片解決沒辦法居中的問題 -->
         <div class="ckeditor-img position-relative border test"
             :style="{ 'background-image': `url(${otherTeacherData.ckeditorImg ||defaultCkeditorImg })` }">
-            
-                <label for="file-upload-ckeditor">
-                  <i class="bi bi-cloud-arrow-up-fill cursor-pointer upload-icon-ckeditor text-primary"></i>
-                </label>
-                <input
-                        type="file"
-                        id="file-upload-ckeditor"
-                        class="d-none"
-                        @change="uploadPhoto('ckeditor',$event)"
-                      />
         </div>
 
       </div>

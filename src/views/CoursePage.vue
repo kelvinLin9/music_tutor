@@ -6,7 +6,7 @@
         <img :src="courseData.courseImg" alt="課程圖片" class="course-photo">
       </div>
       <div class="col-12 col-lg-4 d-flex flex-column">
-        <h1>{{ courseData.courseName }}</h1>
+        <p class="fs-2 fw-bold">{{ courseData.courseName }}</p>
         <p class="">{{ courseData.courseIntro}}</p>
         <div class="border border-success px-2 py-1 text-success mt-auto ms-auto cursor-pointer"
             @click="toggleBookmark(courseData.id)"
@@ -48,7 +48,7 @@
           </div>
           <div class="col-auto">
             <div class="d-flex align-items-center">
-              <i class="bi bi-people-fill me-2"></i>
+              <i class="bi bi-people me-2"></i>
               <span v-if="courseData.whoBuy">
                 已被購買 <br> {{ courseData.whoBuy.length || 0 }} 次
               </span>
@@ -69,7 +69,7 @@
           <div class="col-auto"
                 v-if="courseData.cityName">
             <div class="d-flex align-items-center">
-              <i class="bi bi-geo-alt-fill me-2"></i>
+              <i class="bi bi-geo-alt me-2"></i>
               上課地點<br> {{ courseData.cityName }}
             </div>
           </div>

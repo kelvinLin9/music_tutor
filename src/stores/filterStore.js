@@ -54,7 +54,7 @@ export default defineStore('filterStore', {
       }
     },
     currentPageCoursesData () {
-      console.log(pagiStore.page.currentPage)
+      // console.log(pagiStore.page.currentPage)
       pagiStore.pagination(this.filterData)
       return pagiStore.eachPage
     }

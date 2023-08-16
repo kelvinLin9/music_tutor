@@ -73,7 +73,9 @@
     <div class="mb-5">
       <img src="../assets/images/section2-left.png" alt="">
     </div>
-    <FeaturedCourses class="mb-5"/>
+    <!-- 先硬寫兩個，之後再改 -->
+    <FeaturedCourses class="mb-5" v-if="!loading"/>
+    <CoursesLoading v-if="loading"/>
   </section>
   <!-- 加入我們 -->
   <section>
@@ -198,26 +200,18 @@
 import FeaturedCourses from '../components/FeaturedCourses.vue'
 import { mapActions, mapState } from 'pinia'
 import dataStore from '../stores/dataStore';
+import CoursesLoading from '../components/CoursesLoading.vue';
 
 export default {
-  components: { FeaturedCourses },
-  data() {
-    return {
-      data: {}
-    }
+  components: { FeaturedCourses, CoursesLoading },
+  computed: {
+    ...mapState(dataStore, ['loading'])
   },
   methods: {
     ...mapActions(dataStore, ['onAuthStateChanged']),
   },
   created() {
     this.onAuthStateChanged()
-  },
-  mounted() {
-    const url = import.meta.env.VITE_PATH
-    this.$http.get(url)
-    .then((res) => {
-      this.data = res.data.results[0]
-    })
   }
 } 
 </script>
