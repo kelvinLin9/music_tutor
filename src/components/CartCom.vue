@@ -1,6 +1,9 @@
 <template>
+  <CoursesLoadingList v-if="loading" />
+
+
   <div class="text-center CoursesCart-vh d-flex flex-column justify-content-center align-items-center"
-      v-if="studentData.myCart.length === 0">
+      v-if="studentData.myCart.length === 0 && !loading">
       <p class="fs-1">購物車無任何品項</p>
       <RouterLink to="/AllCourses">
         <button type="button" class="btn btn-outline-primary">
@@ -8,9 +11,10 @@
         </button>
       </RouterLink> 
   </div>
+
+
   <div class="col-12 col-lg-8 mx-auto mb-3 border rounded-2"
-        v-if="studentData.myCart.length !== 0">
-    <h1 class="my-3">購物車</h1>
+        v-if="studentData.myCart.length !== 0 && !loading">
     <table class="table table-hover align-middle">
       <thead>
         <tr>
@@ -75,30 +79,31 @@
         </tr>
       </tbody>
     </table>
-    <!-- {{ studentData.myCart }} -->
-    <!-- {{ userCartCourses }} -->
   </div>
 
 </template>
 
 <script>
+import CoursesLoadingList from '../components/CoursesLoadingList.vue'
 import { mapState, mapActions, mapWritableState } from 
 'pinia' 
 import cartStore from '@/stores/cartStore'
 import dataStore from '@/stores/dataStore'
 
 export default {
+  components: { CoursesLoadingList },
   computed: {
     ...mapWritableState(cartStore, ['cartCheckboxWrap','payWrap', 'checkAllValue']),
     ...mapWritableState(dataStore, ['studentData','user', 'userCartCourses','couponData']),
-    ...mapState(cartStore, ['cartTotal', 'couponValue'])
+    ...mapState(cartStore, ['cartTotal', 'couponValue']),
+    ...mapState(dataStore, ['loading']),
   },
   methods: {
     ...mapActions(cartStore, ['deleteCart', 'addToPayWrap', 'checkAll']),
     ...mapActions(dataStore, ['onAuthStateChanged','getOneCoursesFirebaseData']),
   },
   created () {
-    // this.onAuthStateChanged()
+
   }
 }
 </script>

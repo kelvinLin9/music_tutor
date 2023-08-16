@@ -1,5 +1,5 @@
 <template>
-  <bannerCom />
+  <BannerCom />
   <!-- 搜尋、排序 -->
   <div class="container mt-3 fs-8" v-if="!loading">
     <div class="row align-items-center g-2">
@@ -215,14 +215,13 @@
         很抱歉，沒有符合條件課程
       </div>
     </div>
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-2"
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-3"
          v-if="displayState === 'grid'">
       <CourseCard />
     </div>
   </div>
   <!-- 條列課程 -->
-  <div class="container mb-3"
-      v-if="displayState === 'list' && !loading">
+  <div class="container mb-3" v-if="displayState === 'list' && !loading">
     <div class="row">
       <div class="col-12">
         <table class="table table-hover align-middle">
@@ -261,6 +260,7 @@
       </div>
     </div>
   </div>
+  <!-- 分頁鈕 -->
   <PaginationCom v-if="!loading" />
 </template>
   
@@ -273,7 +273,6 @@ import { mapState, mapActions, mapWritableState } from
 'pinia'  
 import dataStore from '@/stores/dataStore'
 import filterStore from '@/stores/filterStore'
-import goStore from '@/stores/goStore'
 import bannerStore from '@/stores/bannerStore'
 
 export default {
@@ -284,12 +283,13 @@ export default {
   },
   components: { PaginationCom, CoursesLoading, BannerCom, CourseCard },
   computed: {
-    ...mapState(dataStore, ['onAuthStateChanged', 'loading']),
+    ...mapState(dataStore, ['loading']),
     ...mapState(filterStore, ['filterData','courseMethod', 'sortMethod', 'currentPageCoursesData']),
     ...mapWritableState(dataStore, ['displayState']),
     ...mapWritableState(filterStore, ['selectCityName', 'selectCourseCategory', 'selectCourseName','selectCourseMethod', 'selectSortMethod'])
   },
   methods: {
+    ...mapActions(dataStore, ['onAuthStateChanged']),
     ...mapActions(filterStore, ['selectCityNameCancel', 'courseSort']),
     ...mapActions(bannerStore, ['getBannerInfo'])
 
