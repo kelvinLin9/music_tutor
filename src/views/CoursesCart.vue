@@ -1,4 +1,5 @@
 <template>
+  <BannerCom/>
   <div class="container mt-3">
     <div class="row">
       <pay-com v-if="cartPageState === 'pay'" />
@@ -48,9 +49,6 @@
             </button>
           </div>
         </div>
-        試用折扣碼:<br>
-        2023666 (6折)<br>
-        hexschoolsogood (3折)
       </div>
       <!-- 結帳用 -->
       <div class="col-12 col-lg-4 mb-3 px-0 px-lg-3"
@@ -96,15 +94,36 @@
 </template>
 
 <script>
+import CartCom from '../components/CartCom.vue'
+import PayCom from '../components/PayCom.vue'
+import BannerCom from '../components/BannerCom.vue'
 import { mapState, mapActions, mapWritableState } from 
 'pinia' 
 import cartStore from '@/stores/cartStore'
 import dataStore from '@/stores/dataStore'
-import CartCom from '../components/CartCom.vue'
-import PayCom from '../components/PayCom.vue'
+import bannerStore from '@/stores/bannerStore'
 
 export default {
-  components: { CartCom, PayCom },
+  components: { CartCom, PayCom, BannerCom },
+  watch: {
+    cartPageState() {
+      if (this.cartPageState === 'cart') {
+        this.getBannerInfo(
+        new URL('../assets/images/section3-1.png', import.meta.url).href,
+          '購物車',
+          'CART',
+          '年底前輸入『 2023666 』享六折優惠'
+        )
+      } else {
+        this.getBannerInfo(
+            new URL('../assets/images/section3-1.png', import.meta.url).href,
+            '結帳',
+            'CHECKOUT',
+            'YO~'
+        )
+      }
+    }
+  },
   computed: {
     ...mapWritableState(cartStore, ['cartCheckboxWrap','payWrap', 'cartPageState', 'couponCode']),
     ...mapWritableState(dataStore, ['studentData','user', 'userCartCourses', 'couponData']),
@@ -113,10 +132,17 @@ export default {
   methods: {
     ...mapActions(cartStore, ['deleteCart', 'addToPayWrap', 'addCouponCode','confirmToPay']),
     ...mapActions(dataStore, ['onAuthStateChanged','getOneCoursesFirebaseData']),
+    ...mapActions(bannerStore, ['getBannerInfo'])
   },
   created () {
     this.cartPageState = 'cart'
     this.onAuthStateChanged()
+    this.getBannerInfo(
+      new URL('../assets/images/section3-1.png', import.meta.url).href,
+      '購物車',
+      'CART',
+      '年底前輸入『 2023666 』享六折優惠'
+    )
   }
 }
 </script>

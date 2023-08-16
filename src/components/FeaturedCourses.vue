@@ -107,6 +107,7 @@ export default {
   },
   methods: {
     ...mapActions(dataStore, ['toggleBookmark', 'getOneCoursesFirebaseData']),
+    ...mapActions(goStore, ['goCoursePage']),
   },
   created () {
     // this.getBookmarkCoursesData()
