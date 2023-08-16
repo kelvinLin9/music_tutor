@@ -1,17 +1,5 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col text-center">
-        <h1 class="border-top border-bottom border-5 py-2 w-75 mx-auto">
-          課程介紹
-        </h1>
-        <h2>想吸引同學來上您的課，必須在這邊好好介紹課程</h2>
-      </div>
-    </div>
-  </div>
-
-  
-  <div class="container my-5">
+  <div class="container mb-5">
     <VForm  v-slot="{ errors }"
            @submit="goBeATeacherStep3()">
       <div class="row justify-content-center mb-3">
@@ -38,14 +26,14 @@
       <div class="row justify-content-center mb-3">
         <div class="col-12 col-lg-8 mb-3">
           <div class="row">
-            <div class="col-4">
+            <div class="col-auto">
               <label for="coursePhoto" 
                     class="col-form-label"
                     accept="image/png, image/jpeg">
                 上傳一張課程封面照：
               </label>
             </div>
-            <div class="col-8">
+            <div class="col-5">
               <VField
                   name="課程封面"
                   type="file"
@@ -57,10 +45,12 @@
                 >
               </VField>
               <ErrorMessage class="invalid-feedback" name="課程封面"/>
-                <img class="img-fluid mt-3" 
-                    :src="beATeacherData.courseImg" 
-                    alt="課程封面照"
-                    v-if="beATeacherData.courseImg"/>
+            </div>
+            <div class="col-3">
+              <img class="img-fluid" 
+                  :src="beATeacherData.courseImg" 
+                  alt="課程封面照"
+                  v-if="beATeacherData.courseImg"/>
             </div>
           </div>
         </div>
@@ -85,18 +75,26 @@ import { mapState, mapActions, mapWritableState } from
 'pinia' 
 import goStore from '@/stores/goStore'
 import dataStore from '@/stores/dataStore'
+import bannerStore from '@/stores/bannerStore'
 
 export default {
   computed: {
-    ...mapWritableState(dataStore, ['beATeacherData','teacherData']),
+    ...mapWritableState(dataStore, ['beATeacherData','teacherData', 'createCourseStep']),
 
   },
   methods: {
     ...mapActions(dataStore, ['uploadPhoto']),
     ...mapActions(goStore, ['goBeATeacherStep1', 'goBeATeacherStep3']),
+    ...mapActions(bannerStore, ['getBannerInfo'])
   },
   created () {
-    
+    this.getBannerInfo(
+      new URL('../assets/images/section3-1.png', import.meta.url).href,
+      'INTRODUCE',
+      '課程介紹',
+      '分享您的音樂願景，簡單介紹您的課程內容，為學生營造期待感'
+    )
+    this.createCourseStep = 2
   }
 }
 </script>

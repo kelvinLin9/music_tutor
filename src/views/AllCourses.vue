@@ -1,17 +1,7 @@
 <template>
-  <div class="">
-    <div class="card">
-      <img src="https://fakeimg.pl/180x20/" alt="" class="card-img">
-      <div class="card-img-overlay d-flex justify-content-center  align-items-center">
-        <h2 class="border-top border-bottom border-primary">
-          課程列表
-        </h2>
-      </div>
-    </div>
-  </div>
-
-  <!-- 搜尋 -->
-  <div class="container mt-3 fs-8">
+  <bannerCom />
+  <!-- 搜尋、排序 -->
+  <div class="container mt-3 fs-8" v-if="!loading">
     <div class="row align-items-center g-2">
       <!-- 技能 -->
       <div class="col-12 col-lg-auto me-lg-1">
@@ -55,7 +45,7 @@
             <option value="木琴">木琴</option>
             <option value="馬林巴琴">馬林巴琴</option>
             <option value="鋼琴">鋼琴</option>
-            <option value="數位鋼琴(電鋼琴)">數位鋼琴(電鋼琴)</option>
+            <option value="數位鋼琴">數位鋼琴</option>
             <option value="傳統電子琴">傳統電子琴</option>
             <option value="電子琴">電子琴</option>
             <option value="電子合成器">電子合成器</option>
@@ -216,63 +206,23 @@
       </div>
     </div>
   </div>
+  <!-- Loading -->
+  <CoursesLoading class="my-3" v-if="loading"/>
   <!-- 卡片課程 -->
-  <div class="container my-3">
-    <div class="row"
-     v-if="filterData.length == 0">
+  <div class="container my-3" v-if="!loading">
+    <div class="row" v-if="filterData.length == 0">
       <div class="col text-center fs-2 mt-5">
         很抱歉，沒有符合條件課程
       </div>
     </div>
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-2"
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-2"
          v-if="displayState === 'grid'">
-      <div class="col"
-            v-for="item in currentPageCoursesData" :key="item.id">
-            <div class="card rounded-3 scale h-100"
-            @click="goCoursePage(item.id)">
-          <div class="card-img overflow-hidden position-relative">
-            <img :src="item.data.courseImg" alt="商品圖片" class="card-img-top filter-grayscale">
-            <i class=""
-              :class="bookmarkState(item.id)"
-              @click.stop="toggleBookmark(item.id)"
-              data-bs-toggle="tooltip"
-              data-bs-placement="top"
-              title="加入 / 移除收藏"
-            ></i>
-          </div>
-          <div class="card-body d-flex flex-column">
-            <div class="mb-1">
-              <span class="badge rounded-pill text-bg-danger test align-middle">{{ item.data.courseCategory }}</span>
-              <span class="">&ensp;{{ item.data.courseName }}</span>   
-            </div>
-            <div class="mt-auto">
-              <div class="mb-1 text-primary">
-                by {{ item.data.displayName }}
-              </div>
-              <div class="mb-1">
-                <i class="bi bi-clock-fill"></i>
-                {{ item.data.time }}
-                <i class="bi bi-geo-alt-fill ms-2"></i>
-                {{ item.data.cityName || '線上' }}
-              </div>
-              <div class="mb-1">
-                <span class="me-3">
-                  NT$ {{ $filters.currency(item.data.price) }}
-                </span>
-                <span v-if="item.data.whoBuy">
-                  <i class="bi bi-people-fill me-2"></i>
-                  {{ item.data.whoBuy.length}}
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <CourseCard />
     </div>
   </div>
-  <!-- 條件課程 -->
+  <!-- 條列課程 -->
   <div class="container mb-3"
-      v-if="displayState === 'list'">
+      v-if="displayState === 'list' && !loading">
     <div class="row">
       <div class="col-12">
         <table class="table table-hover align-middle">
@@ -297,11 +247,11 @@
                 </div>
                 <div class="">
                   NT$ {{ $filters.currency(item.data.price) }}
-                  <i class="bi bi-clock-fill ms-2"></i>
+                  <i class="bi bi-clock ms-2"></i>
                   {{ item.data.time }}
                 </div>
                 <div >
-                  <i class="bi bi-people-fill me-2"></i>
+                  <i class="bi bi-people me-2"></i>
                   {{ item.data.whoBuy.length}}
                 </div>
               </td>
@@ -311,16 +261,20 @@
       </div>
     </div>
   </div>
-  <PaginationCom />
+  <PaginationCom v-if="!loading" />
 </template>
   
 <script>
 import PaginationCom from '../components/PaginationCom.vue'
+import CoursesLoading from '../components/CoursesLoading.vue'
+import BannerCom from '../components/BannerCom.vue'
+import CourseCard from '../components/CourseCard.vue'
 import { mapState, mapActions, mapWritableState } from 
 'pinia'  
 import dataStore from '@/stores/dataStore'
 import filterStore from '@/stores/filterStore'
 import goStore from '@/stores/goStore'
+import bannerStore from '@/stores/bannerStore'
 
 export default {
   data() {
@@ -328,25 +282,30 @@ export default {
       fullWidth:0,
     }
   },
-  components: { PaginationCom },
+  components: { PaginationCom, CoursesLoading, BannerCom, CourseCard },
   computed: {
-    ...mapState(dataStore, ['coursesData', 'bookmarkState', 'AllCoursesFirebaseData', 'onAuthStateChanged']),
+    ...mapState(dataStore, ['onAuthStateChanged', 'loading']),
     ...mapState(filterStore, ['filterData','courseMethod', 'sortMethod', 'currentPageCoursesData']),
     ...mapWritableState(dataStore, ['displayState']),
     ...mapWritableState(filterStore, ['selectCityName', 'selectCourseCategory', 'selectCourseName','selectCourseMethod', 'selectSortMethod'])
   },
   methods: {
-    ...mapActions(dataStore, ['toggleBookmark', 'getOneCoursesFirebaseData', 'getAllCoursesFirebaseData']),
     ...mapActions(filterStore, ['selectCityNameCancel', 'courseSort']),
-    ...mapActions(goStore, ['goCoursePage'])
+    ...mapActions(bannerStore, ['getBannerInfo'])
 
   },
   created () {
     this.onAuthStateChanged()
     this.courseSort()
+    this.getBannerInfo(
+      new URL('../assets/images/section3-1.png', import.meta.url).href,
+      '音樂家教媒合平台',
+      '音樂家教媒合平台',
+      '音樂家教媒合平台'
+    )
   },
   mounted () {
-    this.fullWidth = window.innerWidth
+    
   }
 }
 </script>

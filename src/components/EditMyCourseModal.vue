@@ -95,7 +95,7 @@
             <option value="木琴">木琴</option>
             <option value="馬林巴琴">馬林巴琴</option>
             <option value="鋼琴">鋼琴</option>
-            <option value="數位鋼琴(電鋼琴)">數位鋼琴(電鋼琴)</option>
+            <option value="數位鋼琴">數位鋼琴</option>
             <option value="傳統電子琴">傳統電子琴</option>
             <option value="電子琴">電子琴</option>
             <option value="電子合成器">電子合成器</option>
