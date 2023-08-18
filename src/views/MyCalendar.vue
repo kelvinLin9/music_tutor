@@ -1,30 +1,35 @@
 <template>
+  <BannerCom />
   <div class="container">
-    <div class="row">
+    <div class="row align-items-center" v-if="!loading">
       <div class="col-10">
         <el-calendar>
-        <template #dateCell="{data}">
+        <template #date-cell="{data}">
           <div class="calendar-item">
             <div class="calendar-time">
               {{ data.day.split('-').slice(2).join('')}}
             </div>
             <div>
               <span class="remark-text calendar-time" 
-                    v-for="(item, index) in dealMyDate(data.day)" :key="index">
-                {{ item }}
+                    v-for="(item, index) in dealMyDate1(data.day)" :key="index">
+                <span class="text-success">{{ item }}</span>
               </span>
               
+              <span class="remark-text calendar-time" 
+                    v-for="(item, index) in dealMyDate2(data.day)" :key="index">
+                <span class="text-danger">{{ item }}</span>
+              </span>
             </div>
           </div>
         </template>
       </el-calendar>
       </div>
       <div class="col-2">
-        <div class="">
-          要教的課
+        <div class="text-success fs-3 fw-bold">
+          - 要教的課
         </div>
-        <div class="">
-          要上的課
+        <div class="text-danger fs-3 fw-bold">
+          - 要上的課
         </div>
       </div>
     </div>
@@ -34,7 +39,15 @@
 
   
 <script>
+import moment from 'moment'
+import BannerCom from '../components/BannerCom.vue'
+import { mapState, mapActions, mapWritableState } from 
+'pinia'  
+import dataStore from '@/stores/dataStore'
+import bannerStore from '@/stores/bannerStore'
+
 export default {
+  components: { BannerCom },
   data () {
     return {
       resDate: [
@@ -58,19 +71,44 @@ export default {
       ]
     }
   },
+  computed:{
+    ...mapState(dataStore,['calenderData', 'loading']),
+  },
   methods: {
-    dealMyDate (date) {
+    ...mapActions(dataStore,['onAuthStateChanged']),
+    ...mapActions(bannerStore, ['getBannerInfo']),
+    dealMyDate1 (date) {
       let res = '';
-      for (let i = 0; i < this.resDate.length; i++) {
-      if (this.resDate[i].date == date) {
-        res = this.resDate[i].content;
+      for (let i = 0; i < this.calenderData.teach.length; i++) {
+      if (moment(this.calenderData.teach[i].classSchedule).format('YYYY-MM-DD') == date) {
+        res = this.calenderData.teach[i].courseName;
         break;
       }
     }
-      console.log(res)
+      // console.log(res)
+      return res;
+    },
+    dealMyDate2 (date) {
+      let res = '';
+      for (let i = 0; i < this.calenderData.study.length; i++) {
+      if (moment(this.calenderData.study[i].classSchedule).format('YYYY-MM-DD') == date) {
+        res = this.calenderData.study[i].courseName;
+        break;
+      }
+    }
+      // console.log(res)
       return res;
     }
   },
+  created () {
+    this.onAuthStateChanged()
+    this.getBannerInfo(
+      new URL('../assets/images/section3-1.png', import.meta.url).href,
+      'CALENDAR',
+      '行事曆',
+      '一目了然，做一個時間管理大師'
+    )
+  }
 }
 
 
