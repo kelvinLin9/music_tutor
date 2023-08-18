@@ -72,7 +72,7 @@ import CKEditor from '@ckeditor/ckeditor5-vue';
 // element
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
-
+import zhtw from 'element-plus/dist/locale/zh-tw.mjs'
 
 
 const app = createApp(App)
@@ -91,5 +91,7 @@ app.component('VForm', Form);
 app.component('ErrorMessage', ErrorMessage);
 app.use(register);
 app.use(CKEditor)
-app.use(ElementPlus)
+app.use(ElementPlus, {
+  locale: zhtw,
+})
 app.mount('#app')

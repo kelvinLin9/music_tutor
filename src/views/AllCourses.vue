@@ -192,7 +192,7 @@
         </div>
       </div>
       <!-- 排列方式 -->
-      <div class="col-auto ms-auto mt-0 cursor-pointer d-block d-md-none ">
+      <div class="col-auto ms-auto ms-md-2 cursor-pointer">
         <i class="bi bi-grid-fill text-danger fs-2"
             v-if="displayState === 'grid'"
             @click="displayState = 'list'"
@@ -238,20 +238,23 @@
                   <img :src="item.data.courseImg" alt="課程圖片" class="table-image cursor-pointer">
               </td>
               <td>
-                <div class="">
-                  {{item.data.courseName }}
+                <div class="mb-1 d-flex align-items-center">
+                  <span class="badge rounded-pill text-bg-danger mt-2">{{ item.data.courseCategory }}</span>
+                  <span class="fs-5 fw-bold ms-2">{{ item.data.courseName }}</span>   
                 </div>
-                <div class="text-primary">
+                <div class="">
                   by {{ item.data.displayName }}
                 </div>
                 <div class="">
-                  NT$ {{ $filters.currency(item.data.price) }}
-                  <i class="bi bi-clock ms-2"></i>
+                  <i class="bi bi-clock"></i>
                   {{ item.data.time }}
-                </div>
-                <div >
-                  <i class="bi bi-people me-2"></i>
+                  <i class="bi bi-geo-alt ms-2"></i>
+                  {{ item.data.cityName || '線上' }}
+                  <i class="bi bi-people ms-2"></i>
                   {{ item.data.whoBuy.length}}
+                </div>
+                <div class="fs-5 fw-bold">
+                  NT$ {{ $filters.currency(item.data.price) }}
                 </div>
               </td>
             </tr>

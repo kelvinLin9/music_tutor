@@ -135,7 +135,7 @@ export default defineStore('cartStore', {
     },
     async confirmToPay() {
       // Swal.fire('新增歷史付款資訊')
-      // 1. 新增歷史付款資訊(買的人)
+      // 1. 新增歷史付款資訊(買的人) 
       const wrap = { 
         timestamp : new Date().getTime(),
         payData: this.payWrap,
@@ -147,31 +147,42 @@ export default defineStore('cartStore', {
       })
 
 
-      // 2. 新增到學生課程的部分(買的人)
+      // 2. 新增到學生課程的部分(買的人)和3合併了
       // Swal.fire('新增到學生課程')
-      for (let i = 0; i < this.payWrap.payData.length; i++) {
-        console.log('2', this.payWrap.payData[i].courseId)
-        let wrap2 = { 
-        timestamp : new Date().getTime(),
-        courseId: this.payWrap.payData[i].courseId,
-        }
+      // for (let i = 0; i < this.payWrap.payData.length; i++) {
+        // console.log('2', this.payWrap.payData[i].courseId)
+        // let wrap2 = { 
+        // timestamp : buyTime,
+        // courseId: this.payWrap.payData[i].courseId,
+        // classSchedule: ''
+        // }
         // console.log(wrap2)
+        // await updateDoc(cart, {
+        //   myStudyCourses: arrayUnion(wrap2)
+        // })
+      // }
+
+
+      // 2.3. 新增到該課程資料(賣的人)同時新增一份到學生端(買的人)
+      // Swal.fire('新增到該課程購買名單')
+      for (let i = 0; i < this.payWrap.payData.length; i++) {
+        // console.log('2', this.payWrap.payData[i].courseId)
+        const cart2 = doc(db, "MusicTutorCourses", this.payWrap.payData[i].courseId);
+        const ts = new Date().getTime()
+        let wrap2 = { 
+          timestamp : ts,
+          courseId: this.payWrap.payData[i].courseId,
+          classSchedule: ''
+          }
+        let wrap3 = { 
+          timestamp : ts,
+          uid : data.user.uid,
+          classSchedule: ''
+          }
         await updateDoc(cart, {
           myStudyCourses: arrayUnion(wrap2)
         })
-      }
-
-
-      // 3. 新增到學生課程的部分(賣的人)
-      // Swal.fire('新增到該課程購買名單')
-      for (let i = 0; i < this.payWrap.payData.length; i++) {
-        console.log('3', this.payWrap.payData[i].courseId)
-        const cart3 = doc(db, "MusicTutorCourses", this.payWrap.payData[i].courseId);
-        let wrap3 = { 
-          timestamp : new Date().getTime(),
-          uid : data.user.uid ,
-          }
-        await updateDoc(cart3, {
+        await updateDoc(cart2, {
           whoBuy: arrayUnion(wrap3)
         })
       }
