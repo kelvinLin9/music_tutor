@@ -46,7 +46,7 @@ export default defineStore('dataStore', {
     ],
     courseData:{},   // 單一課程頁面用
     myCoursesState: 'student', // 我的課程換頁用
-    displayState: 'list', // 我的課程換呈現方式用
+    displayState: 'list', // 我的課程換呈現方式用(全域共用)
     ckeditorState: false,
     bookmarkIds: [],
     bookmarkNum: 0,
@@ -455,6 +455,7 @@ export default defineStore('dataStore', {
 
     // 取得行事曆用數據
     async getTeachDate () {
+      this.calenderData.teach = []
       this.userTeacherCourses.forEach((i) => {
         i.data.whoBuy.forEach(async (j) => {
           if(j.classSchedule) {
@@ -471,15 +472,17 @@ export default defineStore('dataStore', {
       console.log('行事曆老師資料', this.calenderData.teach)
     },
     async getStudyDate () {
+      this.calenderData.study = []
       this.userStudentCourses.forEach((i) => {
-        let warp = {}
-        warp.TeacherName = i.data.displayName
-        warp.classSchedule = i.classSchedule
-        // console.log(moment(i.classSchedule).format('YYYY-MM-DD'))
-        warp.courseName = i.data.courseName
-        warp.timestamp = i.timestamp
-        warp.id = i.id
-        this.calenderData.study.push(warp)
+        if(i.classSchedule){
+          let warp = {}
+          warp.TeacherName = i.data.displayName
+          warp.classSchedule = i.classSchedule
+          warp.courseName = i.data.courseName
+          warp.timestamp = i.timestamp
+          warp.id = i.id
+          this.calenderData.study.push(warp)
+        }
       })
       console.log('行事曆學生資料', this.calenderData.study)
     },

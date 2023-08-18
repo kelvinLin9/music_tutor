@@ -34,7 +34,7 @@
     <div class="row align-items-center mb-3">
       <div class="col-4 col-md-3 border-bottom border-5 pb-2 cursor-pointer"
           :class="{'border-danger': myCoursesState === 'student'}"
-          @click="myCoursesState = 'student'">
+          @click="myCoursesState = 'student' , courseCardData = userStudentCourses">
         <i class="bi bi-pen"
           :class="{'text-primary': myCoursesState === 'student'}">
         </i>
@@ -44,7 +44,7 @@
       </div>
       <div class="col-4 col-md-3 border-bottom border-5 pb-2 cursor-pointer"
           :class="{'border-danger': myCoursesState === 'teacher'}"
-          @click="myCoursesState = 'teacher'">
+          @click="myCoursesState = 'teacher', courseCardData = userTeacherCourses">
         <i class="bi bi-book"
         :class="{'text-primary': myCoursesState === 'teacher'}">
         </i>
@@ -54,7 +54,7 @@
       </div>
       <div class="col-4 col-md-3 border-bottom border-5 pb-2 cursor-pointer"
           :class="{'border-danger': myCoursesState === 'bookmark'}"
-          @click="myCoursesState = 'bookmark'">
+          @click="myCoursesState = 'bookmark', courseCardData = userBookmarkCourses, displayState = 'grid'">
         <i class="bi bi-bookmarks-fill"
           :class="{'text-primary': myCoursesState === 'bookmark'}"
         >
@@ -79,6 +79,36 @@
   </div>
   <!-- Loading -->
   <CoursesLoading class="my-3" v-if="loading"/>
+
+
+  <!-- 無課程提示 -->
+  <div class="container d-flex justify-content-center align-items-center text-center" v-if="!loading">
+    <div v-if="userStudentCourses.length === 0 && myCoursesState === 'student'">
+      <p class="fs-1">尚未購買課程</p>
+      <RouterLink to="/AllCourses">
+        <button type="button" class="btn btn-primary">
+          馬上購買
+        </button>
+      </RouterLink>
+    </div>
+    <div v-if="userTeacherCourses.length === 0 && myCoursesState === 'teacher'">
+      <p class="fs-1">尚未建立課程</p>
+      <RouterLink to="/CreateCourses/BeATeacherStep1">
+        <button type="button" class="btn btn-primary">
+          我要開課
+        </button>
+      </RouterLink>
+    </div>
+    <div v-if="userBookmarkCourses.length === 0 && myCoursesState === 'bookmark'">
+      <p class="fs-1">尚未收藏課程</p>
+      <RouterLink to="/AllCourses">
+        <button type="button" class="btn btn-primary">
+          添加收藏
+        </button>
+      </RouterLink>
+    </div>
+  </div>
+
   <!-- grid -->
   <div class="container my-3"
       v-if="displayState === 'grid' && !loading">
@@ -111,11 +141,12 @@
           </thead>
           <tbody>
             <tr v-for="item in userStudentCourses" :key="item.id">
-              <td width="100"
+              <th width="100" class="cursor-pointer"
                   @click="getOneCoursesFirebaseData(item.id)">
-                  <img :src="item.data.courseImg" alt="課程圖片" class="table-image cursor-pointer">
-              </td>
-              <td>
+                  <img :src="item.data.courseImg" alt="課程圖片" class="table-image">
+              </th>
+              <td class="cursor-pointer" 
+                  @click="getOneCoursesFirebaseData(item.id)">
                 <div class="">
                   {{item.data.courseName }}
                 </div>
@@ -162,11 +193,12 @@
           </thead>
           <tbody>
             <tr v-for="item in userTeacherCourses" :key="item.id">
-              <td width="100"
+              <td width="100" class="cursor-pointer"
                   @click="getOneCoursesFirebaseData(item.id)">
-                  <img :src="item.data.courseImg" alt="課程圖片" class="table-image cursor-pointer">
+                  <img :src="item.data.courseImg" alt="課程圖片" class="table-image">
               </td>
-              <td>
+              <td class="cursor-pointer" 
+                  @click="getOneCoursesFirebaseData(item.id)">
                 <div class="">
                   {{item.data.courseName }}
                 </div>
@@ -203,6 +235,7 @@
     </div>
   </div>
   <SetUpClassScheduleModal />
+
     <!-- 收藏橫向呈現 -->
   <!-- <div class="container my-3"
       v-else-if="myCoursesState === 'bookmark' && displayState === 'list'">
@@ -261,17 +294,6 @@ import courseCardStore from '@/stores/courseCardStore'
 
 export default {
   components: { CourseCard, CoursesLoading, SetUpClassScheduleModal },
-  watch: {
-    myCoursesState() {
-      if(this.myCoursesState === 'teacher') {
-        this.courseCardData = this.userTeacherCourses
-      } else if (this.myCoursesState === 'bookmark') {
-        this.courseCardData = this.userBookmarkCourses
-      } else if (this.myCoursesState === 'student') {
-        this.courseCardData = this.userStudentCourses
-      } 
-    }
-  },
   computed: {
     ...mapState(dataStore, ['teacherData', 'userTeacherCourses', 'userStudentCourses', 'userBookmarkCourses', 'loading']),
     ...mapWritableState(dataStore, ['myCoursesState', 'displayState', 'classScheduleData']),
@@ -284,6 +306,7 @@ export default {
   created () {
     this.onAuthStateChanged()
     this.courseCardData = this.userTeacherCourses
+    this.displayState = 'list'
   }
 }
 </script>
