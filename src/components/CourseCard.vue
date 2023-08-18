@@ -53,15 +53,20 @@ import goStore from '@/stores/goStore'
 
 export default {
   watch: {
-    // 所有課程頁面用
+    // 所有課程頁面用(為了搜尋排序)
     currentPageCoursesData() {
       if (this.$router.currentRoute.value.fullPath === '/AllCourses'){
         this.courseCardData = this.currentPageCoursesData
       }
+    },
+    // 為了收藏頁能重新渲染
+    userBookmarkCourses () {
+      if (this.$router.currentRoute.value.fullPath === '/MyCourses' && this.myCoursesState === 'bookmark')
+      this.courseCardData = this.userBookmarkCourses
     }
   },
   computed: {
-    ...mapState(dataStore, ['bookmarkState', 'userStudentCourses']),
+    ...mapState(dataStore, ['bookmarkState', 'userStudentCourses', 'userBookmarkCourses', 'myCoursesState']),
     ...mapWritableState(courseCardStore, ['courseCardData']),
     ...mapState(filterStore, ['currentPageCoursesData']),
   },
@@ -73,10 +78,7 @@ export default {
   created () {
     if (this.$router.currentRoute.value.fullPath === '/AllCourses') {
       this.courseCardData = this.currentPageCoursesData
-    } else if (this.$router.currentRoute.value.fullPath === '/MyCourses') {
-      this.courseCardData = this.userStudentCourses
-    }
-    // console.log(this.$router.currentRoute.value.fullPath)
+    } 
   }
 }
 </script>

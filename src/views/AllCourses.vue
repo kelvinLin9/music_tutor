@@ -277,22 +277,20 @@ import { mapState, mapActions, mapWritableState } from
 import dataStore from '@/stores/dataStore'
 import filterStore from '@/stores/filterStore'
 import bannerStore from '@/stores/bannerStore'
+import courseCardStore from '@/stores/courseCardStore'
 
 export default {
-  data() {
-    return {
-      fullWidth:0,
-    }
-  },
   components: { PaginationCom, CoursesLoading, BannerCom, CourseCard },
   computed: {
     ...mapState(dataStore, ['loading']),
     ...mapState(filterStore, ['filterData','courseMethod', 'sortMethod', 'currentPageCoursesData']),
     ...mapWritableState(dataStore, ['displayState']),
-    ...mapWritableState(filterStore, ['selectCityName', 'selectCourseCategory', 'selectCourseName','selectCourseMethod', 'selectSortMethod'])
+    ...mapWritableState(filterStore, ['selectCityName', 'selectCourseCategory', 'selectCourseName','selectCourseMethod', 'selectSortMethod']),
+    ...mapWritableState(courseCardStore, ['courseCardData']),
+
   },
   methods: {
-    ...mapActions(dataStore, ['onAuthStateChanged']),
+    ...mapActions(dataStore, ['onAuthStateChanged', 'getOneCoursesFirebaseData']),
     ...mapActions(filterStore, ['selectCityNameCancel', 'courseSort']),
     ...mapActions(bannerStore, ['getBannerInfo'])
 
@@ -306,9 +304,11 @@ export default {
       '音樂家教媒合平台',
       '音樂家教媒合平台'
     )
+    this.displayState = 'grid'
+    console.log(this.currentPageCoursesData)
   },
   mounted () {
-    
+
   }
 }
 </script>
