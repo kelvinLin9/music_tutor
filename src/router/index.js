@@ -82,6 +82,11 @@ const router = createRouter({
           name: 'AccountSetting',
           component: () => import('../views/AccountSetting.vue')
         },
+        {
+          path: 'Q&A',
+          name: 'Q&A',
+          component: () => import('../views/Q&A.vue')
+        },
       ],
     },
     {

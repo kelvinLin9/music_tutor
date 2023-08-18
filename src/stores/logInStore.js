@@ -79,7 +79,6 @@ export default defineStore('logInStore', {
     },
     data.studentData = {
       myStudyCourses:[],
-      myStudyCoursesDown:[],
       myCart:[],
       payHistory:[],
       allStudyTime:0,

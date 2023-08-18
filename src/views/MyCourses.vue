@@ -90,9 +90,6 @@
 
 
 
-
-
-
     <!-- 學生橫向呈現 -->
   <div class="container my-3"
       v-if="myCoursesState === 'student' && displayState === 'list' && !loading">
@@ -101,7 +98,14 @@
         <table class="table table-hover align-middle">
           <thead>
             <tr>
-              <th width="" class="" colspan="5">
+              <th width="" class="" colspan="2">
+                課程資訊
+              </th>
+              <th width="" class="">
+                購買時間
+              </th>
+              <th>
+                開課時間
               </th>
             </tr>
           </thead>
@@ -125,10 +129,10 @@
                 </div>
               </td>
               <td class="">
-                購買時間：<br>
-                {{ this.$moment(item.timestamp).format('YYYY/MM/DD')}}<br>
-                開課時間：<br>
-                {{}}
+                {{ this.$moment(item.timestamp).format('YYYY/MM/DD') }}<br>
+              </td>
+              <td class="">
+                {{ item.classSchedule || '尚未開課' }}<br>
               </td>
             </tr>
           </tbody>
@@ -138,14 +142,21 @@
   </div>
 
   <!-- 老師橫向呈現 -->
-  <!-- <div class="container my-3"
-      v-else-if="myCoursesState === 'teacher' && displayState === 'list'">
+  <div class="container my-3"
+      v-if="myCoursesState === 'teacher' && displayState === 'list' && !loading">
     <div class="row">
       <div class="col-12">
         <table class="table table-hover align-middle">
           <thead>
             <tr>
-              <th width="" class="" colspan="5">
+              <th width="" class="" colspan="2">
+                課程資訊
+              </th>
+              <th width="" class="">
+                人數統計
+              </th>
+              <th width="" class="">
+                設定開課時間
               </th>
             </tr>
           </thead>
@@ -172,17 +183,26 @@
                   {{ item.data.whoBuy.length}}
                 </div>
               </td>
+              <td>
+                <p>已約定：</p>
+                <p>未完：</p>
+                <p>完課：</p>
+              </td>
               <td class="">
-                我的學生
-                {{ item.data.whoBuy[0].uid }}
+                <button type="button" class="btn btn-outline-danger"
+                  data-bs-toggle="modal" data-bs-target="#SetUpClassSchedule"
+                  @click="SetUpClassSchedule(item)">
+                  設定
+                </button>
+                <a href="#"></a>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
-  </div> -->
-
+  </div>
+  <SetUpClassScheduleModal />
     <!-- 收藏橫向呈現 -->
   <!-- <div class="container my-3"
       v-else-if="myCoursesState === 'bookmark' && displayState === 'list'">
@@ -232,6 +252,7 @@
 <script>
 import CoursesLoading from '../components/CoursesLoading.vue'
 import CourseCard from '../components/CourseCard.vue'
+import SetUpClassScheduleModal from '../components/SetUpClassScheduleModal.vue'
 import { mapState, mapActions, mapWritableState } from 
 'pinia'  
 import dataStore from '@/stores/dataStore'
@@ -239,7 +260,7 @@ import goStore from '@/stores/goStore'
 import courseCardStore from '@/stores/courseCardStore'
 
 export default {
-  components: { CourseCard, CoursesLoading },
+  components: { CourseCard, CoursesLoading, SetUpClassScheduleModal },
   watch: {
     myCoursesState() {
       if(this.myCoursesState === 'teacher') {
@@ -253,11 +274,11 @@ export default {
   },
   computed: {
     ...mapState(dataStore, ['teacherData', 'userTeacherCourses', 'userStudentCourses', 'userBookmarkCourses', 'loading']),
-    ...mapWritableState(dataStore, ['myCoursesState', 'displayState']),
+    ...mapWritableState(dataStore, ['myCoursesState', 'displayState', 'classScheduleData']),
     ...mapWritableState(courseCardStore, ['courseCardData']),
   },
   methods: {
-    ...mapActions(dataStore, ['onAuthStateChanged', 'getOneCoursesFirebaseData']),
+    ...mapActions(dataStore, ['onAuthStateChanged', 'getOneCoursesFirebaseData', 'SetUpClassSchedule']),
     
   },
   created () {

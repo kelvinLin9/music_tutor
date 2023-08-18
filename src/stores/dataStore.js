@@ -6,6 +6,7 @@ import { getAuth, onAuthStateChanged,} from 'firebase/auth'
 import { defineStore } from 'pinia'
 import router from '../router'
 import Swal from 'sweetalert2/dist/sweetalert2'
+import moment from 'moment'
 
 const auth = getAuth()
 const db = getFirestore()
@@ -45,7 +46,7 @@ export default defineStore('dataStore', {
     ],
     courseData:{},   // 單一課程頁面用
     myCoursesState: 'student', // 我的課程換頁用
-    displayState: 'grid', // 我的課程換呈現方式用
+    displayState: 'list', // 我的課程換呈現方式用
     ckeditorState: false,
     bookmarkIds: [],
     bookmarkNum: 0,
@@ -96,7 +97,6 @@ export default defineStore('dataStore', {
     },
     studentData: {
       myStudyCourses:[],
-      myStudyCoursesDown:[],
       myCart:[],
       payHistory:[],
       allStudyTime:0,
@@ -112,6 +112,17 @@ export default defineStore('dataStore', {
     userCartCourses:[],
     top6courses:[],
     youLikeCourses:[],
+    // 設定上課時間用
+    classScheduleData:[],
+    classScheduleId:'',
+    classScheduleIndex:0,
+    classScheduleTime:'',
+    calenderData:{
+      teach : [],
+      study: []
+    },
+    calenderDataNameTemp:''
+
   }),
   actions: {
     // 上傳資料----------------------------------
@@ -279,7 +290,6 @@ export default defineStore('dataStore', {
         this.AllCoursesFirebaseData.push(wrap)
       });
       console.log('全部課程資料',this.AllCoursesFirebaseData)
-      this.loading = false;
       this.getTop6courses()
       this.getCouponData()
       // 用ID抓出其他想要渲染的資料
@@ -288,8 +298,10 @@ export default defineStore('dataStore', {
         this.getUserStudentCourses()
         this.getUserCartCourses()
         this.getBookmarkCoursesData()
-        
-      } 
+        this.loading = false;
+      } else {
+        this.loading = false;
+      }
     },
     async getCouponData() {
       const docRef = doc(db, "coupon", 'code')
@@ -346,6 +358,7 @@ export default defineStore('dataStore', {
           return item.data.uid === this.user.uid
         })
         console.log("用戶老師端課程資料",this.userTeacherCourses)
+        this.getTeachDate()
       }
     },
     getUserStudentCourses() {
@@ -355,14 +368,23 @@ export default defineStore('dataStore', {
         this.userStudentCourses = []
         this.studentData.myStudyCourses.forEach((item) => {
           let wrap = {}
-          wrap = this.AllCoursesFirebaseData.filter((i) => {
+          let wrap1 = this.AllCoursesFirebaseData.filter((i) => {
             return i.id === item.courseId
           })
+          // 從課程中撈出購買時間方便搜尋、渲染
+          // 物件很多層所以要用深拷貝
+          wrap = JSON.parse(JSON.stringify(wrap1));
           wrap[0].timestamp = item.timestamp
-          // console.log(wrap[0])
+          // 再從課程whoBuy中撈出開課時間方便渲染(時間由老師端設定)
+          let wrap2 = {}
+          wrap2 = wrap[0].data.whoBuy.filter((j) => {
+            return j.timestamp === item.timestamp
+          })
+          wrap[0].classSchedule = wrap2[0].classSchedule
           this.userStudentCourses.push(wrap[0])
         })
         console.log("用戶學生端課程資料",this.userStudentCourses)
+        this.getStudyDate ()
       }
     },
     getUserCartCourses() {
@@ -401,6 +423,70 @@ export default defineStore('dataStore', {
         console.log("猜你喜歡",this.youLikeCourses)
       }
     },
+
+
+    // 設定上課時間
+    SetUpClassSchedule (item) {
+      this.classScheduleData = item.data.whoBuy
+      this.classScheduleId = item.id
+    },
+    async UpDateClassSchedule () {
+      this.classScheduleData[this.classScheduleIndex].classSchedule = this.classScheduleTime
+      // 新增上課時間
+      const CSD = doc(db, "MusicTutorCourses",this.classScheduleId);
+      await updateDoc(CSD, {
+        whoBuy: this.classScheduleData
+      })
+      Toast.fire({
+        icon: 'success',
+        title: '設定上課時間成功'
+      })
+    },
+
+
+    // 從uid取得用戶姓名
+    // async getUserDisplayName (uid) {
+    //   const docRef = doc(db, uid, 'teacher');
+    //   const docSnap = await getDoc(docRef);
+    //   this.calenderDataNameTemp = docSnap.data().displayName
+    //   console.log(this.calenderDataNameTemp)
+    // },
+
+
+    // 取得行事曆用數據
+    async getTeachDate () {
+      this.userTeacherCourses.forEach((i) => {
+        i.data.whoBuy.forEach(async (j) => {
+          if(j.classSchedule) {
+            // 用uid去找學生名字渲染
+            const docRef = doc(db, j.uid, 'teacher');
+            const docSnap = await getDoc(docRef);   
+            j.id = i.id         
+            j.studentName = docSnap.data().displayName
+            j.courseName = i.data.courseName
+            this.calenderData.teach.push(j)
+          }
+        })
+      })
+      console.log('行事曆老師資料', this.calenderData.teach)
+    },
+    async getStudyDate () {
+      this.userStudentCourses.forEach((i) => {
+        let warp = {}
+        warp.TeacherName = i.data.displayName
+        warp.classSchedule = i.classSchedule
+        // console.log(moment(i.classSchedule).format('YYYY-MM-DD'))
+        warp.courseName = i.data.courseName
+        warp.timestamp = i.timestamp
+        warp.id = i.id
+        this.calenderData.study.push(warp)
+      })
+      console.log('行事曆學生資料', this.calenderData.study)
+    },
+
+
+
+
 
 
     // 刪除資料-----------------------------------------
