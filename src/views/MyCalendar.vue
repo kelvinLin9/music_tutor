@@ -106,7 +106,7 @@ export default {
       new URL('../assets/images/section3-1.png', import.meta.url).href,
       'CALENDAR',
       '行事曆',
-      '一目了然，做一個時間管理大師'
+      '井然有序，做一個時間管理大師'
     )
   }
 }
