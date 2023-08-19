@@ -1,6 +1,6 @@
 <template>
   <!-- 課程圖片&說明 -->
-  <div class="container mt-5">
+  <div class="container mt-48" v-if="!loading">
     <div class="row">
       <div class="col-12 col-lg-8">
         <img :src="courseData.courseImg" alt="課程圖片" class="course-photo">
@@ -20,7 +20,7 @@
     </div>
   </div>
   <!-- 其他說明 -->
-  <div class="container mt-3 other">
+  <div class="container mt-16" v-if="!loading">
     <div class="row align-items-center">
       <!-- 老師簡介&課程細項 -->
       <div class="col-12 col-lg-8">
@@ -85,7 +85,7 @@
         </div>
         <div class="d-flex justify-content-between">
           <button type="button" class="btn btn-outline-danger w-75"
-          @click="buyNow(user.uid, courseData.id)">
+                  @click="buyNow(user.uid, courseData.id)">
             立即購買
           </button>
           <button type="button" class="btn btn-danger"
@@ -116,14 +116,14 @@
         </div>
       </div>
       <!-- 課程評價 -->
-      <div class="row">
+      <div class="row mb-16">
         <div class="col-12 col-lg-8">
           <p class="fs-4 mb-3">課程評價</p>
           <feedback-com/>
         </div>
       </div>
       <!-- 猜你喜歡 -->
-      <div class="row">
+      <div class="row mb-16">
         <div class="col-12 col-lg-8">
           <p class="fs-4 mb-3">猜你喜歡</p>
           <you-like-courses />
@@ -136,10 +136,6 @@
   <!-- 編輯Modal -->
   <edit-my-course-modal></edit-my-course-modal>
 
-
-  
-  <div class="container mt-3">
-  </div>
 </template>
   
 <script>
@@ -160,7 +156,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(dataStore, ['bookmarkState','user','teacherData']),
+    ...mapState(dataStore, ['bookmarkState','user','teacherData', 'loading']),
     ...mapWritableState(dataStore, ['courseData']),
   
   },

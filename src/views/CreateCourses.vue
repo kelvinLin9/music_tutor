@@ -1,6 +1,6 @@
 <template>
   <BannerCom />
-  <!-- <div class="container my-5">
+  <!-- <div class="container my-48">
     <div class="row justify-content-center">
       <div class="col-9 timeline">
       </div>
