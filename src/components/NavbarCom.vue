@@ -22,8 +22,8 @@
          <!-- 手機板購物車圖示 -->
         <li class="nav-item position-relative fs-5 d-lg-none d-block ms-auto text-light" 
             v-if="this.isMember === true">
-          <RouterLink to="/CoursesCart" class="nav-link"
-            :class="{ 'text-primary':  $route.name === 'CoursesCart'}">
+          <RouterLink to="/CartPage" class="nav-link"
+            :class="{ 'text-primary':  $route.name === 'CartPage'}">
             <i class="bi bi-cart-fill me-lg-2"></i>
             <div class="bg-danger text-white rounded-circle text-center position-absolute small-num-mobile"
               v-if="studentData.myCart.length">
@@ -71,8 +71,8 @@
             </li>
             <li class="nav-item position-relative fs-5 d-none d-lg-block" 
                 v-if="this.isMember === true">
-              <RouterLink to="/CoursesCart" class="nav-link"
-                :class="{ 'text-primary':  $route.name === 'CoursesCart'}">
+              <RouterLink to="/CartPage" class="nav-link"
+                :class="{ 'text-primary':  $route.name === 'CartPage'}">
                 <i class="bi bi-cart-fill me-lg-2"></i>
                 <div class="bg-danger text-white rounded-circle text-center position-absolute small-num"
                   v-if="studentData.myCart.length">

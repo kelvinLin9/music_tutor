@@ -28,9 +28,11 @@
       }"
       class="mySwiper px-3"
     >
+      <!-- Loading -->
+      <!-- <CoursesLoading class="my-3" v-if="loading"/> -->
       <SwiperSlide v-for="(item) in youLikeCourses" :key="item.id" class="mb-5">
         <div class="card rounded-3 scale h-100"
-            @click="getOneCoursesFirebaseData(item.id)">
+            @click="goCoursePage(item.id)">
           <div class="card-img overflow-hidden position-relative">
             <img :src="item.data.courseImg" alt="商品圖片" class="card-img-top filter-grayscale">
             <i class=""
@@ -42,9 +44,9 @@
             ></i>
           </div>
           <div class="card-body d-flex flex-column">
-            <div class="mb-1 sw-title">
-              <span class="badge rounded-pill text-bg-danger test align-middle">{{ item.data.courseCategory }}</span>
-              <span class="">&ensp;{{ item.data.courseName }}</span>   
+            <div class="mb-1 d-flex align-items-start">
+              <span class="badge rounded-pill text-bg-danger align-middle mt-2">{{ item.data.courseCategory }}</span>
+              <span class="fs-5 fw-bold ms-2">{{ item.data.courseName }}</span>   
             </div>
             <div class="mt-auto">
               <div class="mb-1">
@@ -55,61 +57,25 @@
                 {{ item.data.time }}
                 <i class="bi bi-geo-alt ms-2"></i>
                 {{ item.data.cityName || '線上' }}
+                <i class="bi bi-people ms-2"></i>
+                {{ item.data.whoBuy.length}}
               </div>
               <div class="mb-1">
-                <span class="me-3">
+                <span class="me-3 fs-4 fw-bold">
                   NT$ {{ $filters.currency(item.data.price) }}
                 </span>
                 <span v-if="item.data.whoBuy">
-                  <i class="bi bi-people me-2"></i>
-                  {{ item.data.whoBuy.length }}
                 </span>
               </div>
             </div>
           </div>
-        </div>
+    </div>
       </SwiperSlide>
-
-      <!-- <SwiperSlide v-for="(item) in 6" :key="item.id" class="mb-5 overflow-hidden">
-        <el-space direction="vertical" alignment="flex-start" class="card">
-          <el-skeleton :loading="loading" animated>
-            <template #template>
-              <el-skeleton-item variant="image" class="loading-img"/>
-              <div style="padding: 14px">
-                <el-skeleton-item variant="h3" style="width: 50%" />
-                <el-skeleton-item variant="h3" style="width: 100%;margin-top: 12px;" />
-                <div
-                  style="
-                    display: flex;
-                    align-items: center;
-                    justify-items: space-between;
-                    margin-top: 12px;
-                    height: 16px;
-                  "
-                >
-                  <el-skeleton-item variant="text" style="width: 30%;margin-right: 16px" />
-                  <el-skeleton-item variant="text" style="width: 30%" />
-                </div>
-                <div
-                  style="
-                    display: flex;
-                    align-items: center;
-                    justify-items: space-between;
-                    margin-top: 12px;
-                    height: 16px;
-                  "
-                >
-                  <el-skeleton-item variant="text" style="width: 30%;margin-right: 16px" />
-                  <el-skeleton-item variant="text" style="width: 30%" />
-                </div>
-              </div>
-            </template>
-          </el-skeleton>
-        </el-space>
-      </SwiperSlide> -->
+        
     </swiper>
   </div>
 </template>
+
 <script>
   // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue';

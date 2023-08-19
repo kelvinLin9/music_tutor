@@ -27,12 +27,13 @@
           </div>
           <div class="card-footer">
             <div class="row mb-2 align-items-center">
-              <div class="col-9">
-                <label for="coupon" class="fs-7">折扣碼：</label>
-                <input class="col-form-label w-75 p-0" 
+              <div class="col-8">
+                <label for="coupon" class="fs-7"></label>
+                <input class="col-form-label w-75 py-1 fs-7" 
                     type="text" 
                     id="coupon"  
                     name="coupon" 
+                    placeholder="請輸入折扣碼"
                     v-model="couponCode"> 
                 
               </div>

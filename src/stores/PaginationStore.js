@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 
 export default defineStore('paginationStore', {
   state: () => ({
-    eachPage: [],
+    eachPage: [], // 每頁資料
     pageSize: 12, // 每頁有幾筆資料
     page: {
       totalPage: 0, 

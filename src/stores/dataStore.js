@@ -291,6 +291,7 @@ export default defineStore('dataStore', {
       });
       console.log('全部課程資料',this.AllCoursesFirebaseData)
       this.getTop6courses()
+      this.getSameTeacherCourses(this.courseData.uid)
       this.getCouponData()
       // 用ID抓出其他想要渲染的資料
       if (this.user.uid) {
@@ -321,9 +322,10 @@ export default defineStore('dataStore', {
         this.courseData = docSnap.data()
         // 自己加上課程id，後面要編輯上傳才會有值
         const wrap = {id : courseId}
-        this.courseData = Object.assign(this.courseData, wrap,)
+        this.courseData = Object.assign(this.courseData, wrap)
+        // 需要再拿，課程物件大頭照就不存
         this.getTeacherPhoto(this.courseData.uid)
-        this.getSameTeacherCourses(this.courseData.uid)
+        // this.getSameTeacherCourses(this.courseData.uid)
         router.push(`/coursePage/${courseId}`)
       } else {
         console.log("No such OneCourses document!")
@@ -413,6 +415,7 @@ export default defineStore('dataStore', {
       console.log('人氣前6', this.top6courses)
     },
     getSameTeacherCourses(uid) {
+      console.log('???????')
       this.youLikeCourses = []
       if (!this.AllCoursesFirebaseData) {
         console.log('完全沒有課程')

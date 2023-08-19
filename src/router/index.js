@@ -68,9 +68,9 @@ const router = createRouter({
           component: () => import('../views/MemberPage.vue')
         },
         {
-          path: 'CoursesCart',
-          name: 'CoursesCart',
-          component: () => import('../views/CoursesCart.vue')
+          path: 'CartPage',
+          name: 'CartPage',
+          component: () => import('../views/CartPage.vue')
         },
         {
           path: 'MyCalendar',

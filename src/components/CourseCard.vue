@@ -59,7 +59,7 @@ export default {
         this.courseCardData = this.currentPageCoursesData
       }
     },
-    // 為了收藏頁能重新渲染
+    // 為了收藏頁變動時能重新渲染
     userBookmarkCourses () {
       if (this.$router.currentRoute.value.fullPath === '/MyCourses' && this.myCoursesState === 'bookmark')
       this.courseCardData = this.userBookmarkCourses
@@ -78,7 +78,9 @@ export default {
   created () {
     if (this.$router.currentRoute.value.fullPath === '/AllCourses') {
       this.courseCardData = this.currentPageCoursesData
-    } 
+    } else if (this.$router.currentRoute.value.fullPath === '/MyCourses') {
+      this.courseCardData = this.userStudentCourses
+    }
   }
 }
 </script>
