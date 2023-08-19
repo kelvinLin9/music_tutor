@@ -17,7 +17,7 @@
           <button type="button" 
                   class="btn btn-outline-dark d-block mx-auto py-3 d-flex justify-content-center w-75"
                   @click="signInWithGoogle()">
-            <img src="../assets/images/google.png" alt="google icon" class="google-icon me-2">
+            <img src="../assets/images/google-icon.png" alt="google icon" class="google-icon me-2">
             <span class="google-login-text">使用 Google 登入</span>
           </button>
 

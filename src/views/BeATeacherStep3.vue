@@ -13,7 +13,7 @@
     </div>
   </div>
 
-  <div class="container my-5 w-75">
+  <div class="container my-48 w-75">
     <div class="row align-items-center">
       <div class="col-12 col-lg-8">
         <div class="row align-items-center">
@@ -74,7 +74,7 @@
         </div>
       </div>
     </div>
-    <div class="row justify-content-center mt-5">
+    <div class="row justify-content-center mt-48">
       <div class="col-12 d-flex justify-content-between">
         <button type="button" class="btn btn-outline-primary"
                    @click="goBeATeacherStep2()">

@@ -61,7 +61,7 @@ export default defineStore('cartStore', {
       await updateDoc(cart, {
       myCart: arrayUnion(wrap)
       });
-      router.push('/CoursesCart')
+      router.push('/CartPage')
 
     },
 

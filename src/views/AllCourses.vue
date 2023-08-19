@@ -1,5 +1,7 @@
 <template>
   <BannerCom />
+  <!-- Loading -->
+  <CoursesLoading class="my-3" v-if="loading"/>
   <!-- 搜尋、排序 -->
   <div class="container mt-3 fs-8" v-if="!loading">
     <div class="row align-items-center g-2">
@@ -206,15 +208,16 @@
       </div>
     </div>
   </div>
-  <!-- Loading -->
-  <CoursesLoading class="my-3" v-if="loading"/>
+
   <!-- 卡片課程 -->
   <div class="container my-3" v-if="!loading">
+    <!-- 無課程提示 -->
     <div class="row" v-if="filterData.length == 0">
-      <div class="col text-center fs-2 mt-5">
+      <div class="col text-center fs-2 mt-48">
         很抱歉，沒有符合條件課程
       </div>
     </div>
+    <!-- 課程 -->
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-3"
          v-if="displayState === 'grid'">
       <CourseCard />
@@ -233,13 +236,14 @@
           </thead>
           <tbody>
             <tr v-for="item in currentPageCoursesData" :key="item.id">
-              <td width="100"
+              <td width="100" class="cursor-pointer"
                   @click="getOneCoursesFirebaseData(item.id)">
-                  <img :src="item.data.courseImg" alt="課程圖片" class="table-image cursor-pointer">
+                  <img :src="item.data.courseImg" alt="課程圖片" class="table-image ">
               </td>
-              <td>
+              <td class="cursor-pointer" 
+                  @click="getOneCoursesFirebaseData(item.id)"> 
                 <div class="mb-1 d-flex align-items-center">
-                  <span class="badge rounded-pill text-bg-danger mt-2">{{ item.data.courseCategory }}</span>
+                  <span class="badge rounded-pill text-bg-danger">{{ item.data.courseCategory }}</span>
                   <span class="fs-5 fw-bold ms-2">{{ item.data.courseName }}</span>   
                 </div>
                 <div class="">
@@ -300,9 +304,9 @@ export default {
     this.courseSort()
     this.getBannerInfo(
       new URL('../assets/images/section3-1.png', import.meta.url).href,
-      '音樂家教媒合平台',
-      '音樂家教媒合平台',
-      '音樂家教媒合平台'
+      'ALL COURSES',
+      '全部課程',
+      '專業培訓，探索多元音樂風格'
     )
     this.displayState = 'grid'
     console.log(this.currentPageCoursesData)
