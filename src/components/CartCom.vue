@@ -1,12 +1,13 @@
 <template>
-  <CoursesLoadingList v-if="loading" />
+  <div class="col-12 col-lg-8 me-auto">
+    <CoursesLoadingList v-if="loading" />
+  </div>
 
-
-  <div class="text-center CoursesCart-vh d-flex flex-column justify-content-center align-items-center"
+  <div class="text-center mt-48"
       v-if="studentData.myCart.length === 0 && !loading">
-      <p class="fs-1">購物車無任何品項</p>
+      <p class="fs-2 fw-bold">購物車無任何品項</p>
       <RouterLink to="/AllCourses">
-        <button type="button" class="btn btn-outline-primary">
+        <button type="button" class="btn btn-outline-primary mt-16">
           繼續購物
         </button>
       </RouterLink> 
@@ -51,7 +52,7 @@
           </td>
           <td width="300">
             <div class="container">
-              <div class="row">
+              <div class="row align-items-center">
                 <div class="col-12 col-lg-8">
                   {{ item[0].data.courseName }}
                 </div>

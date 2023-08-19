@@ -55,6 +55,7 @@ export default defineStore('filterStore', {
     },
     currentPageCoursesData () {
       // console.log(pagiStore.page.currentPage)
+      // 過濾出來的資料再分頁
       pagiStore.pagination(this.filterData)
       return pagiStore.eachPage
     }

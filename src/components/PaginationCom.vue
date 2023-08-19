@@ -88,13 +88,10 @@ export default {
     ...mapState(filterStore, ['filterData']),
   },
   methods: {
-    ...mapActions(paginationStore, ['pagination']),
-
-    
+    ...mapActions(paginationStore, ['pagination']),    
   },
   mounted () {
-    // console.log(this.filterData)
-    // this.pagination(1,this.filterData)
+
   }
 }
 </script>
