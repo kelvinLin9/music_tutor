@@ -46,7 +46,14 @@ export default defineStore('logInStore', {
       },
     },
     AccountSettingState: false,
-    CurrentUser:[]
+    userProviderData:[],
+    ProviderState: {
+      password: false,
+      google: false,
+      facebook: false,
+      github: false,
+    },
+    resetPasswordEmail: '',
   }),
   actions: {
    signOut() {
@@ -88,30 +95,6 @@ export default defineStore('logInStore', {
       myBookmarkCourses:[],
       myBookmarkTeacher:[],
     }
-    // data.teacher = {
-    //   uid: '',
-    //   accountCreateTime: '',
-    //   lastLogInTime: '',
-    //   email: '',
-    //   displayName: '',
-    //   teacherImg: '',
-    //   gender: '',
-    //   birthday: '',
-    //   address: '',
-    //   phoneNumber:'',
-    //   teachArea: [],
-    //   teacherIntro: '',
-    //   instagram: '',
-    //   facebook: '',
-    //   discord: '',
-    //   expertise: '',
-    //   educationalBackground: '',
-    //   myTeachCourses:[],
-    //   language: [],
-    //   musicStyle:[], 
-    //   allTeachTime:0,
-    //   studentAssess:[]
-    // }
     data.AllCoursesFirebaseData = []
     data.otherTeacherData = []
     data.beATeacherData = {
@@ -145,6 +128,14 @@ export default defineStore('logInStore', {
       finalTotal:0,
       couponUse:''
     }
+    // 驗證
+    this.userProviderData=[]
+    this.ProviderState= {
+      password: false,
+      google: false,
+      facebook: false,
+      github: false,
+    },
     
 
     router.push('/UserLogin')
@@ -321,64 +312,79 @@ export default defineStore('logInStore', {
 
    // 取得當前登入者資料(只有自己)，登出後，它也不會改變。
    getCurrentUser () {
-    const user = auth.currentUser;
-    console.log(user)
-    if (user !== null) {
-      // The user object has basic properties such as display name, email, etc.
-      // const displayName = user.displayName;
-      // const email = user.email;
-      // const photoURL = user.photoURL;
-      // const emailVerified = user.emailVerified;
+    onAuthStateChanged(auth, (user) => {
+      
+      if (user) {
+        console.log(132123)
+        const user = auth.currentUser;
+        this.userProviderData = user.providerData //先留著看用不用的到
+        console.log(user)
+        if (user !== null) {
+          user.providerData.forEach((item) => {
+            console.log(item.providerId)
+            if(item.providerId === 'password') {
+              this.ProviderState.password =  true
+            } else if (item.providerId === 'google.com') {
+              this.ProviderState.google =  true
+            } else if (item.providerId === 'facebook') {
+              this.ProviderState.facebook =  true
+            } else if (item.providerId === 'github') {
+              this.ProviderState.github =  true
+            }
     
-      // The user's ID, unique to the Firebase project. Do NOT use
-      // this value to authenticate with your backend server, if
-      // you have one. Use User.getToken() instead.
-      // const uid = user.uid;
-    }
-    if (user !== null) {
-      user.providerData.forEach((profile) => {
-        console.log("Sign-in provider: " + profile.providerId);
-        console.log("  Provider-specific UID: " + profile.uid);
-        console.log("  Name: " + profile.displayName);
-        console.log("  Email: " + profile.email);
-        console.log("  Photo URL: " + profile.photoURL);
-      });
-    }
+          });
+        }
+      } else {
+
+        console.log('已登出')
+      }
+    });
+
    },
-   // 設置用戶的電子郵件地址
+
+   // 設置用戶的電子郵件地址---先拿掉
    // 要設置用戶的電子郵件地址，用戶必須最近登錄過
    updateUserEmail() {
     const user = auth.currentUser;
     console.log(user)
-    updateEmail(user, "kelvin80121@hotmail.com").then((res) => {
-      // Email updated!
-      console.log(res)
-    }).catch((err) => {
-      console.log(err)
-      // An error occurred
-      // ...
-    });
+    // updateEmail(user, "kelvin80121@hotmail.com").then((res) => {
+    //   // Email updated!
+    //   console.log(res)
+    // }).catch((err) => {
+    //   console.log(err)
+    //   // An error occurred
+    //   // ...
+    // })
    },
    // 向用戶發送驗證電子郵件
    sendEmailVerification () {
-    sendEmailVerification(auth.currentUser).then(() => {
-      console.log('送出驗證信')
-    });
+    // sendEmailVerification(auth.currentUser).then(() => {
+    //   Toast.fire({
+    //     timer: 3000,
+    //     icon: 'success',
+    //     title: '已送出驗證信',
+    //   })
+    // });
    },
    // 發送密碼重置郵件
    sendPasswordResetEmail() {
-    sendPasswordResetEmail(auth, data.user.email)
+    sendPasswordResetEmail(auth, this.resetPasswordEmail)
     .then(() => {
-      console.log('Password reset email sent!')
-      // Password reset email sent!
-      // ..
+      Toast.fire({
+        timer: 3000,
+        icon: 'success',
+        title: '已送出密碼驗證信',
+      })
+      this.resetPasswordEmail = ''
     })
     .catch((err) => {
-      console.log(err)
-      // const errorCode = err.code;
-      // const errorMessage = err.message;
-      // ..
-    });
+      Toast.fire({
+        timer: 3000,
+        icon: 'error',
+        title: err,
+      })
+    })
+    this.resetPasswordEmail =''
    },
   }
 })
