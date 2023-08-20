@@ -47,9 +47,38 @@
                 <label for="password" class="form-label">
                   密碼：
                 </label>
-                <a href="#" class="text-delete fs-7" @click.prevent>
+                <a href="#" class="text-delete fs-7" @click.prevent data-bs-toggle="modal" data-bs-target="#exampleModal">
                   忘記密碼
                 </a>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">重設密碼</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="resetPasswordEmail" class="form-label">請填寫註冊Email</label>
+          <input type="email" 
+                  class="form-control" 
+                  id="resetPasswordEmail" 
+                  placeholder="請填寫註冊Email"
+                  v-model="resetPasswordEmail">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary"
+                @click="sendPasswordResetEmail">
+          送出
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
               </div>
               <VField
                 name="密碼"
@@ -174,11 +203,11 @@ import dataStore from '../stores/dataStore';
 
 export default {
   computed: {
-    ...mapWritableState(logInStore, ['logInForm', 'signUpForm', 'logInPage'])
+    ...mapWritableState(logInStore, ['logInForm', 'signUpForm', 'logInPage', 'resetPasswordEmail'])
   },
   methods: {  
     ...mapActions(goStore, ['goHomePage', 'goLoginPage']),
-    ...mapActions(logInStore, ['signUp', 'logIn', 'signInWithGoogle','updateProfile', 'signOut']),
+    ...mapActions(logInStore, ['signUp', 'logIn', 'signInWithGoogle','updateProfile', 'signOut', 'sendPasswordResetEmail']),
     ...mapActions(dataStore, [])
   },
   created() {

@@ -1,8 +1,8 @@
 <template>
   <div class="">
     <div class="container">
-      <div class="row">
-        <div class="col-12 col-md-4 d-flex flex-column align-items-center mt-3">
+      <div class="row my-16">
+        <div class="col-12 col-md-4 d-flex flex-column align-items-center">
           <div class="user-photo position-relative">
             <img :src="teacherData.teacherImg" alt="大頭照"
                   v-if="teacherData.teacherImg">
@@ -18,23 +18,21 @@
                     @change="uploadPhoto('teacher',$event)"
                   />
           </div>
-          <div class="mb-2 fs-2">
+          <div class="mb-2 fs-3 fw-bold">
             {{ teacherData.displayName }}
             <i :class="teacherData.gender"></i>
           </div>
-          <div class="mb-2 w-100">
-            <i class="bi bi-envelope-fill"></i>：{{ teacherData.email }}
-          </div>
+          <!-- <div class="mb-2 w-100">
           <div class="mb-2 w-100">
             <i class="bi bi-telephone-fill"></i>：{{ teacherData.phoneNumber }}
-          </div>
-          <div class="mb-2 w-100">
-            <p class="">簡介：</p>
-            <p class="border border-secondary rounded-1 p-1">
+          </div> -->
+          <div class="my-8 w-100">
+            <p class="ps-8 fw-bold">關於我：</p>
+            <p class="fs-7 p-8">
               {{ teacherData.teacherIntro }}
             </p>
           </div>
-          <div class="d-flex justify-content-around w-75 mb-2">
+          <div class="d-flex justify-content-around w-50 ms-auto mb-8">
             <a :href="teacherData.facebook" target="_black" @click.prevent>
               <i class="bi bi-facebook fs-3 text-secondary"
                 :class="{'text-blue': teacherData.facebook}"></i>
@@ -49,64 +47,56 @@
             </a>
             
           </div>
-          <div class="mb-2">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">編輯個人資料</button>
-          </div>
+          <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">編輯個人資料</button>
         </div>
-  
-  
-        <div class="col-12 col-md-8 mt-3">
-          <div v-if="teacherData.ckeditorImg"
-              class="ckeditor-img position-relative border"
+        <!-- 課程介紹 -->
+        <div class="col-12 col-md-8">
+          <!-- Banner -->
+          <div class="ckeditor-img position-relative border"
               :style="{ 'background-image': `url(${teacherData.ckeditorImg ||defaultCkeditorImg })` }">
-              
-            <!-- <img :src="teacherData.ckeditorImg" alt="ckeditor大頭照"
-                  v-if="teacherData.ckeditorImg"> -->
-            <!-- <img src="../assets/images/預設大頭貼.png" alt="預設ckeditor大頭照"
-                  v-if="!teacherData.ckeditorImg"> -->
-                  <label for="file-upload-ckeditor">
-                    <i class="bi bi-cloud-arrow-up-fill cursor-pointer upload-icon-ckeditor"></i>
-                  </label>
-                  <input
-                          type="file"
-                          id="file-upload-ckeditor"
-                          class="d-none"
-                          @change="uploadPhoto('ckeditor',$event)"
-                        />
+            <label for="file-upload-ckeditor">
+              <i class="bi bi-cloud-arrow-up-fill cursor-pointer upload-icon-ckeditor"></i>
+            </label>
+            <input
+              type="file"
+              id="file-upload-ckeditor"
+              class="d-none"
+              @change="uploadPhoto('ckeditor',$event)"
+            />
           </div>
-  
-          <div class="text-end" v-if="!ckeditorState">
-            <a class="text-info fw-bold cursor-pointer"
+          <!-- 編輯按鈕 -->
+          <div class="d-flex justify-content-between" v-if="!ckeditorState">
+            <span class="fs-7 text-delete"
+              v-if="!teacherData.ckeditor">
+              編輯個人頁面，和大家分享更多精彩故事
+            </span>
+            <a class="text-info fw-bold cursor-pointer ms-auto"
                 @click="ckeditorState = true">
                 <i class="bi bi-pen-fill me-1"></i>編輯
             </a>
           </div>
-  
-          <div v-html="teacherData.ckeditor" class="test">
-            
-          </div>
-          
+          <!-- 顯示編輯內容 -->
+          <div v-html="teacherData.ckeditor" class="border p-8"></div>
+          <!-- ckeditor編輯框 -->
           <div class="text-delete fs-7 py-1"
               v-if="ckeditorState">
-            編輯個人頁面，和大家分享更多精彩故事
             <ckeditor :editor="editor" v-model="teacherData.ckeditor" :config="editorConfig"></ckeditor>
             
             
   
-            <div class="">
-              <button type="button"
+            <div class="text-end mt-8">
+              <button type="button" class="btn btn-secondary me-8"
                       @click="ckeditorState = false">
                 取消
               </button>
-              <button type="button"
+              <button type="button" class="btn btn-primary"
                       @click="UpdateTeacherCkeditor() , ckeditorState = false">
                 確定
               </button>
             </div>
           </div>
-  
-  
           {{ teacherData.ckeditor }}
+
         </div>
         
       </div>
@@ -159,19 +149,19 @@ export default {
 
 <style lang="scss" scoped>
 .user-photo {
+  width: 100px;
+  height: 100px;
   img {
     width: 100%;
-    display: block;
+    height: 100%;
     object-fit: cover;
-    width: 100px;
-    height: 100px;
     border-radius: 50px;
   }
 }
 .upload-icon { 
   position: absolute;
   right: -3px;
-  bottom: 24px;
+  bottom: 0px;
   z-index: 10;
   font-size: 20px;
   background: white;
@@ -183,7 +173,6 @@ export default {
   align-items: center;
   border-radius: 15px;
   border: 2px solid;
-  
 }
 .upload-icon-ckeditor {
   position: absolute;
@@ -212,4 +201,18 @@ export default {
     height: 200px;
   }
 }
+
+ul li::before{
+  /*   可以自訂其他形狀 */
+    content: "\2022";
+  /*   顏色 */
+    color: red;
+    font-weight: bold;
+  /*   設定 display */
+    display: inline-block;
+  /*  寬度  */
+    width: 1rem;
+  /*  可以視情況調整形狀的距離  */
+    margin-left: -2rem;
+  }
 </style> 

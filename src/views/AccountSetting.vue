@@ -1,13 +1,27 @@
 <template>
 
 <div class="container">
-  <div class="row">
-    <div class="col-3 d-none d-md-block">
-      55
-    </div>
-    <div class="col-12 col-md-9">
+  <div class="row my-16">
+    <div class="col-12 col-md-4 d-flex flex-column align-items-center">
+          <div class="user-photo position-relative">
+            <img :src="teacherData.teacherImg" alt="大頭照"
+                  v-if="teacherData.teacherImg">
+            <img src="../assets/images/預設大頭貼.png" alt="預設大頭照"
+                  v-if="!teacherData.teacherImg">
+          </div>
+          <div class="mb-2 fs-3 fw-bold">
+            {{ teacherData.displayName }}
+            <i :class="teacherData.gender"></i>
+          </div>
+          <RouterLink to="/MemberPage">
+            <button type="button" class="btn btn-primary mt-48">
+              編輯個人資料
+            </button>
+          </RouterLink>
+        </div>
+    <div class="col-12 col-md-8">
       <div class="mb-16">
-        <h2 class="fs-3">完成個人資訊，獲得生日優惠禮與更精準的課程推薦</h2>
+        <!-- <h2 class="fs-3">完成個人資訊，獲得生日優惠禮與更精準的課程推薦</h2> -->
 
       </div>
       <table class="table table-hover align-middle">
@@ -18,11 +32,11 @@
               <div class="d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center">
                   <div class="login-logo d-flex justify-content-center align-items-center">
-                    <img src="../assets/images/LOGO.png" alt="">
+                    <img src="../assets/images/LOGO.png" alt="樂樂LOGO">
                   </div>
                   <div class="ms-32">
-                    <p class="fs-5">尚未建立樂樂帳號</p>
-                    <p class="fs-5">連結為</p>
+                    <p class="fs-6" v-if="!ProviderState.password">尚未建立樂樂帳號</p>
+                    <p class="fs-6" v-else>已連結樂樂帳號</p>
                   </div>
                 </div>
                 <div class="">
@@ -39,17 +53,17 @@
               <div class="d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center">
                   <div class="login-logo d-flex justify-content-center align-items-center">
-                    <img src="../assets/images/google-icon.png" alt="">
+                    <img src="../assets/images/google-icon.png" alt="google-icon">
                   </div>
                   <div class="ms-32">
-                    <p class="fs-5">尚未建立Google帳號</p>
-                    <p class="fs-5">連結為</p>
+                    <p class="fs-6" v-if="!ProviderState.google">尚未連結Google帳號</p>
+                    <p class="fs-6" v-else>已連結Google帳號</p>
                   </div>
                 </div>
                 <div class="">
-                  <a href="#" @click.prevent="signInWithGoogle(), AccountSettingState = true">
+                  <!-- <a href="#" @click.prevent="signInWithGoogle(), AccountSettingState = true">
                     建立並連結帳號
-                  </a>
+                  </a> -->
                 </div>
               </div>
             </td>
@@ -60,17 +74,17 @@
               <div class="d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center">
                   <div class="login-logo d-flex justify-content-center align-items-center">
-                    <img src="../assets/images/facebook-icon.png" alt="">
+                    <img src="../assets/images/facebook-icon.png" alt="facebook-icon">
                   </div>
                   <div class="ms-32">
-                    <p class="fs-5">尚未建立Facebook帳號</p>
-                    <p class="fs-5">連結為</p>
+                    <p class="fs-6" v-if="!ProviderState.facebook">尚未連結Facebook帳號</p>
+                    <p class="fs-6" v-else>已連結Facebook帳號</p>
                   </div>
                 </div>
                 <div class="">
-                  <a href="#" @click.prevent="signInWithFacebook(), AccountSettingState = true">
+                  <!-- <a href="#" @click.prevent="signInWithFacebook(), AccountSettingState = true">
                     建立並連結帳號
-                  </a>
+                  </a> -->
                 </div>
               </div>
             </td>
@@ -81,17 +95,18 @@
               <div class="d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center">
                   <div class="login-logo d-flex justify-content-center align-items-center">
-                    <img src="../assets/images/github-icon.png" alt="">
+                    <img src="../assets/images/github-icon.png" alt="github-icon"
+                    :class="{'filter-grayscale': !ProviderState.github}">
                   </div>
                   <div class="ms-32">
-                    <p class="fs-5">尚未建立GitHub帳號</p>
-                    <p class="fs-5">連結為</p>
+                    <p class="fs-6" v-if="!ProviderState.github">尚未連結GitHub帳號</p>
+                    <p class="fs-6" v-else>已連結GitHub帳號</p>
                   </div>
                 </div>
                 <div class="">
-                  <a href="#" @click.prevent="signInWithGithub(), AccountSettingState = true">
+                  <!-- <a href="#" @click.prevent="signInWithGithub(), AccountSettingState = true">
                     建立並連結帳號
-                  </a>
+                  </a> -->
                 </div>
               </div>
             </td>
@@ -102,18 +117,18 @@
     </div>
   </div>
 </div>
+<!-- {{ ProviderState }}
+{{ userProviderData }}<br> -->
 
-{{ user.providerData }}<br>
-{{ user.email }}<br>
 
-<br>
+<!-- <br>
 <a href="#" @click.prevent="getCurrentUser()">查詢當前登入</a>
 <br>
 <a href="#" @click.prevent="updateUserEmail()">設置信箱</a>
 <br>
 <a href="#" @click.prevent="sendEmailVerification()">發送信箱驗證信</a>
 <br>
-<a href="#" @click.prevent="sendPasswordResetEmail()">發送重設密碼信</a>
+<a href="#" @click.prevent="sendPasswordResetEmail()">發送重設密碼信</a> -->
 </template>
   
 
@@ -126,10 +141,9 @@ import { mapState, mapActions, mapWritableState } from
 import loginStore from '@/stores/loginStore'
 import dataStore from '@/stores/dataStore'
 export default {
-
   computed: {
-    ...mapState(dataStore, ['user']),
-    ...mapState(loginStore, ['']),
+    ...mapState(dataStore, ['user', 'teacherData']),
+    ...mapState(loginStore, ['userProviderData', 'ProviderState']),
     ...mapWritableState(loginStore, ['AccountSettingState']),
 
   },
@@ -139,17 +153,47 @@ export default {
   },
   created () {
     this.onAuthStateChanged()
-  }
+    this.getCurrentUser()
+  },
 }
 </script>
 
 <style lang="scss" scoped>
 .login-logo {
+  border: 1px solid #ced4da ;
+  border-radius: 6px;
   width: 96px;
   height: 48px;
   img {
     width: 32px;
     height: 32px;
   }
+}
+
+.user-photo {
+  width: 100px;
+  height: 100px;
+  img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50px;
+  }
+}
+.upload-icon { 
+  position: absolute;
+  right: -3px;
+  bottom: 0px;
+  z-index: 10;
+  font-size: 20px;
+  background: white;
+  color: rgba(108, 117, 125, 1);
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  border: 2px solid;
 }
 </style>
