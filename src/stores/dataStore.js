@@ -428,6 +428,7 @@ export default defineStore('dataStore', {
     },
 
 
+
     // 設定上課時間
     SetUpClassSchedule (item) {
       this.classScheduleData = item.data.whoBuy
@@ -446,7 +447,6 @@ export default defineStore('dataStore', {
       })
     },
 
-
     // 從uid取得用戶姓名
     // async getUserDisplayName (uid) {
     //   const docRef = doc(db, uid, 'teacher');
@@ -461,6 +461,7 @@ export default defineStore('dataStore', {
       this.calenderData.teach = []
       this.userTeacherCourses.forEach((i) => {
         i.data.whoBuy.forEach(async (j) => {
+          // 把有設定上課時間的抓出來
           if(j.classSchedule) {
             // 用uid去找學生名字渲染
             const docRef = doc(db, j.uid, 'teacher');
