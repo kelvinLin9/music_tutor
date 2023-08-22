@@ -1,31 +1,18 @@
 <template>
-  <div class="sticky-top bg-dark">
-    <nav class="container navbar navbar-expand-lg navbar-dark">
+  <div class="fixed-top" 
+      :class="{ 'sticky-top bg-white':  $route.matched[1].path !== '/'}">
+    <nav class="container navbar navbar-expand-lg">
       <div class="container-fluid">
-        <RouterLink to="/" class="navbar-brand nav-link" href="#">
-          <img src="../assets/images/logo_white.png" alt="logo" class="d-none d-lg-block">
-          <img src="../assets/images/logo_white_sm.png" alt="logo" class="d-block d-lg-none">
+        <RouterLink to="/" class="navbar-brand nav-link d-flex align-items-end">
+          <img src="../assets/images/logo.png" alt="logo" class="logo">
+          <!-- <span class="test">樂樂音樂家教媒合平台</span> -->
         </RouterLink>
-        <!-- 手機板收藏圖示 -->
-        <!-- <li class="nav-item position-relative fs-5 d-lg-none d-block ms-auto me-4 text-light" 
-            v-if="this.isMember === true"
-            @click="myCoursesState = 'bookmark'">
-          <RouterLink to="/MyCourses" class="nav-link"
-              :class="{ 'text-primary':  $route.name === 'MyCourses'}">
-            <i class="bi bi-bookmarks-fill me-lg-2"></i>
-            <div class="bg-danger text-white rounded-circle text-center position-absolute small-num-mobile"
-              v-if="bookmarkNum">
-              {{ bookmarkNum }}
-            </div>
-          </RouterLink>
-        </li> -->
-         <!-- 手機板購物車圖示 -->
-        <li class="nav-item position-relative fs-5 d-lg-none d-block ms-auto text-light" 
+        <li class="nav-item position-relative fs-5 d-lg-none d-block ms-auto" 
             v-if="this.isMember === true">
           <RouterLink to="/CartPage" class="nav-link"
             :class="{ 'text-primary':  $route.name === 'CartPage'}">
             <i class="bi bi-cart-fill me-lg-2"></i>
-            <div class="bg-danger text-white rounded-circle text-center position-absolute small-num-mobile"
+            <div class="bg-primary text-white rounded-circle text-center position-absolute small-num-mobile"
               v-if="studentData.myCart.length">
               {{ studentData.myCart.length }}
             </div>
@@ -63,7 +50,7 @@
               <RouterLink to="/MyCourses" class="nav-link"
                 :class="{ 'text-primary':  $route.name === 'MyCourses'}">
                 <i class="bi bi-bookmarks-fill me-lg-2"></i>
-                <div class="bg-danger text-white rounded-circle text-center position-absolute small-num"
+                <div class="bg-primary text-white rounded-circle text-center position-absolute small-num"
                   v-if="bookmarkNum">
                   {{ bookmarkNum }}
                 </div>
@@ -74,13 +61,13 @@
               <RouterLink to="/CartPage" class="nav-link"
                 :class="{ 'text-primary':  $route.name === 'CartPage'}">
                 <i class="bi bi-cart-fill me-lg-2"></i>
-                <div class="bg-danger text-white rounded-circle text-center position-absolute small-num"
+                <div class="bg-primary text-white rounded-circle text-center position-absolute small-num"
                   v-if="studentData.myCart.length">
                   {{ studentData.myCart.length }}
                 </div>
               </RouterLink>
             </li>
-            <li class="nav-item dropdown bg-dark">  
+            <li class="nav-item dropdown">  
               <button class="btn dropdown-toggle text-primary ps-0 ps-lg-2"
                       type="button" id="dropdownLogin" 
                       data-bs-toggle="dropdown" aria-expanded="false"
@@ -89,7 +76,7 @@
                 <i class="bi bi-person-circle me-2 fs-5"></i>
                 {{ teacherData.displayName }}
               </button>
-              <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="dropdownLogin"
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownLogin"
                       v-if="this.isMember === true">
                 <li>
                   <RouterLink to="/MemberPage" class="dropdown-item">
@@ -146,7 +133,12 @@ export default {
 </script>
 
 
-<style scoped>
+<style lang="scss" scoped>
+.logo {
+    width: 100px;
+    height: auto;
+    object-fit: cover;
+}
 .small-num {
   width:20px;
   height: 20px;

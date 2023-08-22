@@ -1,12 +1,12 @@
 <template>
-  <div class="bg-dark py-4">
+  <div class="bg-primary py-4">
     <div class="container">
       <div class="row justify-content-center justify-content-lg-between align-items-center">
         <div class="col">
-          <RouterLink to="/" class="navbar-brand nav-link " href="#">
-            <img src="../assets/images/logo_white.png" alt="logo" class="d-none d-lg-block">
-            <img src="../assets/images/logo_white_sm.png" alt="logo" class="d-block d-lg-none mx-auto my-3">
-          </RouterLink>
+          <RouterLink to="/" class="navbar-brand nav-link d-flex align-items-end">
+          <img src="../assets/images/logo.png" alt="logo" class="logo">
+          <!-- <span class="test">樂樂音樂家教媒合平台</span> -->
+        </RouterLink>
         </div>
         <div class="col-12 col-lg-auto">
           <ul class="row justify-content-center justify-content-lg-end align-items-center ps-0">
@@ -45,10 +45,9 @@
 </script>
 
 <style lang="scss" scoped>
-a {
-  text-decoration: none;
-  &:hover {
-    color: rgba(168, 128, 48, 1) !important;
-  }
+.logo {
+    width: 100px;
+    height: auto;
+    object-fit: cover;
 }
 </style>

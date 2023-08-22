@@ -58,7 +58,7 @@ export default {
   z-index: -1;
 }
 .progress {
-  background-color: rgba(168, 128, 48, 1);
+  background-color: #ff715f;
   height: 4px;
   left: 0;
   position: absolute;
@@ -81,7 +81,7 @@ export default {
   width: 60px;
 }
 .circle.active {
-  border-color: rgba(168, 128, 48, 1);
-  color: rgba(168, 128, 48, 1);
+  border-color: #ff715f;
+  color: #ff715f;
 }
 </style>

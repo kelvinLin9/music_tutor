@@ -3,12 +3,6 @@
   <section class="header mb-5">
     <div class="container">
       <div class="row d-flex flex-lg-row-reverse align-items-center">
-        <div class="col-12 col-lg-6">
-          <img src="../assets/images/Main-img.png" alt="" class="img-fluid d-none d-lg-block">
-          <img src="../assets/images/Main-img-1.png" alt="" class="img-fluid d-block d-lg-none">
-        </div>
-
-
         <div class="col-12 col-lg-6 p-4 d-none d-lg-block">
           <h2 class="fs-2 fw-bold text-primary mb-3">
             找尋像好友一樣的音樂導師
@@ -218,15 +212,16 @@ export default {
 
 <style lang="scss" scoped>
   .header {
-    // background: rgba(249, 248, 247, 1);
-    // min-height: 100vh;
+    background-image: url('../assets/images/banner.jpg');
+    background-size: cover;
+    min-height: 100vh;
   }
 
   // 測試版-------------------------------------------
   .header-bg {
     background-size: cover;
     background-position: center center;
-    height: calc(100vh - 66px);
+    height: calc(100vh);
   }
   .header-content-bg {
     width: 100vw;
