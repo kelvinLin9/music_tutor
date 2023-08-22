@@ -114,6 +114,7 @@ export default defineStore('dataStore', {
     youLikeCourses:[],
     // 設定上課時間用
     classScheduleData:[],
+    classScheduleStudentData:[],
     classScheduleId:'',
     classScheduleIndex:0,
     classScheduleTime:'',
@@ -385,9 +386,15 @@ export default defineStore('dataStore', {
           wrap[0].classSchedule = wrap2[0].classSchedule
           this.userStudentCourses.push(wrap[0])
         })
-        console.log("用戶學生端課程資料",this.userStudentCourses)
         this.getStudyDate ()
+        this.UserStudentCoursesMerge()
       }
+    },
+    // 同名課程整理在一起渲染用
+    UserStudentCoursesMerge() {
+      const set = new Set()
+      this.userStudentCourses = this.userStudentCourses.filter(item=>!set.has(item.id)?set.add(item.id):false)  
+      console.log("用戶學生端課程資料",this.userStudentCourses)
     },
     getUserCartCourses() {
       if (!this.AllCoursesFirebaseData) {
@@ -411,11 +418,10 @@ export default defineStore('dataStore', {
       this.AllCoursesFirebaseData.sort((a,b)  => {
         return b.data.whoBuy.length - a.data.whoBuy.length
       }) 
-      this.top6courses = this.AllCoursesFirebaseData.slice(0,6)
-      console.log('人氣前6', this.top6courses)
+      this.top6courses = this.AllCoursesFirebaseData.slice(0,10)
+      console.log('人氣前10', this.top6courses)
     },
     getSameTeacherCourses(uid) {
-      console.log('???????')
       this.youLikeCourses = []
       if (!this.AllCoursesFirebaseData) {
         console.log('完全沒有課程')
@@ -430,8 +436,18 @@ export default defineStore('dataStore', {
 
 
     // 設定上課時間
-    SetUpClassSchedule (item) {
+    SetUpTeacherClassSchedule (item) {
       this.classScheduleData = item.data.whoBuy
+      this.classScheduleId = item.id
+    },
+    // 學生的要過濾掉別人買的課
+    SetUpStudentClassSchedule (item) {
+      console.log(item.data.whoBuy)
+      this.classScheduleData = item.data.whoBuy.filter((i) => {
+        return i.uid === this.teacherData.uid
+      })
+      console.log(this.classScheduleData)
+      // this.classScheduleData = item.data.whoBuy
       this.classScheduleId = item.id
     },
     async UpDateClassSchedule () {
@@ -455,20 +471,21 @@ export default defineStore('dataStore', {
     //   console.log(this.calenderDataNameTemp)
     // },
 
+  
 
     // 取得行事曆用數據
     async getTeachDate () {
       this.calenderData.teach = []
       this.userTeacherCourses.forEach((i) => {
         i.data.whoBuy.forEach(async (j) => {
+          // 用uid去找學生名字渲染modal
+          const docRef = doc(db, j.uid, 'teacher');
+          const docSnap = await getDoc(docRef);   
+          j.id = i.id         
+          j.studentName = docSnap.data().displayName
+          j.courseName = i.data.courseName
           // 把有設定上課時間的抓出來
           if(j.classSchedule) {
-            // 用uid去找學生名字渲染
-            const docRef = doc(db, j.uid, 'teacher');
-            const docSnap = await getDoc(docRef);   
-            j.id = i.id         
-            j.studentName = docSnap.data().displayName
-            j.courseName = i.data.courseName
             this.calenderData.teach.push(j)
           }
         })
@@ -478,15 +495,32 @@ export default defineStore('dataStore', {
     async getStudyDate () {
       this.calenderData.study = []
       this.userStudentCourses.forEach((i) => {
-        if(i.classSchedule){
-          let warp = {}
-          warp.TeacherName = i.data.displayName
-          warp.classSchedule = i.classSchedule
-          warp.courseName = i.data.courseName
-          warp.timestamp = i.timestamp
-          warp.id = i.id
-          this.calenderData.study.push(warp)
-        }
+        i.data.whoBuy.forEach(async (j) => {
+          // 用uid去找學生名字渲染modal
+          const docRef = doc(db, j.uid, 'teacher');
+          const docSnap = await getDoc(docRef);   
+          j.id = i.id         
+          j.studentName = docSnap.data().displayName
+          j.courseName = i.data.courseName
+          // 把有設定上課時間的抓出來
+          if(j.classSchedule) {
+            this.calenderData.teach.push(j)
+          }
+        })
+
+
+
+
+
+        // if(i.classSchedule){
+        //   let warp = {}
+        //   warp.TeacherName = i.data.displayName
+        //   warp.classSchedule = i.classSchedule
+        //   warp.courseName = i.data.courseName
+        //   warp.timestamp = i.timestamp
+        //   warp.id = i.id
+        //   this.calenderData.study.push(warp)
+        // }
       })
       console.log('行事曆學生資料', this.calenderData.study)
     },
