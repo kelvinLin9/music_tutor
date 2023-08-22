@@ -195,7 +195,7 @@
       </div>
       <!-- 排列方式 -->
       <div class="col-auto ms-auto ms-md-2 cursor-pointer">
-        <i class="bi bi-grid-fill text-danger fs-2"
+        <i class="bi bi-grid-fill text-primary fs-2"
             v-if="displayState === 'grid'"
             @click="displayState = 'list'"
         >
@@ -309,7 +309,7 @@ export default {
     this.onAuthStateChanged()
     this.courseSort()
     this.getBannerInfo(
-      new URL('../assets/images/section3-1.png', import.meta.url).href,
+      new URL('../assets/images/banner.jpg', import.meta.url).href,
       'ALL COURSES',
       '全部課程',
       '專業培訓，探索多元音樂風格'

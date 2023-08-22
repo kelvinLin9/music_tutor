@@ -37,6 +37,6 @@ export default {
 
 <style lang="scss" scoped>
 .min-height {
-  min-height: calc(100vh - 178px);
+  min-height: calc(100vh - 211px);
 }
 </style>

@@ -139,7 +139,7 @@ export default {
     this.cartPageState = 'cart'
     this.onAuthStateChanged()
     this.getBannerInfo(
-      new URL('../assets/images/section3-1.png', import.meta.url).href,
+      new URL('../assets/images/banner.jpg', import.meta.url).href,
       '購物車',
       'CART',
       '年底前輸入『 2023666 』享六折優惠'

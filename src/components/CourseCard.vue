@@ -14,8 +14,8 @@
         ></i>
       </div>
       <div class="card-body d-flex flex-column">
-        <div class="mb-1 d-flex align-items-start">
-          <span class="badge rounded-pill text-bg-danger align-middle mt-2">{{ item.data.courseCategory }}</span>
+        <div class="mb-1">
+          <span class="badge rounded-pill text-bg-primary text-white">{{ item.data.courseCategory }}</span>
           <span class="fs-5 fw-bold ms-2">{{ item.data.courseName }}</span>   
         </div>
         <div class="mt-auto">
