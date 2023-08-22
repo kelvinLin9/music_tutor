@@ -176,7 +176,10 @@ export default defineStore('cartStore', {
           }
         let wrap3 = { 
           timestamp : ts,
-          uid : data.user.uid,
+          uid : data.teacherData.uid,
+          // id : this.payWrap.payData[i].courseId,
+          // courseName : this.payWrap.payData[i].courseName,
+          // studentName : data.teacherData.displayName,
           classSchedule: ''
           }
         await updateDoc(cart, {

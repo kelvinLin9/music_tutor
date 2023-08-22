@@ -13,7 +13,7 @@
             name="課程名稱"
             id="courseName"
             type="text"
-            rules="required|min:3|max:20"
+            rules="required|min:3|max:15"
             class="form-control"
             :class="{ 'is-invalid': errors['課程名稱'] }"
             placeholder="請輸入課程名稱"
