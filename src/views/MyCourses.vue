@@ -1,39 +1,43 @@
 <template>
-  <div class="container mt-48">
-    <!-- 上方統計欄 -->
-    <div class="row align-items-center mb-3">
-      <div class="col-12 col-lg-6 mb-3 mb-lg-0">
-        <div class="d-flex align-items-center">
-          <div class="user-photo position-relative">
-            <img :src="teacherData.teacherImg" alt="大頭照"
-                v-if="teacherData.teacherImg">
-            <!-- <img src="../assets/images/預設大頭貼.png" alt="預設大頭照"
-                v-if="!teacherData.teacherImg"> -->
+  <!-- 上方統計欄 -->
+  <div class="bg-primary text-white">
+    <div class="container">
+      <div class="row align-items-center py-48">
+        <div class="col-12 col-lg-6 mb-3 mb-lg-0">
+          <div class="d-flex align-items-center">
+            <div class="user-photo position-relative">
+              <img :src="teacherData.teacherImg" alt="大頭照"
+                  v-if="teacherData.teacherImg">
+              <!-- <img src="../assets/images/預設大頭貼.png" alt="預設大頭照"
+                  v-if="!teacherData.teacherImg"> -->
+            </div>
+            <h1 class="ms-48"> {{ teacherData.displayName }} </h1>
           </div>
-          <h1 class="ms-48"> {{ teacherData.displayName }} </h1>
         </div>
-      </div>
-      <div class="col-12 col-lg-6 ms-auto">
-        <div class="row justify-content-between align-items-center">
-          <div class="col-auto text-center">
-            <h5>參加課程</h5>
-            <p class="fs-1">{{ userStudentCourses.length }}</p>
-          </div>
-          <div class="col-auto text-center">
-            <h5>已開課程</h5>
-            <p class="fs-1">{{ userTeacherCourses.length }}</p>
-          </div>
-          <div class="col-auto text-center">
-            <h5>目前收藏</h5>
-            <p class="fs-1">{{ userBookmarkCourses.length }}</p>
+        <div class="col-12 col-lg-6 ms-auto">
+          <div class="row justify-content-between align-items-center">
+            <div class="col-auto text-center">
+              <h5>參加課程</h5>
+              <p class="fs-1">{{ userStudentCourses.length }}</p>
+            </div>
+            <div class="col-auto text-center">
+              <h5>已開課程</h5>
+              <p class="fs-1">{{ userTeacherCourses.length }}</p>
+            </div>
+            <div class="col-auto text-center">
+              <h5>目前收藏</h5>
+              <p class="fs-1">{{ userBookmarkCourses.length }}</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
+  <div class="container my-24">
     <!-- 分類按鈕 -->
     <div class="row align-items-center mb-3">
-      <div class="col col-md-3 border-bottom border-5 pb-2 cursor-pointer"
-          :class="{'border-danger': myCoursesState === 'student'}"
+      <div class="col col-md-3 fs-5 fw-bold border-bottom border-5 pb-2 cursor-pointer"
+          :class="{'border-primary': myCoursesState === 'student'}"
           @click="myCoursesState = 'student', courseCardData = userStudentCourses">
         <i class="bi bi-pen"
           :class="{'text-primary': myCoursesState === 'student'}">
@@ -42,8 +46,8 @@
           我是學生
         </span>
       </div>
-      <div class="col col-md-3 border-bottom border-5 pb-2 cursor-pointer"
-          :class="{'border-danger': myCoursesState === 'teacher'}"
+      <div class="col col-md-3 fs-5 fw-bold border-bottom border-5 pb-2 cursor-pointer"
+          :class="{'border-primary': myCoursesState === 'teacher'}"
           @click="myCoursesState = 'teacher', courseCardData = userTeacherCourses">
         <i class="bi bi-book"
         :class="{'text-primary': myCoursesState === 'teacher'}">
@@ -52,8 +56,8 @@
           我是老師
         </span>
       </div>
-      <div class="col col-md-3 border-bottom border-5 pb-2 cursor-pointer"
-          :class="{'border-danger': myCoursesState === 'bookmark'}"
+      <div class="col col-md-3 fs-5 fw-bold border-bottom border-5 pb-2 cursor-pointer"
+          :class="{'border-primary': myCoursesState === 'bookmark'}"
           @click="myCoursesState = 'bookmark', courseCardData = userBookmarkCourses">
         <i class="bi bi-bookmarks"
           :class="{'text-primary': myCoursesState === 'bookmark'}"
@@ -98,11 +102,11 @@
   </div>
 
   <!-- 老師設定上課時間 -->
-  <SetUpClassScheduleModal />
+  <SetUpClassScheduleModal/>
   <!-- 學生查看上課時間 -->
   <class-schedule-modal/>
 
-  <div class="container d-flex" v-if="!loading">
+  <div class="container d-flex mb-16" v-if="!loading">
     <div class="w-100 w-md-70">
       <CourseCardList />
     </div>

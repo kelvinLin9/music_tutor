@@ -119,7 +119,7 @@ export default {
 // }
 
 $color_white: #fff;
-$color_prime: rgba(168, 128, 48, 1);
+$color_prime: #ff715f;
 $color_grey: #e2e2e2;
 $color_grey_dark: #a2a2a2;
 
