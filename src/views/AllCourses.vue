@@ -222,9 +222,14 @@
          v-if="displayState === 'grid'">
       <CourseCard />
     </div>
+      <!-- 條列課程 -->
+    <div v-if="displayState === 'list'">
+      <CourseCardList />
+    </div>
   </div>
-  <!-- 條列課程 -->
-  <div class="container mb-3" v-if="displayState === 'list' && !loading">
+
+  <!-- 舊的條列課程 -->
+  <!-- <div class="container mb-3" v-if="displayState === 'list' && !loading">
     <div class="row">
       <div class="col-12">
         <table class="table table-hover align-middle">
@@ -266,7 +271,7 @@
         </table>
       </div>
     </div>
-  </div>
+  </div> -->
   <!-- 分頁鈕 -->
   <PaginationCom v-if="!loading" />
 </template>
@@ -282,13 +287,14 @@ import dataStore from '@/stores/dataStore'
 import filterStore from '@/stores/filterStore'
 import bannerStore from '@/stores/bannerStore'
 import courseCardStore from '@/stores/courseCardStore'
+import CourseCardList from '../components/CourseCardList.vue'
 
 export default {
-  components: { PaginationCom, CoursesLoading, BannerCom, CourseCard },
+  components: { PaginationCom, CoursesLoading, BannerCom, CourseCard, CourseCardList },
   computed: {
     ...mapState(dataStore, ['loading']),
     ...mapState(filterStore, ['filterData','courseMethod', 'sortMethod', 'currentPageCoursesData']),
-    ...mapWritableState(dataStore, ['displayState']),
+    ...mapWritableState(dataStore, ['myCoursesState', 'displayState']),
     ...mapWritableState(filterStore, ['selectCityName', 'selectCourseCategory', 'selectCourseName','selectCourseMethod', 'selectSortMethod']),
     ...mapWritableState(courseCardStore, ['courseCardData']),
 
@@ -309,7 +315,7 @@ export default {
       '專業培訓，探索多元音樂風格'
     )
     this.displayState = 'grid'
-    console.log(this.currentPageCoursesData)
+    this.myCoursesState = 'bookmark'
   },
   mounted () {
 
