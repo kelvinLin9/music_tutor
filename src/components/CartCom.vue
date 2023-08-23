@@ -28,7 +28,7 @@
                 value=""
                 @click="checkAll()"
                 v-model="checkAllValue"> 
-              <label for="checkAll" class="text-danger fs-5">全選</label>
+              <label for="checkAll" class="text-primary fs-5">全選</label>
             </div>
           </th>
         </tr>

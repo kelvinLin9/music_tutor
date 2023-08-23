@@ -3,7 +3,8 @@ import { defineStore } from 'pinia'
 export default defineStore('windowStore', {
   state: () => ({
     goTopIcon: false,
-    windowWidth: 0
+    windowWidth: 0,
+    navbarWhite: false
   }),
   actions: {
     scroll () {
@@ -13,6 +14,12 @@ export default defineStore('windowStore', {
         } else {
           this.goTopIcon = false
         }
+        if (e.target.scrollingElement.scrollTop > 70) {
+          this.navbarWhite = true
+        } else {
+          this.navbarWhite = false
+        }
+
       }
     },
     getWindowWidth () {

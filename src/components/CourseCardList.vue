@@ -32,31 +32,31 @@
           title="加入 / 移除收藏"
           ></i>
       </h2>
-      <h3>by {{ item.data.displayName }}</h3>
-      <p> 
-        <i class="bi bi-clock"></i>
-        {{ item.data.time }}
-        <i class="bi bi-geo-alt ms-2"></i>
-        {{ item.data.cityName || '線上' }}
-        <i class="bi bi-people ms-2"></i>
-        {{ item.data.whoBuy.length}}
-      </p>
+      <h3 class="fs-6">by {{ item.data.displayName }}</h3>
+      <p class="d-flex align-items-center"> 
+          <span class="material-symbols-outlined fs-6 me-4">timer</span>
+          {{ item.data.time }}
+          <span class="material-symbols-outlined fs-6 ms-8 me-4">map</span>
+          {{ item.data.cityName || '線上' }}
+          <span class="material-symbols-outlined fs-6 ms-8 me-4">group</span>
+          {{ item.data.whoBuy.length}}
+        </p>
       <p class="d-flex justify-content-between align-items-center">
         <span class="fs-5 fw-bold">NT$ {{ $filters.currency(item.data.price) }}</span>
-        <a v-if="myCoursesState === 'teacher'"
-          type="button" class="btn"
+        <button v-if="myCoursesState === 'teacher'"
+          type="button" class="btn btn-outline-primary border-0 fw-bold"
           data-bs-toggle="modal" data-bs-target="#SetUpClassSchedule"
           @click.stop="SetUpTeacherClassSchedule(item)"
         >
           設定上課時間
-        </a>
-        <a v-if="myCoursesState === 'student'"
-          type="button" class="btn"
+      </button>
+        <button v-if="myCoursesState === 'student'"
+          type="button" class="btn btn-outline-primary border-0 fw-bold"
           data-bs-toggle="modal" data-bs-target="#ClassSchedule"
           @click.stop="SetUpStudentClassSchedule(item)"
         >
           查看上課時間
-        </a>
+      </button>
       </p>
     </div>
   </div>  
@@ -106,18 +106,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-/*PEN STYLES*/
-
-// body {
-//   background: #f1f1f1;
-//   display: flex;
-//   flex-direction:column;
-//   font-size: 1rem;
-//   justify-content: center;
-//   align-items: center;
-//   height: 100vh;
-// }
-
 $color_white: #fff;
 $color_prime: #ff715f;
 $color_grey: #e2e2e2;
@@ -126,7 +114,6 @@ $color_grey_dark: #a2a2a2;
 .blog-card {
   display: flex;
   flex-direction: column;
-  // margin: 1rem auto;
   box-shadow: 0 3px 7px -1px rgba(#000, .1);
   margin-bottom: 1.6%;
   background: $color_white;
@@ -149,7 +136,7 @@ $color_grey_dark: #a2a2a2;
   .meta {
     position: relative;
     z-index: 0;
-    // height: 200px; //先拿掉手機版圖片
+    // height: 200px; //拿掉的話在桌面版就不會被文字撐開
   }
   .photo {
     position: absolute;
@@ -161,6 +148,8 @@ $color_grey_dark: #a2a2a2;
     background-position: center;
     transition: transform .2s;
   }
+
+
   .details,
   .details ul {
     margin: auto;
@@ -217,42 +206,12 @@ $color_grey_dark: #a2a2a2;
     background: $color_white;
     position: relative;
     z-index: 1;
-    h2,
-    h3 {
-      font-family: Poppins, sans-serif;
-    }
     h2 {
       line-height: 1;
-      margin: 0;
-      font-size: 1.7rem;
     }
     h3 {
-      font-size: 1rem;
-      font-weight: 300;
-      // text-transform: uppercase;
       color: $color_grey_dark;
       margin-top: 5px;
-    }
-    .read-more {
-      text-align: right;
-      a {
-        color: $color_prime;
-        display: inline-block;
-        position: relative;
-        &:after {
-          content: "\f061";
-          font-family: FontAwesome;
-          margin-left: -10px;
-          opacity: 0;
-          vertical-align: middle;
-          transition: margin .3s, opacity .3s;
-        }
-
-        &:hover:after {
-          margin-left: 5px;
-          opacity: 1;
-        }
-      }
     }
   }
   p {
@@ -280,7 +239,7 @@ $color_grey_dark: #a2a2a2;
 
   @media (min-width: 576px) {
     flex-direction: row;
-    max-width: 700px;
+    // max-width: 700px;
     .meta {
       flex-basis: 40%;
       height: auto;
