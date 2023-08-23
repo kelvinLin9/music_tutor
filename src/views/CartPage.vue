@@ -72,7 +72,7 @@
             </div>
           </div>
           <div class="card-footer">
-            <div class="text-danger fs-8 mb-2">
+            <div class="text-primary fs-8 mb-2 fw-bold">
               我已詳閱並同意〈服務契約〉及服務內容
             </div>
             <div class="row">
@@ -110,14 +110,14 @@ export default {
     cartPageState() {
       if (this.cartPageState === 'cart') {
         this.getBannerInfo(
-        new URL('../assets/images/section3-1.png', import.meta.url).href,
+        new URL('../assets/images/banner.jpg', import.meta.url).href,
           '購物車',
           'CART',
           '年底前輸入『 2023666 』享六折優惠'
         )
       } else {
         this.getBannerInfo(
-            new URL('../assets/images/section3-1.png', import.meta.url).href,
+            new URL('../assets/images/banner.jpg', import.meta.url).href,
             '結帳',
             'CHECKOUT',
             'YO~'

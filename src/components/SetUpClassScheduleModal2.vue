@@ -11,17 +11,17 @@
 
 
 
-
+        
 
         <div class="block">
-      <span class="demonstration">Use value-format</span>
+      <!-- <span class="demonstration">Use value-format</span> -->
       <div class="demonstration">Value：{{ classScheduleTime }}</div>
       <el-date-picker
         v-model="classScheduleTime"
         type="datetime"
         placeholder="Pick a Date"
-        format="YYYY/MM/DD hh:mm"
-        value-format="YYYY-MM-DD hh:mm"
+        format="YYYY/MM/DD HH:mm"
+        value-format="YYYY-MM-DD HH:mm"
       />
     </div>
 

@@ -40,7 +40,7 @@
     </nav>
   </div>
 
-  <div class="container d-flex justify-content-center my-4 d-block d-sm-none"
+  <div class="container d-flex justify-content-center my-32 d-block d-sm-none"
         v-if="filterData.length != 0">
     <div class="pagination row g-1 justify-content-center align-items-center">
       <div class="col-auto page-item" 

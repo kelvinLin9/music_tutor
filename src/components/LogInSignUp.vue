@@ -21,7 +21,7 @@
             <span class="google-login-text">使用 Google 登入</span>
           </button>
 
-          <hr class="mx-auto w-75 mt-4 text-center fs-7 login-hr">
+          <hr class="mx-auto w-75 mt-32 text-center fs-7 login-hr">
 
           <VForm class="mx-auto w-75"
                 v-slot="{ errors }"

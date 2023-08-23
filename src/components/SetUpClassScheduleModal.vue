@@ -27,7 +27,7 @@
                     {{ item.classSchedule || '無' }}
                   </td>
                   <td>
-                    <button class="btn btn-primary" data-bs-target="#SetUpClassSchedule2" data-bs-toggle="modal"
+                    <button class="btn btn-outline-primary" data-bs-target="#SetUpClassSchedule2" data-bs-toggle="modal"
                     @click="classScheduleIndex = index">
                        設定
                     </button>
