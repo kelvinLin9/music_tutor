@@ -217,61 +217,19 @@
         很抱歉，沒有符合條件課程
       </div>
     </div>
-    <!-- 課程 -->
+    <!-- 卡片課程 -->
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-3"
          v-if="displayState === 'grid'">
       <CourseCard />
     </div>
       <!-- 條列課程 -->
     <div v-if="displayState === 'list'">
-      <CourseCardList />
+      <div class="w-100 w-lg-70 w-xl-60">
+        <CourseCardList />
+      </div>
     </div>
   </div>
 
-  <!-- 舊的條列課程 -->
-  <!-- <div class="container mb-3" v-if="displayState === 'list' && !loading">
-    <div class="row">
-      <div class="col-12">
-        <table class="table table-hover align-middle">
-          <thead>
-            <tr>
-              <th width="" class="" colspan="5">
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="item in currentPageCoursesData" :key="item.id">
-              <td width="100" class="cursor-pointer"
-                  @click="getOneCoursesFirebaseData(item.id)">
-                  <img :src="item.data.courseImg" alt="課程圖片" class="table-image ">
-              </td>
-              <td class="cursor-pointer" 
-                  @click="getOneCoursesFirebaseData(item.id)"> 
-                <div class="mb-1 d-flex align-items-center">
-                  <span class="badge rounded-pill text-bg-danger">{{ item.data.courseCategory }}</span>
-                  <span class="fs-5 fw-bold ms-2">{{ item.data.courseName }}</span>   
-                </div>
-                <div class="">
-                  by {{ item.data.displayName }}
-                </div>
-                <div class="">
-                  <i class="bi bi-clock"></i>
-                  {{ item.data.time }}
-                  <i class="bi bi-geo-alt ms-2"></i>
-                  {{ item.data.cityName || '線上' }}
-                  <i class="bi bi-people ms-2"></i>
-                  {{ item.data.whoBuy.length}}
-                </div>
-                <div class="fs-5 fw-bold">
-                  NT$ {{ $filters.currency(item.data.price) }}
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div> -->
   <!-- 分頁鈕 -->
   <PaginationCom v-if="!loading" />
 </template>
