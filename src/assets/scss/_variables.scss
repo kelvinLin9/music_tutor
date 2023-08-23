@@ -424,8 +424,9 @@ $spacers: (
   1: $spacer * .25,
   2: $spacer * .5,
   3: $spacer,
-  4: $spacer * 1.5,
+  // 4: $spacer * 1.5,
   // 先這樣改，只要動到5比較部會麻煩
+  4: $spacer * .25,
   8: $spacer * .5,
   10: $spacer * .625,
   12: $spacer * .75,
@@ -870,9 +871,11 @@ $btn-link-disabled-color:     $gray-600 !default;
 
 // Allows for customizing button radius independently from global border radius
 // $btn-border-radius:           var(--#{$prefix}border-radius) !default;
-$btn-border-radius:           0;
-$btn-border-radius-sm:        var(--#{$prefix}border-radius-sm) !default;
-$btn-border-radius-lg:        var(--#{$prefix}border-radius-lg) !default;
+// $btn-border-radius-sm:        var(--#{$prefix}border-radius-sm) !default;
+// $btn-border-radius-lg:        var(--#{$prefix}border-radius-lg) !default;
+$btn-border-radius:           50rem;
+$btn-border-radius-sm:        50rem !default;
+$btn-border-radius-lg:        50rem !default;
 
 $btn-transition:              color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out !default;
 

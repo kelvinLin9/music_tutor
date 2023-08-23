@@ -128,6 +128,14 @@ export default defineStore('logInStore', {
       finalTotal:0,
       couponUse:''
     }
+    // 行事曆
+    data.classScheduleData=[],
+    data.classScheduleStudentData=[],
+    data.classScheduleId='',
+    data.classScheduleIndex=0,
+    data.classScheduleTime='',
+    data.calenderDataAll=[],
+    data.calenderDataNameTemp=''
     // 驗證
     this.userProviderData=[]
     this.ProviderState= {
@@ -137,6 +145,7 @@ export default defineStore('logInStore', {
       github: false,
     },
     
+
 
     router.push('/UserLogin')
     

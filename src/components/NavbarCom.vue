@@ -1,6 +1,6 @@
 <template>
   <div class="fixed-top" 
-      :class="{ 'sticky-top bg-white':  $route.matched[1].path !== '/'}">
+      :class="{ 'sticky-top bg-white':  $route.matched[1].path !== '/' || navbarWhite }">
     <nav class="container navbar navbar-expand-lg">
       <div class="container-fluid">
         <RouterLink to="/" class="navbar-brand nav-link d-flex align-items-end">
@@ -19,7 +19,7 @@
           </RouterLink>
         </li>
     
-        <button class="navbar-toggler ms-4" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler ms-32" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -90,7 +90,7 @@
                 </li>
                 <li>
                   <RouterLink to="/MyCalendar" class="dropdown-item">
-                    我的課表
+                    行事曆
                   </RouterLink>
                 </li>
                 <li>
@@ -117,12 +117,13 @@ import { mapState, mapActions, mapWritableState } from
 'pinia'  
 import logInStore from '@/stores/logInStore'
 import dataStore from '../stores/dataStore';
-import goStore from '@/stores/goStore'
+import windowStore from '@/stores/windowStore'
 
 export default {
   computed: {
     ...mapState(dataStore, ['user','teacherData', 'isMember', 'studentData', 'bookmarkNum']),
-    ...mapWritableState(dataStore, ['myCoursesState'])
+    ...mapWritableState(dataStore, ['myCoursesState']),
+    ...mapState(windowStore, ['navbarWhite'])
   },
   methods: {
     ...mapActions(logInStore, ['signOut'])
@@ -152,5 +153,11 @@ export default {
   top: 0px;
   left: 15px;
   font-size: 12px;
+}
+.bg-white {
+  transition: .4s ease;
+}
+.fixed-top {
+  transition: .4s ease;
 }
 </style>

@@ -107,7 +107,7 @@
   <class-schedule-modal/>
 
   <div class="container d-flex mb-16" v-if="!loading">
-    <div class="w-100 w-md-70">
+    <div class="w-100 w-lg-70 w-xl-60">
       <CourseCardList />
     </div>
     <!-- <div class="w-50 ">

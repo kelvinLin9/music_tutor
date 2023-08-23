@@ -1,45 +1,26 @@
 <template>
   <BannerCom />
-  <div class="container">
-    <div class="row align-items-center" v-if="!loading">
-      <div class="col-10">
-        <el-calendar>
-        <template #date-cell="{data}">
-          <div class="calendar-item">
-            <div class="calendar-time">
-              {{ data.day.split('-').slice(2).join('')}}
-            </div>
-            <div>
-              <span class="remark-text calendar-time" 
-                    v-for="(item, index) in dealMyDate1(data.day)" :key="index">
-                <span class="text-success">{{ item }}</span>
-              </span>
-              
-              <span class="remark-text calendar-time" 
-                    v-for="(item, index) in dealMyDate2(data.day)" :key="index">
-                <span class="text-danger">{{ item }}</span>
-              </span>
-            </div>
-          </div>
-        </template>
-      </el-calendar>
-      </div>
-      <div class="col-2">
-        <div class="text-success fs-3 fw-bold">
-          - 要教的課
-        </div>
-        <div class="text-danger fs-3 fw-bold">
-          - 要上的課
-        </div>
-      </div>
-    </div>
+  <div class="container my-48" v-if="!loading">
+    <FullCalendar :options='calendarOptions'>
+    <!-- <template v-slot:eventContent='arg'>
+      <b>{{ arg.timeText }}</b>
+      <i>{{ arg.event.title }}</i>
+    </template> -->
+  </FullCalendar>
   </div>
 </template>
 
 
   
 <script>
-import moment from 'moment'
+import FullCalendar from "@fullcalendar/vue3"
+import dayGridPlugin from '@fullcalendar/daygrid'
+import timeGridPlugin from '@fullcalendar/timegrid' // 右上顯示月週日
+import interactionPlugin from "@fullcalendar/interaction" // 拖曳
+import listPlugin from "@fullcalendar/list";
+import Tooltip from 'tippy.js' //npm i tippy.js
+import 'tippy.js/dist/tippy.css'
+
 import BannerCom from '../components/BannerCom.vue'
 import { mapState, mapActions, mapWritableState } from 
 'pinia'  
@@ -47,63 +28,85 @@ import dataStore from '@/stores/dataStore'
 import bannerStore from '@/stores/bannerStore'
 
 export default {
-  components: { BannerCom },
+  components: { BannerCom, FullCalendar },
   data () {
     return {
-      resDate: [
-        { date: '2023-08-14', content: '專題討論、研究行事曆' },
-        { date: '2023-08-16', content: '訂正作業' },
-        { date: '2023-08-15', content: '小組討論' },
-        { date: '2023-08-17', content: '信箱、手機驗證' },
-        { date: '2023-08-18', content: '第七週課程' },
-        { date: '2023-08-21', content: '專題討論' },
-        { date: '2023-09-10', content: '作業死線' },
-        { date: '2023-09-17', content: '成果發表會' },
-        { date: '2023-08-01', content: '進度條' },
-        { date: '2023-08-02', content: '骨架屏' },
-        { date: '2023-08-03', content: '表格' },
-        { date: '2023-08-04', content: '倒數計時' },
-        { date: '2023-08-05', content: '步驟條' },
-        { date: '2023-08-06', content: '對話框(modal)' },
-        { date: '2023-08-07', content: 'Loading' },
-        { date: '2023-08-08', content: '彈出框、評分' },
-        { date: '2023-08-09', content: '標籤頁、上傳、時間選擇、選擇器' },
-      ]
+      calendarOptions: {
+        plugins: [dayGridPlugin, interactionPlugin, timeGridPlugin, listPlugin],
+        initialView: 'dayGridMonth',
+        weekends: true,
+        locale: 'zh-tw',
+        dayMaxEventRows: 2.0, // 事件最大展示列數
+        aspectRatio: 2,
+        handleWindowResize: true, // 響應式
+        selectable: true,  // 是否可以选中日历格   
+        expandRows: true,
+        views: {
+          color: '#000000',
+        },
+        headerToolbar: {
+          left: "prevYear,prev,next,nextYear today",
+          center: "title",
+          right: "dayGridMonth,timeGridWeek,timeGridDay listMonth"
+        }, //日曆上方的按钮和title
+        buttonText: {
+          today: "今天",
+          month: "月",
+          week: "周",
+          day: "日",
+          list: "列表",
+        },
+
+        slotLabelFormat: {
+          hour: "2-digit",
+          minute: "2-digit",
+          meridiem: false,
+          hour12: false, // 设置时间为24小时
+        }, // 视图的一些基本设置
+        // eventMouseEnter: this.eventMouseEnter,
+        dateClick: info => {
+          console.log(info);
+        },//點擊日期info是單元格的信息
+        eventClick: info => {
+          console.log(info);
+          // dialogVisible.value = true;
+        }, //事件的点击
+        eventDidMount: function(info) {
+          var tooltip = new Tooltip(info.el, {
+            content: info.event._def.title,
+            placement: 'top',
+            // trigger: 'hover', 
+            // container: 'body'
+          });
+        },
+        events: [],
+        // eventSources:[
+        //   {
+        //     events: []
+        //   }
+        // ],
+        // events: 'https://calendar.google.com/calendar/embed?src=zh-tw.taiwan%23holiday%40group.v.calendar.google.com&ctz=Asia%2FTaipei'
+      },
+
+    }
+  },
+  watch: {
+    calenderDataAll() {
+      this.calendarOptions.events = this.calenderDataAll
+      // this.calendarOptions.eventSources[0].events = this.calenderDataAll
     }
   },
   computed:{
-    ...mapState(dataStore,['calenderData', 'loading']),
+    ...mapState(dataStore,['calenderDataAll', 'calenderData', 'loading']),
   },
   methods: {
     ...mapActions(dataStore,['onAuthStateChanged']),
     ...mapActions(bannerStore, ['getBannerInfo']),
-    dealMyDate1 (date) {
-      let res = '';
-      for (let i = 0; i < this.calenderData.teach.length; i++) {
-      if (moment(this.calenderData.teach[i].classSchedule).format('YYYY-MM-DD') == date) {
-        res = this.calenderData.teach[i].courseName;
-        break;
-      }
-    }
-      // console.log(res)
-      return res;
-    },
-    dealMyDate2 (date) {
-      let res = '';
-      for (let i = 0; i < this.calenderData.study.length; i++) {
-      if (moment(this.calenderData.study[i].classSchedule).format('YYYY-MM-DD') == date) {
-        res = this.calenderData.study[i].courseName;
-        break;
-      }
-    }
-      // console.log(res)
-      return res;
-    }
   },
   created () {
     this.onAuthStateChanged()
     this.getBannerInfo(
-      new URL('../assets/images/section3-1.png', import.meta.url).href,
+      new URL('../assets/images/banner.jpg', import.meta.url).href,
       'CALENDAR',
       '行事曆',
       '井然有序，做一個時間管理大師'
@@ -115,15 +118,50 @@ export default {
 
 </script>
 
-<style lang="scss" scoped>
-.remark-text {
-  font-size: 8px;
+<style lang="scss">
+.fc-toolbar-title {
+  color: #ff715f !important;
 }
-.calendar-item {
-  flex-direction: column;
+.fc-button-primary {
+    color: #ff715f !important;
+    background-color: #ffffff !important;
+    border-color: #ff715f !important;
+    border-radius: 50rem !important;
+    &:hover{
+    background-color: #ff715f !important;
+    color: #ffffff !important;
+    box-shadow: 0!important;
+  }
 }
-.calendar-time {
-  height: 16px;
-  line-height: 16px;
+.fc-button-primary {
+  &:hover{
+    background-color: #ff715f !important;
+    color: #ffffff !important;
+    box-shadow: 0!important;
+  }
 }
+.fc-button-active {
+  background-color: #ff715f !important;
+  color: #ffffff !important;
+  box-shadow: 0!important;
+}
+.fc-button .fc-icon {
+    vertical-align: middle;
+    font-size: 1.5em;
+    color: #ff715f;
+    &:hover{
+    background-color: #ff715f !important;
+    color: #ffffff !important;
+    box-shadow: 0!important;
+  }
+}
+.fc-event {
+    position: relative;
+    display: block;
+    font-size: 0.6em !important;
+    line-height: 1.4 !important;
+    border-radius: 5px;
+    color: #333333;
+}
+
 </style>

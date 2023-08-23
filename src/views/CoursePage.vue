@@ -76,7 +76,7 @@
         </div>
       </div>
       <!-- 別人的課顯示 -->
-      <div class="col-12 col-lg-4 p-4 border sticky-course-page"
+      <div class="col-12 col-lg-4 p-32 border sticky-course-page"
           v-if="this.user.uid !== courseData.uid">
         <h4 class="border-bottom pb-2">購買單堂課程</h4>
         <div class="mb-3">
@@ -84,11 +84,11 @@
           <span class="fs-1">NT${{ $filters.currency(courseData.price) }}</span> 
         </div>
         <div class="d-flex justify-content-between">
-          <button type="button" class="btn btn-outline-danger w-75"
+          <button type="button" class="btn btn-outline-primary w-75"
                   @click="buyNow(user.uid, courseData.id)">
             立即購買
           </button>
-          <button type="button" class="btn btn-danger"
+          <button type="button" class="btn btn-primary"
                   data-bs-toggle="tooltip"
                   data-bs-placement="top"
                   title="加入購物車"
@@ -98,7 +98,7 @@
         </div>
       </div>
       <!-- 自己的課顯示 -->
-      <div class="col-12 col-lg-4 p-4 border sticky-course-page"
+      <div class="col-12 col-lg-4 p-32 border sticky-course-page"
           v-if="this.user.uid === courseData.uid">
         <h4 class="border-bottom pb-2">購買人數</h4>
         <div class="mb-3">
@@ -108,11 +108,11 @@
           </span> 
         </div>
         <div class="d-flex justify-content-between align-items-center">
-          <button type="button" class="btn btn-outline-danger w-25"
+          <button type="button" class="btn btn-outline-primary w-25"
           data-bs-toggle="modal" data-bs-target="#editMyCourseModal">
             編輯
           </button>
-          <span class="text-danger fs-8">(課程審核通過後將無法再編輯)</span>
+          <span class="text-primary fs-8">(課程審核通過後將無法再編輯)</span>
         </div>
       </div>
       <!-- 課程評價 -->

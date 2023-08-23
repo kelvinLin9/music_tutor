@@ -141,9 +141,9 @@
           <ErrorMessage class="invalid-feedback" name="教學項目"/>
           <div class="mt-1">
             熱門項目：
-            <span class="badge rounded-pill text-bg-danger me-1">鋼琴</span>
-            <span class="badge rounded-pill text-bg-danger me-1">木吉他</span>
-            <span class="badge rounded-pill text-bg-danger me-1">流行歌唱</span>
+            <span class="badge rounded-pill text-bg-primary text-white me-1">鋼琴</span>
+            <span class="badge rounded-pill text-bg-primary text-white me-1">木吉他</span>
+            <span class="badge rounded-pill text-bg-primary text-white me-1">流行歌唱</span>
           </div>
         </div>
       </div>
@@ -278,7 +278,7 @@ export default {
   created () {
     this.onAuthStateChangedForCreateCourse()
     this.getBannerInfo(
-      new URL('../assets/images/section3-1.png', import.meta.url).href,
+      new URL('../assets/images/banner.jpg', import.meta.url).href,
       'COURSE INFORMATION',
       '四個步驟，讓你成為老師',
       '首先設定必要資訊'
