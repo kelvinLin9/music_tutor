@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row my-16">
         <div class="col-12 col-md-4 d-flex flex-column align-items-center">
-          <div class="user-photo position-relative">
+          <div class="user-photo position-relative mb-16">
             <img :src="teacherData.teacherImg" alt="大頭照"
                   v-if="teacherData.teacherImg">
             <img src="../assets/images/預設大頭貼.png" alt="預設大頭照"
@@ -18,10 +18,27 @@
                     @change="uploadPhoto('teacher',$event)"
                   />
           </div>
-          <div class="mb-2 fs-3 fw-bold">
+          <div class="mb-8 fs-3 fw-bold position-relative">
             {{ teacherData.displayName }}
             <i :class="teacherData.gender"></i>
+            <span class="material-symbols-outlined cursor-pointer fs-3 text-teal ms-16 edit-pen" @click="updateNameState = true">Edit_Note</span>
           </div>
+
+          <div class="mb-3" v-if="updateNameState">
+            <label for="updateName" class="form-label fs-8">變更姓名：</label>
+            <input type="text" class="form-control" id="updateName" v-model="teacherData.displayName">
+            <div class="mt-16 text-end">
+              <button type="button" class="btn btn-secondary me-8"
+                        @click="updateNameState = false">
+                  取消
+              </button>
+              <button type="button" class="btn btn-primary"
+                        @click="updateUserName() , updateNameState = false">
+                  確定
+              </button>
+            </div>
+          </div>
+          
           <!-- <div class="mb-2 w-100">
           <div class="mb-2 w-100">
             <i class="bi bi-telephone-fill"></i>：{{ teacherData.phoneNumber }}
@@ -66,19 +83,20 @@
           </div>
           <!-- 編輯按鈕 -->
           <div class="d-flex justify-content-between" v-if="!ckeditorState">
-            <span class="fs-7 text-delete"
+            <span class="fs-7 text-teal"
               v-if="!teacherData.ckeditor">
               編輯個人頁面，和大家分享更多精彩故事
             </span>
-            <a class="text-info fw-bold cursor-pointer ms-auto"
+            <a class="text-teal fw-bold cursor-pointer ms-auto"
                 @click="ckeditorState = true">
-                <i class="bi bi-pen-fill me-1"></i>編輯
+                <span class="material-symbols-outlined fs-1">Edit_Note</span>
+                <!-- <i class="bi bi-pen me-1"></i>編輯 -->
             </a>
           </div>
           <!-- 顯示編輯內容 -->
           <div v-html="teacherData.ckeditor" class="border p-8"></div>
           <!-- ckeditor編輯框 -->
-          <div class="text-delete fs-7 py-1"
+          <div class="text-teal fs-7 py-1"
               v-if="ckeditorState">
             <ckeditor :editor="editor" v-model="teacherData.ckeditor" :config="editorConfig"></ckeditor>
             
@@ -131,11 +149,11 @@ export default {
   components: { EditIntroModal },
   computed: {
     ...mapState(dataStore, ['user','isMember', 'teacherData']),
-    ...mapWritableState(dataStore, ['ckeditorState'])
+    ...mapWritableState(dataStore, ['ckeditorState', 'updateNameState'])
   },
   methods: {
     ...mapActions(logInStore, ['signOut']),  
-    ...mapActions(dataStore, ['uploadPhoto', 'onAuthStateChanged', 'UpdateTeacherCkeditor']),
+    ...mapActions(dataStore, ['uploadPhoto', 'onAuthStateChanged', 'UpdateTeacherCkeditor', 'updateUserName']),
     
   },
   created () {
@@ -202,17 +220,23 @@ export default {
   }
 }
 
-ul li::before{
-  /*   可以自訂其他形狀 */
-    content: "\2022";
-  /*   顏色 */
-    color: red;
-    font-weight: bold;
-  /*   設定 display */
-    display: inline-block;
-  /*  寬度  */
-    width: 1rem;
-  /*  可以視情況調整形狀的距離  */
-    margin-left: -2rem;
-  }
+// ul li::before{
+//   /*   可以自訂其他形狀 */
+//     content: "\2022";
+//   /*   顏色 */
+//     color: red;
+//     font-weight: bold;
+//   /*   設定 display */
+//     display: inline-block;
+//   /*  寬度  */
+//     width: 1rem;
+//   /*  可以視情況調整形狀的距離  */
+//     margin-left: -2rem;
+//   }
+
+.edit-pen {
+  position: absolute;
+  bottom: 0;
+}
+
 </style> 

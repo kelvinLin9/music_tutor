@@ -1,6 +1,6 @@
 <template>
   <div class="blog-card"
-      v-for="item in courseCardData" :key="item">
+      v-for="item in courseCardData" :key="item.id">
     <div class="meta cursor-pointer" 
         @click="goCoursePage(item.id)">
       <div class="photo" :style="{backgroundImage: `url(${item.data.courseImg})`}"></div>
@@ -53,7 +53,7 @@
         <button v-if="myCoursesState === 'student'"
           type="button" class="btn btn-outline-primary border-0 fw-bold"
           data-bs-toggle="modal" data-bs-target="#ClassSchedule"
-          @click.stop="SetUpStudentClassSchedule(item)"
+          @click.stop="lookStudentClassSchedule(item)"
         >
           查看上課時間
       </button>
@@ -91,7 +91,7 @@ export default {
     ...mapState(filterStore, ['currentPageCoursesData']),
   },
   methods: {
-    ...mapActions(dataStore, ['SetUpTeacherClassSchedule', 'SetUpStudentClassSchedule', 'toggleBookmark']),
+    ...mapActions(dataStore, ['SetUpTeacherClassSchedule', 'lookStudentClassSchedule', 'toggleBookmark']),
     ...mapActions(goStore, ['goCoursePage']),
     
   },

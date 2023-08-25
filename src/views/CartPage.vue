@@ -4,7 +4,6 @@
     <div class="row">
       <pay-com v-if="cartPageState === 'pay'" />
       <cart-com v-if="cartPageState === 'cart'" />
-
       <!-- 購物車用 -->
       <div class="col-12 col-lg-4 mb-3 px-0 px-lg-3"
         v-if="cartPageState === 'cart' && studentData.myCart.length !== 0">
@@ -27,18 +26,16 @@
           </div>
           <div class="card-footer">
             <div class="row mb-2 align-items-center">
-              <div class="col-8">
-                <label for="coupon" class="fs-7"></label>
-                <input class="col-form-label w-75 py-1 fs-7" 
+              <div class="col-8 pe-0">
+                <input class="col-form-label w-100 py-1 fs-7" 
                     type="text" 
                     id="coupon"  
                     name="coupon" 
                     placeholder="請輸入折扣碼"
                     v-model="couponCode"> 
-                
               </div>
-              <div class="col-auto ms-auto">
-                <button type="button" class="btn btn-sm btn-secondary"
+              <div class="col-4 text-end">
+                <button type="button" class="btn btn-sm btn-secondary w-100"
                           @click="addCouponCode()">
                     確認
                 </button>

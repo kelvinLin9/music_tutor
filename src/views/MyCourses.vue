@@ -6,10 +6,10 @@
         <div class="col-12 col-lg-6 mb-3 mb-lg-0">
           <div class="d-flex align-items-center">
             <div class="user-photo position-relative">
-              <img :src="teacherData.teacherImg" alt="大頭照"
+              <img :src="teacherData.teacherImg" alt="大頭照" 
                   v-if="teacherData.teacherImg">
-              <!-- <img src="../assets/images/預設大頭貼.png" alt="預設大頭照"
-                  v-if="!teacherData.teacherImg"> -->
+              <img src="../assets/images/預設大頭貼.png" alt="預設大頭照"
+                  v-if="!teacherData.teacherImg">
             </div>
             <h1 class="ms-48"> {{ teacherData.displayName }} </h1>
           </div>
@@ -150,10 +150,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.table-image {
+.user-photo {
+  img {
   width: 100px;
-  height: 80px;
+  height: 100px;
+  border-radius: 50px;
   object-fit: cover;
-  border-radius: 10px;
+}
 }
 </style>
