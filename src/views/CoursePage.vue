@@ -8,7 +8,7 @@
       <div class="col-12 col-lg-4 d-flex flex-column">
         <p class="fs-2 fw-bold">{{ courseData.courseName }}</p>
         <p class="">{{ courseData.courseIntro}}</p>
-        <div class="border border-success px-2 py-1 text-success mt-auto ms-auto cursor-pointer"
+        <div class="border border-success px-16 py-8 text-success mt-auto ms-auto cursor-pointer rounded-pill"
             @click="toggleBookmark(courseData.id)"
             data-bs-toggle="tooltip"
             data-bs-placement="top"
