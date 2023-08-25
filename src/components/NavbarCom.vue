@@ -1,6 +1,8 @@
 <template>
   <div class="fixed-top" 
-      :class="{ 'bg-white':  $route.matched[1].path !== '/' || navbarWhite }">
+      :class="{ 'bg-white':  $route.matched[1].path !== '/' || navbarWhite ,
+                'sticky-top': !homeLoading && $route.matched[1].path !== '/'
+              }">
     <nav class="container navbar navbar-expand-lg">
       <div class="container-fluid">
         <RouterLink to="/" class="navbar-brand nav-link d-flex align-items-end">
@@ -131,7 +133,7 @@ export default {
   computed: {
     ...mapState(dataStore, ['user','teacherData', 'isMember', 'studentData', 'bookmarkNum']),
     ...mapWritableState(dataStore, ['myCoursesState']),
-    ...mapState(windowStore, ['navbarWhite'])
+    ...mapState(windowStore, ['navbarWhite', 'homeLoading'])
   },
   methods: {
     ...mapActions(logInStore, ['signOut']),

@@ -3,7 +3,7 @@
       :style="{backgroundImage: `url(${bgUrl})`}">
       <div class="container">
         <div class="row align-items-center ">
-          <div class="col col-md-6">
+          <div class="col col-lg-6">
             <div class="blockquote px-3 py-2">
               <p class="fs-2 fw-bold"> {{ banner.title }} </p>
               <p class="fs-2 fw-bold">{{ banner.text }} </p>
