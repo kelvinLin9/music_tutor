@@ -1,4 +1,5 @@
 <template>
+  <home-loading/>
   <!-- header -->
   <section class="header d-flex flex-column justify-content-center">
     <div class="container">
@@ -15,10 +16,18 @@
               <input class="form-control mt-0" list="datalistOptions" id="exampleDataList" placeholder="我想學習...">
             </div>
             <div class="pills">
-              <span class="badge rounded-pill text-bg-primary text-white me-1">鋼琴</span>
-              <span class="badge rounded-pill text-bg-primary text-white me-1">吉他</span>
-              <span class="badge rounded-pill text-bg-primary text-white me-1">唱歌</span>
-              <span class="badge rounded-pill text-bg-primary text-white me-1">大鼓</span>
+              <a href="#" @click.prevent="goAllCourses('鋼琴')">
+                <span class="badge rounded-pill text-bg-primary text-white me-1">鋼琴</span>
+              </a>
+              <a href="#" @click.prevent="goAllCourses('編曲')">
+                <span class="badge rounded-pill text-bg-primary text-white me-1">編曲</span>
+              </a>
+              <a href="#" @click.prevent="goAllCourses('流行歌唱')">
+                <span class="badge rounded-pill text-bg-primary text-white me-1">流行歌唱</span>
+              </a>
+              <a href="#" @click.prevent="goAllCourses('木吉他')">
+                <span class="badge rounded-pill text-bg-primary text-white me-1">木吉他</span>
+              </a>
             </div>
           </div>
         </div>
@@ -38,17 +47,20 @@
 
 <script>
 import FeaturedCourses from '../components/FeaturedCourses.vue'
-import CoursesLoading from '../components/CoursesLoading.vue';
+import CoursesLoading from '../components/CoursesLoading.vue'
 import { mapActions, mapState } from 'pinia'
-import dataStore from '../stores/dataStore';
+import dataStore from '../stores/dataStore'
+import HomeLoading from '../components/HomeLoading.vue'
+import goStore from '../stores/goStore'
 
 export default {
-  components: { FeaturedCourses, CoursesLoading },
+  components: { FeaturedCourses, CoursesLoading, HomeLoading },
   computed: {
     ...mapState(dataStore, ['loading'])
   },
   methods: {
     ...mapActions(dataStore, ['onAuthStateChanged']),
+    ...mapActions(goStore, ['goAllCourses']),
   },
   created() {
     this.onAuthStateChanged()
@@ -76,5 +88,8 @@ export default {
   box-shadow: 0 0 0 1px hsla(0,0%,100%,.3) inset,
 	            0 .5em 1em rgba(0, 0, 0, 0.6);
 	text-shadow: 0 1px 1px hsla(0,0%,100%,.3);
+}
+a :hover{
+  scale: 1.2;
 }
 </style>

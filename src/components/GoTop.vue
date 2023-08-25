@@ -1,7 +1,7 @@
 <template>
   <div class="goTop"
       :class="{'d-none' : !goTopIcon }">
-    <a href="#" @click.prevent="top">
+    <a href="#" @click.prevent="goTop">
       <img src="../assets/images/gotop.png" alt="">
     </a>
   </div>
@@ -15,10 +15,7 @@ export default {
     ...mapState(windowStore, ['goTopIcon'])
   },
   methods: {
-    ...mapActions(windowStore, ['scroll']),
-    top () {
-      document.documentElement.scrollTop = 0
-    }
+    ...mapActions(windowStore, ['scroll', 'goTop']),
   },
   mounted () {
     this.scroll()

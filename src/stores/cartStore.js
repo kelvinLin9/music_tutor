@@ -78,7 +78,7 @@ export default defineStore('cartStore', {
 
       // 暫時先全刪
       this.cartCheckboxWrap = []
-
+      this.checkAllValue = false
       // 透過timestamp找出要刪的檔
       const course = data.studentData.myCart.filter((item) => {
         return item.timestamp === dTimestamp
