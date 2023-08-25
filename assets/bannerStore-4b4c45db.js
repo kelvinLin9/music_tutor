@@ -1,0 +1,1 @@
+import{d as o}from"./index-7719e1f3.js";const b=o("bannerStore",{state:()=>({bgUrl:"",banner:{title:"",text:"",footer:""}}),actions:{getBannerInfo(t,e,n,r){this.bgUrl=t,this.banner.title=e,this.banner.text=n,this.banner.footer=r}}});export{b};
