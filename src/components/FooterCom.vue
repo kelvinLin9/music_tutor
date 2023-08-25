@@ -3,10 +3,10 @@
     <div class="container">
       <div class="row justify-content-center justify-content-lg-between align-items-center">
         <div class="col">
-          <RouterLink to="/" class="navbar-brand nav-link d-flex align-items-end">
-          <!-- <img src="../assets/images/logo.png" alt="logo" class="logo"> -->
+          <RouterLink to="/" class="navbar-brand nav-link d-flex">
+          <img src="../assets/images/logo-white.png" alt="logo" class="logo mx-auto mx-lg-0 me-lg-auto">
           <!-- <span class="test">樂樂音樂家教媒合平台</span> -->
-          <svg  version="1.1" id="圖層_1" 
+          <!-- <svg  version="1.1" id="圖層_1" 
                 xmlns="http://www.w3.org/2000/svg" 
                 xmlns:xlink="http://www.w3.org/1999/xlink" 
                 x="0px" y="0px"
@@ -51,7 +51,7 @@
             			c0,6.67-4.12,13.39-12.34,20.17c-8.23,6.78-19.23,12.73-33.01,17.84C992.39,538.23,997.5,527.61,1005.06,518.61z"/>
             	</g>
             </g>
-          </svg>
+          </svg> -->
         </RouterLink>
         </div>
         <div class="col-12 col-lg-auto">
@@ -92,9 +92,8 @@
 
 <style lang="scss" scoped>
 .logo {
-    width: 100px;
-    height: auto;
-    object-fit: cover;
+  width: 100px;
+  height: 50px;
 }
 .st0{
   fill:#fff;

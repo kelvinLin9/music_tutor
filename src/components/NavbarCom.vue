@@ -1,6 +1,6 @@
 <template>
   <div class="fixed-top" 
-      :class="{ 'sticky-top bg-white':  $route.matched[1].path !== '/' || navbarWhite }">
+      :class="{ 'bg-white':  $route.matched[1].path !== '/' || navbarWhite }">
     <nav class="container navbar navbar-expand-lg">
       <div class="container-fluid">
         <RouterLink to="/" class="navbar-brand nav-link d-flex align-items-end">
@@ -47,16 +47,16 @@
               <!-- 登入後出現 -->
             <li class="nav-item position-relative fs-5 d-none d-lg-block" 
                 v-if="this.isMember === true"
-                @click="myCoursesState = 'bookmark'">
-              <RouterLink to="/MyCourses" class="nav-link"
+                @click="myCoursesState = 'bookmark', goBookmark()">
+              <div class="nav-link"
                 :class="{ 'text-primary':  $route.name === 'MyCourses'}"
-                @click="goBookmark()">
+              >
                 <i class="bi bi-bookmarks-fill me-lg-2"></i>
                 <div class="bg-primary text-white rounded-circle text-center position-absolute small-num"
                   v-if="bookmarkNum">
                   {{ bookmarkNum }}
                 </div>
-              </RouterLink>
+              </div>
             </li>
             <li class="nav-item position-relative fs-5 d-none d-lg-block" 
                 v-if="this.isMember === true">
