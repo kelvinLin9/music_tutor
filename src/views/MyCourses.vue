@@ -143,8 +143,8 @@ export default {
   },
   created () {
     this.onAuthStateChanged()
-    this.courseCardData = this.userStudentCourses
-    this.myCoursesState = 'student'
+
+    // this.myCoursesState = 'student'
   }
 }
 </script>
