@@ -56,15 +56,11 @@
 </template>
 
 <script>
-
+import { mapState, mapActions, mapWritableState } from 'pinia'
+import windowStore from '@/stores/windowStore'
 export default {
-  data () {
-    return {
-      homeLoading: true,
-    }
-  },
   computed: {
-    
+    ...mapWritableState(windowStore, ['homeLoading'])
   },
   methods: {
     scrollStop () {
