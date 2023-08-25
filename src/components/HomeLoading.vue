@@ -75,6 +75,7 @@ export default {
     }
   },
   mounted () {
+    this.homeLoading = true
     this.scrollStop()
     setTimeout(() => {
       this.scrollMove()

@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex align-items-center border rounded-2 mb-3 p-3" 
+  <div class="d-flex align-items-center border-0 rounded-2 mb-3 p-3" 
         v-for="item in 3" :key="item">
     <el-space>
       <el-skeleton animated>
