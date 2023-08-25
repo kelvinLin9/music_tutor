@@ -4,7 +4,8 @@ export default defineStore('windowStore', {
   state: () => ({
     goTopIcon: false,
     windowWidth: 0,
-    navbarWhite: false
+    navbarWhite: false,
+    homeLoading: true,
   }),
   actions: {
     scroll () {
