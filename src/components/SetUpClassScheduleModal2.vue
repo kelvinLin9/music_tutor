@@ -12,21 +12,15 @@
 
 
         
-
-        <div class="block">
-      <!-- <span class="demonstration">Use value-format</span> -->
-      <div class="demonstration">Value：{{ classScheduleTime }}</div>
-      <el-date-picker
-        v-model="classScheduleTime"
-        type="datetime"
-        placeholder="Pick a Date"
-        format="YYYY/MM/DD HH:mm"
-        value-format="YYYY-MM-DD HH:mm"
-      />
+    <div>
+      <flat-pickr 
+          v-model="classScheduleTime"
+          :config="config"
+          class="form-control"
+          placeholder="選擇日期時間"                   
+      >
+      </flat-pickr>
     </div>
-
-        
-
 
       </div>
       <div class="modal-footer">
@@ -47,15 +41,22 @@
 </template>
     
 <script>
+  import flatPickr from 'vue-flatpickr-component';
+  import 'flatpickr/dist/flatpickr.css';
 import { mapState, mapActions, mapWritableState } from 
 'pinia' 
 import dataStore from '../stores/dataStore';
 
 
 export default {
+  components: { flatPickr },
   data () {
     return {
-      value:''
+      config: {
+        minDate: "today",
+        maxDate: new Date().fp_incr(60), // 60天內可預約
+        enableTime: true,
+      }
     }
   },
   computed: {

@@ -22,7 +22,8 @@
         <button class="navbar-toggler ms-32" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <div class="collapse navbar-collapse" id="navbarNavDropdown"
+            :class="{'show':isMenuOpen}">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item fs-5">
               <RouterLink to="/CreateCourses/BeATeacherStep1" class="nav-link"
@@ -48,7 +49,8 @@
                 v-if="this.isMember === true"
                 @click="myCoursesState = 'bookmark'">
               <RouterLink to="/MyCourses" class="nav-link"
-                :class="{ 'text-primary':  $route.name === 'MyCourses'}">
+                :class="{ 'text-primary':  $route.name === 'MyCourses'}"
+                @click="goBookmark()">
                 <i class="bi bi-bookmarks-fill me-lg-2"></i>
                 <div class="bg-primary text-white rounded-circle text-center position-absolute small-num"
                   v-if="bookmarkNum">
@@ -118,17 +120,28 @@ import { mapState, mapActions, mapWritableState } from
 import logInStore from '@/stores/logInStore'
 import dataStore from '../stores/dataStore';
 import windowStore from '@/stores/windowStore'
+import goStore from '@/stores/goStore'
 
 export default {
+  data() {
+    return {
+      isMenuOpen : false
+    }
+  },
   computed: {
     ...mapState(dataStore, ['user','teacherData', 'isMember', 'studentData', 'bookmarkNum']),
     ...mapWritableState(dataStore, ['myCoursesState']),
     ...mapState(windowStore, ['navbarWhite'])
   },
   methods: {
-    ...mapActions(logInStore, ['signOut'])
+    ...mapActions(logInStore, ['signOut']),
+    ...mapActions(goStore,['goBookmark']),
   },
   created () {
+    
+  },
+  mounted() {
+    this.isMenuOpen = false;
   }
 }
 </script>

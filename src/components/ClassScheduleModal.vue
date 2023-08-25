@@ -1,9 +1,9 @@
 <template>
-  <div class="modal fade" id="ClassSchedule" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+  <div class="modal fade" id="ClassSchedule" tabindex="-1" aria-labelledby="ClassSchedule" aria-hidden="true" data-bs-backdrop="static">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">上課時間</h1>
+          <h1 class="modal-title fs-5" id="ClassSchedule">上課時間</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -17,7 +17,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="item, index in classScheduleData" :key="item.id">
+                <tr v-for="item, index in classScheduleData" :key="item.timestamp">
                   <th scope="row">{{ index }}</th>
                   <td>{{ this.$moment(item.timestamp).format('YYYY/MM/DD') }}</td>
                   <td>
