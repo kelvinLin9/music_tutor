@@ -5,7 +5,7 @@ export default defineStore('windowStore', {
     goTopIcon: false,
     windowWidth: 0,
     navbarWhite: false,
-    homeLoading: true,
+    homeLoading: false,
   }),
   actions: {
     scroll () {
@@ -15,7 +15,7 @@ export default defineStore('windowStore', {
         } else {
           this.goTopIcon = false
         }
-        if (e.target.scrollingElement.scrollTop > 70) {
+        if (e.target.scrollingElement.scrollTop > 100) {
           this.navbarWhite = true
         } else {
           this.navbarWhite = false

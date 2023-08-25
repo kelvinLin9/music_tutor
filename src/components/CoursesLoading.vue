@@ -24,7 +24,7 @@
     >
 
       <SwiperSlide v-for="(item) in 6" :key="item.id" class="mb-5 overflow-hidden">
-        <el-space direction="vertical" alignment="flex-start" class="card">
+        <el-space direction="vertical" alignment="flex-start" class="card border-0">
           <el-skeleton :loading="loading" animated>
             <template #template>
               <el-skeleton-item variant="image" class="loading-img"/>

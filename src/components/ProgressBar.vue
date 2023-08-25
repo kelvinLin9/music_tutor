@@ -1,7 +1,7 @@
 <template>
   <div class="container my-32">
     <div class="row justify-content-center">
-      <div class="col-6">
+      <div class="col-12 col-md-6">
         <div class="progress-container">
           <div class="progress"
               :style="{'width': `${(createCourseStep - 1)*33.3333}%`}">
