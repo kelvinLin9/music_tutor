@@ -174,14 +174,14 @@
       <div class="col-auto ms-md-auto">
         <div class="row g-1 align-items-center">
           <div class="col-auto">
-            <label for="selectCityName" class="col-form-label">
+            <label for="sort" class="col-form-label">
               排序：
             </label>
           </div>
           <div class="col-auto">
             <select class="form-select fs-8" 
                     aria-label="Default select example"
-                    id="selectCityName"
+                    id="sort"
                     v-model="selectSortMethod"
                     @change="courseSort()">
               <option value="" selected>請選擇</option>
@@ -200,7 +200,7 @@
             @click="displayState = 'list'"
         >
         </i>
-        <i class="bi bi-list-task text-danger fs-2"
+        <i class="bi bi-list-task text-primary fs-2"
             v-if="displayState === 'list'"
             @click="displayState = 'grid'"
         >

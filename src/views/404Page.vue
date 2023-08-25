@@ -4,8 +4,8 @@
       <span class="me-2 fw-bolder">找不到頁面</span>
       <span class="text-primary align-self-end">/ 404 Not Found</span>
     </h1>
-    <p class="mb-5">Oops！您要找的頁面不存在</p>
-    <RouterLink to="/" class="btn btn-outline-primary btn-lg fw-bold px-4 py-3">
+    <p class="mb-32">Oops！您要找的頁面不存在</p>
+    <RouterLink to="/" class="btn btn-outline-primary btn-lg fw-bold px-32 py-8">
       回首頁
     </RouterLink>
   </div>
@@ -17,7 +17,7 @@
   &:hover,
   &:focus {
     color: #ffffff;
-    box-shadow: inset 0 0 0 2em #b632ab;
+    box-shadow: inset 0 0 0 2em #ff715f;
   }
 }
 </style>

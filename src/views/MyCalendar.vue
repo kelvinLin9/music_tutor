@@ -1,10 +1,16 @@
 <template>
   <BannerCom />
   <div class="container my-48" v-if="!loading">
-    <FullCalendar :options='calendarOptions'>
+    <FullCalendar :options='calendarOptions' class="tyr">
     <!-- <template v-slot:eventContent='arg'>
-      <b>{{ arg.timeText }}</b>
-      <i>{{ arg.event.title }}</i>
+      <div :style="{color: arg.event.backgroundColor}">
+        <p class="">
+          {{ arg.timeText }}
+        </p>
+        <p>
+          {{ arg.event.title }}
+        </p>
+      </div>
     </template> -->
   </FullCalendar>
   </div>
@@ -35,17 +41,22 @@ export default {
         plugins: [dayGridPlugin, interactionPlugin, timeGridPlugin, listPlugin],
         initialView: 'dayGridMonth',
         weekends: true,
-        locale: 'zh-tw',
+        // locale: 'zh-tw',
         dayMaxEventRows: 2.0, // 事件最大展示列數
         aspectRatio: 2,
         handleWindowResize: true, // 響應式
-        selectable: true,  // 是否可以选中日历格   
-        expandRows: true,
+        selectable: true,  // 是否可以選中日曆格   
+        expandRows: true, 
+        windowResize : function(e){//瀏覽器窗體變化時觸發
+          console.log(e)
+            },
         views: {
-          color: '#000000',
+          name: {
+            month:'???'
+          }
         },
         headerToolbar: {
-          left: "prevYear,prev,next,nextYear today",
+          left: "prev,next today",
           center: "title",
           right: "dayGridMonth,timeGridWeek,timeGridDay listMonth"
         }, //日曆上方的按钮和title
@@ -56,7 +67,7 @@ export default {
           day: "日",
           list: "列表",
         },
-
+        
         slotLabelFormat: {
           hour: "2-digit",
           minute: "2-digit",
@@ -70,21 +81,21 @@ export default {
         eventClick: info => {
           console.log(info);
           // dialogVisible.value = true;
-        }, //事件的点击
+        }, //事件的點擊
         eventDidMount: function(info) {
           var tooltip = new Tooltip(info.el, {
             content: info.event._def.title,
             placement: 'top',
             // trigger: 'hover', 
             // container: 'body'
-          });
+          }); // 懸浮提示
         },
-        events: [],
-        // eventSources:[
-        //   {
-        //     events: []
-        //   }
-        // ],
+        // events: [],
+        eventSources:[
+          {
+            events: [],
+          }
+        ],
         // events: 'https://calendar.google.com/calendar/embed?src=zh-tw.taiwan%23holiday%40group.v.calendar.google.com&ctz=Asia%2FTaipei'
       },
 
@@ -157,11 +168,21 @@ export default {
 }
 .fc-event {
     position: relative;
-    display: block;
     font-size: 0.6em !important;
     line-height: 1.4 !important;
+    display: block !important;
     border-radius: 5px;
     color: #333333;
+    .fc-daygrid-event-dot {
+      display: inline-block !important;
+    }
+    .fc-event-time {
+      display: inline !important;
+      
+    }
+    .fc-event-title {
+      padding-left: 4px;
+    }
 }
 
 </style>

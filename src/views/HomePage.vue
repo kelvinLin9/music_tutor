@@ -22,8 +22,7 @@
             </div>
           </div>
         </div>
-
-
+        
       </div>
     </div>
   </section>
@@ -32,16 +31,16 @@
     <CoursesLoading class="my-48" v-if="loading"/>
     <FeaturedCourses class="my-48" v-if="!loading"/>
   </section>
-
-
   
+
+
 </template>
 
 <script>
 import FeaturedCourses from '../components/FeaturedCourses.vue'
+import CoursesLoading from '../components/CoursesLoading.vue';
 import { mapActions, mapState } from 'pinia'
 import dataStore from '../stores/dataStore';
-import CoursesLoading from '../components/CoursesLoading.vue';
 
 export default {
   components: { FeaturedCourses, CoursesLoading },
@@ -78,5 +77,4 @@ export default {
 	            0 .5em 1em rgba(0, 0, 0, 0.6);
 	text-shadow: 0 1px 1px hsla(0,0%,100%,.3);
 }
-
 </style>
