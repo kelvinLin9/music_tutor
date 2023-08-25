@@ -15,11 +15,6 @@ import FooterCom from '../components/FooterCom.vue'
 
 
 export default {
-  data () {
-    return {
-      homeLoading: true,
-    }
-  },
   components: {
     NavbarCom,
     GoTop,

@@ -1,8 +1,8 @@
 <template>
-  <div class="fixed-top" 
-      :class="{ 'bg-white':  $route.matched[1].path !== '/' || navbarWhite ,
-                'sticky-top': !homeLoading && $route.matched[1].path !== '/'
-              }">
+  <div  :class="{ 'bg-white':  $route.matched[1].path !== '/' || navbarWhite ,
+                  'fixed-top': homeLoading && $route.matched[1].path == '/',
+                  'sticky-top': !homeLoading
+                }">
     <nav class="container navbar navbar-expand-lg">
       <div class="container-fluid">
         <RouterLink to="/" class="navbar-brand nav-link d-flex align-items-end">
@@ -143,7 +143,7 @@ export default {
     
   },
   mounted() {
-    this.isMenuOpen = false;
+    this.isMenuOpen = false; // 重整關閉navbar
   }
 }
 </script>
