@@ -99,7 +99,11 @@ export default {
     if (this.$router.currentRoute.value.fullPath === '/AllCourses') {
       this.courseCardData = this.currentPageCoursesData
     } else if (this.$router.currentRoute.value.fullPath === '/MyCourses') {
+      if (this.myCoursesState === 'bookmark') {
+      this.courseCardData = this.userBookmarkCourses
+    } else {
       this.courseCardData = this.userStudentCourses
+    }
     }
   }
 }

@@ -3,10 +3,12 @@ import { defineStore } from 'pinia'
 import logInStore from './logInStore'
 import dataStore from './dataStore'
 import courseCardStore from './courseCardStore'
+import filterStore from './filterStore'
 
 const logIn = logInStore()
 const data = dataStore()
 const courseCard = courseCardStore()
+const filter = filterStore()
 export default defineStore('goStore', {
   actions: {
     goCoursePage (id) {
@@ -35,10 +37,15 @@ export default defineStore('goStore', {
       router.push('/CreateCourses/BeATeacherStep4')
     },
     goBookmark() {
-      console.log(123)
-      courseCard.courseCardData = data.userBookmarkCourses
+      // courseCard.courseCardData = data.userBookmarkCourses
       console.log(courseCard.courseCardData)
       router.push('/MyCourses')
-    }
+    },
+    goAllCourses(search) {
+      router.push('/AllCourses')
+      filter.selectCourseCategory = search
+      console.log(filter.selectCourseCategory)
+
+    },
   }
 })

@@ -6,16 +6,16 @@
         <img :src="courseData.courseImg" alt="課程圖片" class="course-photo">
       </div>
       <div class="col-12 col-lg-4 d-flex flex-column">
-        <p class="fs-2 fw-bold">{{ courseData.courseName }}</p>
-        <p class="">{{ courseData.courseIntro}}</p>
-        <div class="border border-success px-16 py-8 text-success mt-auto ms-auto cursor-pointer rounded-pill"
-            @click="toggleBookmark(courseData.id)"
+        <h1 class="fs-2 fw-bold">{{ courseData.courseName }}</h1>
+        <p class="mt-16">{{ courseData.courseIntro}}</p>
+        <a href="#" class="border border-success px-16 py-8 text-success mt-auto ms-auto cursor-pointer rounded-pill"
+            @click.prevent="toggleBookmark(courseData.id)"
             data-bs-toggle="tooltip"
             data-bs-placement="top"
             title="加入 / 移除收藏">
           <i :class="bookmarkState(courseData.id)"></i>
           收藏
-        </div>
+        </a>
       </div>
     </div>
   </div>
@@ -39,16 +39,16 @@
           </div>
         </div>
         <div class="row my-3">
-          <p class="fs-4">關於課程</p>
+          <p class="fs-4 mb-8">關於課程</p>
           <div class="col-auto">
             <div class="d-flex align-items-center">
-              <i class="bi bi-clock me-2"></i>
+              <span class="material-symbols-outlined fs-4 me-8">timer</span>
               課程時長<br>{{ courseData.time }}分鐘
             </div>
           </div>
           <div class="col-auto">
             <div class="d-flex align-items-center">
-              <i class="bi bi-people me-2"></i>
+              <span class="material-symbols-outlined fs-4 ms-8 me-8">group</span>
               <span v-if="courseData.whoBuy">
                 已被購買 <br> {{ courseData.whoBuy.length || 0 }} 次
               </span>
@@ -56,10 +56,10 @@
           </div>
           <div class="col-auto">
             <div class="d-flex align-items-center">
-              <i class="bi bi-tools me-2"></i>
+              <span class="material-symbols-outlined fs-4 ms-8 me-8">history_edu</span>
               <div>
                 上課方式<br>
-                <span class="bg-info rounded-2 px-2 me-2"
+                <span class="bg-primary text-white rounded-2 px-2 me-2"
                       v-for="item in courseData.courseMethod" :key="item">
                   {{ item }}
                 </span>
@@ -69,7 +69,7 @@
           <div class="col-auto"
                 v-if="courseData.cityName">
             <div class="d-flex align-items-center">
-              <i class="bi bi-geo-alt me-2"></i>
+              <span class="material-symbols-outlined fs-4 ms-8 me-8">map</span>
               上課地點<br> {{ courseData.cityName }}
             </div>
           </div>

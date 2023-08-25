@@ -27,6 +27,10 @@ export default defineStore('windowStore', {
       window.addEventListener('resize', () => {
         this.windowWidth = window.innerWidth
       })
+    },
+    goTop () {
+      console.log(556562)
+      document.documentElement.scrollTop = 0
     }
   }
 })

@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex justify-content-center">
+  <div class="home-loading position-fixed" v-if="homeLoading">
     <svg version="1.1" id="lion-dashed" xmlns="http://www.w3.org/2000/svg" class="animal-svg animal-svg--dashed" xmlns:xlink="http://www.w3.org/1999/xlink" 
          x="0px" y="0px" viewBox="-150 -50 1920 1080" style="enable-background:new 0 0 1920 1080;" xml:space="preserve"
          >
@@ -58,18 +58,45 @@
 <script>
 
 export default {
-
+  data () {
+    return {
+      homeLoading: true,
+    }
+  },
   computed: {
     
   },
   methods: {
-
+    scrollStop () {
+      const mo = function (e) { e.preventDefault() }
+      document.body.style.overflow = 'hidden'
+      document.addEventListener('touchmove', mo, false)
+    },
+    scrollMove () {
+      const mo = function (e) { e.preventDefault() }
+      document.body.style.overflow = ''
+      document.removeEventListener('touchmove', mo, false)
+    }
   },
+  mounted () {
+    this.scrollStop()
+    setTimeout(() => {
+      this.scrollMove()
+      this.homeLoading = false
+    }, 5000)
+  }
 
 }
 </script>
 
 <style lang="scss" scoped>
+.home-loading {
+  position: absolute;
+  z-index: 50000;
+  width: 100%;
+  min-height: 100vh;
+  background:  #F3F1E5;
+}
 .st0 {
   fill: none;
   stroke: #ff715f;
