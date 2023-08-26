@@ -1,52 +1,83 @@
 <template>
   <div class="container">
-    <h1> {{ otherTeacherData.displayName }} 老師的頁面</h1>
-    <div class="row test">
-      <div class="col-12 col-md-4 d-flex flex-column justify-content-center align-items-center mt-3">
-        <div class="user-photo position-relative">
+    <div class="row my-16">
+      <!-- 個人資料 -->
+      <div class="col-12 col-lg-3 d-flex flex-column align-items-center mb-32 py-32 shadow h-100">
+        <div class="user-photo position-relative mb-16">
           <img :src="otherTeacherData.teacherImg" alt="大頭照"
                 v-if="otherTeacherData.teacherImg">
           <img src="../assets/images/預設大頭貼.png" alt="預設大頭照"
                 v-if="!otherTeacherData.teacherImg">
         </div>
-        <div class="mb-2 fs-2">
+        <!-- 姓名 -->
+        <div class="mb-8 fs-3 fw-bold position-relative">
           {{ otherTeacherData.displayName }}
           <i :class="otherTeacherData.gender"></i>
         </div>
-        <div class="mb-2 w-100">
-          <i class="bi bi-envelope-fill"></i>：{{ otherTeacherData.email }}
-        </div>
-        <div class="mb-2 w-100">
-          <i class="bi bi-telephone-fill"></i>：{{ otherTeacherData.phoneNumber }}
-        </div>
-        <div class="mb-2 w-100">
-          <p class="">自我介紹：</p>
-          <p class="border border-secondary rounded-4 p-3">
+        <!-- 關於我 -->
+        <div class="my-8 w-100">
+          <p class="ps-8 fw-bold">關於我：</p>
+          <p class="fs-7 p-8">
             {{ otherTeacherData.teacherIntro }}
           </p>
         </div>
-        <div class="d-flex justify-content-around w-75 mb-2">
-          <a :href="otherTeacherData.facebook" target="_black">
+        <div class="d-flex justify-content-around w-50 ms-auto mb-8">
+          <a :href="otherTeacherData.facebook" target="_black" @click.prevent>
             <i class="bi bi-facebook fs-3 text-secondary"
               :class="{'text-blue': otherTeacherData.facebook}"></i>
           </a>
-          <a :href="otherTeacherData.instagram" target="_black">
+          <a :href="otherTeacherData.instagram" target="_black" @click.prevent>
             <i class="bi bi-instagram fs-3 text-secondary"
               :class="{'text-danger': otherTeacherData.instagram}"></i>
           </a>
-          <a :href="otherTeacherData.discord" target="_black">
+          <a :href="otherTeacherData.discord" target="_black" @click.prevent>
             <i class="bi bi-discord fs-3 text-secondary"
               :class="{'text-purple': otherTeacherData.discord}"></i>
           </a>
+          
         </div>
       </div>
-      <div class="col-12 col-md-8">
-
-        <!-- 先用背景圖片解決沒辦法居中的問題 -->
-        <div class="ckeditor-img position-relative border test"
+      <!-- 課程介紹、其他個人資料 -->
+      <div class="col-12 col-lg-9">
+        <!-- Banner -->
+        <div class="ckeditor-img position-relative shadow"
             :style="{ 'background-image': `url(${otherTeacherData.ckeditorImg ||defaultCkeditorImg })` }">
         </div>
-
+        <!-- 顯示編輯內容 -->
+        <div v-html="otherTeacherData.ckeditor" class="border p-16 shadow"></div>
+        <!-- 專長 -->
+        <div class="my-16">
+          <!-- 多選框 -->
+          <div class="shadow p-16">
+            <div class="row d-flex align-items-center mb-16">
+              <p class="col-auto fw-bold">音樂風格：</p>
+              <div class="col-9">
+                <span class="badge rounded-pill text-bg-primary text-white fs-6 py-8 mx-4 px-16 my-4"
+                  v-for="item in otherTeacherData.musicStyle" :key="item">
+                  {{ item }}
+                </span>
+              </div>
+            </div>
+            <div class="row d-flex align-items-center mb-16">
+              <p class="col-auto fw-bold">擅長領域：</p>
+              <div class="col-9">
+                <span class="badge rounded-pill text-bg-primary text-white fs-6 py-8 mx-4 px-16 my-4"
+                  v-for="item in otherTeacherData.expertise" :key="item">
+                  {{ item }}
+                </span>
+              </div>
+            </div>
+            <div class="row d-flex align-items-center mb-16">
+              <p class="col-auto fw-bold">教學語言：</p>
+              <div class="col-9">
+                <span class="badge rounded-pill text-bg-primary text-white fs-6 py-8 mx-4 px-16 my-4"
+                  v-for="item in otherTeacherData.language" :key="item">
+                  {{ item }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>    
       </div>
     </div>
   </div>
@@ -56,7 +87,6 @@
 import { mapState, mapActions, mapWritableState } from 
 'pinia'  
 import logInStore from '@/stores/logInStore'
-import goStore from '@/stores/goStore'
 import dataStore from '../stores/dataStore';
 
 export default {
