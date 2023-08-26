@@ -1,5 +1,5 @@
 <template>
-  <div class="blog-card"
+  <div class="course-card"
       v-for="item in courseCardData" :key="item.id">
     <div class="meta cursor-pointer" 
         @click="goCoursePage(item.id)">
@@ -115,7 +115,7 @@ $color_prime: #ff715f;
 $color_grey: #e2e2e2;
 $color_grey_dark: #a2a2a2;
 
-.blog-card {
+.course-card {
   display: flex;
   flex-direction: column;
   box-shadow: 0 3px 7px -1px rgba(#000, .1);

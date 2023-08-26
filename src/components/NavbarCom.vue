@@ -1,7 +1,7 @@
 <template>
-  <div  :class="{ 'bg-white':  $route.matched[1].path !== '/' || navbarWhite ,
-                  'fixed-top': homeLoading && $route.matched[1].path == '/',
-                  'sticky-top': !homeLoading
+  <div  :class="{ 'bg-white ':  $route.matched[1].path !== '/' || navbarWhite ,
+                  'fixed-top':  $route.matched[1].path == '/',
+                  'sticky-top':  $route.matched[1].path !== '/'
                 }">
     <nav class="container navbar navbar-expand-lg">
       <div class="container-fluid">

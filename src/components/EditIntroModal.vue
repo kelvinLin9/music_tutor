@@ -25,7 +25,7 @@
             />
             <ErrorMessage class="invalid-feedback" name="姓名"/>
           </div> -->
-          <div class="mb-3 w-50">
+          <!-- <div class="mb-3 w-50">
             <label for="phone" class="form-label ">
               手機：
             </label>
@@ -39,7 +39,7 @@
               v-model="teacherData.phoneNumber"
             />
             <ErrorMessage class="invalid-feedback" name="手機"/>
-          </div>
+          </div> -->
           <div class="mb-3 w-50">
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="bi bi-gender-male text-blue"
