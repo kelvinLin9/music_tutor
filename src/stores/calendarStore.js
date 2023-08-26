@@ -12,8 +12,6 @@ export default defineStore('calenderStore', {
     }
   }),
   actions: {
-    getTeachDate () {
 
-    }
   }
 })

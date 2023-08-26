@@ -72,7 +72,7 @@
             <div class="text-primary fs-8 mb-2 fw-bold">
               我已詳閱並同意〈服務契約〉及服務內容
             </div>
-            <div class="row">
+            <div class="row g-0">
               <button type="button" class="btn btn-secondary col-5"
                     @click="cartPageState = 'cart', 
                             payWrap.payData = []">

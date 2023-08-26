@@ -14,7 +14,7 @@
   </div>
 
 
-  <div class="col-12 col-lg-8 mx-auto mb-3 border rounded-2"
+  <div class="col-12 col-lg-8 mx-auto mb-3 border rounded-2 h-100"
         v-if="studentData.myCart.length !== 0 && !loading">
     <table class="table table-hover align-middle">
       <thead>
@@ -35,7 +35,7 @@
       </thead>
       <tbody>
         <tr v-for="item, index in userCartCourses" :key="item.timestamp">
-          <td width="30" class="">
+          <td width="8%" class="">
             <div class="form-check">
               <input class="form-check-input" 
                 type="checkbox" 
@@ -46,15 +46,19 @@
               <label :for="item.timestamp"></label>
             </div>
           </td>
-          <td width="50"
-          @click="getOneCoursesFirebaseData(item[0].id)">
-            <img :src="item[0].data.courseImg" alt="" class="table-image cursor-pointer">
+          <td width="25%"
+              @click="goCoursePage(item[0].id)">
+              <div class="table-image cursor-pointer">
+                <img :src="item[0].data.courseImg" alt="課程圖片" class="">
+              </div>
           </td>
-          <td width="300">
-            <div class="container">
-              <div class="row align-items-center">
+          <td width="60%">
+            <div class="container g-0">
+              <div class="row align-items-center g-0">
                 <div class="col-12 col-lg-8">
-                  {{ item[0].data.courseName }}
+                  <div class="fs-5 fw-bold lh-1">
+                    {{ item[0].data.courseName }}
+                  </div>
                 </div>
                 <div class="col-12 col-lg-4 text-lg-end">
                   <p v-if="couponValue == 1">
@@ -71,7 +75,7 @@
               </div>
             </div>
           </td>
-          <td width="10" class="text-end">
+          <td width="7%" class="text-end">
             <div class="cursor-pointer"
               @click="deleteCart(user.uid, item.timestamp, index)">
               <i class="bi bi-trash3-fill"></i>
@@ -90,6 +94,7 @@ import { mapState, mapActions, mapWritableState } from
 'pinia' 
 import cartStore from '@/stores/cartStore'
 import dataStore from '@/stores/dataStore'
+import goStore from '@/stores/goStore'
 
 export default {
   components: { CoursesLoadingList },
@@ -101,7 +106,8 @@ export default {
   },
   methods: {
     ...mapActions(cartStore, ['deleteCart', 'addToPayWrap', 'checkAll']),
-    ...mapActions(dataStore, ['onAuthStateChanged','getOneCoursesFirebaseData']),
+    ...mapActions(dataStore, ['onAuthStateChanged']),
+    ...mapActions(goStore, ['goCoursePage']),
   },
   created () {
 
@@ -111,21 +117,26 @@ export default {
 
 <style lang="scss" scoped>
 .table-image {
-  width: 100px;
-  height: 80px;
-  object-fit: cover;
-  border-radius: 10px;
-  @media (max-width:768px) {
-    width: 50px;
-    height: 40px;
-    border-radius: 10px;
+  border-radius: 5px;
+  overflow: hidden;
+  img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    transition: transform .3s;
+    
+  }
+  &:hover {
+    img {
+      transform: scale(1.3) rotate(3deg);
+    }
   }
 }
 input {
   width: 25px;
   height: 25px;
 }
-.CoursesCart-vh {
-  height: calc(100vh - 194px);
+table {
+  font-family: sans-serif;
 }
 </style>

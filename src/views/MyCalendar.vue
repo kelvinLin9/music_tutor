@@ -1,6 +1,18 @@
 <template>
   <BannerCom />
-  <div class="container my-48" v-if="!loading">
+  <div class="container my-32">
+    <div class="row">
+      <div class="col-auto">
+        - 我是老師
+      </div>
+      <div class="col-auto">
+        - 我是學生
+      </div>
+      <label for="exampleColorInput" class="form-label">自訂顏色</label>
+      <input type="color" class="form-control form-control-color" id="exampleColorInput" value="#563d7c" title="Choose your color">
+    </div>
+  </div>
+  <div class="container mb-32" v-if="!loading">
     <FullCalendar :options='calendarOptions' class="tyr">
     <!-- <template v-slot:eventContent='arg'>
       <div :style="{color: arg.event.backgroundColor}">
