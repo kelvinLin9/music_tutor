@@ -69,12 +69,6 @@
         </div>
       </SwiperSlide>
     </swiper>
-
-    <RouterLink to="/AllCourses" class="text-center d-block">
-      <button type="button" class="btn btn-dark col-9 col-sm-6 col-md-3">
-        更多課程
-      </button>
-    </RouterLink>
   </div>
 </template>
 <script>

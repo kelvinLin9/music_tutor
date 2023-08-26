@@ -28,7 +28,7 @@
       class="mySwiper px-3"
     >
       <SwiperSlide v-for="(item) in 5" :key="item" class="mb-5">
-        <div class="card rounded-3">
+        <div class="card rounded-3 shadow-sm">
           <div class="card-body">
             <div class="d-flex align-items-center">
               <div class="me-2">

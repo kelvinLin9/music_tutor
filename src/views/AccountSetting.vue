@@ -2,29 +2,32 @@
 
 <div class="container">
   <div class="row my-16">
-    <div class="col-12 col-md-4 d-flex flex-column align-items-center">
-          <div class="user-photo position-relative">
-            <img :src="teacherData.teacherImg" alt="大頭照"
-                  v-if="teacherData.teacherImg">
-            <img src="../assets/images/預設大頭貼.png" alt="預設大頭照"
-                  v-if="!teacherData.teacherImg">
-          </div>
-          <div class="mb-2 fs-3 fw-bold">
-            {{ teacherData.displayName }}
-            <i :class="teacherData.gender"></i>
-          </div>
-          <RouterLink to="/MemberPage">
+    <div class="col-12 col-lg-3 d-flex flex-column align-items-center mb-32 py-32 shadow h-100">
+        <div class="user-photo position-relative mb-16">
+          <img :src="teacherData.teacherImg" alt="大頭照"
+                v-if="teacherData.teacherImg">
+          <img src="../assets/images/預設大頭貼.png" alt="預設大頭照"
+                v-if="!teacherData.teacherImg">
+        </div>
+        <!-- 姓名 -->
+        <div class="mb-8 fs-3 fw-bold position-relative">
+          {{ teacherData.displayName }}
+          <i :class="teacherData.gender"></i>
+        </div>
+        <RouterLink to="/MemberPage">
             <button type="button" class="btn btn-primary mt-48">
               編輯個人資料
             </button>
-          </RouterLink>
-        </div>
-    <div class="col-12 col-md-8">
-      <div class="mb-16">
+        </RouterLink>
+      </div>
+    <div class="col-12 col-md-9">
+      <!-- 進度條 -->
+      <div class="mb-16 shadow">
         <!-- <h2 class="fs-3">完成個人資訊，獲得生日優惠禮與更精準的課程推薦</h2> -->
 
       </div>
-      <table class="table table-hover align-middle">
+      <!-- 帳號驗證 -->
+      <table class="table table-hover align-middle px-8 shadow">
         <tbody>
           <!-- 信箱 -->
           <tr>
@@ -61,6 +64,9 @@
                   </div>
                 </div>
                 <div class="">
+                  <a href="#" @click.prevent>
+                    建立並連結帳號
+                  </a>
                   <!-- <a href="#" @click.prevent="signInWithGoogle(), AccountSettingState = true">
                     建立並連結帳號
                   </a> -->
@@ -82,6 +88,9 @@
                   </div>
                 </div>
                 <div class="">
+                  <a href="#" @click.prevent>
+                    建立並連結帳號
+                  </a>
                   <!-- <a href="#" @click.prevent="signInWithFacebook(), AccountSettingState = true">
                     建立並連結帳號
                   </a> -->
@@ -104,6 +113,9 @@
                   </div>
                 </div>
                 <div class="">
+                  <a href="#" @click.prevent>
+                    建立並連結帳號
+                  </a>
                   <!-- <a href="#" @click.prevent="signInWithGithub(), AccountSettingState = true">
                     建立並連結帳號
                   </a> -->
@@ -113,10 +125,17 @@
           </tr>
         </tbody>
       </table>
+      <!-- 生日 -->
+      <div class="">
 
+      </div>
+      <!-- 專業相關 -->
     </div>
   </div>
 </div>
+
+
+
 <!-- {{ ProviderState }}
 {{ userProviderData }}<br> -->
 
@@ -126,9 +145,7 @@
 <br>
 <a href="#" @click.prevent="updateUserEmail()">設置信箱</a>
 <br>
-<a href="#" @click.prevent="sendEmailVerification()">發送信箱驗證信</a>
-<br>
-<a href="#" @click.prevent="sendPasswordResetEmail()">發送重設密碼信</a> -->
+ -->
 </template>
   
 
