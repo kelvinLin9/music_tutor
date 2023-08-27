@@ -58,8 +58,8 @@
   <!-- serve -->
   <section>
     <div class="container py-48 ">
-      <h2 class="section-title fs-1 fw-bolder">SERVE</h2>
-      <h4 class="letter-spacing-8 fs-6 mb-4 mb-md-5">我們的服務</h4>
+      <h2 class="letter-spacing-12 fs-1 fw-bolder">SERVE</h2>
+      <h4 class="letter-spacing-8 fs-6 mb-48">我們的服務</h4>
       <div class="row align-items-center">
         <div class="col-md-6 mb-3">
            <h3 class="lh-base mb-3 mb-md-4">奏響夢想的旋律。<br>
@@ -67,7 +67,7 @@
             <p class="fs-14 fw-light lh-lg">在尋找音樂之道的路上，樂樂音樂家教媒合平台將您與充滿熱情的音樂老師相結合。<br>無論您是剛起步或已有經驗，我們靈活的課程時間安排讓您自由展現對音樂的想像和熱愛。<br>一同探索音符的世界，實現心中的音樂夢想。<br>在這裡，旋律不僅被演奏，更被細心呵護成成長的足跡。</p>
         </div>
         <div class="col-md-6">
-          <img class="img-fluid" src="../assets/images/serve1.jpg" alt="">
+          <img class="img-fluid" src="../assets/images/banner.jpg" alt="">
         </div>
       </div>
 
@@ -77,7 +77,7 @@
             <p class="fs-14 fw-light lh-lg">音樂家的才華在樂樂音樂家教媒合平台綻放，歡迎您將空閑時間轉化為珍貴的教學時光。<br>與學生分享您的音樂造詣，同時獲得寶貴的報酬。<br>這是您與學生共同書寫音符、創造人生旋律的地方。<br>在這裡，您不僅成為指導者，更是啟發夢想、播撒希望的音樂使者。</p>
         </div>
         <div class="col-md-6">
-          <img class="img-fluid" src="../assets/images/serve1.jpg" alt="">
+          <img class="img-fluid" src="../assets/images/banner.jpg" alt="">
         </div>
       </div>
     </div>
@@ -85,8 +85,8 @@
   <!-- 開課流程 -->
   <section class="bg-grey">
     <div class="container py-48">
-      <h2 class="section-title h1 fw-bolder">PROCESS</h2>
-      <h4 class="letter-spacing-8 h6 mb-32">簡易的開課流程</h4>
+      <h2 class="letter-spacing-12 fs-1 fw-bolder">PROCESS</h2>
+      <h4 class="letter-spacing-8  fs-6 mb-48">簡易的開課流程</h4>
       <p class="fs-14 fw-light lh-lg mb-64">輕鬆開始您的音樂教學之旅！我們的老師只需簡單的四步驟，即可開展線上課程。<br>將您的音樂才華轉化為寶貴的報酬，無壓力、無煩惱。讓音符為您譜寫充實人生的新篇章。</p>
       <div class="row">
         <div class="col-6 col-md-3 d-flex justify-content-center align-items-center mb-5 mb-md-0">
@@ -128,8 +128,8 @@
   <!-- 精選課程 -->
   <section>
     <div class="container py-48">
-      <h2 class="section-title h1 fw-bolder">COURSE</h2>
-      <h4 class="letter-spacing-8 fs-6 mb-4 mb-md-5">精選課程</h4>
+      <h2 class="letter-spacing-12 fs-1 fw-bolder">COURSE</h2>
+      <h4 class="letter-spacing-8  fs-6 mb-48">精選課程</h4>
       <p class="fs-14 fw-light lh-lg mb-7">音樂是靈魂的共鳴，而我們的課程精選優美。踏上專業音樂之旅，探索熱門精選課程，逐步揭開音樂的神秘面紗。這裡，我們致力於將音樂<br>的藝術帶入您的生活，以專業指導和獨特教學方法，激發您的音樂熱情。</p>
     </div>
     <CoursesLoading class="my-48" v-if="loading"/>
@@ -146,8 +146,8 @@
     <div class="container py-6">
       
       <ul class="ps-0 ">
-        <h2 class="section-title h1 fw-bolder">FAQ</h2>
-      <h4 class="letter-spacing-8 fs-6 mb-4 mb-md-5">常見問題</h4>
+        <h2 class="letter-spacing-12 fs-1 fw-bolder">FAQ</h2>
+      <h4 class="letter-spacing-8  fs-6 mb-48">常見問題</h4>
         <li class="border-bottom py-4">
           <h3 class="question fw-bolder fs-7 fs-md-5">Ｑ 這個平台如何確保音樂家教的質量？</h3>
           <p class="fw-light pt-3 fs-7 fs-md-5">我們精心篩選並核實每位音樂家教的專業背景和教學經驗。我們採用嚴格的審核標準，確保教師具備高水準的音樂技能和教學能力，從而為學生提供優質的學習體驗。</p>
@@ -178,27 +178,27 @@
   <!-- 合作夥伴 -->
   <section>
     <div class="container py-6">
-        <h2 class="section-title h1 fw-bolder">PARTNER</h2>
-        <h4 class="letter-spacing-8 fs-6 mb-4 mb-md-5">我們的合作夥伴</h4>
+        <h2 class="letter-spacing-12 fs-1 fw-bolder">PARTNER</h2>
+        <h4 class="letter-spacing-8  fs-6 mb-48">我們的合作夥伴</h4>
         <p class="fs-14 fw-light lh-lg mb-7">與知名品牌攜手合作，為您提供更廣闊的音樂學習視野，豐富您的音樂旅程。</p>
         <div class="row">
           <div class="col-6 col-md-3 d-flex justify-content-center align-items-center mb-6">
-            <img class="brand-img" src="../assets/images/serve1.jpg" alt="">
+            <img class="brand-img" src="../assets/images/banner.jpg" alt="">
           </div>
           <div class="col-6 col-md-3 d-flex justify-content-center align-items-center mb-6">
-            <img class="brand-img" src="../assets/images/serve1.jpg" alt="">
+            <img class="brand-img" src="../assets/images/banner.jpg" alt="">
           </div>
           <div class="col-6 col-md-3 d-flex justify-content-center align-items-center mb-6">
-            <img class="brand-img" src="../assets/images/serve1.jpg" alt="">
+            <img class="brand-img" src="../assets/images/banner.jpg" alt="">
           </div>
           <div class="col-6 col-md-3 d-flex justify-content-center align-items-center mb-6">
-            <img class="brand-img" src="../assets/images/serve1.jpg" alt="">
+            <img class="brand-img" src="../assets/images/banner.jpg" alt="">
           </div>
           <div class="col-6 col-md-3 d-flex justify-content-center align-items-center mb-6">
-            <img class="brand-img" src="../assets/images/serve1.jpg" alt="">
+            <img class="brand-img" src="../assets/images/banner.jpg" alt="">
           </div>
           <div class="col-6 col-md-3 d-flex justify-content-center align-items-center mb-6">
-            <img class="brand-img" src="../assets/images/serve1.jpg" alt="">
+            <img class="brand-img" src="../assets/images/banner.jpg" alt="">
           </div>
         </div>
     </div>
