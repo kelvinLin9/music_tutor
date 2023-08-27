@@ -10,8 +10,14 @@ img {
   object-fit: cover;
 }
 
-/* 每個區塊的標題文字 */
-.section-title{
+body {
+  font-family: sans-serif;
+}
+
+.letter-spacing-8{
+  letter-spacing: 8px;
+}
+
+.letter-spacing-12{
   letter-spacing: 12px;
-  margin-bottom: 0px;
 }

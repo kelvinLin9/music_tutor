@@ -1,19 +1,18 @@
 <template>
-  <div  :class="{ 'bg-white ':  $route.matched[1].path !== '/' || navbarWhite ,
+  <div  :class="{ 'bg-white ':  $route.matched[1].path !== '/' || navbarWhite || isMenuOpen,
                   'fixed-top':  $route.matched[1].path == '/',
                   'sticky-top':  $route.matched[1].path !== '/'
                 }">
     <nav class="container navbar navbar-expand-lg">
       <div class="container-fluid">
-        <RouterLink to="/" class="navbar-brand nav-link d-flex align-items-end">
+        <RouterLink to="/" class="navbar-brand nav-link d-flex">
           <img src="../assets/images/logo.png" alt="logo" class="logo">
           <!-- <span class="test">樂樂音樂家教媒合平台</span> -->
         </RouterLink>
-        <li class="nav-item position-relative fs-5 d-lg-none d-block ms-auto" 
-            v-if="this.isMember === true">
+        <li class="nav-item position-relative fs-5 d-lg-none d-block ms-auto">  
           <RouterLink to="/CartPage" class="nav-link"
             :class="{ 'text-primary':  $route.name === 'CartPage'}">
-            <i class="bi bi-cart-fill me-lg-2"></i>
+            <span class="material-symbols-outlined fs-3 align-middle">shopping_cart</span>
             <div class="bg-primary text-white rounded-circle text-center position-absolute small-num-mobile"
               v-if="studentData.myCart.length">
               {{ studentData.myCart.length }}
@@ -21,8 +20,10 @@
           </RouterLink>
         </li>
     
-        <button class="navbar-toggler ms-32" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+        <button class="navbar-toggler ms-16" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" @click="isMenuOpen = !isMenuOpen">
+          <!-- <span class="navbar-toggler-icon"></span> -->
+          <span class="material-symbols-outlined fs-1 fw-bold text-primary" v-if="!isMenuOpen">menu</span>
+          <span class="material-symbols-outlined fs-1 fw-bold text-primary" v-if="isMenuOpen">close</span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown"
             :class="{'show':isMenuOpen}">
@@ -47,13 +48,14 @@
               </RouterLink> 
             </li>
               <!-- 登入後出現 -->
-            <li class="nav-item position-relative fs-5 d-none d-lg-block" 
+            <li class="nav-item position-relative fs-5 d-none d-lg-block cursor-pointer" 
                 v-if="this.isMember === true"
                 @click="myCoursesState = 'bookmark', goBookmark()">
               <div class="nav-link"
                 :class="{ 'text-primary':  $route.name === 'MyCourses'}"
               >
-                <i class="bi bi-bookmarks-fill me-lg-2"></i>
+                <!-- <i class="bi bi-bookmarks-fill me-lg-2"></i> -->
+                <span class="material-symbols-outlined fs-3">bookmark</span>
                 <div class="bg-primary text-white rounded-circle text-center position-absolute small-num"
                   v-if="bookmarkNum">
                   {{ bookmarkNum }}
@@ -64,7 +66,8 @@
                 v-if="this.isMember === true">
               <RouterLink to="/CartPage" class="nav-link"
                 :class="{ 'text-primary':  $route.name === 'CartPage'}">
-                <i class="bi bi-cart-fill me-lg-2"></i>
+                <!-- <i class="bi bi-cart-fill me-lg-2"></i> -->
+                <span class="material-symbols-outlined fs-3">shopping_cart</span>
                 <div class="bg-primary text-white rounded-circle text-center position-absolute small-num"
                   v-if="studentData.myCart.length">
                   {{ studentData.myCart.length }}
@@ -127,7 +130,7 @@ import goStore from '@/stores/goStore'
 export default {
   data() {
     return {
-      isMenuOpen : false
+      isMenuOpen : false,
     }
   },
   computed: {
@@ -143,7 +146,7 @@ export default {
     
   },
   mounted() {
-    this.isMenuOpen = false; // 重整關閉navbar
+    this.isMenuOpen = false; // 重整關閉navbar，順便給漢堡按鈕用
   }
 }
 </script>
@@ -156,16 +159,16 @@ export default {
     object-fit: cover;
 }
 .small-num {
-  width:20px;
-  height: 20px;
-  top: 3px;
-  left: 20px;
+  width:18px;
+  height: 18px;
+  top: 0px;
+  left: 23px;
   font-size: 12px;
 }
 .small-num-mobile{
   width:20px;
   height: 20px;
-  top: 0px;
+  top: -5px;
   left: 15px;
   font-size: 12px;
 }
@@ -174,5 +177,13 @@ export default {
 }
 .fixed-top {
   transition: .4s ease;
+}
+// 移除漢堡選單邊框、陰影
+.navbar-toggler:focus {
+  box-shadow: 0 0 0 0;
+}
+.btn-check:checked + .btn, :not(.btn-check) + .btn:active, .btn:first-child:active, .btn.active, .btn.show {
+    border: 0;
+    border-color: #ffffff00;
 }
 </style>
