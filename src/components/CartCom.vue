@@ -46,7 +46,7 @@
               <label :for="item.timestamp"></label>
             </div>
           </td>
-          <td width="25%"
+          <td width="12%"
               @click="goCoursePage(item[0].id)">
               <div class="table-image cursor-pointer">
                 <img :src="item[0].data.courseImg" alt="課程圖片" class="">
