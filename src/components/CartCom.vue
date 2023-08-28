@@ -46,21 +46,21 @@
               <label :for="item.timestamp"></label>
             </div>
           </td>
-          <td width="12%"
+          <td width="15%"
               @click="goCoursePage(item[0].id)">
-              <div class="table-image cursor-pointer">
-                <img :src="item[0].data.courseImg" alt="課程圖片" class="">
+              <div class="table-image cursor-pointer mx-auto">
+                <img :src="item[0].data.courseImg" alt="課程圖片">
               </div>
           </td>
           <td width="60%">
-            <div class="container g-0">
-              <div class="row align-items-center g-0">
-                <div class="col-12 col-lg-8">
-                  <div class="fs-5 fw-bold lh-1">
+            <div class="container">
+              <div class="row align-items-center">
+                <div class="col-12">
+                  <div class="fs-6 fw-bold lh-1">
                     {{ item[0].data.courseName }}
                   </div>
                 </div>
-                <div class="col-12 col-lg-4 text-lg-end">
+                <div class="col-12 mt-8">
                   <p v-if="couponValue == 1">
                     NT$ {{ $filters.currency(item[0].data.price) }}
                   </p>
@@ -117,14 +117,15 @@ export default {
 
 <style lang="scss" scoped>
 .table-image {
-  border-radius: 5px;
+  width: 100px;
+  height: 60px;
+  border-radius: 10px;
   overflow: hidden;
   img {
-    width: 100%;
-    height: auto;
+    width: 100px;
+    height: 60px;
     object-fit: cover;
     transition: transform .3s;
-    
   }
   &:hover {
     img {

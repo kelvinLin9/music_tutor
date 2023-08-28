@@ -58,6 +58,7 @@ export default defineStore('logInStore', {
   actions: {
    signOut() {
     signOut(auth)
+    router.push('/UserLogin')
     data.courseData={}
     data.user = {}
     data.isMember = false
@@ -143,12 +144,7 @@ export default defineStore('logInStore', {
       google: false,
       facebook: false,
       github: false,
-    },
-    
-
-
-    router.push('/UserLogin')
-    
+    }   
    },
    logIn() {
     signInWithEmailAndPassword(auth, this.logInForm.user.email, this.logInForm.user.password)

@@ -5,10 +5,11 @@
                 }">
     <nav class="container navbar navbar-expand-lg">
       <div class="container-fluid">
-        <RouterLink to="/" class="navbar-brand nav-link d-flex">
-          <img src="../assets/images/logo.png" alt="logo" class="logo">
-          <!-- <span class="test">樂樂音樂家教媒合平台</span> -->
-        </RouterLink>
+        <h1>
+          <RouterLink to="/" class="logo navbar-brand nav-link d-flex">
+            <span>樂樂音樂家教媒合平台</span>
+          </RouterLink>
+        </h1>
         <li class="nav-item position-relative fs-5 d-lg-none d-block ms-auto">  
           <RouterLink to="/CartPage" class="nav-link"
             :class="{ 'text-primary':  $route.name === 'CartPage'}">
@@ -107,7 +108,7 @@
                 </li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="#"
-                  @click="signOut()">
+                  @click.prevent="signOut()">
                   登出
                 </a></li>
               </ul>
@@ -153,10 +154,16 @@ export default {
 
 
 <style lang="scss" scoped>
-.logo {
+.logo{
+    background-image: url(../assets/images/LOGO.png);
+    background-size: cover;
+    background-position: center center;
     width: 100px;
-    height: auto;
-    object-fit: cover;
+    height: 45px;
+    display: block;
+    text-indent: 101%;
+    overflow: hidden;
+    white-space: nowrap;
 }
 .small-num {
   width:18px;
