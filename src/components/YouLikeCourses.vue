@@ -60,11 +60,11 @@
             </h2>
             <h3 class="fs-6">by {{ item.data.displayName }}</h3>
             <p class="d-flex align-items-center"> 
-              <span class="material-symbols-outlined fs-6 me-4">timer</span>
+              <span class="material-symbols-outlined fs-3 me-4">timer</span>
               {{ item.data.time }}
-              <span class="material-symbols-outlined fs-6 ms-8 me-4">map</span>
+              <span class="material-symbols-outlined fs-3 ms-8 me-4">map</span>
               {{ item.data.cityName || '線上' }}
-              <span class="material-symbols-outlined fs-6 ms-8 me-4">group</span>
+              <span class="material-symbols-outlined fs-3 ms-8 me-4">group</span>
               {{ item.data.whoBuy.length}}
             </p>
           </div>
@@ -131,7 +131,7 @@ $color_grey_dark: #a2a2a2;
   background: $color_white;
   line-height: 1.4;
   font-family: sans-serif;
-  border-radius: 5px;
+  border-radius: 16px;
   overflow: hidden;
   z-index: 0;
   a {
