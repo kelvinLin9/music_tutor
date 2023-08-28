@@ -124,7 +124,7 @@ $color_grey_dark: #a2a2a2;
   background: $color_white;
   line-height: 1.4;
   font-family: sans-serif;
-  border-radius: 5px;
+  border-radius: 16px;
   overflow: hidden;
   z-index: 0;
   a {
