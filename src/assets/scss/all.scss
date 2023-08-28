@@ -40,12 +40,13 @@
 
 // 8. Add additional custom code here
 @import "bootstrap/scss/bootstrap";
+@import "reset";
 @import "font";
 @import "swiper";
-@import "reset";
+@import "calender";
 
 * {
-  outline: 1px solid  red;
+  // outline: 1px solid  red;
 }
 
 .test {

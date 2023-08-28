@@ -1,5 +1,5 @@
 <template>
-  <!-- <div data-bs-theme="dark" class="bg-dark text-white"> -->
+  <!-- <div data-bs-theme="dark"> -->
     <RouterView />
   <!-- </div> -->
 </template>

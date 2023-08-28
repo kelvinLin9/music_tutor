@@ -104,25 +104,6 @@ export default {
                             },
         // events: [],
         eventSources: [
-          // {
-          //   events: [],
-          //   // color: 'black',     // an option!
-          //   // textColor: 'yellow' // an option!
-          // },
-          // {
-          //   events: [
-          //     {
-          //       title  : 'event0',
-          //       start  : '2023-08-27'
-          //     },
-          //     {
-          //       title  : 'event1',
-          //       start  : '2023-08-29'
-          //     },
-          //   ],
-          //   // color: 'black',     // an option!
-          //   // textColor: 'yellow' // an option!
-          // },
         ]
       },
 
@@ -131,25 +112,25 @@ export default {
   },
   watch: {
     calenderDataAll() {
-      
-      // this.calendarOptions.eventSources = this.calenderTeach
-      // this.calendarOptions.events = this.calenderDataAll
-      // console.log(this.calendarOptions.eventSources[0].events)
-      // this.calendarOptions.eventSources[1].events = this.calenderDataAll
+      this.calendarOptions.events = this.calenderDataAll
     },
   },
   computed:{
-    ...mapState(dataStore,['calenderDataAll', 'calenderData', 'calenderTeach', 'calenderTest']),
+    ...mapState(dataStore,['calenderDataAll', 'calenderData', 'calenderTeach']),
   },
   methods: {
 
   },
   created () {
-    console.log('??????',this.calenderTeach)
     this.calendarOptions.events = this.calenderDataAll
-    // this.calendarOptions.eventSources = this.calenderTest
-    // this.calendarOptions.eventSources = this.calenderTeach
-  
+    if(window.innerWidth < 992) {
+        this.calendarOptions.initialView = 'listMonth'
+        this.calendarOptions.headerToolbar = {
+          left: "prev,next today",
+          center: "title",
+          right: "listMonth"
+        }
+      }
     },
   mounted() {
   }
@@ -157,3 +138,7 @@ export default {
 
 
 </script>
+
+<style lang="scss">
+
+</style>
