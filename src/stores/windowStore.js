@@ -30,7 +30,6 @@ export default defineStore('windowStore', {
       })
     },
     goTop () {
-      console.log(556562)
       document.documentElement.scrollTop = 0
     }
   }

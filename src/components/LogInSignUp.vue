@@ -1,14 +1,14 @@
 <template>
   <div class="container-fluid ps-0 position-relative">
-    <RouterLink to="/">
-      <img src="../assets/images/logo_default.png" alt="logo" class="login-logo">
-    </RouterLink>
-    <div class="row align-items-center justify-content-center justify-content-md-start login-page ">
+    <h1>
+      <RouterLink to="/" class="login-logo navbar-brand nav-link d-flex">
+        <span>樂樂音樂家教媒合平台</span>
+      </RouterLink>
+    </h1>
+    <div class="row align-items-center justify-content-center justify-content-md-start">
       <div class="col-6 col-lg-4 d-none d-md-block">
-        <img src="../assets/images/login.jpg" alt="登入圖" class="">
+        <img src="../assets/images/login.jpg" alt="登入圖" class="login-side-img">
       </div>
-
-
       <div class="col-8 col-md-6 col-xl-4">
         <div v-if="logInPage">
           <h1 class="mx-auto border-bottom my-3 pb-2 w-75 text-center fs-1">
@@ -52,8 +52,8 @@
                 </a>
 
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -78,7 +78,7 @@
       </div>
     </div>
   </div>
-</div>
+                </div>
               </div>
               <VField
                 name="密碼"
@@ -217,20 +217,24 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-img {
+  .login-logo {
+    width: 100px;
+    height: 45px;
+    position: absolute;
+    z-index: 10;
+    left: 20px;
+    top: 10px;
+    background-image: url(../assets/images/LOGO.png);
+    background-size: cover;
+    background-position: center center;
+    display: block;
+    text-indent: 101%;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+.login-side-img {
   width: 100%;
   height: 100vh;
-}
-.login-page {
-  height: 100vh;
-}
-.login-logo {
-  width: 228px;
-  height: 40px;
-  position: absolute;
-  z-index: 10;
-  left: 20px;
-  top: 10px;
 }
 .google-icon {
   width: 16px;

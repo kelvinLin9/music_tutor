@@ -105,49 +105,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.scale{
-    cursor:pointer;
-    &:hover{
-      img{
-        transform: scale(1.15);
-      }
-      .bookmark-off{
-        top: -15px;
-      }
-      .filter-grayscale {
-        -webkit-filter:grayscale(0);
-      }
-    }
-  }
-.card-img-top { 
-  height: 180px;
-  object-fit: cover;
-  transition: 0.5s;
-}
-.bookmark-off {
-  font-size: 40px;
-  position: absolute;
-  right: 5px;
-  top: -55px;
-  z-index: 10;
-  transition: 0.5s;
-}
-.bookmark-on {
-  font-size: 40px;
-  position: absolute;
-  right: 5px;
-  top: -15px;
-  z-index: 10;
-}
-.filter-grayscale {
-  -webkit-filter:grayscale(1);
-}
-.sw-title {
-  height: 50px;
-}
 .loading-img{
   height: 180px;
   width: 1508px;
+  border-radius: 16px;
   @media (min-width: 575.8px) {
     width: 506px;
   }
