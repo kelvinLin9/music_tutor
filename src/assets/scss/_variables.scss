@@ -328,6 +328,7 @@ $theme-colors: (
   "orange":     $orange,
   "teal":       $teal,
   "delete":     $delete,
+  "gray":       $gray-600,
   "goose-yellow": $goose-yellow,
 ) !default;
 // scss-docs-end theme-colors-map
@@ -875,7 +876,7 @@ $btn-link-disabled-color:     $gray-600 !default;
 // $btn-border-radius:           var(--#{$prefix}border-radius) !default;
 // $btn-border-radius-sm:        var(--#{$prefix}border-radius-sm) !default;
 // $btn-border-radius-lg:        var(--#{$prefix}border-radius-lg) !default;
-$btn-border-radius:           50rem;
+$btn-border-radius:           50rem; // custom
 $btn-border-radius-sm:        50rem !default;
 $btn-border-radius-lg:        50rem !default;
 
