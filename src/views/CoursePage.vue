@@ -13,7 +13,7 @@
             data-bs-toggle="tooltip"
             data-bs-placement="top"
             title="加入 / 移除收藏">
-          <i :class="bookmarkState(courseData.id)"></i>
+          <i class="bookmark" :class="bookmarkState(courseData.id)"></i>
           收藏
         </a>
       </div>
@@ -38,39 +38,46 @@
             {{ courseData.teacherIntro }}
           </div>
         </div>
-        <div class="row my-3">
-          <p class="fs-4 mb-8">關於課程</p>
-          <div class="col-auto">
+        <p class="fs-4 mb-8 fw-bold">關於課程</p>
+        <div class="row row-cols-2 my-3 g-3">
+          <div class="col col-lg-auto">
             <div class="d-flex align-items-center">
-              <span class="material-symbols-outlined fs-4 me-8">timer</span>
-              課程時長<br>{{ courseData.time }}分鐘
-            </div>
-          </div>
-          <div class="col-auto">
-            <div class="d-flex align-items-center">
-              <span class="material-symbols-outlined fs-4 ms-8 me-8">group</span>
-              <span v-if="courseData.whoBuy">
-                已被購買 <br> {{ courseData.whoBuy.length || 0 }} 次
+              <span class="material-symbols-outlined fs-1 me-8">timer</span>
+              <span class="text-delete fs-7">
+                課程時長<br><span class="fs-6 text-dark fw-bold">{{ courseData.time }}分鐘</span>
               </span>
             </div>
           </div>
-          <div class="col-auto">
+          <div class="col col-lg-auto">
             <div class="d-flex align-items-center">
-              <span class="material-symbols-outlined fs-4 ms-8 me-8">history_edu</span>
+              <span class="material-symbols-outlined fs-1 me-8">group</span>
+              <span v-if="courseData.whoBuy" class="text-delete fs-7">
+                已被購買 <br> <span class="fs-6 text-dark fw-bold">{{ courseData.whoBuy.length || 0 }} 次</span>
+              </span>
+            </div>
+          </div>
+          <div class="col col-lg-auto">
+            <div class="d-flex align-items-center">
+              <span class="material-symbols-outlined fs-1 me-8">history_edu</span>
               <div>
-                上課方式<br>
-                <span class="bg-primary text-white rounded-2 px-2 me-2"
+                <span class="text-delete fs-7">
+                  上課方式
+                </span>
+                <br>
+                <span class="fs-6 text-dark fw-bold me-24"
                       v-for="item in courseData.courseMethod" :key="item">
                   {{ item }}
                 </span>
               </div>
             </div>
           </div>
-          <div class="col-auto"
+          <div class="col col-lg-auto"
                 v-if="courseData.cityName">
             <div class="d-flex align-items-center">
-              <span class="material-symbols-outlined fs-4 ms-8 me-8">map</span>
-              上課地點<br> {{ courseData.cityName }}
+              <span class="material-symbols-outlined fs-1 me-8">map</span>
+              <span class="text-delete fs-7">
+                上課地點<br> <span class="fs-6 text-dark fw-bold">{{ courseData.cityName }}</span>
+              </span>
             </div>
           </div>
         </div>
@@ -78,9 +85,9 @@
       <!-- 別人的課顯示 -->
       <div class="col-12 col-lg-4 p-32 border sticky-course-page"
           v-if="this.user.uid !== courseData.uid">
-        <h4 class="border-bottom pb-2">購買單堂課程</h4>
+        <h4 class="border-bottom pb-24 mb-24">購買單堂課程</h4>
         <div class="mb-3">
-          <span class="fs-5 me-1">售價</span>
+          <span class="fs-5 me-16">售價</span>
           <span class="fs-1">NT${{ $filters.currency(courseData.price) }}</span> 
         </div>
         <div class="d-flex justify-content-between">
@@ -100,7 +107,7 @@
       <!-- 自己的課顯示 -->
       <div class="col-12 col-lg-4 p-32 border sticky-course-page"
           v-if="this.user.uid === courseData.uid">
-        <h4 class="border-bottom pb-2">購買人數</h4>
+        <h4 class="border-bottom pb-24 mb-24">購買人數</h4>
         <div class="mb-3">
           <span class="fs-5 me-1">共</span>
           <span class="fs-1" v-if="courseData.whoBuy">
@@ -118,14 +125,14 @@
       <!-- 課程評價 -->
       <div class="row mb-16">
         <div class="col-12 col-lg-8">
-          <p class="fs-4 mb-3">課程評價</p>
+          <p class="fs-4 mb-3 fw-bold">課程評價</p>
           <feedback-com/>
         </div>
       </div>
       <!-- 猜你喜歡 -->
       <div class="row mb-16">
         <div class="col-12 col-lg-8">
-          <p class="fs-4 mb-3">猜你喜歡</p>
+          <p class="fs-4 mb-3 fw-bold">猜你喜歡</p>
           <you-like-courses />
         </div>
       </div>
@@ -202,5 +209,8 @@ img {
     position: sticky;
     top: 100px;
   }
+}
+.bookmark {
+  color: #ff715f !important;
 }
 </style>
