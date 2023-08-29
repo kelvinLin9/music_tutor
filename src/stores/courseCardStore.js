@@ -8,8 +8,6 @@ export default defineStore('courseCardStore', {
     courseCardData:[],
   }),
   actions: {
-    // getCourseCardDataInfo(data) {
-    //   this.courseCardData = data
-    // }
+
   },
 })

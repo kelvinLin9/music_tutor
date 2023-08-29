@@ -80,7 +80,7 @@ export default {
     setTimeout(() => {
       this.scrollMove()
       this.homeLoading = false
-    }, 2000)
+    }, 3500)
   }
 
 }
@@ -103,7 +103,7 @@ export default {
 }
 
 .draw-animation {
-  animation: draw 1.5s ease-in-out forwards, fill 1.5s linear forwards;
+  animation: draw 3s ease-in-out forwards, fill 3s linear forwards;
 }
 @keyframes draw {
   to {

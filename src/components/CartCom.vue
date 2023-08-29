@@ -13,77 +13,77 @@
       </RouterLink> 
   </div>
 
-
-  <div class="col-12 col-lg-8 mx-auto mb-3 border rounded-2 h-100"
-        v-if="studentData.myCart.length !== 0 && !loading">
-    <table class="table table-hover align-middle">
-      <thead>
-        <tr>
-          <th width="" class="" colspan="4">
-            <div class="form-check align-items-center">
-              <input class="form-check-input me-3" 
-                type="checkbox" 
-                id="checkAll" 
-                name="checkAll"
-                value=""
-                @click="checkAll()"
-                v-model="checkAllValue"> 
-              <label for="checkAll" class="text-primary fs-5">全選</label>
-            </div>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="item, index in userCartCourses" :key="item.timestamp">
-          <td width="8%" class="">
-            <div class="form-check">
-              <input class="form-check-input" 
-                type="checkbox" 
-                :id="item.timestamp" 
-                :value="index" 
-                name="courseMethod1" 
-                v-model="cartCheckboxWrap"> 
-              <label :for="item.timestamp"></label>
-            </div>
-          </td>
-          <td width="15%"
-              @click="goCoursePage(item[0].id)">
-              <div class="table-image cursor-pointer mx-auto">
-                <img :src="item[0].data.courseImg" alt="課程圖片">
+  <div class="col-12 col-lg-8 mx-auto mb-3 border rounded-2 h-100 "
+          v-if="studentData.myCart.length !== 0 && !loading">
+      <table class="table table-hover align-middle">
+        <thead>
+          <tr>
+            <th width="" class="" colspan="4">
+              <div class="form-check align-items-center">
+                <input class="form-check-input me-16" 
+                  type="checkbox" 
+                  id="checkAll" 
+                  name="checkAll"
+                  value=""
+                  @click="checkAll()"
+                  v-model="checkAllValue"> 
+                <label for="checkAll" class="text-primary fs-5">全選</label>
               </div>
-          </td>
-          <td width="60%">
-            <div class="container">
-              <div class="row align-items-center">
-                <div class="col-12">
-                  <div class="fs-6 fw-bold lh-1">
-                    {{ item[0].data.courseName }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="item, index in userCartCourses" :key="item.timestamp">
+            <td width="8%" class="">
+              <div class="form-check">
+                <input class="form-check-input" 
+                  type="checkbox" 
+                  :id="item.timestamp" 
+                  :value="index" 
+                  name="courseMethod1" 
+                  v-model="cartCheckboxWrap"> 
+                <label :for="item.timestamp"></label>
+              </div>
+            </td>
+            <td width="15%"
+                @click="goCoursePage(item[0].id)">
+                <div class="table-image cursor-pointer mx-auto">
+                  <img :src="item[0].data.courseImg" alt="課程圖片">
+                </div>
+            </td>
+            <td width="60%">
+              <div class="container">
+                <div class="row align-items-center">
+                  <div class="col-12">
+                    <div class="fs-6 fw-bold lh-1">
+                      {{ item[0].data.courseName }}
+                    </div>
+                  </div>
+                  <div class="col-12 mt-8">
+                    <p v-if="couponValue == 1">
+                      NT$ {{ $filters.currency(item[0].data.price) }}
+                    </p>
+                    <p v-if="couponValue != 1">
+                      NT$ {{ $filters.currency(item[0].data.price * couponValue) }}
+                    </p>
+                    <p class="fs-8 text-delete text-decoration-line-through" 
+                          v-if="couponValue != 1">
+                      NT$ {{ $filters.currency(item[0].data.price) }}
+                    </p>
                   </div>
                 </div>
-                <div class="col-12 mt-8">
-                  <p v-if="couponValue == 1">
-                    NT$ {{ $filters.currency(item[0].data.price) }}
-                  </p>
-                  <p v-if="couponValue != 1">
-                    NT$ {{ $filters.currency(item[0].data.price * couponValue) }}
-                  </p>
-                  <p class="fs-8 text-delete text-decoration-line-through" 
-                        v-if="couponValue != 1">
-                    NT$ {{ $filters.currency(item[0].data.price) }}
-                  </p>
-                </div>
               </div>
-            </div>
-          </td>
-          <td width="7%" class="text-end">
-            <div class="cursor-pointer"
-              @click="deleteCart(user.uid, item.timestamp, index)">
-              <i class="bi bi-trash3-fill"></i>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+            </td>
+            <td width="7%" class="text-end">
+              <div class="cursor-pointer"
+                @click="deleteCart(user.uid, item.timestamp, index)">
+                <i class="bi bi-trash3-fill"></i>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
   </div>
 
 </template>

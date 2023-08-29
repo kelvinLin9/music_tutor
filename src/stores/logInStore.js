@@ -20,6 +20,7 @@ const Toast = Swal.mixin({
   toast: true,
   position: 'top-end',
   showConfirmButton: false,
+  timer: 2000,
   timerProgressBar: true,
   didOpen: (toast) => {
     toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -45,7 +46,7 @@ export default defineStore('logInStore', {
         confirmation: ''
       },
     },
-    AccountSettingState: false,
+    AccountSettingState: false, //以下驗證頁面用
     userProviderData:[],
     ProviderState: {
       password: false,
@@ -165,10 +166,11 @@ export default defineStore('logInStore', {
    async signUp () {
     await createUserWithEmailAndPassword(auth, this.signUpForm.user.email, this.signUpForm.user.password)
     .then((res) => {
-      console.log(res.user)
       data.user = res.user
       // 只有用戶名要跟google登入用不同方式取得
+      console.log(this.signUpForm.user.displayName)
       data.teacherData.displayName = this.signUpForm.user.displayName
+      console.log(data.teacherData.displayName)
       Toast.fire({
         icon: 'success',
         title: '恭喜註冊成功'
@@ -182,7 +184,7 @@ export default defineStore('logInStore', {
     })
     .catch((err) => {
       Toast.fire({
-        icon: 'success',
+        icon: 'error',
         title: err
       })
     })  

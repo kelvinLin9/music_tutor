@@ -103,7 +103,7 @@
               取消
             </button>
             <button type="button" class="btn btn-primary"
-                    @click="UpdateTeacherCkeditor() , ckeditorState = false">
+                    @click="UpdateFirebaseMemberData() , ckeditorState = false">
               確定
             </button>
           </div>
@@ -198,7 +198,7 @@
                 取消
               </button>
               <button type="button" class="btn btn-primary"
-                      @click="UpdateTeacherCkeditor() , updateTeacherDataState = false">
+                      @click="UpdateFirebaseMemberData() , updateTeacherDataState = false">
                 確定
               </button>
             </div>
@@ -323,7 +323,7 @@ export default {
   },
   methods: {
     ...mapActions(logInStore, ['signOut']),  
-    ...mapActions(dataStore, ['uploadPhoto', 'onAuthStateChanged', 'UpdateTeacherCkeditor', 'updateUserName']),
+    ...mapActions(dataStore, ['uploadPhoto', 'onAuthStateChanged', 'UpdateFirebaseMemberData', 'updateUserName']),
     
   },
   created () {

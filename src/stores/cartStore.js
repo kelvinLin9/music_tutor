@@ -12,8 +12,6 @@ const Toast = Swal.mixin({
   showConfirmButton: false,
   timer: 2000,
   timerProgressBar: true,
-  confirmButtonColor: 'rgba(168, 128, 48, 1)',
-  cancelButtonColor: 'rgba(108, 117, 125, 1)',
   didOpen: (toast) => {
     toast.addEventListener('mouseenter', Swal.stopTimer)
     toast.addEventListener('mouseleave', Swal.resumeTimer)
@@ -83,7 +81,7 @@ export default defineStore('cartStore', {
       const course = data.studentData.myCart.filter((item) => {
         return item.timestamp === dTimestamp
       })
-      console.log('要刪的檔', course[0])
+      // console.log('要刪的檔', course[0])
       const cart = doc(db, uid, 'student');
       await updateDoc(cart, {
         myCart: arrayRemove(course[0])
@@ -92,7 +90,7 @@ export default defineStore('cartStore', {
         icon: 'success',
         title: '成功刪除購物車項目'
       })
-      data.getStudentFirebaseData()
+      data.onAuthStateChanged()
     },
     // 新增資料進到結帳頁面
     addToPayWrap() {
