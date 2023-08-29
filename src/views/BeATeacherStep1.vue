@@ -3,7 +3,7 @@
     <VForm  v-slot="{ errors }"
            @submit="goBeATeacherStep2()">
       <div class="row justify-content-center mb-3">
-        <div class="col-auto">
+        <div class="col-2 d-flex justify-content-end">
           <label for="courseName" class="col-form-label">
             課程名稱：
           </label>
@@ -23,7 +23,7 @@
         </div>
       </div>
       <div class="row justify-content-center mb-3">
-        <div class="col-auto">
+        <div class="col-2 d-flex justify-content-end">
           <label for="coursePrice" class="col-form-label">
             課程費用：
           </label>
@@ -42,9 +42,8 @@
           <ErrorMessage class="invalid-feedback" name="課程費用"/>
         </div>
       </div>
-
       <div class="row justify-content-center mb-3">
-        <div class="col-auto">
+        <div class="col-2 d-flex justify-content-end">
           <label for="courseCategory" class="col-form-label">
             教學項目：
           </label>
@@ -147,11 +146,10 @@
           </div>
         </div>
       </div>
-
       <div class="row justify-content-center mb-3">
-        <div class="col-auto">
+        <div class="col-2 d-flex justify-content-end">
           <label for="courseTime" class="col-form-label">
-            授課時間：
+            授課時間(分)：
           </label>
         </div>
         <div class="col-8 col-lg-6">
@@ -169,7 +167,7 @@
         </div>
       </div>
       <div class="row justify-content-center mb-3">
-        <div class="col-auto">
+        <div class="col-2 d-flex justify-content-end">
             上課方式：
         </div>
         <div class="col-8 col-lg-6">
@@ -203,7 +201,7 @@
         </div>
       </div>
       <div class="row justify-content-center mb-3">
-        <div class="col-auto">
+        <div class="col-2 d-flex justify-content-end">
           <label for="cityName" class="col-form-label"
               :class="{'d-none' : beATeacherData.courseMethod.length == 1 && beATeacherData.courseMethod[0] == '線上'}">
             上課地點：
@@ -246,7 +244,7 @@
         </div>
       </div>
       <div class="row justify-content-center">
-        <div class="col-6 text-end">
+        <div class="col-8 text-end">
           <button type="submit" class="btn btn-primary">
             &emsp;&emsp;下一步&emsp;&emsp;
           </button>

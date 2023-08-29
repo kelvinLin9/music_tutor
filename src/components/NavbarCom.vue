@@ -63,7 +63,7 @@
                 </div>
               </div>
             </li>
-            <li class="nav-item position-relative fs-5 d-none d-lg-block" 
+            <li class="nav-item position-relative fs-5 d-none d-lg-block me-8" 
                 v-if="this.isMember === true">
               <RouterLink to="/CartPage" class="nav-link"
                 :class="{ 'text-primary':  $route.name === 'CartPage'}">
@@ -76,7 +76,7 @@
               </RouterLink>
             </li>
             <li class="nav-item dropdown">  
-              <button class="btn dropdown-toggle text-primary ps-0 ps-lg-2"
+              <button class="btn dropdown-toggle text-primary ps-0 ps-lg-2 border-0"
                       type="button" id="dropdownLogin" 
                       data-bs-toggle="dropdown" aria-expanded="false"
                       :class="{ 'text-primary':  $route.name === 'UserLogin'}"

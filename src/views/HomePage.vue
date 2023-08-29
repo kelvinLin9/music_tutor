@@ -12,21 +12,21 @@
             <h3 class="fs-6 text-white mb-24">
               在這裡與熱愛音樂的導師相遇，將你的音樂激情傾注其中。
             </h3>
-            <div class="mb-2">
+            <div class="mb-8">
               <input class="form-control mt-0" list="datalistOptions" id="exampleDataList" placeholder="我想學習...">
             </div>
-            <div class="pills">
+            <div class="home-pills">
               <a href="#" @click.prevent="goAllCourses('鋼琴')">
-                <span class="badge rounded-pill text-bg-primary text-white me-1">鋼琴</span>
+                <span class="badge rounded-pill text-bg-primary text-white me-8">鋼琴</span>
               </a>
               <a href="#" @click.prevent="goAllCourses('編曲')">
-                <span class="badge rounded-pill text-bg-primary text-white me-1">編曲</span>
+                <span class="badge rounded-pill text-bg-primary text-white me-8">編曲</span>
               </a>
               <a href="#" @click.prevent="goAllCourses('流行歌唱')">
-                <span class="badge rounded-pill text-bg-primary text-white me-1">流行歌唱</span>
+                <span class="badge rounded-pill text-bg-primary text-white me-8">流行歌唱</span>
               </a>
               <a href="#" @click.prevent="goAllCourses('木吉他')">
-                <span class="badge rounded-pill text-bg-primary text-white me-1">木吉他</span>
+                <span class="badge rounded-pill text-bg-primary text-white me-8">木吉他</span>
               </a>
             </div>
           </div>
@@ -39,7 +39,7 @@
   <section>
     <div class="container text-center py-48">
       <h2 class="fw-bold lh-base mb-32">和音樂共舞。<br>尋找心中的旋律。</h2>
-      <h4 class="fw-bolder mb-64">Lele Music Tutor</h4>
+      <h2 class="fw-bolder mb-64">Lele Music Tutor</h2>
       <p class="lh-lg  fw-lighter">歡迎來到樂樂音樂家教媒合平台！<br>
         我們深知音樂對於心靈的滋養和生活的豐富意義。<br>
         我們的使命是連結那些渴望學習音樂的您，與充滿熱情且專業的音樂家教師。<br>
@@ -59,7 +59,7 @@
   <section>
     <div class="container py-48 ">
       <h2 class="letter-spacing-12 fs-1 fw-bolder">SERVE</h2>
-      <h4 class="letter-spacing-8 fs-6 mb-48">我們的服務</h4>
+      <h2 class="letter-spacing-8 fs-6 mb-48">我們的服務</h2>
       <div class="row align-items-center">
         <div class="col-md-6 mb-3">
            <h3 class="lh-base mb-3 mb-md-4">奏響夢想的旋律。<br>
@@ -86,7 +86,7 @@
   <section class="bg-light">
     <div class="container py-48">
       <h2 class="letter-spacing-12 fs-1 fw-bolder">PROCESS</h2>
-      <h4 class="letter-spacing-8  fs-6 mb-48">簡易的開課流程</h4>
+      <h2 class="letter-spacing-8  fs-6 mb-48">簡易的開課流程</h2>
       <p class="fs-14 fw-light lh-lg mb-48">
         輕鬆開始您的音樂教學之旅！我們的老師只需簡單的四步驟，即可開展線上課程。<br>將您的音樂才華轉化為寶貴的報酬，無壓力、無煩惱。讓音符為您譜寫充實人生的新篇章。
       </p>
@@ -133,7 +133,7 @@
   <section>
     <div class="container py-48">
       <h2 class="letter-spacing-12 fs-1 fw-bolder">COURSE</h2>
-      <h4 class="letter-spacing-8  fs-6 mb-48">精選課程</h4>
+      <h2 class="letter-spacing-8  fs-6 mb-48">精選課程</h2>
       <p class="fs-14 fw-light lh-lg mb-7 mb-48">音樂是靈魂的共鳴，而我們的課程精選優美。踏上專業音樂之旅，探索熱門精選課程，逐步揭開音樂的神秘面紗。這裡，我們致力於將音樂<br>的藝術帶入您的生活，以專業指導和獨特教學方法，激發您的音樂熱情。</p>
       <CoursesLoading v-if="loading"/>
       <FeaturedCourses v-if="!loading"/>
@@ -150,11 +150,11 @@
       <h2 class="letter-spacing-8  fs-6 mb-48">常見問題</h2>
       <div class="accordion" id="accordionExample">
         <div class="accordion-item">
-          <h2 class="accordion-header">
+          <h3 class="accordion-header">
             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
               Ｑ 這個平台如何確保音樂家教的品質？
             </button>
-          </h2>
+          </h3>
           <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
       <div class="accordion-body">
         我們精心篩選並核實每位音樂家教的專業背景和教學經驗。我們採用嚴格的審核標準，確保教師具備高水準的音樂技能和教學能力，從而為學生提供優質的學習體驗。
@@ -162,11 +162,11 @@
           </div>
         </div>
         <div class="accordion-item">
-          <h2 class="accordion-header">
+          <h3 class="accordion-header">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
               Ｑ 我需要擁有昂貴的樂器嗎？
             </button>
-          </h2>
+          </h3>
           <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
             <div class="accordion-body">
               不必。我們的音樂家教能夠根據您的需求和預算，提供適合的建議和方案。無論您是初學者還是有經驗的音樂人，我們都會確保您得到適合的指導，而且您可以根據自己的情況選擇是否購買樂器。
@@ -174,11 +174,11 @@
           </div>
         </div>
         <div class="accordion-item">
-          <h2 class="accordion-header">
+          <h3 class="accordion-header">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
               Ｑ 如何安排教學時間？
             </button>
-          </h2>
+          </h3>
           <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
             <div class="accordion-body">
               我們的平台提供靈活的教學時間選擇，讓您和音樂家教共同商討最合適的上課時間。您可以在平台上瀏覽教師的時間表，選擇符合您日程的時間段，確保教學時間的便利性和彈性。
@@ -186,11 +186,11 @@
           </div>
         </div>
         <div class="accordion-item">
-          <h2 class="accordion-header">
+          <h3 class="accordion-header">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
               Ｑ 我可以隨時取消或改變教學計劃嗎？
             </button>
-          </h2>
+          </h3>
           <div id="collapse4" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
             <div class="accordion-body">
               是的，我們理解您的時間可能會有變動。您可以提前與您的音樂家教溝通，根據需要進行教學計劃的調整。請確保您在取消或更改計劃時遵循我們的相關政策。
@@ -198,11 +198,11 @@
           </div>
         </div>
         <div class="accordion-item">
-          <h2 class="accordion-header">
+          <h3 class="accordion-header">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
               Ｑ 是否有免費試教？
             </button>
-          </h2>
+          </h3>
           <div id="collapse5" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
             <div class="accordion-body">
               是的，我們的部分音樂家教提供免費試教，讓您有機會評估教學風格和師生配合是否適合。您可以在平台上查找提供免費試教的教師，並預約試教課程。
@@ -210,11 +210,11 @@
           </div>
         </div>
         <div class="accordion-item">
-          <h2 class="accordion-header">
+          <h3 class="accordion-header">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse6" aria-expanded="false" aria-controls="collapse6">
               Ｑ 我需要具備多少音樂基礎才能開始學習？
             </button>
-          </h2>
+          </h3>
           <div id="collapse6" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
             <div class="accordion-body">
               我們歡迎各個程度的學生，無論您是初學者還是有經驗的音樂人。我們的音樂家教將根據您的現有知識和技能，量身定制教學計劃，從基礎教學到高級技巧，都能找到適合您的課程內容。
@@ -300,9 +300,11 @@ export default {
 	            0 .5em 1em rgba(0, 0, 0, 0.6);
 	  text-shadow: 0 1px 1px hsla(0,0%,100%,.3);
   }
-  // a :hover{
-  //   scale: 1.2;
-  // }
+  .home-pills {
+    a :hover{
+      scale: 1.2;
+    }
+  }
 
 .step{
     width: 150px;

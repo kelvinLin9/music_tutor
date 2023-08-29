@@ -39,8 +39,8 @@
           </div>
         </div>
         <p class="fs-4 mb-8 fw-bold">關於課程</p>
-        <div class="row row-cols-2 my-3 g-3">
-          <div class="col col-lg-auto">
+        <div class="row my-3 g-3">
+          <div class="col-auto">
             <div class="d-flex align-items-center">
               <span class="material-symbols-outlined fs-1 me-8">timer</span>
               <span class="text-delete fs-7">
@@ -48,7 +48,7 @@
               </span>
             </div>
           </div>
-          <div class="col col-lg-auto">
+          <div class="col-auto">
             <div class="d-flex align-items-center">
               <span class="material-symbols-outlined fs-1 me-8">group</span>
               <span v-if="courseData.whoBuy" class="text-delete fs-7">
@@ -56,22 +56,7 @@
               </span>
             </div>
           </div>
-          <div class="col col-lg-auto">
-            <div class="d-flex align-items-center">
-              <span class="material-symbols-outlined fs-1 me-8">history_edu</span>
-              <div>
-                <span class="text-delete fs-7">
-                  上課方式
-                </span>
-                <br>
-                <span class="fs-6 text-dark fw-bold me-24"
-                      v-for="item in courseData.courseMethod" :key="item">
-                  {{ item }}
-                </span>
-              </div>
-            </div>
-          </div>
-          <div class="col col-lg-auto"
+          <div class="col-auto"
                 v-if="courseData.cityName">
             <div class="d-flex align-items-center">
               <span class="material-symbols-outlined fs-1 me-8">map</span>
@@ -80,6 +65,22 @@
               </span>
             </div>
           </div>
+          <div class="col-12 col-xl-auto">
+            <div class="d-flex align-items-center">
+              <span class="material-symbols-outlined fs-1 me-8">history_edu</span>
+              <div>
+                <span class="text-delete fs-7">
+                  上課方式
+                </span>
+                <br>
+                <span class="fs-6 bg-primary rounded px-2 text-dark fw-bold me-8"
+                      v-for="item in courseData.courseMethod" :key="item">
+                  {{ item }}
+                </span>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
       <!-- 別人的課顯示 -->
@@ -100,7 +101,7 @@
                   data-bs-placement="top"
                   title="加入購物車"
                   @click="addCart(user.uid, courseData.id)">
-            <i class="bi bi-cart-fill"></i>
+                  <span class="material-symbols-outlined fs-3 align-middle">shopping_cart</span>
           </button>
         </div>
       </div>
