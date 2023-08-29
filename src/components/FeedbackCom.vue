@@ -5,29 +5,30 @@
       :slidesPerView="1"
       :spaceBetween="20"
       :freeMode="true"
+      :pagination="{clickable: true}"
       navigation
       :scrollbar="{ draggable: true }"
       :breakpoints="{
       '576': {
         slidesPerView: 1,
-        spaceBetween: 20,
+        spaceBetween: 26,
         },
       '768': {
         slidesPerView: 2,
-        spaceBetween: 20,
+        spaceBetween: 26,
         },
       '992': {
         slidesPerView: 2,
-        spaceBetween: 20,
+        spaceBetween: 26,
         },
       '1400': {
         slidesPerView: 3,
-        spaceBetween: 20,
+        spaceBetween: 26,
         },
       }"
-      class="mySwiper px-3"
+      class="mySwiper px-24"
     >
-      <SwiperSlide v-for="(item) in 5" :key="item" class="mb-5">
+      <SwiperSlide v-for="(item) in 5" :key="item" class="mb-32">
         <div class="card rounded-3 shadow-sm">
           <div class="card-body">
             <div class="d-flex align-items-center">

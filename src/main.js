@@ -73,6 +73,12 @@ import CKEditor from '@ckeditor/ckeditor5-vue';
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import zhtw from 'element-plus/dist/locale/zh-tw.mjs'
+// 換主題色
+const el = document.documentElement
+getComputedStyle(el).getPropertyValue(`--el-color-primary`)
+el.style.setProperty('--el-color-primary', '#ff715f')
+
+
 
 
 const app = createApp(App)
