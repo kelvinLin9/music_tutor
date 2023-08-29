@@ -5,7 +5,7 @@
       <pay-com v-if="cartPageState === 'pay'" />
       <cart-com v-if="cartPageState === 'cart'" />
       <!-- 購物車用 -->
-      <div class="col-12 col-lg-4 mb-3 px-0 px-lg-3"
+      <div class="col-12 col-lg-4 mb-3"
         v-if="cartPageState === 'cart' && studentData.myCart.length !== 0">
         <div class="card">
           <div class="card-header">
@@ -49,7 +49,7 @@
         </div>
       </div>
       <!-- 結帳用 -->
-      <div class="col-12 col-lg-4 mb-3 px-0 px-lg-3"
+      <div class="col-12 col-lg-4 mb-3"
             v-if="cartPageState === 'pay'">
         <div class="card">
           <div class="card-header">

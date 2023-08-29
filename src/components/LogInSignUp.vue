@@ -10,19 +10,19 @@
         <img src="../assets/images/login.jpg" alt="登入圖" class="login-side-img">
       </div>
       <div class="col-8 col-md-6 col-xl-4">
+        <!-- 登入 -->
         <div v-if="logInPage">
-          <h1 class="mx-auto border-bottom my-3 pb-2 w-75 text-center fs-1">
+          <h1 class="mx-auto border-bottom my-16 pb-16 w-75 text-center fs-1">
             會員登入
           </h1>
           <button type="button" 
-                  class="btn btn-outline-dark d-block mx-auto py-3 d-flex justify-content-center w-75"
+                  class="btn btn-outline-dark d-block mx-auto py-16 d-flex justify-content-center w-75"
                   @click="signInWithGoogle()">
             <img src="../assets/images/google-icon.png" alt="google icon" class="google-icon me-2">
             <span class="google-login-text">使用 Google 登入</span>
           </button>
-
-          <hr class="mx-auto w-75 mt-32 text-center fs-7 login-hr">
-
+          <hr class="mx-auto w-75 mt-16 text-center fs-7 login-hr">
+          
           <VForm class="mx-auto w-75"
                 v-slot="{ errors }"
                 @submit="logIn()">
@@ -105,7 +105,7 @@
             
           </VForm>
         </div>
-
+        <!-- 註冊 -->
         <div v-else>
           <h1 class="mx-auto border-bottom my-3 pb-2 w-75 text-center">會員註冊</h1>
           <VForm class="mx-auto w-75"

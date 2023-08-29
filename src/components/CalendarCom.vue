@@ -70,7 +70,7 @@ export default {
           meridiem: false,
           hour12: false, 
         }, 
-        eventTimeFormat: { // like '14:30'
+        eventTimeFormat: {
           hour: '2-digit',
           minute: '2-digit',
           hour12: false

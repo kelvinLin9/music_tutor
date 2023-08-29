@@ -76,7 +76,7 @@
   <!-- 無課程提示 -->
   <div class="container d-flex justify-content-center align-items-center text-center" v-if="!loading">
     <div v-if="userStudentCourses.length === 0 && myCoursesState === 'student'">
-      <p class="fs-1">尚未購買課程</p>
+      <p class="fs-1 my-16">尚未購買課程</p>
       <RouterLink to="/AllCourses">
         <button type="button" class="btn btn-primary">
           馬上購買
@@ -84,7 +84,7 @@
       </RouterLink>
     </div>
     <div v-if="userTeacherCourses.length === 0 && myCoursesState === 'teacher'">
-      <p class="fs-1">尚未建立課程</p>
+      <p class="fs-1 my-16">尚未建立課程</p>
       <RouterLink to="/CreateCourses/BeATeacherStep1">
         <button type="button" class="btn btn-primary">
           我要開課
@@ -92,7 +92,7 @@
       </RouterLink>
     </div>
     <div v-if="userBookmarkCourses.length === 0 && myCoursesState === 'bookmark'">
-      <p class="fs-1">尚未收藏課程</p>
+      <p class="fs-1 my-16">尚未收藏課程</p>
       <RouterLink to="/AllCourses">
         <button type="button" class="btn btn-primary">
           添加收藏
