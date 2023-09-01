@@ -23,8 +23,8 @@
     
         <button class="navbar-toggler ms-16" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" @click="isMenuOpen = !isMenuOpen">
           <!-- <span class="navbar-toggler-icon"></span> -->
-          <span class="material-symbols-outlined fs-1 fw-bold text-primary" v-if="!isMenuOpen">menu</span>
-          <span class="material-symbols-outlined fs-1 fw-bold text-primary" v-if="isMenuOpen">close</span>
+          <span class="material-symbols-outlined fs-1 fw-bold" v-if="!isMenuOpen">menu</span>
+          <span class="material-symbols-outlined fs-1 fw-bold" v-if="isMenuOpen">close</span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown"
             :class="{'show':isMenuOpen}">
@@ -56,7 +56,7 @@
                 :class="{ 'text-primary':  $route.name === 'MyCourses'}"
               >
                 <!-- <i class="bi bi-bookmarks-fill me-lg-2"></i> -->
-                <span class="material-symbols-outlined fs-3">bookmark</span>
+                <span class="material-symbols-outlined align-middle fs-3">bookmark</span>
                 <div class="bg-primary text-white rounded-circle text-center position-absolute small-num"
                   v-if="bookmarkNum">
                   {{ bookmarkNum }}
@@ -68,20 +68,22 @@
               <RouterLink to="/CartPage" class="nav-link"
                 :class="{ 'text-primary':  $route.name === 'CartPage'}">
                 <!-- <i class="bi bi-cart-fill me-lg-2"></i> -->
-                <span class="material-symbols-outlined fs-3">shopping_cart</span>
+                <span class="material-symbols-outlined align-middle fs-3">shopping_cart</span>
                 <div class="bg-primary text-white rounded-circle text-center position-absolute small-num"
                   v-if="studentData.myCart.length">
                   {{ studentData.myCart.length }}
                 </div>
               </RouterLink>
             </li>
-            <li class="nav-item dropdown">  
+            <li class="nav-item dropdown d-flex">  
               <button class="btn dropdown-toggle text-primary ps-0 ps-lg-2 border-0"
                       type="button" id="dropdownLogin" 
                       data-bs-toggle="dropdown" aria-expanded="false"
                       :class="{ 'text-primary':  $route.name === 'UserLogin'}"
                       v-if="this.isMember === true">
-                <i class="bi bi-person-circle me-2 fs-5"></i>
+                <span class="material-symbols-outlined align-middle fs-3">
+                  account_circle
+                </span>
                 {{ teacherData.displayName }}
               </button>
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownLogin"

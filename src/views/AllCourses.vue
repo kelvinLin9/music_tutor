@@ -3,18 +3,18 @@
   <!-- Loading -->
   <CoursesLoading class="my-3" v-if="loading"/>
   <!-- 搜尋、排序 -->
-  <div class="container mt-3 fs-8" v-if="!loading">
+  <div class="container mt-3 fs-7 fs-sm-6" v-if="!loading">
     <div class="row align-items-center g-2">
       <!-- 技能 -->
-      <div class="col-12 col-lg-auto me-lg-1">
+      <div class="col-12 col-xl-auto me-lg-1">
         <div class="row g-1 align-items-center">
           <div class="col-auto">
             <label for="selectCourseCategory" class="col-form-label">
               音樂技能：
             </label>
           </div>
-          <div class="col-auto">
-            <select class="form-select fs-8" aria-label="Default select example"
+          <div class="col-4 col-lg-auto">
+            <select class="form-select fs-7 fs-sm-6" aria-label="Default select example"
                   id="selectCourseCategory"
                   v-model="selectCourseCategory">
             <option value="" selected>請選擇</option>
@@ -105,15 +105,15 @@
         </div>      
       </div>
       <!-- 地點 -->
-      <div class="col-12 col-lg-auto me-lg-1">
+      <div class="col-12 col-xl-auto me-lg-1">
         <div class="row g-1 align-items-center">
           <div class="col-auto">
             <label for="selectCityName" class="col-form-label">
               上課方式：
             </label>
           </div>
-          <div class="col-auto">
-            <select class="form-select fs-8" 
+          <div class="col-4 col-lg-auto">
+            <select class="form-select fs-7 fs-sm-6" 
                     aria-label="Default select example"
                     id="selectCityName"
                     v-model="selectCourseMethod"
@@ -125,12 +125,12 @@
               </option>
             </select>
           </div>
-          <div class="col-auto"
+          <div class="col-4 col-lg-auto"
               v-if="selectCourseMethod === '在老師家' || selectCourseMethod === '在學生家'">
-            <select class="form-select fs-8" aria-label="Default select example"
+            <select class="form-select fs-7 fs-sm-6" aria-label="Default select example"
                     id="selectCityName"
                     v-model="selectCityName">
-              <option value="" selected>請選擇地點</option>
+              <option value="" selected>選擇地點</option>
               <option value="台北市">台北市</option>
               <option value="基隆市">基隆市</option>
               <option value="新北市">新北市</option>
@@ -158,13 +158,13 @@
         </div>
       </div>
       <!-- 名稱 -->
-      <div class="col-12 col-md-auto  col-lg-auto">
+      <div class="col-12 col-md-auto col-lg-auto">
         <div class="row g-1 align-items-center">
           <div class="col-auto">
             <label for="selectCourseName" class="col-form-label">課程名稱：</label>
           </div>
-          <div class="col-auto">
-            <input type="search" id="selectCourseName" class="form-control fs-8" aria-labelledby="searchHelpInline"
+          <div class="col-8 col-sm-4 col-lg-auto">
+            <input type="search" id="selectCourseName" class="form-control fs-7 fs-sm-6" aria-labelledby="searchHelpInline"
             placeholder="請輸入課程名稱"
             v-model="selectCourseName">
           </div>
@@ -175,11 +175,11 @@
         <div class="row g-1 align-items-center">
           <div class="col-auto">
             <label for="sort" class="col-form-label">
-              排序：
+              排序：<span class="d-md-none">&emsp;&emsp;</span>
             </label>
           </div>
           <div class="col-auto">
-            <select class="form-select fs-8" 
+            <select class="form-select fs-7 fs-sm-6" 
                     aria-label="Default select example"
                     id="sort"
                     v-model="selectSortMethod"
