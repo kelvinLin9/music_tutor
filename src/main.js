@@ -53,13 +53,13 @@ const options = {
 //firebase
 import { initializeApp } from 'firebase/app';
 const firebaseConfig = {
-  apiKey: "AIzaSyBurMB5RDdvNOV8jMh0M6zi4gNx8r5xNyU",
-  authDomain: "music-tutor-909ea.firebaseapp.com",
-  projectId: "music-tutor-909ea",
-  storageBucket: "music-tutor-909ea.appspot.com",
-  messagingSenderId: "653538731223",
-  appId: "1:653538731223:web:7d9fdd8b43e991ab6bfc92",
-  measurementId: "G-D8YY5SWYN2"
+  apiKey: import.meta.env.VITE_apiKey,
+  authDomain: import.meta.env.VITE_authDomain,
+  projectId: import.meta.env.VITE_projectId,
+  storageBucket: import.meta.env.VITE_storageBucket,
+  messagingSenderId: import.meta.env.VITE_messagingSenderId,
+  appId: import.meta.env.VITE_appId,
+  measurementId: import.meta.env.VITE_measurementId
 };
 initializeApp(firebaseConfig)
 

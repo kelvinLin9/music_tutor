@@ -119,6 +119,7 @@ export default defineStore('cartStore', {
       }
     },
     addCouponCode () {
+      console.log(data.couponData)
       for (let i in data.couponData){
         console.log(i)
         console.log(data.couponData[i])

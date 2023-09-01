@@ -97,6 +97,11 @@
                   </RouterLink>
                 </li>
                 <li>
+                  <RouterLink to="/PayHistory" class="dropdown-item">
+                    購買紀錄
+                  </RouterLink>
+                </li>
+                <li>
                   <RouterLink to="/MyCalendar" class="dropdown-item">
                     行事曆
                   </RouterLink>

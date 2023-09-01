@@ -1,5 +1,5 @@
 <template>
-    <FullCalendar :options='calendarOptions' class="tyr">
+    <FullCalendar :options='calendarOptions' ref="fullCalendar">
     <!-- <template v-slot:eventContent='arg'>
       <div :style="{color: arg.event.backgroundColor}">
         <p class="">
@@ -25,7 +25,7 @@ import 'tippy.js/dist/tippy.css'
 import { mapState, mapActions, mapWritableState } from 
 'pinia'  
 import dataStore from '@/stores/dataStore'
-
+import windowStore from '@/stores/windowStore'
 
 export default {
   components: { FullCalendar },
@@ -36,7 +36,7 @@ export default {
         initialView: 'dayGridMonth',
         weekends: true,
         height: 650,
-        // locale: 'zh-tw',
+        locale: 'zh-tw',
         dayMaxEventRows: 2.0, // 事件最大展示列數
         aspectRatio: 1.35,
         weekNumberCalculation:'iso',//周次的显示格式。
@@ -46,11 +46,10 @@ export default {
         // stickyFooterScrollbar: true, //
         windowResize : function(e){//瀏覽器窗體變化時觸發
           console.log(window.innerWidth)
-          console.log()
             },
         titleFormat: { 
           year: 'numeric',
-          month: '2-digit',
+          month: 'long',
           },
         headerToolbar: {
           left: "prev,next today",
@@ -88,51 +87,59 @@ export default {
           var tooltip = new Tooltip(info.el, {
             content: info.event._def.title,
             placement: 'top',
-            // trigger: 'hover', 
-            // container: 'body'
           }); // 懸浮提示
         },
-        loading : function(isLoading, view){ //视图数据加载中、加载完成触发
-                                console.log("↓↓↓loading↓↓↓");
-                                if(isLoading == true){
-                                    console.log("view:"+view+",开始加载");
-                                }else if(isLoading == false){
-                                    console.log("view:"+view+",加载完成");
-                                }else{
-                                    console.log("view:"+view+",除非天塌下来否则不会进这个分支");
-                                }
-                            },
+        // loading : function(isLoading, view){ //视图数据加载中、加载完成触发
+        //                         console.log("↓↓↓loading↓↓↓");
+        //                         if(isLoading == true){
+        //                             console.log("view:"+view+",开始加载");
+        //                         }else if(isLoading == false){
+        //                             console.log("view:"+view+",加载完成");
+        //                         }
+        //                     },
         // events: [],
         eventSources: [
-        ]
+        ],
+        views: ['timeGridWeek'],
       },
-
-
     }
   },
   watch: {
     calenderDataAll() {
       this.calendarOptions.events = this.calenderDataAll
     },
-  },
-  computed:{
-    ...mapState(dataStore,['calenderDataAll', 'calenderData', 'calenderTeach']),
-  },
-  methods: {
-
-  },
-  created () {
-    this.calendarOptions.events = this.calenderDataAll
-    if(window.innerWidth < 992) {
-        this.calendarOptions.initialView = 'listMonth'
+    windowWidth() {
+      console.log(this.windowWidth)
+      if(window.innerWidth < 992) {
+        this.$refs.fullCalendar.calendar.changeView('listMonth')
+        console.log(this.$refs.fullCalendar.calendar.el)
         this.calendarOptions.headerToolbar = {
           left: "prev,next today",
           center: "title",
           right: "listMonth"
         }
+      } else {
+        this.$refs.fullCalendar.calendar.changeView('dayGridMonth')
+        this.calendarOptions.headerToolbar = {
+          left: "prev,next today",
+          center: "title",
+          right: "dayGridMonth,timeGridWeek,timeGridDay listMonth",
+        }
       }
+    }
+  },
+  computed:{
+    ...mapState(dataStore,['calenderDataAll']),
+    ...mapState(windowStore,['windowWidth']),
+  },
+  methods: {
+    ...mapActions(windowStore,['getWindowWidth']),
+  },
+  created () {
+    this.calendarOptions.events = this.calenderDataAll
     },
   mounted() {
+    this.getWindowWidth()
   }
 }
 
