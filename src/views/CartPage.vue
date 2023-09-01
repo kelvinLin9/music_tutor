@@ -25,9 +25,9 @@
             </div>
           </div>
           <div class="card-footer">
-            <div class="row mb-2 align-items-center">
+            <div class="row my-8 align-items-center">
               <div class="col-8 pe-0">
-                <input class="col-form-label w-100 py-1 fs-7" 
+                <input class="col-form-label w-100 py-1 fs-7 rounded-5 px-16" 
                     type="text" 
                     id="coupon"  
                     name="coupon" 
@@ -35,13 +35,13 @@
                     v-model="couponCode"> 
               </div>
               <div class="col-4 text-end">
-                <button type="button" class="btn btn-sm btn-secondary w-100"
+                <button type="button" class="btn btn-sm btn-secondary px-16"
                           @click="addCouponCode()">
                     確認
                 </button>
               </div>
             </div>
-            <button type="button" class="btn btn-primary w-100"
+            <button type="button" class="btn btn-primary w-100 my-8"
                     @click="addToPayWrap()">
               來去結帳
             </button>
