@@ -6,7 +6,7 @@
       </div>
       <div class="col-12 col-lg-4 d-flex flex-column">
         <h1 class="fs-2 fw-bold">{{ beATeacherData.courseName }}</h1>
-        <p class="mt-16">{{ beATeacherData.courseIntro}}</p>
+        <p class="mt-16 text-delete">{{ beATeacherData.courseIntro}}</p>
       </div>
     </div>
   </div>

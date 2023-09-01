@@ -87,12 +87,23 @@ const router = createRouter({
           name: 'Q&A',
           component: () => import('../views/Q&A.vue')
         },
+        {
+          path: 'PayHistory',
+          name: 'PayHistory',
+          component: () => import('../views/PayHistory.vue')
+        },
       ],
     },
     {
       path: '/UserLogin',
       name: 'UserLogin',
       component: () => import('../views/UserLogin.vue')
+    },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: () => import('../views/admin/AdminView.vue'),
+      children:[]
     },
     {
       path: '/:pathMatch(.*)*',
