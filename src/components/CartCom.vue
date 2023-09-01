@@ -34,7 +34,7 @@
         </thead>
         <tbody>
           <tr v-for="item, index in userCartCourses" :key="item.timestamp">
-            <td width="8%" class="">
+            <td width="6%" class="">
               <div class="form-check">
                 <input class="form-check-input" 
                   type="checkbox" 
@@ -47,7 +47,7 @@
             </td>
             <td width="15%"
                 @click="goCoursePage(item[0].id)">
-                <div class="table-image cursor-pointer mx-auto">
+                <div class="cart-image cursor-pointer mx-auto">
                   <img :src="item[0].data.courseImg" alt="課程圖片">
                 </div>
             </td>
@@ -116,15 +116,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.table-image {
-  width: 100px;
-  height: 60px;
-  border-radius: 10px;
+.cart-image {
+  // width: 100px;
+  // height: 60px;
+  border-radius: 20%;
   overflow: hidden;
   img {
-    width: 100px;
-    height: 60px;
-    object-fit: cover;
+    // width: 100px;
+    // height: 60px;
+    // object-fit: cover;
     transition: transform .3s;
   }
   &:hover {
