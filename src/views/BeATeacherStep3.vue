@@ -2,7 +2,9 @@
   <div class="container mt-48">
     <div class="row">
       <div class="col-12 col-lg-8">
-        <img :src="beATeacherData.courseImg" alt="課程圖片" class="course-photo">
+        <div class="pe-48">
+          <img :src="beATeacherData.courseImg" alt="課程圖片" class="course-photo">
+        </div>
       </div>
       <div class="col-12 col-lg-4 d-flex flex-column">
         <h1 class="fs-2 fw-bold">{{ beATeacherData.courseName }}</h1>

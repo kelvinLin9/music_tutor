@@ -1,9 +1,9 @@
 <template>
-  <div class="container my-3">
+  <div class="container mt-48 mb-8"> 
     <VForm  v-slot="{ errors }"
            @submit="goBeATeacherStep2()">
-      <div class="row justify-content-center mb-3">
-        <div class="col-2 d-flex justify-content-end">
+      <div class="row justify-content-center mb-16">
+        <div class="col-auto d-flex justify-content-end">
           <label for="courseName" class="col-form-label">
             課程名稱：
           </label>
@@ -22,8 +22,8 @@
           <ErrorMessage class="invalid-feedback" name="課程名稱"/>
         </div>
       </div>
-      <div class="row justify-content-center mb-3">
-        <div class="col-2 d-flex justify-content-end">
+      <div class="row justify-content-center mb-16">
+        <div class="col-auto d-flex justify-content-end">
           <label for="coursePrice" class="col-form-label">
             課程費用：
           </label>
@@ -42,8 +42,8 @@
           <ErrorMessage class="invalid-feedback" name="課程費用"/>
         </div>
       </div>
-      <div class="row justify-content-center mb-3">
-        <div class="col-2 d-flex justify-content-end">
+      <div class="row justify-content-center mb-16">
+        <div class="col-auto d-flex justify-content-end">
           <label for="courseCategory" class="col-form-label">
             教學項目：
           </label>
@@ -146,10 +146,10 @@
           </div>
         </div>
       </div>
-      <div class="row justify-content-center mb-3">
-        <div class="col-2 d-flex justify-content-end">
+      <div class="row justify-content-center mb-16">
+        <div class="col-auto d-flex justify-content-end">
           <label for="courseTime" class="col-form-label">
-            授課時間(分)：
+            授課時間：
           </label>
         </div>
         <div class="col-8 col-lg-6">
@@ -166,8 +166,8 @@
           <ErrorMessage class="invalid-feedback" name="授課時間"/>
         </div>
       </div>
-      <div class="row justify-content-center mb-3">
-        <div class="col-2 d-flex justify-content-end">
+      <div class="row justify-content-center mb-16">
+        <div class="col-auto d-flex justify-content-end">
             上課方式：
         </div>
         <div class="col-8 col-lg-6">
@@ -200,8 +200,8 @@
           </div>
         </div>
       </div>
-      <div class="row justify-content-center mb-3">
-        <div class="col-2 d-flex justify-content-end">
+      <div class="row justify-content-center mb-16">
+        <div class="col-auto d-flex justify-content-end">
           <label for="cityName" class="col-form-label"
               :class="{'d-none' : beATeacherData.courseMethod.length == 1 && beATeacherData.courseMethod[0] == '線上'}">
             上課地點：
@@ -239,16 +239,15 @@
                 <option value="台東縣">台東縣</option>
                 <option value="花蓮縣">花蓮縣</option>
                 <option value="連江縣">連江縣</option>
-              </VField>
-              <ErrorMessage class="invalid-feedback" name="上課地點"/>
+          </VField>
+          <ErrorMessage class="invalid-feedback" name="上課地點"/>
+          <div class="text-end ">
+            <button type="submit" class="btn btn-primary mt-24 px-32">
+              下一步
+            </button>
+          </div>
         </div>
-      </div>
-      <div class="row justify-content-center">
-        <div class="col-8 text-end">
-          <button type="submit" class="btn btn-primary">
-            &emsp;&emsp;下一步&emsp;&emsp;
-          </button>
-        </div>
+        
       </div>
     </VForm>
   </div>

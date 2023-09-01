@@ -3,36 +3,36 @@
 <div class="container">
   <div class="row my-16">
     <div class="col-12 col-lg-3 d-flex flex-column align-items-center mb-32 py-32 shadow h-100">
-        <div class="user-photo position-relative mb-16">
-          <img :src="teacherData.teacherImg" alt="大頭照"
-                v-if="teacherData.teacherImg">
-          <img src="../assets/images/預設大頭貼.png" alt="預設大頭照"
-                v-if="!teacherData.teacherImg">
-        </div>
-        <!-- 姓名 -->
-        <div class="mb-8 fs-3 fw-bold position-relative">
-          {{ teacherData.displayName }}
-          <i :class="teacherData.gender"></i>
-        </div>
-        <RouterLink to="/MemberPage">
-            <button type="button" class="btn btn-primary mt-48">
-              編輯個人資料
-            </button>
-        </RouterLink>
+      <div class="user-photo position-relative mb-16">
+        <img :src="teacherData.teacherImg" alt="大頭照"
+              v-if="teacherData.teacherImg">
+        <img src="../assets/images/預設大頭貼.png" alt="預設大頭照"
+              v-if="!teacherData.teacherImg">
       </div>
+      <!-- 姓名 -->
+      <div class="mb-8 fs-3 fw-bold position-relative">
+        {{ teacherData.displayName }}
+        <i :class="teacherData.gender"></i>
+      </div>
+      <RouterLink to="/MemberPage">
+        <button type="button" class="btn btn-primary mt-48">
+          編輯個人資料
+        </button>
+      </RouterLink>
+    </div>
     <div class="col-12 col-md-9">
       <!-- 進度條 -->
-      <div class="mb-16 shadow">
-        <!-- <h2 class="fs-3">完成個人資訊，獲得生日優惠禮與更精準的課程推薦</h2> -->
+      <!-- <div class="mb-16 shadow">
+        <h2 class="fs-3">完成個人資訊，獲得生日優惠禮與更精準的課程推薦</h2>
 
-      </div>
+      </div> -->
       <!-- 帳號驗證 -->
-      <table class="table table-hover align-middle px-8 shadow">
+      <table class="table table-hover align-middle shadow">
         <tbody>
           <!-- 信箱 -->
           <tr>
             <td>
-              <div class="d-flex justify-content-between align-items-center">
+              <div class="d-flex justify-content-between align-items-center mx-16 ">
                 <div class="d-flex align-items-center">
                   <div class="login-logo d-flex justify-content-center align-items-center">
                     <img src="../assets/images/LOGO.png" alt="樂樂LOGO">
@@ -53,7 +53,7 @@
           <!-- google -->
           <tr>
             <td>
-              <div class="d-flex justify-content-between align-items-center">
+              <div class="d-flex justify-content-between align-items-center mx-16">
                 <div class="d-flex align-items-center">
                   <div class="login-logo d-flex justify-content-center align-items-center">
                     <img src="../assets/images/google-icon.png" alt="google-icon">
@@ -77,7 +77,7 @@
           <!-- facebook -->
           <tr>
             <td>
-              <div class="d-flex justify-content-between align-items-center">
+              <div class="d-flex justify-content-between align-items-center mx-16">
                 <div class="d-flex align-items-center">
                   <div class="login-logo d-flex justify-content-center align-items-center">
                     <img src="../assets/images/facebook-icon.png" alt="facebook-icon">
@@ -101,7 +101,7 @@
           <!-- GitHub -->
           <tr>
             <td>
-              <div class="d-flex justify-content-between align-items-center">
+              <div class="d-flex justify-content-between align-items-center mx-16">
                 <div class="d-flex align-items-center">
                   <div class="login-logo d-flex justify-content-center align-items-center">
                     <img src="../assets/images/github-icon.png" alt="github-icon"
