@@ -124,9 +124,11 @@
             </div>
         </div>
       </div>
-      <button type="button" class="btn btn-outline-primary border-0 d-block mx-auto w-75 w-md-55 w-lg-40  mt-32 shadow fw-bolder fs-14 letter-spacing-8 py-16">
-        製作課程
-      </button>
+      <RouterLink to="/CreateCourses/BeATeacherStep1">
+        <button type="button" class="btn btn-outline-primary border-0 d-block mx-auto w-75 w-md-55 w-lg-40  mt-32 shadow fw-bolder fs-14 letter-spacing-8 py-16">
+          製作課程
+        </button>
+      </RouterLink>
     </div>
   </section>
   <!-- 精選課程 -->
@@ -137,9 +139,11 @@
       <p class="fs-14 fw-light lh-lg mb-7 mb-48">音樂是靈魂的共鳴，而我們的課程精選優美。踏上專業音樂之旅，探索熱門精選課程，逐步揭開音樂的神秘面紗。這裡，我們致力於將音樂<br>的藝術帶入您的生活，以專業指導和獨特教學方法，激發您的音樂熱情。</p>
       <CoursesLoading v-if="loading"/>
       <FeaturedCourses v-if="!loading"/>
-      <button type="button" class="btn btn-outline-primary border-0 d-block mx-auto w-75 w-md-55 w-lg-40  mt-32 shadow fw-bolder fs-14 letter-spacing-8 py-16">
-        更多課程
-      </button>
+      <RouterLink to="/AllCourses" class="nav-link">
+        <button type="button" class="btn btn-outline-primary border-0 d-block mx-auto w-75 w-md-55 w-lg-40  mt-32 shadow fw-bolder fs-14 letter-spacing-8 py-16">
+          更多課程
+        </button>
+      </RouterLink>
     </div>
 
   </section>

@@ -1,6 +1,6 @@
 <template>
   <!-- 上方統計欄 -->
-  <div class="bg-primary text-white">
+  <div class="bg-primar text-whit">
     <div class="container">
       <div class="row align-items-center py-48">
         <div class="col-12 col-lg-6 mb-3 mb-lg-0">
@@ -17,16 +17,16 @@
         <div class="col-12 col-lg-6 ms-auto">
           <div class="row justify-content-between align-items-center">
             <div class="col-auto text-center">
-              <h5>參加課程</h5>
-              <p class="fs-1">{{ userStudentCourses.length }}</p>
+              <h3 class="fs-6 text-gray-600">參加課程</h3>
+              <p class="fs-1 text-primary">{{ userStudentCourses.length }}</p>
             </div>
             <div class="col-auto text-center">
-              <h5>已開課程</h5>
-              <p class="fs-1">{{ userTeacherCourses.length }}</p>
+              <h3 class="fs-6 text-gray-600">已開課程</h3>
+              <p class="fs-1 text-primary">{{ userTeacherCourses.length }}</p>
             </div>
             <div class="col-auto text-center">
-              <h5>目前收藏</h5>
-              <p class="fs-1">{{ userBookmarkCourses.length }}</p>
+              <h3 class="fs-6 text-gray-600">目前收藏</h3>
+              <p class="fs-1 text-primary">{{ userBookmarkCourses.length }}</p>
             </div>
           </div>
         </div>

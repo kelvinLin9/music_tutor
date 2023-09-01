@@ -395,5 +395,10 @@ export default {
   right: -30px;
   bottom: 0;
 }
-
+.badge {
+  color: #000000 !important;
+  background: #ffffff !important;
+  border: 1px solid #ff715f !important;
+  font-weight: bold;
+}
 </style> 

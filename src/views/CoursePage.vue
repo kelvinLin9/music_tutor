@@ -1,9 +1,11 @@
 <template>
   <!-- 課程圖片&說明 -->
   <div class="container mt-48" v-if="!loading">
-    <div class="row">
+    <div class="row justify-content-between">
       <div class="col-12 col-lg-8">
-        <img :src="courseData.courseImg" alt="課程圖片" class="course-photo">
+        <div class="pe-48">
+          <img :src="courseData.courseImg" alt="課程圖片" class="course-photo">
+        </div>
       </div>
       <div class="col-12 col-lg-4 d-flex flex-column">
         <h1 class="fs-2 fw-bold">{{ courseData.courseName }}</h1>
@@ -184,10 +186,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-img {
-  width: 100%;
-  object-fit: cover;
-}
 .user-photo {
   width: 100px;
   height: 100px;
@@ -196,7 +194,6 @@ img {
 }
 .course-photo {
   height: 500px;
-  object-fit: cover;
   @media (max-width: 768px)  {
     height: 300px;
   }
