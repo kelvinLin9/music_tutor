@@ -332,7 +332,7 @@ export default defineStore('dataStore', {
     // 我的課程頁面for學生
     async getUserStudentCourses() {
       if(!this.studentData.myStudyCourses) {
-        console.log('沒取得所有課程')
+        console.log('無學生端資料')
       } else {
         this.userStudentCourses = []
         this.studentData.myStudyCourses.forEach((item) => {
@@ -427,7 +427,7 @@ export default defineStore('dataStore', {
       })
     },
     // 取得行事曆用數據
-    async getTeachDate () {
+    async getTeachDate () { 
       this.userTeacherCourses.forEach((i) => {
         i.data.whoBuy.forEach(async (j) => {
           // 用uid去找學生名字渲染modal
