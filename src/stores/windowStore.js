@@ -15,7 +15,7 @@ export default defineStore('windowStore', {
         } else {
           this.goTopIcon = false
         }
-        if (e.target.scrollingElement.scrollTop > 100) {
+        if (e.target.scrollingElement.scrollTop > 50) {
           this.navbarWhite = true
         } else {
           this.navbarWhite = false
