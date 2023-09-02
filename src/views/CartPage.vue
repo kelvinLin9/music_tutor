@@ -27,7 +27,7 @@
           <div class="card-footer">
             <div class="row my-8 align-items-center">
               <div class="col-8 pe-0">
-                <input class="col-form-label w-100 py-1 fs-7 rounded-5 px-16" 
+                <input class="col-form-label w-100 py-1 fs-7 rounded-5 px-16 border-0" 
                     type="text" 
                     id="coupon"  
                     name="coupon" 

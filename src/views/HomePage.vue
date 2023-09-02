@@ -1,40 +1,8 @@
 <template>
   <home-loading/>
-  <!-- header -->
-  <section class="header d-flex flex-column justify-content-center">
-    <div class="container">
-      <div class="row align-items-center">
-        <div class="col-12 col-lg-6 ">
-          <div class="blockquote px-32">
-            <h2 class="fs-2 text-white mb-3">
-              找尋像好友一樣的音樂導師
-            </h2>
-            <h3 class="fs-6 text-white mb-24">
-              在這裡與熱愛音樂的導師相遇，將你的音樂激情傾注其中。
-            </h3>
-            <div class="mb-8">
-              <input class="form-control mt-0" list="datalistOptions" id="exampleDataList" placeholder="我想學習...">
-            </div>
-            <div class="home-pills">
-              <a href="#" @click.prevent="goAllCourses('鋼琴')">
-                <span class="badge rounded-pill text-bg-primary text-white me-8">鋼琴</span>
-              </a>
-              <a href="#" @click.prevent="goAllCourses('編曲')">
-                <span class="badge rounded-pill text-bg-primary text-white me-8">編曲</span>
-              </a>
-              <a href="#" @click.prevent="goAllCourses('流行歌唱')">
-                <span class="badge rounded-pill text-bg-primary text-white me-8">流行歌唱</span>
-              </a>
-              <a href="#" @click.prevent="goAllCourses('木吉他')">
-                <span class="badge rounded-pill text-bg-primary text-white me-8">木吉他</span>
-              </a>
-            </div>
-          </div>
-        </div>
-        
-      </div>
-    </div>
-  </section>
+  <home-header/>
+
+
   <!-- 歡迎 -->
   <section>
     <div class="container text-center py-48">
@@ -49,11 +17,10 @@
         讓學習音樂成為一段充滿樂趣與成長的旅程<br>
       </p>
     </div>
-
   </section>
   <!-- 圖 -->
   <section>
-    <img class="" src="../assets/images/banner.jpg" alt="" style="height: 300px;">
+    <div class="home-section2"></div>
   </section>
   <!-- serve -->
   <section>
@@ -67,7 +34,9 @@
             <p class="fs-14 fw-light lh-lg">在尋找音樂之道的路上，樂樂音樂家教媒合平台將您與充滿熱情的音樂老師相結合。<br>無論您是剛起步或已有經驗，我們靈活的課程時間安排讓您自由展現對音樂的想像和熱愛。<br>一同探索音符的世界，實現心中的音樂夢想。<br>在這裡，旋律不僅被演奏，更被細心呵護成成長的足跡。</p>
         </div>
         <div class="col-md-6">
-          <img class="img-fluid" src="../assets/images/banner.jpg" alt="">
+          <div class="home-serve">
+            <img src="../assets/images/home-serve-1.jpg" alt="home-serve-1">
+          </div>
         </div>
       </div>
 
@@ -77,7 +46,9 @@
             <p class="fs-14 fw-light lh-lg">音樂家的才華在樂樂音樂家教媒合平台綻放，歡迎您將空閑時間轉化為珍貴的教學時光。<br>與學生分享您的音樂造詣，同時獲得寶貴的報酬。<br>這是您與學生共同書寫音符、創造人生旋律的地方。<br>在這裡，您不僅成為指導者，更是啟發夢想、播撒希望的音樂使者。</p>
         </div>
         <div class="col-md-6">
-          <img class="img-fluid" src="../assets/images/banner.jpg" alt="">
+          <div class="home-serve">
+            <img src="../assets/images/home-serve-2.jpg" alt="home-serve-2">
+          </div>
         </div>
       </div>
     </div>
@@ -267,9 +238,10 @@ import { mapActions, mapState } from 'pinia'
 import dataStore from '../stores/dataStore'
 import HomeLoading from '../components/HomeLoading.vue'
 import goStore from '../stores/goStore'
+import HomeHeader from '../components/HomeHeader.vue'
 
 export default {
-  components: { FeaturedCourses, CoursesLoading, HomeLoading },
+  components: { FeaturedCourses, CoursesLoading, HomeLoading, HomeHeader },
   computed: {
     ...mapState(dataStore, ['loading'])
   },
@@ -284,32 +256,24 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .header {
-    background-image: url('../assets/images/banner.jpg');
-    background-size: cover;
-    background-position: center center;
-    min-height: 100vh;
+.home-section2 {
+  height: 300px;
+  background-image: url(../assets/images/home-section-2.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position:center ;
+  background-attachment: fixed;
+    @media (max-width: 600px) {
+    height: 150px;
   }
-  .blockquote {
-    background: hsla(0,0%,100%,.3);  
-    position: relative;
-    overflow: hidden;
-    backdrop-filter: blur(5px);
-  
-    /* stylings */
-    padding: 1em 0;
-    border-radius: .3em;
-    margin: 0 auto;
-    box-shadow: 0 0 0 1px hsla(0,0%,100%,.3) inset,
-	            0 .5em 1em rgba(0, 0, 0, 0.6);
-	  text-shadow: 0 1px 1px hsla(0,0%,100%,.3);
+}
+.home-serve {
+  // height: 400px;
+  img {
+    width: 100%;
+    height: 400px;
   }
-  .home-pills {
-    a :hover{
-      scale: 1.2;
-    }
-  }
-
+}
 .step{
     width: 150px;
     height: 150px;
