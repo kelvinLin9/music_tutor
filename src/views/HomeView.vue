@@ -39,6 +39,6 @@ export default {
   background:  #F3F1E5;
 }
 .min-height {
-  min-height: calc(100vh - 211px);
+  min-height: calc(100vh - 207px);
 }
 </style>

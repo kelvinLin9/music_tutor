@@ -12,10 +12,9 @@
         </button>
       </RouterLink> 
   </div>
-
-  <div class="col-12 col-lg-8 mx-auto mb-3 border rounded-2 h-100 "
+  <div class="col-lg-8 mb-3 border rounded-4 h-100 "
           v-if="studentData.myCart.length !== 0 && !loading">
-      <table class="table table-hover align-middle">
+      <table class="table table-hover align-middle px-0">
         <thead>
           <tr>
             <th width="" class="" colspan="4">
@@ -45,15 +44,13 @@
                 <label :for="item.timestamp"></label>
               </div>
             </td>
-            <td width="15%"
+            <td width="100" class="overflow-hidden"
                 @click="goCoursePage(item[0].id)">
-                <div class="cart-image cursor-pointer mx-auto">
-                  <img :src="item[0].data.courseImg" alt="課程圖片">
-                </div>
+              <img :src="item[0].data.courseImg" alt="課程圖片" class="cart-image cursor-pointer">
             </td>
-            <td width="60%">
+            <td width="">
               <div class="container">
-                <div class="row align-items-center">
+                <div class="row align-items-center ">
                   <div class="col-12">
                     <div class="fs-6 fw-bold lh-1">
                       {{ item[0].data.courseName }}
@@ -117,20 +114,13 @@ export default {
 
 <style lang="scss" scoped>
 .cart-image {
-  // width: 100px;
-  // height: 60px;
-  border-radius: 20%;
+  width: 100px;
+  height: 60px;
+  border-radius: 12px;
   overflow: hidden;
-  img {
-    // width: 100px;
-    // height: 60px;
-    // object-fit: cover;
-    transition: transform .3s;
-  }
+  // transition: transform .3s;
   &:hover {
-    img {
-      transform: scale(1.3) rotate(3deg);
-    }
+    // transform: scale(1.3) rotate(3deg);
   }
 }
 input {
