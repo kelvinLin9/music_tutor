@@ -1,7 +1,7 @@
 <template>
   <div class="container my-32">
     <div class="row justify-content-center">
-      <div class="col-12 col-md-6">
+      <div class="col-12 col-lg-6">
         <div class="progress-container">
           <div class="progress"
               :style="{'width': `${(createCourseStep - 1)*33.3333}%`}">
@@ -107,6 +107,10 @@ export default {
   height: 80px;
   justify-content: center;
   transition: .4s ease;
+  @media (max-width: 576px) {
+    width: 60px;
+    height: 60px;
+  }
 }
 .circle.active {
   // border-color: #ff715f;

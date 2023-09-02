@@ -13,7 +13,7 @@
               音樂技能：
             </label>
           </div>
-          <div class="col-4 col-lg-auto">
+          <div class="col-4 col-md-2 col-xl-auto">
             <select class="form-select fs-7 fs-sm-6" aria-label="Default select example"
                   id="selectCourseCategory"
                   v-model="selectCourseCategory">
@@ -112,7 +112,7 @@
               上課方式：
             </label>
           </div>
-          <div class="col-4 col-lg-auto">
+          <div class="col-4 col-md-2 col-xl-auto">
             <select class="form-select fs-7 fs-sm-6" 
                     aria-label="Default select example"
                     id="selectCityName"
@@ -125,7 +125,7 @@
               </option>
             </select>
           </div>
-          <div class="col-4 col-lg-auto"
+          <div class="col-4 col-md-2 col-xl-auto"
               v-if="selectCourseMethod === '在老師家' || selectCourseMethod === '在學生家'">
             <select class="form-select fs-7 fs-sm-6" aria-label="Default select example"
                     id="selectCityName"
@@ -163,7 +163,7 @@
           <div class="col-auto">
             <label for="selectCourseName" class="col-form-label">課程名稱：</label>
           </div>
-          <div class="col-8 col-sm-4 col-lg-auto">
+          <div class="col-8 me-24 col-xl-auto">
             <input type="search" id="selectCourseName" class="form-control fs-7 fs-sm-6" aria-labelledby="searchHelpInline"
             placeholder="請輸入課程名稱"
             v-model="selectCourseName">
