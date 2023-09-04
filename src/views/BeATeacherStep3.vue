@@ -1,9 +1,9 @@
 <template>
-  <div class="container mt-48">
+  <div class="container mt-32">
     <div class="row">
       <div class="col-12 col-lg-8">
-        <div class="pe-48">
-          <img :src="beATeacherData.courseImg" alt="課程圖片" class="course-photo">
+        <div class="pe-xl-48">
+          <img :src="beATeacherData.courseImg" alt="課程圖片" class="course-photo rounded-4">
         </div>
       </div>
       <div class="col-12 col-lg-4 d-flex flex-column">
@@ -13,8 +13,8 @@
     </div>
   </div>
 
-  <div class="container mt-16">
-    <div class="row align-items-center">
+  <div class="container mt-32">
+    <div class="row align-items-start">
       <!-- 老師簡介&課程細項 -->
       <div class="col-12 col-lg-8">
         <div class="row align-items-center"
@@ -77,7 +77,7 @@
         </div>
       </div>
       <!-- 別人的課顯示 -->
-      <div class="col-12 col-lg-4 p-32 border sticky-course-page">
+      <div class="col-12 col-lg-4 p-32 border sticky-course-page rounded-4">
         <h4 class="border-bottom pb-24 mb-24">購買單堂課程</h4>
         <div class="mb-3">
           <span class="fs-5 me-16">售價</span>
@@ -145,14 +145,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-img {
-  width: 100%;
-  object-fit: cover;
-}
 .user-photo {
   width: 80px;
   height: 80px;
   border-radius: 40px;
   object-fit: cover;
+}
+.course-photo {
+  width: 100%;
+  height: 500px;
+  @media (max-width: 768px)  {
+    height: 300px;
+  }
+  @media (max-width: 576px)  {
+    height: 200px;
+  }
 }
 </style>
