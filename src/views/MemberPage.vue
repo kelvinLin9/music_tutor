@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row my-16">
       <!-- 個人資料 -->
-      <div class="col-12 col-lg-3 d-flex flex-column align-items-center mb-32 py-32 shadow h-100">
+      <div class="col-12 col-lg-3 d-flex flex-column align-items-center mb-32 py-32 shadow h-100 rounded-4">
         <div class="user-photo position-relative mb-16">
           <img :src="teacherData.teacherImg" alt="大頭照"
                 v-if="teacherData.teacherImg">
@@ -65,7 +65,7 @@
       <!-- 課程介紹、其他個人資料 -->
       <div class="col-12 col-lg-9">
         <!-- Banner -->
-        <div class="ckeditor-img position-relative shadow"
+        <div class="ckeditor-img position-relative shadow rounded-4"
             :style="{ 'background-image': `url(${teacherData.ckeditorImg ||defaultCkeditorImg })` }">
           <label for="file-upload-ckeditor">
             <i class="bi bi-cloud-arrow-up-fill cursor-pointer upload-icon-ckeditor"></i>
@@ -89,14 +89,11 @@
           </a>
         </div>
         <!-- 顯示編輯內容 -->
-        <div v-html="teacherData.ckeditor" class="border p-16 shadow"></div>
+        <div v-html="teacherData.ckeditor" class="border p-16 shadow rounded-4"></div>
         <!-- ckeditor編輯框 -->
-        <div class="text-delete fs-7 py-8 "
+        <div class="text-delete fs-7 py-8"
             v-if="ckeditorState">
           <ckeditor :editor="editor" v-model="teacherData.ckeditor" :config="editorConfig"></ckeditor>
-          
-          
-
           <div class="text-end mt-8">
             <button type="button" class="btn btn-secondary me-8"
                     @click="ckeditorState = false">
@@ -119,7 +116,7 @@
               </a>
           </div>
           <!-- 多選框 -->
-          <div class="shadow p-16">
+          <div class="shadow p-16 rounded-4">
             <div class="row d-flex  mb-16">
               <p class="col-auto fw-bold mt-8">音樂風格：</p>
               <div class="col-9" v-if="!updateTeacherDataState">

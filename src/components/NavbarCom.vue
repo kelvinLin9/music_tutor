@@ -175,7 +175,7 @@ export default {
 .small-num {
   width:18px;
   height: 18px;
-  top: 0px;
+  top: 5px;
   left: 23px;
   font-size: 12px;
 }

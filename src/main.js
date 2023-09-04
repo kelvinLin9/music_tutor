@@ -78,7 +78,10 @@ const el = document.documentElement
 getComputedStyle(el).getPropertyValue(`--el-color-primary`)
 el.style.setProperty('--el-color-primary', '#ff715f')
 
-
+//aos
+import AOS from 'aos'
+import 'aos/dist/aos.css'
+AOS.init()
 
 
 const app = createApp(App)

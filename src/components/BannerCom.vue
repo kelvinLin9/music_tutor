@@ -5,8 +5,8 @@
         <div class="row align-items-center ">
           <div class="col col-lg-6">
             <div class="blockquote px-3 py-2">
-              <p class="fs-2 fw-bold"> {{ banner.title }} </p>
-              <p class="fs-2 fw-bold">{{ banner.text }} </p>
+              <h2 class="fs-2 fw-bold"> {{ banner.title }} </h2>
+              <h2 class="fs-2 fw-bold">{{ banner.text }} </h2>
               <p class="fs-7 fw-bold mt-3">{{ banner.footer }} </p>
             </div>
           </div>
