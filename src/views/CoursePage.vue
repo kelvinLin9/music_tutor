@@ -69,7 +69,7 @@
           </div>
           <div class="col-12 col-xl-auto">
             <div class="d-flex align-items-center">
-              <span class="material-symbols-outlined fs-1 me-8">history_edu</span>
+              <span class="material-symbols-outlined fs-1 me-8">school</span>
               <div>
                 <span class="text-delete fs-7">
                   上課方式
@@ -187,9 +187,9 @@ export default {
 
 <style lang="scss" scoped>
 .user-photo {
-  width: 100px;
-  height: 100px;
-  border-radius: 50px;
+  width: 80px;
+  height: 80px;
+  border-radius: 40px;
   object-fit: cover;
 }
 .course-photo {

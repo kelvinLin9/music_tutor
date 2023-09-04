@@ -4,7 +4,7 @@
       <div class="row justify-content-center justify-content-lg-between align-items-center">
         <div class="col">
           <RouterLink to="/" class="navbar-brand nav-link d-flex">
-          <img src="../assets/images/logo-white.png" alt="logo" class="logo mx-auto mx-lg-0 me-lg-auto">
+          <img src="../assets/images/logo-white.png" alt="logo" class="logo mx-auto mx-lg-0 me-lg-auto mb-16">
           <!-- <span class="test">樂樂音樂家教媒合平台</span> -->
           <!-- <svg  version="1.1" id="圖層_1" 
                 xmlns="http://www.w3.org/2000/svg" 

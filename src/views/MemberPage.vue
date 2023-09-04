@@ -120,8 +120,8 @@
           </div>
           <!-- 多選框 -->
           <div class="shadow p-16">
-            <div class="row d-flex align-items-center mb-16">
-              <p class="col-auto fw-bold">音樂風格：</p>
+            <div class="row d-flex  mb-16">
+              <p class="col-auto fw-bold mt-8">音樂風格：</p>
               <div class="col-9" v-if="!updateTeacherDataState">
                 <span class="badge rounded-pill text-bg-primary text-white fs-6 py-8 mx-4 px-16 my-4"
                   v-for="item in teacherData.musicStyle" :key="item">
@@ -144,8 +144,8 @@
                 </el-select>
               </div>
             </div>
-            <div class="row d-flex align-items-center mb-16">
-              <p class="col-auto fw-bold">擅長領域：</p>
+            <div class="row d-flex  mb-16">
+              <p class="col-auto fw-bold mt-8">擅長領域：</p>
               <div class="col-9" v-if="!updateTeacherDataState">
                 <span class="badge rounded-pill text-bg-primary text-white fs-6 py-8 mx-4 px-16 my-4"
                   v-for="item in teacherData.expertise" :key="item">
@@ -168,8 +168,8 @@
                 </el-select>
               </div>
             </div>
-            <div class="row d-flex align-items-center mb-16">
-              <p class="col-auto fw-bold">教學語言：</p>
+            <div class="row d-flex  mb-16">
+              <p class="col-auto fw-bold mt-8">教學語言：</p>
               <div class="col-9" v-if="!updateTeacherDataState">
                 <span class="badge rounded-pill text-bg-primary text-white fs-6 py-8 mx-4 px-16 my-4"
                   v-for="item in teacherData.language" :key="item">
@@ -399,6 +399,6 @@ export default {
   color: #000000 !important;
   background: #ffffff !important;
   border: 1px solid #ff715f !important;
-  font-weight: bold;
+  font-weight: normal;
 }
 </style> 
