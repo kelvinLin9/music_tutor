@@ -1,7 +1,7 @@
 <template>
   <div class="container my-32">
     <div class="row justify-content-center">
-      <div class="col-12 col-lg-6">
+      <div class="col-12 col-md-10 col-lg-6">
         <div class="progress-container">
           <div class="progress"
               :style="{'width': `${(createCourseStep - 1)*33.3333}%`}">
@@ -25,22 +25,22 @@
           <div class="circle fw-bold position-relative"
           :class="{ 'active': createCourseStep > 0}">
             <span class="material-symbols-outlined fs-2">edit_document</span>
-            <span class="progress-bar-text position-absolute position-absolute text-dark w-100">填寫資訊</span>
+            <span class="progress-bar-text position-absolute position-absolute text-dark w-100 fs-8 fs-md-6">填寫資訊</span>
           </div>
           <div class="circle fw-bold position-relative"
           :class="{ 'active': createCourseStep > 1}">
             <span class="material-symbols-outlined fs-2">contract_edit</span>
-            <span class="progress-bar-text position-absolute position-absolute text-dark w-100">課程介紹</span>
+            <span class="progress-bar-text position-absolute position-absolute text-dark w-100 fs-8 fs-md-6">課程介紹</span>
           </div>
           <div class="circle fw-bold position-relative"
           :class="{ 'active': createCourseStep > 2}">
             <span class="material-symbols-outlined fs-2">preview</span>
-            <span class="progress-bar-text position-absolute position-absolute text-dark w-100">預覽頁面</span>
+            <span class="progress-bar-text position-absolute position-absolute text-dark w-100 fs-8 fs-md-6">預覽頁面</span>
           </div>
           <div class="circle fw-bold position-relative"
           :class="{ 'active': createCourseStep > 3}">
             <span class="material-symbols-outlined fs-2">task_alt</span>
-            <span class="progress-bar-text position-absolute position-absolute text-dark w-100">開課完成</span>
+            <span class="progress-bar-text position-absolute position-absolute text-dark w-100 fs-8 fs-md-6">開課完成</span>
           </div>
         </div>
       </div>
@@ -123,5 +123,9 @@ export default {
 .progress-bar-text {
   top: 110%;
   left: 5%;
+  @media (max-width: 576px) {
+    top: 120%;
+  }
+ 
 }
 </style>
