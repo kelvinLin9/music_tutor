@@ -43,9 +43,9 @@ export default defineStore('goStore', {
     },
     goAllCourses(search) {
       router.push('/AllCourses')
-      filter.selectCourseCategory = search
-      console.log(filter.selectCourseCategory)
-
+      if (search) {
+        filter.selectCourseCategory = search
+      }
     },
   }
 })
