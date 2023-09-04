@@ -75,7 +75,7 @@
                 </div>
               </RouterLink>
             </li>
-            <li class="nav-item dropdown d-flex">  
+            <li class="nav-item dropdown d-lg-flex">  
               <button class="btn dropdown-toggle text-primary ps-0 ps-lg-2 border-0"
                       type="button" id="dropdownLogin" 
                       data-bs-toggle="dropdown" aria-expanded="false"
