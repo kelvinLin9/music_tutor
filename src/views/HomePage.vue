@@ -27,7 +27,7 @@
     <div class="container py-48 ">
       <h2 class="letter-spacing-12 fs-1 fw-bolder">SERVE</h2>
       <h2 class="letter-spacing-8 fs-6 mb-48">我們的服務</h2>
-      <div class="row align-items-center">
+      <div class="row align-items-center mb-48">
         <div class="col-md-6 mb-3">
            <h3 class="lh-base mb-3 mb-md-4">奏響夢想的旋律。<br>
             從這裡開始。</h3>
@@ -61,7 +61,7 @@
       <p class="fs-14 fw-light lh-lg mb-48">
         輕鬆開始您的音樂教學之旅！我們的老師只需簡單的四步驟，即可開展線上課程。<br>將您的音樂才華轉化為寶貴的報酬，無壓力、無煩惱。讓音符為您譜寫充實人生的新篇章。
       </p>
-      <div class="row row-cols-2 row-cols-md-4 mb-48 gx-0 gy-3">
+      <div class="row row-cols-2 row-cols-md-4 mb-48 gx-0 gy-24">
         <div class="col d-flex justify-content-center align-items-center">
             <div class="step rounded-circle bg-light shadow position-relative d-flex flex-column  align-items-center justify-content-center">
               <span class="fs-3 position-absolute top-0 start-50 translate-middle">01</span>
@@ -205,24 +205,24 @@
         <h2 class="letter-spacing-12 fs-1 fw-bolder">PARTNER</h2>
         <h2 class="letter-spacing-8  fs-6 mb-48">我們的合作夥伴</h2>
         <p class="fs-14 fw-light lh-lg mb-48">與知名品牌攜手合作，為您提供更廣闊的音樂學習視野，豐富您的音樂旅程。</p>
-        <div class="row row-cols-2 row-cols-md-4 ">
-          <div class="col">
-            <img src="../assets/images/banner.jpg" alt="合作夥伴圖片">
+        <div class="row row-cols-2 row-cols-md-4 g-24">
+          <div class="col d-flex justify-content-center align-items-center">
+            <img class="w-75" src="../assets/images/brand-1.svg" alt="合作夥伴圖片">
           </div>
-          <div class="col">
-            <img src="../assets/images/banner.jpg" alt="合作夥伴圖片">
+          <div class="col d-flex justify-content-center align-items-center">
+            <img class="w-75" src="../assets/images/brand-2.png" alt="合作夥伴圖片">
           </div>
-          <div class="col">
-            <img src="../assets/images/banner.jpg" alt="合作夥伴圖片">
+          <div class="col d-flex justify-content-center align-items-center">
+            <img class="w-75" src="../assets/images/brand-3.png" alt="合作夥伴圖片">
           </div>
-          <div class="col">
-            <img src="../assets/images/banner.jpg" alt="合作夥伴圖片">
+          <div class="col d-flex justify-content-center align-items-center">
+            <img class="w-75" src="../assets/images/brand-4.webp" alt="合作夥伴圖片">
           </div>
-          <div class="col">
-            <img src="../assets/images/banner.jpg" alt="合作夥伴圖片">
+          <div class="col d-flex justify-content-center align-items-center">
+            <img class="w-75" src="../assets/images/brand-5.webp" alt="合作夥伴圖片">
           </div>
-          <div class="col">
-            <img src="../assets/images/banner.jpg" alt="合作夥伴圖片">
+          <div class="col d-flex justify-content-center align-items-center">
+            <img class="w-75" src="../assets/images/brand-6.png" alt="合作夥伴圖片">
           </div>
         </div>
     </div>
