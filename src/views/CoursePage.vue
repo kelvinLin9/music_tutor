@@ -1,13 +1,13 @@
 <template>
   <!-- 課程圖片&說明 -->
-  <div class="container mt-48" v-if="!loading">
+  <div class="container mt-32" v-if="!loading">
     <div class="row justify-content-between">
       <div class="col-12 col-lg-8">
-        <div class="pe-48">
-          <img :src="courseData.courseImg" alt="課程圖片" class="course-photo">
+        <div class="pe-xl-48">
+          <img :src="courseData.courseImg" alt="課程圖片" class="course-photo rounded-4">
         </div>
       </div>
-      <div class="col-12 col-lg-4 d-flex flex-column">
+      <div class="col-12 col-lg-4 d-flex flex-column mt-32 mt-lg-0">
         <h1 class="fs-2 fw-bold">{{ courseData.courseName }}</h1>
         <p class="mt-16 text-delete">{{ courseData.courseIntro}}</p>
         <a href="#" class="border border-primary px-16 py-8 text-primary mt-auto ms-auto cursor-pointer rounded-pill"
@@ -22,8 +22,8 @@
     </div>
   </div>
   <!-- 其他說明 -->
-  <div class="container mt-16" v-if="!loading">
-    <div class="row align-items-center">
+  <div class="container mt-32" v-if="!loading">
+    <div class="row align-items-start">
       <!-- 老師簡介&課程細項 -->
       <div class="col-12 col-lg-8">
         <div class="row align-items-center"
@@ -35,13 +35,13 @@
             {{ courseData.displayName }}
           </div>
         </div>
-        <div class="row my-3">
+        <div class="row mt-16 mb-32">
           <div class="col-12 col-lg-10">
             {{ courseData.teacherIntro }}
           </div>
         </div>
-        <p class="fs-4 mb-8 fw-bold">關於課程</p>
-        <div class="row my-3 g-3">
+        <p class="fs-4 mb-16 fw-bold">關於課程</p>
+        <div class="row mb-32 g-3">
           <div class="col-auto">
             <div class="d-flex align-items-center">
               <span class="material-symbols-outlined fs-1 me-8">timer</span>
@@ -86,7 +86,7 @@
         </div>
       </div>
       <!-- 別人的課顯示 -->
-      <div class="col-12 col-lg-4 p-32 border sticky-course-page"
+      <div class="col-12 col-lg-4 p-32 border sticky-course-page rounded-4"
           v-if="this.user.uid !== courseData.uid">
         <h4 class="border-bottom pb-24 mb-24">購買單堂課程</h4>
         <div class="mb-3">
@@ -108,7 +108,7 @@
         </div>
       </div>
       <!-- 自己的課顯示 -->
-      <div class="col-12 col-lg-4 p-32 border sticky-course-page"
+      <div class="col-12 col-lg-4 p-32 border sticky-course-page rounded-4"
           v-if="this.user.uid === courseData.uid">
         <h4 class="border-bottom pb-24 mb-24">購買人數</h4>
         <div class="mb-3">
@@ -126,16 +126,16 @@
         </div>
       </div>
       <!-- 課程評價 -->
-      <div class="row mb-16">
+      <div class="row mb-32 mt-32 mt-lg-0">
         <div class="col-12 col-lg-8">
-          <p class="fs-4 mb-3 fw-bold">課程評價</p>
+          <p class="fs-4 mb-16 fw-bold">課程評價</p>
           <feedback-com/>
         </div>
       </div>
       <!-- 猜你喜歡 -->
-      <div class="row mb-16">
+      <div class="row mb-32">
         <div class="col-12 col-lg-8">
-          <p class="fs-4 mb-3 fw-bold">猜你喜歡</p>
+          <p class="fs-4 mb-16 fw-bold">猜你喜歡</p>
           <you-like-courses />
         </div>
       </div>
@@ -193,6 +193,7 @@ export default {
   object-fit: cover;
 }
 .course-photo {
+  width: 100%;
   height: 500px;
   @media (max-width: 768px)  {
     height: 300px;

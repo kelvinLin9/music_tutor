@@ -10,8 +10,6 @@
     :autoplay= "{
         delay: 2000,
     }"
-     
-
       class="mySwiper position-relative"
     >
       <SwiperSlide>
@@ -26,17 +24,25 @@
         <div class="header-bg-3">
         </div>
       </SwiperSlide>
-
       <div class="container">
-        <div class="blockquote px-32 position-absolute">
+        <div class="blockquote px-32 position-absolute rounded-4">
           <h2 class="fs-2 text-white mb-16">
             找尋像好友一樣的音樂導師
           </h2>
           <h3 class="fs-6 text-white mb-24">
             在這裡與熱愛音樂的導師相遇，將你的音樂激情傾注其中。
           </h3>
-          <div class="mb-8">
-            <input class="form-control mt-0" list="datalistOptions" id="exampleDataList" placeholder="我想學習...">
+          <div class="mb-8 position-relative">
+            <input class="form-control mt-0" 
+                    list="datalistOptions" 
+                    id="homeInput" 
+                    placeholder="我想學習..."
+                    v-model="selectCourseName"
+                    >
+            <label for="homeInput" class="position-absolute home-input" 
+                    @click.prevent="goAllCourses()">
+              <span class="material-symbols-outlined align-middle text-gray-600 cursor-pointer">search</span>
+            </label>
           </div>
           <div class="home-pills">
             <a href="#" @click.prevent="goAllCourses('鋼琴')">
@@ -67,11 +73,21 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 import 'swiper/css/effect-fade';
+import { mapActions, mapState, mapWritableState } from 'pinia'
+import filterStore from '@/stores/filterStore'
+import goStore from '../stores/goStore'
 
 export default {
   components: {
     Swiper,
     SwiperSlide,
+  },
+  computed: {
+    ...mapWritableState(filterStore, ['selectCourseName']),
+
+  },
+  methods: {
+    ...mapActions(goStore, ['goAllCourses']),
   },
 }
 </script>
@@ -118,5 +134,9 @@ export default {
     a :hover{
       scale: 1.2;
     }
+  }
+  .home-input {
+    top: 2px;
+    right: 5px;
   }
 </style>

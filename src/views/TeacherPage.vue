@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row my-16">
       <!-- 個人資料 -->
-      <div class="col-12 col-lg-3 d-flex flex-column align-items-center mb-32 py-32 shadow h-100">
+      <div class="col-12 col-lg-3 d-flex flex-column align-items-center mb-32 py-32 shadow h-100 rounded-4">
         <div class="user-photo position-relative mb-16">
           <img :src="otherTeacherData.teacherImg" alt="大頭照"
                 v-if="otherTeacherData.teacherImg">
@@ -40,15 +40,15 @@
       <!-- 課程介紹、其他個人資料 -->
       <div class="col-12 col-lg-9">
         <!-- Banner -->
-        <div class="ckeditor-img position-relative shadow"
+        <div class="ckeditor-img position-relative shadow rounded-4 mb-16"
             :style="{ 'background-image': `url(${otherTeacherData.ckeditorImg ||defaultCkeditorImg })` }">
         </div>
         <!-- 顯示編輯內容 -->
-        <div v-html="otherTeacherData.ckeditor" class="border p-16 shadow"></div>
+        <div v-html="otherTeacherData.ckeditor" class="border p-16 shadow rounded-4"></div>
         <!-- 專長 -->
         <div class="my-16">
           <!-- 多選框 -->
-          <div class="shadow p-16">
+          <div class="shadow p-16 rounded-4">
             <div class="row d-flex align-items-center mb-16">
               <p class="col-auto fw-bold">音樂風格：</p>
               <div class="col-9">
