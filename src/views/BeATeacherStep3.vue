@@ -99,13 +99,13 @@
     </div>
         <div class="row justify-content-center my-16">
       <div class="col-12 d-flex justify-content-between">
-        <button type="button" class="btn btn-outline-primary"
+        <button type="button" class="btn btn-outline-primary px-64"
                    @click="goBeATeacherStep2()">
-            &emsp;&emsp;上一步&emsp;&emsp;
+            上一步
         </button>
-        <button type="button" class="btn btn-primary"
+        <button type="button" class="btn btn-primary px-64"
                   @click="goBeATeacherStep4(), SetFirebaseCourseData()">
-            &emsp;&emsp;下一步&emsp;&emsp;
+            下一步
         </button>
       </div>
     </div>

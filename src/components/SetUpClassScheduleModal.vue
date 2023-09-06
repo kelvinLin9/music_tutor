@@ -14,8 +14,7 @@
                   <th scope="col">#</th>
                   <th scope="col">學生</th>
                   <th scope="col">購買時間</th>
-                  <th scope="col">上課時間</th>
-                  <th scope="col"></th>
+                  <th scope="col" colspan="2">上課時間</th>
                 </tr>
               </thead>
               <tbody>
