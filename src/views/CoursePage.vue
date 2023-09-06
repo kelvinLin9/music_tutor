@@ -9,7 +9,7 @@
       </div>
       <div class="col-12 col-lg-4 d-flex flex-column mt-32 mt-lg-0">
         <h1 class="fs-2 fw-bold">{{ courseData.courseName }}</h1>
-        <p class="mt-16 text-delete">{{ courseData.courseIntro}}</p>
+        <p class="my-16 text-delete">{{ courseData.courseIntro}}</p>
         <a href="#" class="border border-primary px-16 py-8 text-primary mt-auto ms-auto cursor-pointer rounded-pill"
             @click.prevent="toggleBookmark(courseData.id)"
             data-bs-toggle="tooltip"
@@ -159,7 +159,7 @@ import FeedbackCom from '../components/FeedbackCom.vue'
 import YouLikeCourses from '../components/YouLikeCourses.vue'
 
 export default {
-  components: { EditMyCourseModal, FeedbackCom, YouLikeCourses,  },
+  components: { EditMyCourseModal, FeedbackCom, YouLikeCourses },
   data () {
     return {
       id: ''

@@ -2,11 +2,11 @@
   <div class="container mt-32">
     <div class="row">
       <div class="col-12 col-lg-8">
-        <div class="pe-xl-48">
+        <div class="pe-xl-48 mt-16">
           <img :src="beATeacherData.courseImg" alt="課程圖片" class="course-photo rounded-4">
         </div>
       </div>
-      <div class="col-12 col-lg-4 d-flex flex-column">
+      <div class="col-12 col-lg-4 d-flex flex-column mt-16">
         <h1 class="fs-2 fw-bold">{{ beATeacherData.courseName }}</h1>
         <p class="mt-16 text-delete">{{ beATeacherData.courseIntro}}</p>
       </div>
@@ -97,13 +97,13 @@
         </div>
       </div>
     </div>
-        <div class="row justify-content-center my-16">
+        <div class="row justify-content-center mt-16 mb-32">
       <div class="col-12 d-flex justify-content-between">
-        <button type="button" class="btn btn-outline-primary px-64"
+        <button type="button" class="btn btn-outline-primary px-48"
                    @click="goBeATeacherStep2()">
             上一步
         </button>
-        <button type="button" class="btn btn-primary px-64"
+        <button type="button" class="btn btn-primary px-48"
                   @click="goBeATeacherStep4(), SetFirebaseCourseData()">
             下一步
         </button>

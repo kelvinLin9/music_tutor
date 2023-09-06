@@ -4,7 +4,7 @@
   <CoursesLoading class="my-3" v-if="loading"/>
   <!-- 搜尋、排序 -->
   <div class="container mt-3 fs-7 fs-sm-6" v-if="!loading">
-    <div class="row align-items-center g-2">
+    <div class="row align-items-center g-8">
       <!-- 技能 -->
       <div class="col-12 col-xl-auto me-lg-1">
         <div class="row g-1 align-items-center">
@@ -218,7 +218,7 @@
       </div>
     </div>
     <!-- 卡片課程 -->
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-3"
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-16"
          v-if="displayState === 'grid'">
       <CourseCard />
     </div>

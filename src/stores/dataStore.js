@@ -48,7 +48,7 @@ export default defineStore('dataStore', {
       courseCategory: '',
       courseMethod: [],      
       cityName: '',
-      time: 0,
+      time: "",
       price: 0,
       whoBuy:[],
       onSale:true,
