@@ -17,6 +17,9 @@ const Toast = Swal.mixin({
     toast.addEventListener('mouseleave', Swal.resumeTimer)
   }
 })
+const SwalN = Swal.mixin({
+  confirmButtonColor: '#ff715f',
+})
 
 export default defineStore('cartStore', {
   state: () => ({
@@ -95,7 +98,7 @@ export default defineStore('cartStore', {
     // 新增資料進到結帳頁面
     addToPayWrap() {
       if (this.cartCheckboxWrap.length === 0) {
-        Swal.fire('請選擇結帳項目')
+        SwalN.fire('請選擇結帳項目')
       } else {
         this.cartPageState = 'pay'
         let total = 0
@@ -124,16 +127,19 @@ export default defineStore('cartStore', {
         console.log(i)
         console.log(data.couponData[i])
         if (this.couponCode === i) {
-          Swal.fire('成功加入折扣碼')
+          SwalN.fire('成功加入折扣碼')
           this.couponValue = data.couponData[i]
           this.payWrap.couponUse = i
           return
         }
       }
-      Swal.fire('折扣碼不存在')
+      SwalN.fire({
+        title:'折扣碼不存在',
+        confirmButtonColor: '#ff715f',
+      })
     },
     async confirmToPay() {
-      // Swal.fire('新增歷史付款資訊')
+      // SwalN.fire('新增歷史付款資訊')
       // 1. 新增歷史付款資訊(買的人) 
       const wrap = { 
         timestamp : new Date().getTime(),
@@ -147,7 +153,7 @@ export default defineStore('cartStore', {
 
 
       // 2. 新增到學生課程的部分(買的人)和3合併了
-      // Swal.fire('新增到學生課程')
+      // SwalN.fire('新增到學生課程')
       // for (let i = 0; i < this.payWrap.payData.length; i++) {
         // console.log('2', this.payWrap.payData[i].courseId)
         // let wrap2 = { 
@@ -163,7 +169,7 @@ export default defineStore('cartStore', {
 
 
       // 2.3. 新增到該課程資料(賣的人)同時新增一份到學生端(買的人)
-      // Swal.fire('新增到該課程購買名單')
+      // SwalN.fire('新增到該課程購買名單')
       for (let i = 0; i < this.payWrap.payData.length; i++) {
         // console.log('2', this.payWrap.payData[i].courseId)
         const cart2 = doc(db, "MusicTutorCourses", this.payWrap.payData[i].courseId);
@@ -191,7 +197,7 @@ export default defineStore('cartStore', {
 
     
       // 4. 從購物車移除的部分
-      // Swal.fire('刪除購物車項目')
+      // SwalN.fire('刪除購物車項目')
       const cart4 = doc(db, data.user.uid, 'student')
       for (let i = 0; i < this.cartCheckboxWrap.length; i++) {
         await updateDoc(cart4, {
@@ -209,7 +215,7 @@ export default defineStore('cartStore', {
         finalTotal:0,
         couponUse:''
       }
-      Swal.fire('成功完成付款')
+      SwalN.fire('成功完成付款')
       router.push('/AllCourses')
       data.onAuthStateChanged()
     },
