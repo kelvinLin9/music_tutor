@@ -1,5 +1,5 @@
 <template>
-  <div class="course-card-list"
+  <div class="course-card-list mb-16"
       v-for="item in courseCardData" :key="item.id">
     <div class="meta cursor-pointer" 
         @click="goCoursePage(item.id)">

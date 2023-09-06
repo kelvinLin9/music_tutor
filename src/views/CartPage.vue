@@ -117,7 +117,7 @@ export default {
             new URL('../assets/images/banner.jpg', import.meta.url).href,
             '結帳',
             'CHECKOUT',
-            'YO~'
+            '購物的終點，滿足的起點'
         )
       }
     }

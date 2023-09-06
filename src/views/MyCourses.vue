@@ -2,7 +2,7 @@
   <!-- 上方統計欄 -->
   <div class="bg-primar text-whit">
     <div class="container">
-      <div class="row align-items-center py-48">
+      <div class="row align-items-center pt-32">
         <div class="col-12 col-lg-6 mb-3 mb-lg-0">
           <div class="d-flex align-items-center">
             <div class="user-photo position-relative">
@@ -36,7 +36,7 @@
   <div class="container my-24">
     <!-- 分類按鈕 -->
     <div class="row align-items-center mb-3">
-      <div class="col col-md-3 fs-5 fw-bold border-bottom border-5 pb-2 cursor-pointer"
+      <div class="col col-md-3 fs-6 fs-md-5 fw-bold border-bottom border-5 pb-2 cursor-pointer"
           :class="{'border-primary': myCoursesState === 'student'}"
           @click="myCoursesState = 'student', courseCardData = userStudentCourses">
         <i class="bi bi-pen"
@@ -46,7 +46,7 @@
           我是學生
         </span>
       </div>
-      <div class="col col-md-3 fs-5 fw-bold border-bottom border-5 pb-2 cursor-pointer"
+      <div class="col col-md-3 fs-6 fs-md- fw-bold border-bottom border-5 pb-2 cursor-pointer"
           :class="{'border-primary': myCoursesState === 'teacher'}"
           @click="myCoursesState = 'teacher', courseCardData = userTeacherCourses">
         <i class="bi bi-book"
@@ -56,7 +56,7 @@
           我是老師
         </span>
       </div>
-      <div class="col col-md-3 fs-5 fw-bold border-bottom border-5 pb-2 cursor-pointer"
+      <div class="col col-md-3 fs-6 fs-md- fw-bold border-bottom border-5 pb-2 cursor-pointer"
           :class="{'border-primary': myCoursesState === 'bookmark'}"
           @click="myCoursesState = 'bookmark', courseCardData = userBookmarkCourses">
         <i class="bi bi-bookmarks"

@@ -5,7 +5,7 @@
   <section>
     <div class="container text-center py-48">
       <h2 class="fw-bold lh-base mb-32" data-aos="fade-up">和音樂共舞。<br>尋找心中的旋律。</h2>
-      <h2 class="fw-bolder mb-64" data-aos="fade-up">Lele Music Tutor</h2>
+      <h2 class="fw-bolder mb-64" data-aos="fade-up">LeLe Music Tutor</h2>
       <p class="lh-lg  fw-lighter" data-aos="fade-up">歡迎來到樂樂音樂家教媒合平台！<br>
         我們深知音樂對於心靈的滋養和生活的豐富意義。<br>
         我們的使命是連結那些渴望學習音樂的您，與充滿熱情且專業的音樂家教師。<br>
