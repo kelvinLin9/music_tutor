@@ -5,13 +5,13 @@
         <span>樂樂音樂家教媒合平台</span>
       </RouterLink>
     </h1>
-    <div class="row align-items-center justify-content-center justify-content-md-start">
+    <div class="row align-items-md-center justify-content-center justify-content-md-start">
       <div class="col-6 col-lg-4 d-none d-md-block">
         <img src="../assets/images/login.jpg" alt="登入圖" class="login-side-img">
       </div>
-      <div class="col-8 col-md-6 col-xl-4">
+      <div class="col-12 col-md-6 col-xl-4">
         <!-- 登入 -->
-        <div v-if="logInPage">
+        <div v-if="logInPage" class="login-wrap d-flex flex-column justify-content-center">
           <h1 class="mx-auto border-bottom my-16 pb-16 w-75 text-center fs-1">
             會員登入
           </h1>
@@ -106,7 +106,7 @@
           </VForm>
         </div>
         <!-- 註冊 -->
-        <div v-else>
+        <div v-else class="login-wrap d-flex flex-column justify-content-center">
           <h1 class="mx-auto border-bottom my-3 pb-2 w-75 text-center">會員註冊</h1>
           <VForm class="mx-auto w-75"
           v-slot="{ errors }"
@@ -217,6 +217,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .login-wrap {
+    height: 100vh;
+  }
   .login-logo {
     width: 100px;
     height: 45px;

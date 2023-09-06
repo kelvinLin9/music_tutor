@@ -10,10 +10,11 @@
             <span>樂樂音樂家教媒合平台</span>
           </RouterLink>
         </h1>
-        <li class="nav-item position-relative fs-5 d-lg-none d-block ms-auto">  
+        <li class="nav-item position-relative fs-5 d-lg-none d-block ms-auto" 
+            v-if="this.isMember === true">  
           <RouterLink to="/CartPage" class="nav-link"
             :class="{ 'text-primary':  $route.name === 'CartPage'}">
-            <span class="material-symbols-outlined fs-3 align-middle">shopping_cart</span>
+            <span class="material-symbols-outlined fs-1 align-middle">shopping_cart</span>
             <div class="bg-primary text-white rounded-circle text-center position-absolute small-num-mobile"
               v-if="studentData.myCart.length">
               {{ studentData.myCart.length }}
@@ -55,7 +56,6 @@
               <div class="nav-link"
                 :class="{ 'text-primary':  $route.name === 'MyCourses'}"
               >
-                <!-- <i class="bi bi-bookmarks-fill me-lg-2"></i> -->
                 <span class="material-symbols-outlined align-middle fs-3">bookmark</span>
                 <div class="bg-primary text-white rounded-circle text-center position-absolute small-num"
                   v-if="bookmarkNum">
@@ -182,8 +182,8 @@ export default {
 .small-num-mobile{
   width:20px;
   height: 20px;
-  top: -5px;
-  left: 15px;
+  top: -12%;
+  left: 60%;
   font-size: 12px;
 }
 .bg-white {

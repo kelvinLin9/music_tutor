@@ -1,5 +1,5 @@
 <template>
-  <div class="container mb-5">
+  <div class="container pb-32">
     <VForm  v-slot="{ errors }"
            @submit="goBeATeacherStep3()">
       <div class="row justify-content-center mb-3">
@@ -33,7 +33,7 @@
                 上傳一張課程封面照：
               </label>
             </div>
-            <div class="col-5">
+            <div class="col-12 col-md-5">
               <VField
                   name="課程封面"
                   type="file"
@@ -46,7 +46,7 @@
               </VField>
               <ErrorMessage class="invalid-feedback" name="課程封面"/>
             </div>
-            <div class="col-3">
+            <div class="col-3 mt-16 mt-md-0 ms-auto">
               <img class="img-fluid" 
                   :src="beATeacherData.courseImg" 
                   alt="課程封面照"
@@ -57,11 +57,11 @@
       </div>
       <div class="row justify-content-center">
         <div class="col-12 col-lg-8 d-flex justify-content-between">
-          <button type="button" class="btn btn-outline-primary px-64"
+          <button type="button" class="btn btn-outline-primary px-48"
                   @click="goBeATeacherStep1()">
             上一步
           </button>
-          <button type="submit" class="btn btn-primary px-64">
+          <button type="submit" class="btn btn-primary px-48">
             下一步
           </button>
         </div>
