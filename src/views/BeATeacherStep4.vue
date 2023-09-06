@@ -31,12 +31,11 @@ export default {
       title: '<h1>恭喜完成開課</h1>',
       icon: 'success',
       text: '課程審核需要2~3個工作天',
-      // showCloseButton: true,
       showCancelButton: true,
       reverseButtons: true,
       cancelButtonText: '回到首頁',
       confirmButtonText: '繼續開課',
-      
+      confirmButtonColor: '#ff715f',
     })
       .then((result) => {
         if (result.isConfirmed) {
