@@ -25,11 +25,11 @@
         </div>
       </SwiperSlide>
       <div class="container">
-        <div class="blockquote px-32 position-absolute rounded-4">
-          <h2 class="fs-2 text-white mb-16">
+        <div class="blockquote px-32 position-absolute rounded-4 w-95 w-sm-75 w-md-50 w-lg-30">
+          <h2 class="fs-48 text-dark mb-16">
             找尋像好友一樣的音樂導師
           </h2>
-          <h3 class="fs-6 text-white mb-24">
+          <h3 class="fs-6 text-dark mb-24">
             在這裡與熱愛音樂的導師相遇，將你的音樂激情傾注其中。
           </h3>
           <div class="mb-8 position-relative">
@@ -46,16 +46,16 @@
           </div>
           <div class="home-pills">
             <a href="#" @click.prevent="goAllCourses('鋼琴')">
-              <span class="badge rounded-pill text-bg-primary text-white me-8">鋼琴</span>
+              <span class="badge rounded-pill text-bg-primary text-dark me-8">鋼琴</span>
             </a>
             <a href="#" @click.prevent="goAllCourses('編曲')">
-              <span class="badge rounded-pill text-bg-primary text-white me-8">編曲</span>
+              <span class="badge rounded-pill text-bg-primary text-dark me-8">編曲</span>
             </a>
             <a href="#" @click.prevent="goAllCourses('流行歌唱')">
-              <span class="badge rounded-pill text-bg-primary text-white me-8">流行歌唱</span>
+              <span class="badge rounded-pill text-bg-primary text-dark me-8">流行歌唱</span>
             </a>
             <a href="#" @click.prevent="goAllCourses('木吉他')">
-              <span class="badge rounded-pill text-bg-primary text-white me-8">木吉他</span>
+              <span class="badge rounded-pill text-bg-primary text-dark me-8">木吉他</span>
             </a>
           </div>
         </div>
