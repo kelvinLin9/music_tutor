@@ -17,12 +17,13 @@ const Toast = Swal.mixin({
   showConfirmButton: false,
   timer: 2000,
   timerProgressBar: true,
-  // confirmButtonColor: 'rgba(168, 128, 48, 1)',
-  // cancelButtonColor: 'rgba(108, 117, 125, 1)',
   didOpen: (toast) => {
     toast.addEventListener('mouseenter', Swal.stopTimer)
     toast.addEventListener('mouseleave', Swal.resumeTimer)
   }
+})
+const SwalN = Swal.mixin({
+  confirmButtonColor: '#ff715f',
 })
 
 export default defineStore('dataStore', {
@@ -219,7 +220,7 @@ export default defineStore('dataStore', {
         if(router.currentRoute._value.fullPath === "/CreateCourses/BeATeacherStep1") {
           if (!this.teacherData.displayName || !this.teacherData.teacherIntro || !this.teacherData.teacherImg || !this.teacherData.gender) {
             console.log(this.teacherData.displayName, this.teacherData.teacherIntro, this.teacherData.gender, this.teacherData.teacherImg)
-            Swal.fire('請先填寫老師姓名、大頭照、性別、自我介紹')
+            SwalN.fire('請先填寫老師姓名、大頭照、性別、自我介紹')
             router.push('/MemberPage')
           }
         }
@@ -552,7 +553,7 @@ export default defineStore('dataStore', {
         }
         this.to64(item, file)
       } catch (error) {
-        Swal.fire(error)
+        SwalN.fire(error)
         console.log('Catch Error: ', error)
       } finally {
         e.target.value = ''

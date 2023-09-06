@@ -242,7 +242,7 @@
           </VField>
           <ErrorMessage class="invalid-feedback" name="上課地點"/>
           <div class="text-end ">
-            <button type="submit" class="btn btn-primary mt-24 px-32">
+            <button type="submit" class="btn btn-primary mt-24 px-64">
               下一步
             </button>
           </div>

@@ -57,11 +57,11 @@
       </div>
       <div class="row justify-content-center">
         <div class="col-12 col-lg-8 d-flex justify-content-between">
-          <button type="button" class="btn btn-outline-primary col-5 col-md-3"
+          <button type="button" class="btn btn-outline-primary px-64"
                   @click="goBeATeacherStep1()">
             上一步
           </button>
-          <button type="submit" class="btn btn-primary col-5 col-md-3">
+          <button type="submit" class="btn btn-primary px-64">
             下一步
           </button>
         </div>
