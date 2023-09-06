@@ -32,7 +32,7 @@
           <VField
             name="課程費用"
             id="coursePrice"
-            type="text"
+            type="number"
             rules="required|min_value:100|max_value:100000"
             class="form-control"
             :class="{ 'is-invalid': errors['課程費用'] }"
