@@ -25,8 +25,8 @@
         </div>
       </SwiperSlide>
       <div class="container">
-        <div class="blockquote px-16 px-md-32 position-absolute rounded-4 w-95 w-sm-75 w-md-50 w-lg-35">
-          <h2 class="fs-36 fs-md-48 text-dark mb-16">
+        <div class="blockquote px-16 px-md-32 position-absolute rounded-4">
+          <h2 class="fs-36 fs-sm-48 text-dark mb-16">
             找尋像好友一樣的音樂導師
           </h2>
           <h3 class="fs-6 text-dark mb-24">
@@ -125,7 +125,7 @@ export default {
 	              0 .5em 1em rgba(0, 0, 0, 0.6);
 	  text-shadow: 0 1px 1px hsla(0,0%,100%,.3);
     @media (max-width: 576px) {
-      width: 100%;
+      width: 95%;
       left: 50%;
       transform: translate(-50%, -50%);
     }
