@@ -46,7 +46,7 @@
           我是學生
         </span>
       </div>
-      <div class="col col-md-3 fs-6 fs-md- fw-bold border-bottom border-5 pb-2 cursor-pointer"
+      <div class="col col-md-3 fs-6 fs-md-5 fw-bold border-bottom border-5 pb-2 cursor-pointer"
           :class="{'border-primary': myCoursesState === 'teacher'}"
           @click="myCoursesState = 'teacher', courseCardData = userTeacherCourses">
         <i class="bi bi-book"
@@ -56,7 +56,7 @@
           我是老師
         </span>
       </div>
-      <div class="col col-md-3 fs-6 fs-md- fw-bold border-bottom border-5 pb-2 cursor-pointer"
+      <div class="col col-md-3 fs-6 fs-md-5 fw-bold border-bottom border-5 pb-2 cursor-pointer"
           :class="{'border-primary': myCoursesState === 'bookmark'}"
           @click="myCoursesState = 'bookmark', courseCardData = userBookmarkCourses">
         <i class="bi bi-bookmarks"
