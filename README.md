@@ -1,5 +1,5 @@
 # LeLe | 樂樂音樂家教媒合平台
-![](https://i.imgur.com/bPBSUBa.png)
+![](https://i.imgur.com/dUhuh3v.png)
 
 ## 專案簡介
 此為六角學院2023切版直播班專題，目標是建立一個滿足音樂老師和學生需求的網站，使用firebase作為後端數據庫使用
