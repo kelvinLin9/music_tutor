@@ -4,7 +4,7 @@
 ## 專案簡介
 此為六角學院2023切版直播班專題，目標是建立一個滿足音樂老師和學生需求的網站，使用firebase作為後端數據庫使用
 
-設計稿：[superAwei](https://whimsical.com/0815-NG8wL8iZ1SvCXpdocsejtZ)
+設計稿：[AWEI](https://whimsical.com/0815-NG8wL8iZ1SvCXpdocsejtZ)
 
 ## 主要功能
 - 註冊登入
