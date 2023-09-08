@@ -188,6 +188,8 @@ export default {
 }
 .bg-white {
   transition: .4s ease;
+  box-shadow: 0 4px 8px 2px rgba(0,0,0,.02);
+  border-bottom: ipx solid rgba(0,0,0,.05);
 }
 .fixed-top {
   transition: .4s ease;
