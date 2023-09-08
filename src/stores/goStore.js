@@ -12,6 +12,7 @@ const filter = filterStore()
 export default defineStore('goStore', {
   actions: {
     goCoursePage (id) {
+      console.log(id)
       router.push(`/coursePage/${id}`)
     },
     goHomePage () {
@@ -38,7 +39,7 @@ export default defineStore('goStore', {
     },
     goBookmark() {
       // courseCard.courseCardData = data.userBookmarkCourses
-      console.log(courseCard.courseCardData)
+      // console.log(courseCard.courseCardData)
       router.push('/MyCourses')
     },
     goAllCourses(search) {
