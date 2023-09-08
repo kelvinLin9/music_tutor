@@ -60,7 +60,7 @@
         輕鬆開始您的音樂教學之旅！我們的老師只需簡單的四步驟，即可開展線上課程。<br>將您的音樂才華轉化為寶貴的報酬，無壓力、無煩惱。讓音符為您譜寫充實人生的新篇章。
       </p>
       <div class="row row-cols-2 row-cols-md-4 mb-48 gx-0 gy-24">
-        <div class="col d-flex justify-content-center align-items-center" data-aos="flip-left">
+        <div class="col d-flex justify-content-center align-items-center" data-aos="fade-up">
             <div class="step rounded-circle bg-light shadow position-relative d-flex flex-column  align-items-center justify-content-center">
               <span class="fs-3 position-absolute top-0 start-50 translate-middle">01</span>
               <span class="material-symbols-outlined fs-1 mb-16 text-primary">edit_document</span>
@@ -68,7 +68,7 @@
               <p class="text-secondary fw-light">填寫資訊</p>
             </div>
         </div>
-        <div class="col d-flex justify-content-center align-items-center" data-aos="flip-left" data-aos-delay="300">
+        <div class="col d-flex justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="300">
             <div class="step rounded-circle bg-light shadow position-relative d-flex flex-column  align-items-center justify-content-center">
               <span class="fs-3 position-absolute top-0 start-50 translate-middle">02</span>
               <span class="material-symbols-outlined fs-1 mb-16 text-primary">contract_edit</span>
@@ -76,7 +76,7 @@
               <p class="text-secondary fw-light">課程介紹</p>
             </div>
         </div>
-        <div class="col d-flex justify-content-center align-items-center" data-aos="flip-left" data-aos-delay="600">
+        <div class="col d-flex justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="600">
             <div class="step rounded-circle bg-light shadow position-relative d-flex flex-column  align-items-center justify-content-center">
               <span class="fs-3 position-absolute top-0 start-50 translate-middle">03</span>
               <span class="material-symbols-outlined fs-1 mb-16 text-primary">preview</span>
@@ -84,7 +84,7 @@
               <p class="text-secondary fw-light">預覽</p>
             </div>
         </div>
-        <div class="col d-flex justify-content-center align-items-center" data-aos="flip-left" data-aos-delay="900">
+        <div class="col d-flex justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="900">
             <div class="step rounded-circle bg-light shadow position-relative d-flex flex-column  align-items-center justify-content-center">
               <span class="fs-3 position-absolute top-0 start-50 translate-middle">04</span>
               <span class="material-symbols-outlined fs-1 mb-16 text-primary">task_alt</span>
