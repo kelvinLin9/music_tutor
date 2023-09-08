@@ -204,23 +204,23 @@
         <h2 class="letter-spacing-8  fs-6 mb-48">我們的合作夥伴</h2>
         <p class="fs-14 fw-light lh-lg mb-48">與知名品牌攜手合作，為您提供更廣闊的音樂學習視野，豐富您的音樂旅程。</p>
         <div class="row row-cols-2 row-cols-md-4 g-24">
-          <div class="col d-flex justify-content-center align-items-center">
-            <img class="w-75" src="../assets/images/brand-1.svg" alt="合作夥伴圖片">
+          <div class="partner-img col d-flex justify-content-center align-items-center">
+            <img src="../assets/images/brand-1.svg" alt="合作夥伴圖片">
           </div>
-          <div class="col d-flex justify-content-center align-items-center">
-            <img class="w-75" src="../assets/images/brand-2.png" alt="合作夥伴圖片">
+          <div class="partner-img col d-flex justify-content-center align-items-center">
+            <img src="../assets/images/brand-2.png" alt="合作夥伴圖片">
           </div>
-          <div class="col d-flex justify-content-center align-items-center">
-            <img class="w-75" src="../assets/images/brand-3.png" alt="合作夥伴圖片">
+          <div class="partner-img col d-flex justify-content-center align-items-center">
+            <img src="../assets/images/brand-3.png" alt="合作夥伴圖片">
           </div>
-          <div class="col d-flex justify-content-center align-items-center">
-            <img class="w-75" src="../assets/images/brand-4.webp" alt="合作夥伴圖片">
+          <div class="partner-img col d-flex justify-content-center align-items-center">
+            <img src="../assets/images/brand-4.webp" alt="合作夥伴圖片">
           </div>
-          <div class="col d-flex justify-content-center align-items-center">
-            <img class="w-75" src="../assets/images/brand-5.webp" alt="合作夥伴圖片">
+          <div class="partner-img col d-flex justify-content-center align-items-center">
+            <img src="../assets/images/brand-5.webp" alt="合作夥伴圖片">
           </div>
-          <div class="col d-flex justify-content-center align-items-center">
-            <img class="w-75" src="../assets/images/brand-6.png" alt="合作夥伴圖片">
+          <div class="partner-img col d-flex justify-content-center align-items-center">
+            <img src="../assets/images/brand-6.png" alt="合作夥伴圖片">
           </div>
         </div>
     </div>
@@ -266,7 +266,6 @@ export default {
   }
 }
 .home-serve {
-  // height: 400px;
   img {
     width: 100%;
     height: 400px;
@@ -281,5 +280,16 @@ export default {
       height: 200px;
     }
   }
-
+.partner-img {
+  height: 180px;
+  img {
+    width: 80%;
+  }
+  @media (max-width:576px) {
+    height: 100px;
+    img{
+      width: 60%;
+    }
+  }  
+}
 </style>
