@@ -207,47 +207,47 @@
             上課地點：
           </label>
         </div>
-        <div class="col-8 col-lg-6"
-        :class="{'d-none' : beATeacherData.courseMethod.length == 1 && beATeacherData.courseMethod[0] == '線上'}">
-          <VField name="上課地點" 
-                      as="select" 
-                      class="form-select" 
-                      aria-label="Default select example"
-                      id="cityName"
-                      :class="{ 'is-invalid': errors['上課地點'] }"
-                      v-model="beATeacherData.cityName">
-                <option value="" selected>請選擇上課地點</option>
-                <option value="台北市">台北市</option>
-                <option value="基隆市">基隆市</option>
-                <option value="新北市">新北市</option>
-                <option value="宜蘭縣">宜蘭縣</option>
-                <option value="桃園市">桃園市</option>
-                <option value="新竹市">新竹市</option>
-                <option value="新竹縣">新竹縣</option>
-                <option value="苗栗縣">苗栗縣</option>
-                <option value="台中市">台中市</option>
-                <option value="彰化縣">彰化縣</option>
-                <option value="南投縣">南投縣</option>
-                <option value="嘉義市">嘉義市</option>
-                <option value="嘉義縣">嘉義縣</option>
-                <option value="雲林縣">雲林縣</option>
-                <option value="台南市">台南市</option>
-                <option value="高雄市">高雄市</option>
-                <option value="澎湖縣">澎湖縣</option>
-                <option value="金門縣">金門縣</option>
-                <option value="屏東縣">屏東縣</option>
-                <option value="台東縣">台東縣</option>
-                <option value="花蓮縣">花蓮縣</option>
-                <option value="連江縣">連江縣</option>
-          </VField>
-          <ErrorMessage class="invalid-feedback" name="上課地點"/>
+        <div class="col-8 col-lg-6">
+          <div :class="{'d-none' : beATeacherData.courseMethod.length == 1 && beATeacherData.courseMethod[0] == '線上'}">
+            <VField name="上課地點" 
+                        as="select" 
+                        class="form-select" 
+                        aria-label="Default select example"
+                        id="cityName"
+                        :class="{ 'is-invalid': errors['上課地點'] }"
+                        v-model="beATeacherData.cityName">
+                  <option value="" selected>請選擇上課地點</option>
+                  <option value="台北市">台北市</option>
+                  <option value="基隆市">基隆市</option>
+                  <option value="新北市">新北市</option>
+                  <option value="宜蘭縣">宜蘭縣</option>
+                  <option value="桃園市">桃園市</option>
+                  <option value="新竹市">新竹市</option>
+                  <option value="新竹縣">新竹縣</option>
+                  <option value="苗栗縣">苗栗縣</option>
+                  <option value="台中市">台中市</option>
+                  <option value="彰化縣">彰化縣</option>
+                  <option value="南投縣">南投縣</option>
+                  <option value="嘉義市">嘉義市</option>
+                  <option value="嘉義縣">嘉義縣</option>
+                  <option value="雲林縣">雲林縣</option>
+                  <option value="台南市">台南市</option>
+                  <option value="高雄市">高雄市</option>
+                  <option value="澎湖縣">澎湖縣</option>
+                  <option value="金門縣">金門縣</option>
+                  <option value="屏東縣">屏東縣</option>
+                  <option value="台東縣">台東縣</option>
+                  <option value="花蓮縣">花蓮縣</option>
+                  <option value="連江縣">連江縣</option>
+            </VField>
+            <ErrorMessage class="invalid-feedback" name="上課地點"/>
+          </div>
           <div class="text-end ">
             <button type="submit" class="btn btn-primary mt-24 px-64">
               下一步
             </button>
           </div>
         </div>
-        
       </div>
     </VForm>
   </div>
