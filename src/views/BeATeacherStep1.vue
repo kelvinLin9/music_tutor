@@ -276,9 +276,9 @@ export default {
     this.onAuthStateChangedForCreateCourse()
     this.getBannerInfo(
       new URL('../assets/images/banner.jpg', import.meta.url).href,
-      'COURSE INFORMATION',
-      '四個步驟，讓你成為老師',
-      '首先設定必要資訊'
+      '課程資訊',
+      'INFORMATION',
+      '填寫課程資訊，讓學生輕鬆找到您的課程'
     )
     this.createCourseStep = 1
   }

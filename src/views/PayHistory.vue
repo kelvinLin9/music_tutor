@@ -28,7 +28,7 @@
             <tbody>
               <template v-for=" item in studentData.payHistory" :key="item">
                 <tr>
-                  <td> {{ item.timestamp }} </td>
+                  <td> {{ this.$moment(item.timestamp).format('YYYY-MM-DD')  }} </td>
                   <td>
                     <ul class="list-unstyled">
                       <li v-for="i in item.payData.payData" :key="i">

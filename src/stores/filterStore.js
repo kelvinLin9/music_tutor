@@ -13,8 +13,8 @@ export default defineStore('filterStore', {
     selectCourseName: '',
     courseMethod: ['在學生家', '在老師家', '線上'], // 下拉選單用
     selectCourseMethod: '',
-    sortMethod: ['依新舊', '依人氣', '依金額'], // 下拉選單用
-    selectSortMethod: '',
+    sortMethod: ['依人氣', '依新舊', '依金額'], // 下拉選單用
+    selectSortMethod: '依人氣',
   }),
   actions: {
     selectCityNameCancel () {

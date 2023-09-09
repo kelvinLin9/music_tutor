@@ -90,9 +90,9 @@ export default {
   created () {
     this.getBannerInfo(
       new URL('../assets/images/banner.jpg', import.meta.url).href,
-      'INTRODUCE',
       '課程介紹',
-      '分享您的音樂願景，簡單介紹您的課程內容，為學生營造期待感'
+      'INTRODUCE',
+      '介紹課程內容，為學生營造期待感'
     )
     this.createCourseStep = 2
   }
