@@ -104,7 +104,7 @@
 
         </div>      
       </div>
-      <!-- 地點 -->
+      <!-- 上課方式 -->
       <div class="col-12 col-xl-auto me-lg-1">
         <div class="row g-1 align-items-center">
           <div class="col-auto">
@@ -184,7 +184,6 @@
                     id="sort"
                     v-model="selectSortMethod"
                     @change="courseSort()">
-              <option value="" selected>請選擇</option>
               <option v-for="item in sortMethod" 
                       :key="item" :value="item">
                 {{ item }}
@@ -192,6 +191,11 @@
             </select>
           </div>
         </div>
+      </div>
+      <!-- 清空 -->
+      <div class="col-auto ms-md-2 cursor-pointer text-delete"
+        @click="selectSortMethod = '依人氣', selectCourseName = '', selectCourseMethod = '', selectCourseCategory = '',courseSort()">
+        <i class="bi bi-x-circle fs-4"></i>
       </div>
       <!-- 排列方式 -->
       <div class="col-auto ms-auto ms-md-2 cursor-pointer">

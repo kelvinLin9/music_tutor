@@ -135,9 +135,9 @@ export default {
   created () { 
     this.getBannerInfo(
       new URL('../assets/images/banner.jpg', import.meta.url).href,
+      '頁面預覽',
       'PREVIEW',
-      '頁面預覽 ',
-      '一探學習體驗，預覽您的課程頁面，確保效果完美呈現'
+      '預覽課程頁面，確保效果完美呈現'
     )
     this.createCourseStep = 3
   }
