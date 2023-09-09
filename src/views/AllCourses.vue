@@ -272,8 +272,8 @@ export default {
     this.courseSort()
     this.getBannerInfo(
       new URL('../assets/images/banner.jpg', import.meta.url).href,
-      'ALL COURSES',
       '全部課程',
+      'ALL COURSES',
       '專業培訓，探索多元音樂風格'
     )
     this.displayState = 'grid'

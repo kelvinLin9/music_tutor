@@ -2,15 +2,16 @@ import { defineStore } from 'pinia'
 import router from '../router'
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
          onAuthStateChanged, GoogleAuthProvider, FacebookAuthProvider, GithubAuthProvider, signInWithPopup,
-         updateProfile, updateEmail, sendEmailVerification, 
-         updatePassword, sendPasswordResetEmail, signOut
+         sendPasswordResetEmail, signOut
         } from 'firebase/auth'
 import dataStore from './dataStore';
 import cartStore from './cartStore';
 import moment from 'moment'
 
 import Swal from 'sweetalert2/dist/sweetalert2'
-
+// const SwalN = Swal.mixin({
+//   confirmButtonColor: '#ff715f',
+// })
 
 
 const auth = getAuth();

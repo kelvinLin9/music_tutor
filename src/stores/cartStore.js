@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import dataStore from './dataStore';
-import { doc, setDoc, updateDoc, getFirestore , arrayUnion, arrayRemove} from "firebase/firestore"; 
+import { doc, updateDoc, getFirestore , arrayUnion, arrayRemove} from "firebase/firestore"; 
 import router from '../router'
 import Swal from 'sweetalert2/dist/sweetalert2'
 

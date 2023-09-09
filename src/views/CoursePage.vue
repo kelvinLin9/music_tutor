@@ -1,4 +1,8 @@
 <template>
+  <!-- Loading -->
+  <div class="container">
+    <CoursesLoadingList v-if="loading"/>
+  </div>
   <!-- 課程圖片&說明 -->
   <div class="container mt-32" v-if="!loading">
     <div class="row justify-content-between">
@@ -141,8 +145,6 @@
       </div>
     </div>
   </div>
-
-
   <!-- 編輯Modal -->
   <edit-my-course-modal></edit-my-course-modal>
 
@@ -157,12 +159,21 @@ import EditMyCourseModal from '../components/EditMyCourseModal.vue'
 import cartStore from '../stores/cartStore'
 import FeedbackCom from '../components/FeedbackCom.vue'
 import YouLikeCourses from '../components/YouLikeCourses.vue'
+import CoursesLoadingList from '../components/CoursesLoadingList.vue'
 
 export default {
-  components: { EditMyCourseModal, FeedbackCom, YouLikeCourses },
+  components: { EditMyCourseModal, FeedbackCom, YouLikeCourses, CoursesLoadingList },
   data () {
     return {
       id: ''
+    }
+  },
+  watch: {
+    $route() {
+      this.onAuthStateChanged()
+      // 防止從新整理產生讀不到資料
+      this.id = this.$route.params.coursePageId
+      this.getOneCoursesFirebaseData(this.id)
     }
   },
   computed: {
