@@ -1,5 +1,6 @@
 <template>
   <BannerCom />
+  <!-- 自訂顏色 -->
   <div class="container my-32">
     <div class="row">
       <div class="col-auto d-flex align-items-center mb-16">
@@ -36,18 +37,26 @@
             <input type="color" class="form-control form-control-color mx-auto" id="s-textColor" title="Choose your color" v-model="teacherData.calenderStudentColor.textColor">
           </div>
           <div class="col-12 col-sm-auto" v-if="customColorState">
-                <button type="button" class="btn btn-sm btn-secondary me-8"
-                        @click="customColorState = false">
-                  取消
-                </button>
-                <button type="button" class="btn btn-sm btn-primary"
-                        @click="UpdateTeacherCalender() , customColorState = false">
-                  確定
-                </button>
+            <button type="button" class="btn btn-sm btn-outline-secondary me-8"
+                   >
+              預設
+            </button>
+            <button type="button" class="btn btn-sm btn-secondary me-8"
+                    @click="customColorState = false">
+              取消
+            </button>
+            <button type="button" class="btn btn-sm btn-primary"
+                    @click="UpdateTeacherCalender() , customColorState = false">
+              確定
+            </button>
           </div>
         </div>
       </div>
     </div>
+  </div>
+  <!-- Loading -->
+  <div class="container">
+    <CoursesLoadingList v-if="loading"/>
   </div>
   <div class="container mb-32" v-if="!loading">
     <calendar-com/>
@@ -60,14 +69,15 @@
 
 
 import BannerCom from '../components/BannerCom.vue'
-import { mapState, mapActions, mapWritableState } from 
+import { mapState, mapActions } from 
 'pinia'  
 import dataStore from '@/stores/dataStore'
 import bannerStore from '@/stores/bannerStore'
 import CalendarCom from '../components/CalendarCom.vue'
+import CoursesLoadingList from '../components/CoursesLoadingList.vue'
 
 export default {
-  components: { BannerCom, CalendarCom },
+  components: { BannerCom, CalendarCom, CoursesLoadingList },
   data () {
     return {
       customColorState: false,
@@ -84,14 +94,11 @@ export default {
     this.onAuthStateChanged()
     this.getBannerInfo(
       new URL('../assets/images/banner.jpg', import.meta.url).href,
-      'CALENDAR',
       '行事曆',
+      'CALENDAR',
       '井然有序，做一個時間管理大師'
       )
     },
-    mounted() {
-
-  }
 }
 
 

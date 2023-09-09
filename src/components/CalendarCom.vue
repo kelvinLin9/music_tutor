@@ -22,7 +22,7 @@ import interactionPlugin from "@fullcalendar/interaction" // 拖曳
 import listPlugin from "@fullcalendar/list";
 import Tooltip from 'tippy.js' //npm i tippy.js
 import 'tippy.js/dist/tippy.css'
-import { mapState, mapActions, mapWritableState } from 
+import { mapState, mapActions } from 
 'pinia'  
 import dataStore from '@/stores/dataStore'
 import windowStore from '@/stores/windowStore'
@@ -33,10 +33,11 @@ export default {
     return {
       calendarOptions: {
         plugins: [dayGridPlugin, interactionPlugin, timeGridPlugin, listPlugin],
+        themeSystem: 'standard',
         initialView: 'dayGridMonth',
         weekends: true,
         height: 650,
-        locale: 'zh-tw',
+        // locale: 'zh-tw',
         dayMaxEventRows: 2.0, // 事件最大展示列數
         aspectRatio: 1.35,
         weekNumberCalculation:'iso',//周次的显示格式。
@@ -44,12 +45,13 @@ export default {
         selectable: true,  // 是否可以選中日曆格   
         expandRows: true, 
         // stickyFooterScrollbar: true, //
-        windowResize : function(e){//瀏覽器窗體變化時觸發
+        windowResize : function(){//瀏覽器窗體變化時觸發
           console.log(window.innerWidth)
             },
         titleFormat: { 
           year: 'numeric',
           month: 'long',
+          day: 'numeric'
           },
         headerToolbar: {
           left: "prev,next today",
@@ -84,7 +86,7 @@ export default {
           // dialogVisible.value = true;
         }, //事件的點擊
         eventDidMount: function(info) {
-          var tooltip = new Tooltip(info.el, {
+          let tooltip = new Tooltip(info.el, {
             content: info.event._def.title,
             placement: 'top',
           }); // 懸浮提示
@@ -109,21 +111,30 @@ export default {
       this.calendarOptions.events = this.calenderDataAll
     },
     windowWidth() {
-      console.log(this.windowWidth)
+      // console.log(this.windowWidth)
       if(window.innerWidth < 992) {
         this.$refs.fullCalendar.calendar.changeView('listMonth')
-        console.log(this.$refs.fullCalendar.calendar.el)
+        // console.log(this.$refs.fullCalendar.calendar.el)
         this.calendarOptions.headerToolbar = {
-          left: "prev,next today",
+          left: "prev,next",
           center: "title",
-          right: "listMonth"
+          right: "today,listMonth"
+        }
+        this.calendarOptions.titleFormat = { 
+          year: 'numeric',
+          month: 'long',
         }
       } else {
         this.$refs.fullCalendar.calendar.changeView('dayGridMonth')
         this.calendarOptions.headerToolbar = {
           left: "prev,next today",
           center: "title",
-          right: "dayGridMonth,timeGridWeek,timeGridDay listMonth",
+          right: "dayGridMonth,timeGridWeek,timeGridDay",
+        }
+        this.calendarOptions.titleFormat = { 
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
         }
       }
     }

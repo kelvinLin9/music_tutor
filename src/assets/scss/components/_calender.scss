@@ -1,35 +1,38 @@
 .fc-toolbar-title {
-  color: #ff715f !important;
+  color: rgb(140,140,140) !important;
+  @media (max-width:992px) {
+    font-size: 20px !important;
+  }
 }
 .fc-button-primary {
-    color: #ff715f !important;
+    color: rgb(140,140,140) !important;
     background-color: #ffffff !important;
-    border-color: #ff715f !important;
+    border-color: rgb(140,140,140) !important;
     border-radius: 50rem !important;
     &:hover{
-    background-color: #ff715f !important;
+    background-color: rgb(140,140,140) !important;
     color: #ffffff !important;
     box-shadow: 0!important;
   }
 }
 .fc-button-primary {
   &:hover{
-    background-color: #ff715f !important;
+    background-color: rgb(140,140,140) !important;
     color: #ffffff !important;
     box-shadow: 0!important;
   }
 }
 .fc-button-active {
-  background-color: #ff715f !important;
+  background-color: rgb(140,140,140) !important;
   color: #ffffff !important;
   box-shadow: 0!important;
 }
 .fc-button .fc-icon {
     vertical-align: middle;
     font-size: 1.5em;
-    color: #ff715f;
+    color: rgb(140,140,140);
     &:hover{
-    background-color: #ff715f !important;
+    background-color: rgb(140,140,140) !important;
     color: #ffffff !important;
     box-shadow: 0!important;
   }
@@ -38,7 +41,6 @@
     position: relative;
     font-size: 0.6em !important;
     line-height: 1.4 !important;
-    display: block !important;
     border-radius: 5px;
     color: #333333;
     .fc-daygrid-event-dot {
@@ -46,9 +48,24 @@
     }
     .fc-event-time {
       display: inline !important;
-      
     }
     .fc-event-title {
       padding-left: 4px;
     }
+    @media (min-width:992px) {
+      display: block !important;
+    }
+}
+// 改行事曆內框和文字顏色
+.fc-col-header-cell-cushion {
+  color: rgb(140,140,140) !important;
+}
+.fc-daygrid-day-number {
+  color: rgb(140,140,140) !important;
+}
+.fc-list-day-text {
+  color: rgb(140,140,140) !important;
+}
+.fc-list-day-side-text {
+  color: rgb(140,140,140) !important;
 }
