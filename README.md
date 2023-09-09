@@ -22,10 +22,10 @@ https://kelvinlin9.github.io/music_tutor/
 - Bootstrap 5
 - SCSS
 - ESlint(Standard)
+- pinia
 
 ## 使用套件
 - vee-validate
-- pinia
 - swiper
 - sweetalert
 - moment

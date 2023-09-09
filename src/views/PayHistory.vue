@@ -18,32 +18,24 @@
           <table class="table table-hover">
             <thead class="border-bottom-3 fw-bold">
               <tr class="align-middle">
-                <th scope="col">購買時間</th>
-                <th scope="col">購買品項</th>
-                <th scope="col">數量</th>
-                <th scope="col">購買金額</th>
+                <th class="text-nowrap">購買時間</th>
+                <th class="text-nowrap">購買品項</th>
+                <th class="text-nowrap">購買金額</th>
                 <!-- <th scope="col">付款狀態</th> -->
               </tr>
             </thead>
             <tbody>
               <template v-for=" item in studentData.payHistory" :key="item">
                 <tr>
-                  <td> {{ this.$moment(item.timestamp).format('YYYY-MM-DD')  }} </td>
-                  <td>
+                  <td class="text-nowrap"> {{ this.$moment(item.timestamp).format('YYYY-MM-DD')  }} </td>
+                  <td class="text-nowrap">
                     <ul class="list-unstyled">
                       <li v-for="i in item.payData.payData" :key="i">
                         {{ i.courseName }}
                       </li>
                     </ul>
                   </td>
-                  <td>
-                    <ul class="list-unstyled">
-                      <li v-for="i in item.payData.payData" :key="i">
-                        1
-                      </li>
-                    </ul>
-                  </td>
-                  <td>{{ item.payData.finalTotal}}</td>
+                  <td class="text-nowrap">NT${{ $filters.currency(item.payData.finalTotal)}}</td>
                 </tr>
               </template>
             </tbody>
@@ -58,9 +50,8 @@
 <script>
 import BannerCom from '../components/BannerCom.vue'
 import CoursesLoadingList from '../components/CoursesLoadingList.vue'
-import { mapState, mapActions, mapWritableState } from 
+import { mapState, mapActions } from 
 'pinia' 
-import cartStore from '@/stores/cartStore'
 import dataStore from '@/stores/dataStore'
 import bannerStore from '@/stores/bannerStore'
 
@@ -93,7 +84,7 @@ export default {
     this.getBannerInfo(
       new URL('../assets/images/banner.jpg', import.meta.url).href,
       '購買紀錄',
-      'Payment History',
+      'History',
       '詳盡紀錄，金流一目了然'
     )
     this.ss()

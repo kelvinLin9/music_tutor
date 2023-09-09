@@ -17,8 +17,8 @@
     </div>
   </section>
   <!-- 圖 -->
-  <section>
-    <div class="home-section2"></div>
+  <section class="home-section2 position-relative">
+    <div class="home-section2-bg"></div>
   </section>
   <!-- serve -->
   <section>
@@ -254,7 +254,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.home-section2 {
+.home-section2-bg {
   height: 300px;
   background-image: url(../assets/images/home-section-2.jpg);
   background-repeat: no-repeat;
