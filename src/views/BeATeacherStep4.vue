@@ -20,8 +20,8 @@ export default {
   created () { 
     this.getBannerInfo(
       new URL('../assets/images/banner.jpg', import.meta.url).href,
+      '完成',
       'COMPLETE',
-      '完成 ',
       '準備好了!您的課程將準備好在平台上展示。'
     )
     this.createCourseStep = 4

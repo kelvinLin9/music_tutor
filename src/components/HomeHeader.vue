@@ -46,16 +46,16 @@
           </div>
           <div class="home-pills">
             <a href="#" @click.prevent="goAllCourses('鋼琴')">
-              <span class="badge rounded-pill text-bg-primary text-dark me-8 fw-normal">鋼琴</span>
+              <span class="badge rounded-pill text-bg-primary text-white me-8 fw-normal">鋼琴</span>
             </a>
             <a href="#" @click.prevent="goAllCourses('編曲')">
-              <span class="badge rounded-pill text-bg-primary text-dark me-8 fw-normal">編曲</span>
+              <span class="badge rounded-pill text-bg-primary text-white me-8 fw-normal">編曲</span>
             </a>
             <a href="#" @click.prevent="goAllCourses('流行歌唱')">
-              <span class="badge rounded-pill text-bg-primary text-dark me-8 fw-normal">流行歌唱</span>
+              <span class="badge rounded-pill text-bg-primary text-white me-8 fw-normal">流行歌唱</span>
             </a>
             <a href="#" @click.prevent="goAllCourses('木吉他')">
-              <span class="badge rounded-pill text-bg-primary text-dark me-8 fw-normal">木吉他</span>
+              <span class="badge rounded-pill text-bg-primary text-white me-8 fw-normal">木吉他</span>
             </a>
           </div>
         </div>
