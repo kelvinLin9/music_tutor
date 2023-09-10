@@ -9,7 +9,7 @@
         <button type="button" class="btn btn-outline-primary mt-16">
           前往購買
         </button>
-      </RouterLink> 
+      </RouterLink>
   </div>
 
     <div class="card shadow-sm" v-if="studentData.payHistory.length !== 0 && !loading">
@@ -48,48 +48,46 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'pinia'
 import BannerCom from '../components/BannerCom.vue'
 import CoursesLoadingList from '../components/CoursesLoadingList.vue'
-import { mapState, mapActions } from 
-'pinia' 
 import dataStore from '@/stores/dataStore'
 import bannerStore from '@/stores/bannerStore'
 
 export default {
   components: { BannerCom, CoursesLoadingList },
   computed: {
-    ...mapState(dataStore, ['studentData','user', 'userCartCourses', 'couponData', 'loading']),
+    ...mapState(dataStore, ['studentData', 'user', 'userCartCourses', 'couponData', 'loading']),
   },
   methods: {
     ...mapActions(dataStore, ['onAuthStateChanged']),
     ...mapActions(bannerStore, ['getBannerInfo']),
     ss() {
-      console.log(this.studentData.payHistory)
-      const names = ['Danny','Danny','Jack','Sam','Danny']
-      const total_count = names.reduce((obj,item)=>{
+      console.log(this.studentData.payHistory);
+      const names = ['Danny', 'Danny', 'Jack', 'Sam', 'Danny'];
+      const total_count = names.reduce((obj, item) => {
         if (item in obj) {
-          obj[item]++
+          obj[item]++;
         } else {
-          obj[item] = 1
+          obj[item] = 1;
         }
-        return obj
-      },{})
- 
-      console.log(total_count) 
+        return obj;
+      }, {});
 
-    }
+      console.log(total_count);
+    },
   },
-  created () {
-    this.onAuthStateChanged()
+  created() {
+    this.onAuthStateChanged();
     this.getBannerInfo(
       new URL('../assets/images/banner.jpg', import.meta.url).href,
       '購買紀錄',
       'History',
-      '詳盡紀錄，金流一目了然'
-    )
-    this.ss()
-  }
-}
+      '詳盡紀錄，金流一目了然',
+    );
+    this.ss();
+  },
+};
 </script>
 
 <style lang="scss" scoped>
