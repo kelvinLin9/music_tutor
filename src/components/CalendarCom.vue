@@ -56,7 +56,7 @@ export default {
         headerToolbar: {
           left: "prev,next today",
           center: "title",
-          right: "dayGridMonth,timeGridWeek,timeGridDay listMonth",
+          right: "dayGridMonth,timeGridWeek,timeGridDay",
         }, //日曆上方的按钮和title
         buttonText: {
           today: "今天",
@@ -116,9 +116,9 @@ export default {
         this.$refs.fullCalendar.calendar.changeView('listMonth')
         // console.log(this.$refs.fullCalendar.calendar.el)
         this.calendarOptions.headerToolbar = {
-          left: "prev,next",
+          left: "prev,next today",
           center: "title",
-          right: "today,listMonth"
+          right: "listMonth"
         }
         this.calendarOptions.titleFormat = { 
           year: 'numeric',

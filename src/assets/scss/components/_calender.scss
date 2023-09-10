@@ -15,11 +15,20 @@
     box-shadow: 0!important;
   }
 }
-.fc-button-primary {
+.fc-button {
+  .fc-icon {
+    vertical-align: middle !important;
+    font-size: 16px !important;
+    color: rgb(140,140,140);
+    padding-bottom: 20px;
+  }
   &:hover{
     background-color: rgb(140,140,140) !important;
     color: #ffffff !important;
     box-shadow: 0!important;
+    .fc-icon {
+      color: #ffffff !important;
+    }
   }
 }
 .fc-button-active {
@@ -28,14 +37,8 @@
   box-shadow: 0!important;
 }
 .fc-button .fc-icon {
-    vertical-align: middle;
-    font-size: 1.5em;
-    color: rgb(140,140,140);
-    &:hover{
-    background-color: rgb(140,140,140) !important;
-    color: #ffffff !important;
-    box-shadow: 0!important;
-  }
+
+
 }
 .fc-event {
     position: relative;

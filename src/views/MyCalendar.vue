@@ -38,7 +38,12 @@
           </div>
           <div class="col-12 col-sm-auto" v-if="customColorState">
             <button type="button" class="btn btn-sm btn-outline-secondary me-8"
-                   >
+                   @click="
+                    teacherData.calenderTeacherColor.color = '#c3dcbe',
+                    teacherData.calenderTeacherColor.textColor = '#000000',
+                    teacherData.calenderStudentColor.color = '#c5b2d6',
+                    teacherData.calenderStudentColor.textColor = '#000000'
+                   ">
               預設
             </button>
             <button type="button" class="btn btn-sm btn-secondary me-8"
