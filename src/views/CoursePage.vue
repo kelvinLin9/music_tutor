@@ -1,7 +1,7 @@
 <template>
   <!-- Loading -->
   <div class="container">
-    <CoursesLoadingList v-if="loading"/>
+    <GenerallyLoading v-if="loading"/>
   </div>
   <!-- 課程圖片&說明 -->
   <div class="container mt-32" v-if="!loading">
@@ -159,10 +159,10 @@ import EditMyCourseModal from '../components/EditMyCourseModal.vue'
 import cartStore from '../stores/cartStore'
 import FeedbackCom from '../components/FeedbackCom.vue'
 import YouLikeCourses from '../components/YouLikeCourses.vue'
-import CoursesLoadingList from '../components/CoursesLoadingList.vue'
+import GenerallyLoading from '../components/GenerallyLoading.vue'
 
 export default {
-  components: { EditMyCourseModal, FeedbackCom, YouLikeCourses, CoursesLoadingList },
+  components: { EditMyCourseModal, FeedbackCom, YouLikeCourses, GenerallyLoading },
   data () {
     return {
       id: ''
