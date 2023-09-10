@@ -6,14 +6,14 @@
   <div class="container mt-3 fs-7 fs-sm-6" v-if="!loading">
     <div class="row align-items-center g-8">
       <!-- 技能 -->
-      <div class="col-12 col-xl-auto me-lg-1">
-        <div class="row g-1 align-items-center">
+      <div class="col-12 col-xxl-auto me-lg-1">
+        <div class="row g-4 align-items-center">
           <div class="col-auto">
             <label for="selectCourseCategory" class="col-form-label">
               音樂技能：
             </label>
           </div>
-          <div class="col-4 col-md-2 col-xl-auto">
+          <div class="col-4 col-md-2 col-xxl-auto">
             <select class="form-select fs-7 fs-sm-6" aria-label="Default select example"
                   id="selectCourseCategory"
                   v-model="selectCourseCategory">
@@ -105,14 +105,14 @@
         </div>      
       </div>
       <!-- 上課方式 -->
-      <div class="col-12 col-xl-auto me-lg-1">
-        <div class="row g-1 align-items-center">
+      <div class="col-12 col-xxl-auto me-lg-1">
+        <div class="row g-4 align-items-center">
           <div class="col-auto">
             <label for="selectCityName" class="col-form-label">
               上課方式：
             </label>
           </div>
-          <div class="col-4 col-md-2 col-xl-auto">
+          <div class="col-4 col-md-2 col-xxl-auto">
             <select class="form-select fs-7 fs-sm-6" 
                     aria-label="Default select example"
                     id="selectCityName"
@@ -125,7 +125,7 @@
               </option>
             </select>
           </div>
-          <div class="col-4 col-md-2 col-xl-auto"
+          <div class="col-4 col-md-2 col-xxl-auto"
               v-if="selectCourseMethod === '在老師家' || selectCourseMethod === '在學生家'">
             <select class="form-select fs-7 fs-sm-6" aria-label="Default select example"
                     id="selectCityName"
@@ -158,8 +158,8 @@
         </div>
       </div>
       <!-- 名稱 -->
-      <div class="col-12 col-md-auto col-lg-auto">
-        <div class="row g-1 align-items-center">
+      <div class="col-12 col-md-auto">
+        <div class="row g-4 align-items-center">
           <div class="col-auto">
             <label for="selectCourseName" class="col-form-label">課程名稱：</label>
           </div>
@@ -222,7 +222,7 @@
       </div>
     </div>
     <!-- 卡片課程 -->
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-16"
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-24"
          v-if="displayState === 'grid'">
       <CourseCard />
     </div>

@@ -1,7 +1,7 @@
 <template>
   <BannerCom/>
   <div class="container my-32">
-    <CoursesLoadingList v-if="loading" />
+    <GenerallyLoading v-if="loading" />
     <div class="text-center mt-48"
       v-if="studentData.payHistory.length === 0 && !loading">
       <p class="fs-2 fw-bold">無任何購買紀錄</p>
@@ -50,12 +50,12 @@
 <script>
 import { mapState, mapActions } from 'pinia'
 import BannerCom from '../components/BannerCom.vue'
-import CoursesLoadingList from '../components/CoursesLoadingList.vue'
+import GenerallyLoading from '../components/GenerallyLoading.vue'
 import dataStore from '@/stores/dataStore'
 import bannerStore from '@/stores/bannerStore'
 
 export default {
-  components: { BannerCom, CoursesLoadingList },
+  components: { BannerCom, GenerallyLoading },
   computed: {
     ...mapState(dataStore, ['studentData', 'user', 'userCartCourses', 'couponData', 'loading']),
   },

@@ -11,6 +11,7 @@
 <style lang="scss">
 ::-webkit-scrollbar {
     width: 6px;
+    height: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -19,7 +20,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-    border-radius: 3px;
+    border-radius: 6px;
     background: #adb5bd;
     --webkit-box-shadow: inset 0 0 3px rgba(0,0,0,0.5);
 }
