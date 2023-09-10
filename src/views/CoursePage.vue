@@ -137,7 +137,7 @@
         </div>
       </div>
       <!-- 猜你喜歡 -->
-      <div class="row mb-32">
+      <div class="row mb-32" v-if="this.user.uid !== courseData.uid">
         <div class="col-12 col-lg-8">
           <p class="fs-4 mb-16 fw-bold">猜你喜歡</p>
           <you-like-courses />

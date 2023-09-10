@@ -95,8 +95,7 @@
 import CartCom from '../components/CartCom.vue'
 import PayCom from '../components/PayCom.vue'
 import BannerCom from '../components/BannerCom.vue'
-import { mapState, mapActions, mapWritableState } from 
-'pinia' 
+import { mapState, mapActions, mapWritableState } from 'pinia' 
 import cartStore from '@/stores/cartStore'
 import dataStore from '@/stores/dataStore'
 import bannerStore from '@/stores/bannerStore'
