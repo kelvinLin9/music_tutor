@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { mapState, mapActions, mapWritableState } from 
+import { mapActions, mapWritableState } from 
 'pinia' 
 import dataStore from '@/stores/dataStore'
 import goStore from '@/stores/goStore'

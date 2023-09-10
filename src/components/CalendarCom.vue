@@ -140,8 +140,8 @@ export default {
     }
   },
   computed:{
-    ...mapState(dataStore,['calenderDataAll']),
-    ...mapState(windowStore,['windowWidth']),
+    ...mapState(dataStore, ['calenderDataAll']),
+    ...mapState(windowStore, ['windowWidth']),
   },
   methods: {
     ...mapActions(windowStore,['getWindowWidth']),
