@@ -56,7 +56,7 @@
   </div>
   <!-- Loading -->
   <div class="container">
-    <CoursesLoadingList v-if="loading"/>
+    <GenerallyLoading v-if="loading"/>
   </div>
   <div class="container mb-32" v-if="!loading">
     <calendar-com/>
@@ -74,10 +74,10 @@ import { mapState, mapActions } from
 import dataStore from '@/stores/dataStore'
 import bannerStore from '@/stores/bannerStore'
 import CalendarCom from '../components/CalendarCom.vue'
-import CoursesLoadingList from '../components/CoursesLoadingList.vue'
+import GenerallyLoading from '../components/GenerallyLoading.vue'
 
 export default {
-  components: { BannerCom, CalendarCom, CoursesLoadingList },
+  components: { BannerCom, CalendarCom, GenerallyLoading },
   data () {
     return {
       customColorState: false,
