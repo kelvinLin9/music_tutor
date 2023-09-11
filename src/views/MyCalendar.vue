@@ -1,24 +1,40 @@
 <template>
   <BannerCom />
   <!-- 自訂顏色 -->
-  <div class="container my-32">
+  <div class="container mt-32">
     <div class="row">
-      <div class="col-auto d-flex align-items-center mb-16">
-        <p class="point me-8"  :style="{ 'backgroundColor': `${teacherData.calenderTeacherColor.color}`}"></p>
-        <p class="px-8 rounded" :style="{ 'color': `${teacherData.calenderTeacherColor.textColor}`,
-                     'backgroundColor': `${teacherData.calenderTeacherColor.color}`}">我是老師</p>
+      <!-- 我是老師 -->
+      <div class="col-auto">
+        <div class="d-flex align-items-center mb-8">
+          <p class="point me-8"  
+          :style="{ 'backgroundColor': `${teacherData.calenderTeacherColor.color}`}"></p>
+          <span>我是老師</span>
+        </div>
+        <p class="px-8 rounded" v-if="customColorState"
+          :style="{ 'color': `${teacherData.calenderTeacherColor.textColor}`,
+                     'backgroundColor': `${teacherData.calenderTeacherColor.color}`}">我是老師
+        </p>
       </div>
-      <div class="col-auto d-flex align-items-center mb-16">
-        <p class="point me-8"  :style="{ 'backgroundColor': `${teacherData.calenderStudentColor.color}`}"></p>
-        <p class="px-8 rounded" :style="{ 'color': `${teacherData.calenderStudentColor.textColor}`,
-                     'backgroundColor': `${teacherData.calenderStudentColor.color}`}">我是學生</p>
+      <!-- 我是學生 -->
+      <div class="col-auto">
+        <div class="d-flex align-items-center mb-8">
+          <p class="point me-8"  
+            :style="{ 'backgroundColor': `${teacherData.calenderStudentColor.color}`}"></p>
+            <span>我是學生</span>
+        </div>
+        <p class="px-8 rounded" v-if="customColorState"
+          :style="{ 'color': `${teacherData.calenderStudentColor.textColor}`,
+                     'backgroundColor': `${teacherData.calenderStudentColor.color}`}">我是學生
+        </p>
       </div>
-      <div class="col-auto mb-16" v-if="!customColorState" @click="customColorState = true">
+      <!-- 自訂顏色 -->
+      <div class="col-auto mb-16" v-if="!customColorState" 
+          @click="customColorState = true">
         <button type="button" class="btn btn-sm btn-outline-delete">
           自訂顏色
         </button>
       </div>
-      <div class="col-auto d-flex align-items-center" v-if="customColorState">
+      <div class="col-auto d-flex align-items-center mt-8" v-if="customColorState">
         <div class="row align-items-center">
           <div class="col-auto mb-16">
             <label for="t-color" class="form-label fs-7">老師背景</label>
@@ -36,7 +52,7 @@
             <label for="s-textColor" class="form-label fs-7">學生文字</label>
             <input type="color" class="form-control form-control-color mx-auto" id="s-textColor" title="Choose your color" v-model="teacherData.calenderStudentColor.textColor">
           </div>
-          <div class="col-12 col-sm-auto" v-if="customColorState">
+          <div class="col-12 col-sm-auto mb-16" v-if="customColorState">
             <button type="button" class="btn btn-sm btn-outline-secondary me-8"
                    @click="
                     teacherData.calenderTeacherColor.color = '#c3dcbe',

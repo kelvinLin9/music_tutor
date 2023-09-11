@@ -46,6 +46,7 @@ export default defineStore('goStore', {
       router.push('/AllCourses')
       if (search) {
         filter.selectCourseCategory = search
+        filter.selectCourseName = ''
       }
     },
   }

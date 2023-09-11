@@ -2,7 +2,7 @@
 
 <div class="container">
   <div class="row my-16">
-    <div class="col-12 col-lg-3 d-flex flex-column align-items-center mb-32 py-32 shadow h-100">
+    <div class="col-12 col-lg-3 d-flex flex-column align-items-center mb-32 py-32 shadow h-100 rounded-4">
       <div class="user-photo position-relative mb-16">
         <img :src="teacherData.teacherImg" alt="大頭照"
               v-if="teacherData.teacherImg">
@@ -27,107 +27,108 @@
 
       </div> -->
       <!-- 帳號驗證 -->
-      <table class="table table-hover align-middle shadow">
-        <tbody>
-          <!-- 信箱 -->
-          <tr>
-            <td>
-              <div class="d-flex justify-content-between align-items-center mx-16 ">
-                <div class="d-flex align-items-center">
-                  <div class="login-logo d-flex justify-content-center align-items-center">
-                    <img src="../assets/images/LOGO.png" alt="樂樂LOGO">
+      <div class="rounded-4 border shadow p-8">
+        <table class="table table-hover align-middle ">
+          <tbody>
+            <!-- 信箱 -->
+            <tr>
+              <td>
+                <div class="d-flex justify-content-between align-items-center mx-16 ">
+                  <div class="d-flex align-items-center">
+                    <div class="login-logo d-flex justify-content-center align-items-center">
+                      <img src="../assets/images/LOGO_h.png" alt="樂樂LOGO">
+                    </div>
+                    <div class="ms-32">
+                      <p class="fs-6" v-if="!ProviderState.password">尚未建立樂樂帳號</p>
+                      <p class="fs-6" v-else>已連結樂樂帳號</p>
+                    </div>
                   </div>
-                  <div class="ms-32">
-                    <p class="fs-6" v-if="!ProviderState.password">尚未建立樂樂帳號</p>
-                    <p class="fs-6" v-else>已連結樂樂帳號</p>
-                  </div>
-                </div>
-                <div class="">
-                  <a href="#" @click.prevent>
-                    建立並連結帳號
-                  </a>
-                </div>
-              </div>
-            </td>
-          </tr>
-          <!-- google -->
-          <tr>
-            <td>
-              <div class="d-flex justify-content-between align-items-center mx-16">
-                <div class="d-flex align-items-center">
-                  <div class="login-logo d-flex justify-content-center align-items-center">
-                    <img src="../assets/images/google-icon.png" alt="google-icon">
-                  </div>
-                  <div class="ms-32">
-                    <p class="fs-6" v-if="!ProviderState.google">尚未連結Google帳號</p>
-                    <p class="fs-6" v-else>已連結Google帳號</p>
+                  <div class="">
+                    <a href="#" @click.prevent>
+                      建立並連結帳號
+                    </a>
                   </div>
                 </div>
-                <div class="">
-                  <a href="#" @click.prevent>
-                    建立並連結帳號
-                  </a>
-                  <!-- <a href="#" @click.prevent="signInWithGoogle(), AccountSettingState = true">
-                    建立並連結帳號
-                  </a> -->
-                </div>
-              </div>
-            </td>
-          </tr>
-          <!-- facebook -->
-          <tr>
-            <td>
-              <div class="d-flex justify-content-between align-items-center mx-16">
-                <div class="d-flex align-items-center">
-                  <div class="login-logo d-flex justify-content-center align-items-center">
-                    <img src="../assets/images/facebook-icon.png" alt="facebook-icon">
+              </td>
+            </tr>
+            <!-- google -->
+            <tr>
+              <td>
+                <div class="d-flex justify-content-between align-items-center mx-16">
+                  <div class="d-flex align-items-center">
+                    <div class="login-logo d-flex justify-content-center align-items-center">
+                      <img src="../assets/images/google-icon.png" alt="google-icon">
+                    </div>
+                    <div class="ms-32">
+                      <p class="fs-6" v-if="!ProviderState.google">尚未連結Google帳號</p>
+                      <p class="fs-6" v-else>已連結Google帳號</p>
+                    </div>
                   </div>
-                  <div class="ms-32">
-                    <p class="fs-6" v-if="!ProviderState.facebook">尚未連結Facebook帳號</p>
-                    <p class="fs-6" v-else>已連結Facebook帳號</p>
-                  </div>
-                </div>
-                <div class="">
-                  <a href="#" @click.prevent>
-                    建立並連結帳號
-                  </a>
-                  <!-- <a href="#" @click.prevent="signInWithFacebook(), AccountSettingState = true">
-                    建立並連結帳號
-                  </a> -->
-                </div>
-              </div>
-            </td>
-          </tr>
-          <!-- GitHub -->
-          <tr>
-            <td>
-              <div class="d-flex justify-content-between align-items-center mx-16">
-                <div class="d-flex align-items-center">
-                  <div class="login-logo d-flex justify-content-center align-items-center">
-                    <img src="../assets/images/github-icon.png" alt="github-icon"
-                    :class="{'filter-grayscale': !ProviderState.github}">
-                  </div>
-                  <div class="ms-32">
-                    <p class="fs-6" v-if="!ProviderState.github">尚未連結GitHub帳號</p>
-                    <p class="fs-6" v-else>已連結GitHub帳號</p>
+                  <div class="">
+                    <a href="#" @click.prevent>
+                      建立並連結帳號
+                    </a>
+                    <!-- <a href="#" @click.prevent="signInWithGoogle(), AccountSettingState = true">
+                      建立並連結帳號
+                    </a> -->
                   </div>
                 </div>
-                <div class="">
-                  <a href="#" @click.prevent>
-                    建立並連結帳號
-                  </a>
-                  <!-- <a href="#" @click.prevent="signInWithGithub(), AccountSettingState = true">
-                    建立並連結帳號
-                  </a> -->
+              </td>
+            </tr>
+            <!-- facebook -->
+            <tr>
+              <td>
+                <div class="d-flex justify-content-between align-items-center mx-16">
+                  <div class="d-flex align-items-center">
+                    <div class="login-logo d-flex justify-content-center align-items-center">
+                      <img src="../assets/images/facebook-icon.png" alt="facebook-icon">
+                    </div>
+                    <div class="ms-32">
+                      <p class="fs-6" v-if="!ProviderState.facebook">尚未連結Facebook帳號</p>
+                      <p class="fs-6" v-else>已連結Facebook帳號</p>
+                    </div>
+                  </div>
+                  <div class="">
+                    <a href="#" @click.prevent>
+                      建立並連結帳號
+                    </a>
+                    <!-- <a href="#" @click.prevent="signInWithFacebook(), AccountSettingState = true">
+                      建立並連結帳號
+                    </a> -->
+                  </div>
                 </div>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+              </td>
+            </tr>
+            <!-- GitHub -->
+            <tr>
+              <td>
+                <div class="d-flex justify-content-between align-items-center mx-16">
+                  <div class="d-flex align-items-center">
+                    <div class="login-logo d-flex justify-content-center align-items-center">
+                      <img src="../assets/images/github-icon.png" alt="github-icon"
+                      :class="{'filter-grayscale': !ProviderState.github}">
+                    </div>
+                    <div class="ms-32">
+                      <p class="fs-6" v-if="!ProviderState.github">尚未連結GitHub帳號</p>
+                      <p class="fs-6" v-else>已連結GitHub帳號</p>
+                    </div>
+                  </div>
+                  <div class="">
+                    <a href="#" @click.prevent>
+                      建立並連結帳號
+                    </a>
+                    <!-- <a href="#" @click.prevent="signInWithGithub(), AccountSettingState = true">
+                      建立並連結帳號
+                    </a> -->
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <!-- 生日 -->
       <div class="">
-
       </div>
       <!-- 專業相關 -->
     </div>

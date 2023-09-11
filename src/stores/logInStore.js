@@ -88,7 +88,15 @@ export default defineStore('logInStore', {
       language: [],
       musicStyle:[], 
       allTeachTime:0,
-      studentAssess:[]
+      studentAssess:[],
+      calenderTeacherColor: {
+        color : '#c3dcbe',
+        textColor : '#000000'
+      },
+      calenderStudentColor: {
+        color : '#c5b2d6',
+        textColor : '#000000'
+      },
     },
     data.studentData = {
       myStudyCourses:[],
@@ -131,7 +139,7 @@ export default defineStore('logInStore', {
       finalTotal:0,
       couponUse:''
     }
-    // 行事曆
+    // 設定上課時間用
     data.classScheduleData=[],
     data.classScheduleStudentData=[],
     data.classScheduleId='',
@@ -321,9 +329,7 @@ export default defineStore('logInStore', {
    // 取得當前登入者資料(只有自己)，登出後，它也不會改變。
    getCurrentUser () {
     onAuthStateChanged(auth, (user) => {
-      
       if (user) {
-        console.log(132123)
         const user = auth.currentUser;
         this.userProviderData = user.providerData //先留著看用不用的到
         console.log(user)
@@ -339,11 +345,9 @@ export default defineStore('logInStore', {
             } else if (item.providerId === 'github') {
               this.ProviderState.github =  true
             }
-    
           });
         }
       } else {
-
         console.log('已登出')
       }
     });

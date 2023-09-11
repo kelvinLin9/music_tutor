@@ -194,8 +194,13 @@
       </div>
       <!-- 清空 -->
       <div class="col-auto ms-md-2 cursor-pointer text-delete"
-        @click="selectSortMethod = '依人氣', selectCourseName = '', selectCourseMethod = '', selectCourseCategory = '',courseSort()">
-        <i class="bi bi-x-circle fs-4"></i>
+        @click="selectSortMethod = '依人氣', selectCourseName = '', selectCourseMethod = '', selectCourseCategory = '',courseSort()"
+        data-bs-toggle="tooltip" 
+        data-bs-placement="top" 
+        data-bs-title="清空所有條件">
+        <span class="material-symbols-outlined">
+          search_off
+        </span>
       </div>
       <!-- 排列方式 -->
       <div class="col-auto ms-auto ms-md-2 cursor-pointer">
@@ -279,8 +284,10 @@ export default {
     this.displayState = 'grid'
     this.myCoursesState = 'bookmark'
   },
-  mounted () {
-
+  unmounted () {
+    this.selectCourseName = ''
+    this.selectCourseMethod = ''
+    this.selectCourseCategory = ''
   }
 }
 </script>
