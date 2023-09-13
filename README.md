@@ -36,6 +36,7 @@ https://kelvinlin9.github.io/music_tutor/
 - aos
 
 ## 未來目標
+- 數據結構優化
 - 評論留言
 - 後台開發
 - 金流串接
