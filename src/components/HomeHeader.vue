@@ -38,9 +38,9 @@
                     id="homeInput" 
                     placeholder="我想學習..."
                     v-model="selectCourseName"
-                    >
+                    @keyup.enter="goAllCourses()">
             <label for="homeInput" class="position-absolute home-input d-flex align-items-center" 
-                    @click.prevent="goAllCourses()">
+                    @click="goAllCourses()">
               <span class="material-symbols-outlined align-middle text-gray-600 cursor-pointer lh-lg">search</span>
             </label>
           </div>
