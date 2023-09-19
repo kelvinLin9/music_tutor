@@ -11,7 +11,7 @@
             <i class="bi bi-caret-left-fill"></i>
           </a>
         </li>
-        
+        <!-- 分頁按鈕不改變順序，key用index可以 -->
         <li class="page-item d-flex" 
             v-for="(item,index) in page.pageNumBox" :key="index" 
             :class="{'active': item === page.currentPage}">

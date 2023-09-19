@@ -6,7 +6,7 @@
     </div>
     <table class="table table-hover align-middle">
       <tbody>
-        <tr v-for="item, index in payWrap.payData " :key="index">
+        <tr v-for="item in payWrap.payData " :key="item">
           <td>
             <div class="container">
               <div class="row">
